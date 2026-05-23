@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5252c9eeb4652ee4b9fb042e7c721610, type: 3}
   m_Name: RandomWalkPreset_Islands
   m_EditorClassIdentifier: Scripts.Core::RandomWalkData
-  _iterations: 50
-  _length: 50
+  _iterations: 20
+  _length: 100
   _largeRooms: 0

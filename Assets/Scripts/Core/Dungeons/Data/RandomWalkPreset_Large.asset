@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5252c9eeb4652ee4b9fb042e7c721610, type: 3}
   m_Name: RandomWalkPreset_Large
   m_EditorClassIdentifier: Scripts.Core::RandomWalkData
-  _iterations: 10
-  _length: 10
-  _largeRooms: 0
+  _iterations: 100
+  _length: 100
+  _largeRooms: 1
