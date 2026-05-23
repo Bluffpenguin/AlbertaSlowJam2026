@@ -38,7 +38,7 @@ public abstract class TilePainter : MonoBehaviour
 		if (tile == null)
 			throw new ArgumentNullException(nameof(tile));
 
-		var tilePosition = tilemap.WorldToCell((Vector3Int)position);
+		var tilePosition = (Vector3Int)position;
 		tilemap.SetTile(tilePosition, tile);
 	}
 }
