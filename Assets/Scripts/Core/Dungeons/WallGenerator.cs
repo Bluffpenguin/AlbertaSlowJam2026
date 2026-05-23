@@ -4,7 +4,7 @@ public static class WallGenerator
 {
 	public static void CreateWalls(HashSet<Vector2Int> floor, TilePainter painter)
 	{
-		HashSet<Vector2Int> walls = FindWallsInDirections(floor, Direction2D.cardinalDirections);
+		HashSet<Vector2Int> walls = FindWallsInDirections(floor, Direction2D.cardinals);
 		foreach (var position in walls) {
 			painter.PaintTile(position);
 		}

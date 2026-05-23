@@ -15,20 +15,22 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 	public override void Generate()
 	{
 		Clear();
-		var floor = RunRandomWalk();
+		var floor = RunRandomWalk(_startPosition, _preset);
 		_floorPainter.PaintTiles(floor);
 		WallGenerator.CreateWalls(floor, _wallPainter);
 	}
 
-	protected HashSet<Vector2Int> RunRandomWalk()
+	protected static HashSet<Vector2Int> RunRandomWalk(Vector2Int startPosition, RandomWalkData data)
 	{
-		Debug.Assert(_preset != null);
-		var currentPosition = _startPosition;
+		if (data == null)
+			throw new ArgumentNullException(nameof(data));
+
+		var currentPosition = startPosition;
 		var floor = new HashSet<Vector2Int>();
-		for (int i = 0; i < _preset.Iterations; i++) {
-			var path = ProcGen.SimpleRandomWalk(currentPosition, _preset.Length);
+		for (int i = 0; i < data.Iterations; i++) {
+			var path = ProcGen.SimpleRandomWalk(currentPosition, data.Length);
 			floor.UnionWith(path);
-			if (_preset.LargeRooms) {
+			if (data.LargeRooms) {
 				currentPosition = floor.ElementAt(Random.Range(0, floor.Count));
 			}
 		}
