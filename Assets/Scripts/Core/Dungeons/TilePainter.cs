@@ -1,39 +1,37 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TilePainter : MonoBehaviour
+public abstract class TilePainter : MonoBehaviour
 {
-	[SerializeField]
-	private Tilemap floorMap;
-	[SerializeField]
-	private TileBase floorTile;
+	[SerializeField] protected Tilemap _tilemap;
 
-	public void PaintFloorTiles(IEnumerable<Vector2Int> positions, bool overwrite)
+	public void Clear()
 	{
-		if (overwrite)
-			floorMap.ClearAllTiles();
-		PaintTiles(positions, floorMap, floorTile);
+		_tilemap.ClearAllTiles();
 	}
 
-	private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, params TileBase[] tiles)
+	public abstract void PaintTiles(IEnumerable<Vector2Int> positions);
+	public abstract void PaintTile(Vector2Int position);
+
+	public static void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, params TileBase[] tileset)
 	{
-		if (tiles?.Length is null or 0)
-			throw new ArgumentNullException(nameof(tiles), "No tiles to paint.");
+		if (tileset?.Length is null or 0)
+			throw new ArgumentNullException(nameof(tileset), "No tiles to paint.");
 
 		foreach (var position in positions) {
-			var tile = tiles[Random.Range(0, tiles.Length)];
+			var tile = tileset[Random.Range(0, tileset.Length)];
 			PaintTile(position, tilemap, tile);
 		}
 	}
 
-	private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
+	public static void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
 	{
 		foreach (var position in positions) {
 			PaintTile(position, tilemap, tile);
 		}
 	}
 
-	private void PaintTile(Vector2Int position, Tilemap tilemap, TileBase tile)
+	public static void PaintTile(Vector2Int position, Tilemap tilemap, TileBase tile)
 	{
 		if (tilemap == null)
 			throw new ArgumentNullException(nameof(tilemap));

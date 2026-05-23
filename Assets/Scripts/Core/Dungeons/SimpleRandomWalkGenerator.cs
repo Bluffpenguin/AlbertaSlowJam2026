@@ -1,30 +1,34 @@
 using System.Linq;
 
-public class SimpleRandomWalkGenerator : MonoBehaviour
+public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 {
-	public Vector2Int startPosition = Vector2Int.zero;
-	public int iterations = 10;
-	public int length = 10;
-	[Tooltip("Rooms will be larger and more cave-like.")]
-	public bool largeRooms = true;
+	[SerializeField] protected TilePainter _floorPainter;
+	[SerializeField] protected TilePainter _wallPainter;
+	[SerializeField] protected RandomWalkData _preset = null;
 
-	[SerializeField]
-	private TilePainter _painter;
-
-	public void Generate()
+	public override void Clear()
 	{
-		HashSet<Vector2Int> floor = RunRandomWalk();
-		_painter.PaintFloorTiles(floor, true);
+		_floorPainter.Clear();
+		_wallPainter.Clear();
+	}
+
+	public override void Generate()
+	{
+		Clear();
+		var floor = RunRandomWalk();
+		_floorPainter.PaintTiles(floor);
+		WallGenerator.CreateWalls(floor, _wallPainter);
 	}
 
 	protected HashSet<Vector2Int> RunRandomWalk()
 	{
-		var currentPosition = startPosition;
+		Debug.Assert(_preset != null);
+		var currentPosition = _startPosition;
 		var floor = new HashSet<Vector2Int>();
-		for (int i = 0; i < iterations; i++) {
-			var path = ProcGen.SimpleRandomWalk(currentPosition, length);
+		for (int i = 0; i < _preset.Iterations; i++) {
+			var path = ProcGen.SimpleRandomWalk(currentPosition, _preset.Length);
 			floor.UnionWith(path);
-			if (largeRooms) {
+			if (_preset.LargeRooms) {
 				currentPosition = floor.ElementAt(Random.Range(0, floor.Count));
 			}
 		}
