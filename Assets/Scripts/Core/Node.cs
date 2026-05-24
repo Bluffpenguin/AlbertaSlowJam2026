@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class Node 
+{
+	public List<Edge> edgeList = new List<Edge>();
+	GameObject id;
+
+	public float f, g, h;
+	public Node cameFrom;
+
+	public Node(GameObject i)
+	{
+		id = i;
+	}
+
+	public GameObject getId()
+	{
+		return id;
+	}
+}
+
+public class Edge
+{
+	public Node startNode;
+	public Node endNode;
+
+	public Edge(Node from, Node to)
+	{
+		startNode = from;
+		endNode = to;
+	}
+}
