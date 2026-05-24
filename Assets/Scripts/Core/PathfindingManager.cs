@@ -1,5 +1,7 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections;
 
 public class PathfindingManager : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class PathfindingManager : MonoBehaviour
 
 	List<Graph> graphs = new List<Graph>();
 
+	Dictionary<Vector2Int, Node> nodeDictionary;
+
+	
+
 	struct Graph
 	{
 		internal Node[,] nodes;
@@ -37,10 +43,6 @@ public class PathfindingManager : MonoBehaviour
 
 	#region Graph Generation
 
-	/// <summary>
-	/// Generate a node grid at the given position with the provided dimension
-	/// Returns the index of the created graph
-	/// </summary>
 	public int GenerateGrid(Vector2 position, float xDimension, float yDimension, float nodeSeperation)
 	{
 
@@ -81,6 +83,66 @@ public class PathfindingManager : MonoBehaviour
 		return graphs.Count - 1;
 	}
 
+	void GenerateLink(HashSet<Vector2Int> tiles, Tilemap map, bool diagonal)
+	{
+		if (tiles.Count == 0)
+			return;
+
+
+		nodeDictionary.Clear();
+		nodeDictionary = new Dictionary<Vector2Int, Node>();
+
+		// Set Up Nodes
+		foreach (Vector2Int tile in tiles)
+		{
+			Node node = new Node(map.GetInstantiatedObject(new Vector3Int(tile.x, tile.y)));
+			node.position = tile;
+			nodeDictionary.Add(tile, node);
+		}
+
+		// Establish Neighbors
+		foreach (Vector2Int tile in tiles)
+		{
+			Node node = nodeDictionary[tile];
+
+			Node neighbor;
+
+			// Check for right neighbor
+			if (nodeDictionary.TryGetValue(new Vector2Int(tile.x + 1, tile.y), out neighbor))
+				node.edgeList.Add(new Edge(node, neighbor));
+
+			// Check for left neighbor
+			if (nodeDictionary.TryGetValue(new Vector2Int(tile.x - 1, tile.y), out neighbor))
+				node.edgeList.Add(new Edge(node, neighbor));
+
+			// Check for bottom neighbor
+			if (nodeDictionary.TryGetValue(new Vector2Int(tile.x, tile.y - 1), out neighbor))
+				node.edgeList.Add(new Edge(node, neighbor));
+
+			// Check for top neighbor
+			if (nodeDictionary.TryGetValue(new Vector2Int(tile.x, tile.y + 1), out neighbor))
+				node.edgeList.Add(new Edge(node, neighbor));
+			
+			if (diagonal)
+			{
+				// Check for top right neighbor
+				if (nodeDictionary.TryGetValue(new Vector2Int(tile.x + 1, tile.y + 1), out neighbor))
+					node.edgeList.Add(new Edge(node, neighbor));
+
+				// Check for top left neighbor
+				if (nodeDictionary.TryGetValue(new Vector2Int(tile.x - 1, tile.y + 1), out neighbor))
+					node.edgeList.Add(new Edge(node, neighbor));
+
+				// Check for bottom right neighbor
+				if (nodeDictionary.TryGetValue(new Vector2Int(tile.x + 1, tile.y - 1), out neighbor))
+					node.edgeList.Add(new Edge(node, neighbor));
+
+				// Check for bottom left neighbor
+				if (nodeDictionary.TryGetValue(new Vector2Int(tile.x - 1, tile.y - 1), out neighbor))
+					node.edgeList.Add(new Edge(node, neighbor));
+			}
+		}
+	}
 	void GenerateLinks(Node[,] nodes, int numOfXPos, int numOfYPos)
 	{
 		if (numOfXPos == 0 || numOfYPos == 0) return;
