@@ -579,8 +579,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142364379}
-  - component: {fileID: 1142364378}
-  - component: {fileID: 1142364377}
   - component: {fileID: 1142364376}
   m_Layer: 0
   m_Name: WPGenerator
@@ -601,11 +599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66a25b6ef8d0444b8a3071e8684ecf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  length: 10
-  width: 10
-  separationDistance: 0.5
   agentSize: 1
   wpObject: {fileID: 4164311523602927295, guid: 62561c28c6b851747aae6bf2381e5726, type: 3}
+  graphPrefab: {fileID: 7933693843177094706, guid: d040d187cf70e60479b5416818bc582f, type: 3}
   diagonalLinks: 0
   groundMask:
     serializedVersion: 2
@@ -613,31 +609,10 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
-  generated: 0
---- !u!114 &1142364377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142364375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9f12df051552e4cbf9f62494e76355, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Scripts.Core::PathfindingManager
---- !u!114 &1142364378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142364375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3699234468547f409bdaa2788a8d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
+  test_length: 10
+  test_width: 10
+  test_seperationDist: 0.5
+  test_generated: 0
 --- !u!4 &1142364379
 Transform:
   m_ObjectHideFlags: 0

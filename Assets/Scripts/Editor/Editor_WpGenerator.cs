@@ -1,22 +1,22 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(WaypointGenerator))]
+[CustomEditor(typeof(PathfindingManager))]
 public class Editor_WpGenerator : Editor
 {
 	public override void OnInspectorGUI()
 	{
 		DrawDefaultInspector();
 
-		WaypointGenerator targetScript = (WaypointGenerator)target;
-		if (GUILayout.Button("Generate"))
+		PathfindingManager targetScript = (PathfindingManager)target;
+		if (GUILayout.Button("Test_Generate"))
 		{
-			targetScript.Generate();
+			targetScript.Test_Generate();
 		}
 
 		if (GUILayout.Button("Remove Waypoints"))
 		{
-			targetScript.DeleteWaypoints();
+			targetScript.Test_Delete();
 		}
 	}
 }
