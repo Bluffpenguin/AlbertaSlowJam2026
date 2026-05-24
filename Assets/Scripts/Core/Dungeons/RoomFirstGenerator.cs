@@ -31,6 +31,8 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		floor.UnionWith(corridors);
 
 		_floorPainter.PaintTiles(floor);
+		var walls = WallGenerator.CreateWalls(floor, _wallPainter);
+		floor.UnionWith(walls);
 		WallGenerator.CreateWalls(floor, _wallPainter);
 	}
 

@@ -539,8 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb45352910ad53344a9bc0b37abac40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::SingleTilePainter
-  _tilemap: {fileID: 1212294752}
-  _tile: {fileID: 11400000, guid: 22c9f328675568942a63b2770a6a63dc, type: 2}
+  _tilemap: {fileID: 1218275354}
+  _tile: {fileID: 11400000, guid: 229f16c6d19a1b147bfd0d88a298a108, type: 2}
 --- !u!1839735485 &1212294752
 Tilemap:
   m_ObjectHideFlags: 0
@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::SingleTilePainter
   _tilemap: {fileID: 1218275354}
-  _tile: {fileID: 11400000, guid: 471853985ed4b5242ad12af71ace0cf6, type: 2}
+  _tile: {fileID: 11400000, guid: 0daf134f9bf4c6f44b237c4c3a831925, type: 2}
 --- !u!1 &1291431389
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +825,7 @@ MonoBehaviour:
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
   _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
-  _corridorLength: 40
+  _corridorLength: 29
   _corridorCount: 5
   _roomPercentage: 0.8
 --- !u!4 &1291431391

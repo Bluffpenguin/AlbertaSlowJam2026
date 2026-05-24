@@ -15,6 +15,8 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 		var rooms = GenerateRooms(floor, potentialRooms);
 		floor.UnionWith(rooms);
 		_floorPainter.PaintTiles(floor);
+		var walls = WallGenerator.CreateWalls(floor, _wallPainter);
+		floor.UnionWith(walls);
 		WallGenerator.CreateWalls(floor, _wallPainter);
 	}
 

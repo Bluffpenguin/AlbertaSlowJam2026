@@ -96,6 +96,13 @@ public static class Direction2D
 		Vector2Int.up + Vector2Int.right
 	};
 
+	public static readonly IReadOnlyList<Vector2Int> all = new Vector2Int[8] {
+		cardinals[0], ordinals[0],
+		cardinals[1], ordinals[1],
+		cardinals[2], ordinals[2],
+		cardinals[3], ordinals[3]
+	};
+
 	public static Vector2Int GetRandomDirection()
 	{
 		return cardinals[Random.Range(0, cardinals.Count)];
