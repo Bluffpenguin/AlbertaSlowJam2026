@@ -1,5 +1,18 @@
 public static class ProcGen
 {
+	public static IEnumerable<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength, int stepLength = 1)
+	{
+		yield return startPosition;
+		var previousPosition = startPosition;
+		for (int i = 0; i < walkLength; i++) {
+			var direction = Direction2D.GetRandomDirection();
+			for (int j = 0; j < stepLength; j++) {
+				yield return previousPosition += direction;
+			}
+		}
+	}
+
+	[Obsolete]
 	public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int length)
 	{
 		var path = new HashSet<Vector2Int> { startPosition };
@@ -12,6 +25,7 @@ public static class ProcGen
 		return path;
 	}
 
+	[Obsolete]
 	public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int length)
 	{
 		var corridor = new List<Vector2Int>() { startPosition };
@@ -96,15 +110,31 @@ public static class Direction2D
 		Vector2Int.up + Vector2Int.right
 	};
 
-	public static readonly IReadOnlyList<Vector2Int> all = new Vector2Int[8] {
+	public static readonly IReadOnlyList<Vector2Int> compass = new Vector2Int[8] {
 		cardinals[0], ordinals[0],
 		cardinals[1], ordinals[1],
 		cardinals[2], ordinals[2],
 		cardinals[3], ordinals[3]
 	};
 
-	public static Vector2Int GetRandomDirection()
+	[Flags]
+	public enum Type { None = 0, Cardinal = 1, Ordinal = 2 }
+	public enum Cardinal { North = 0, East = 1, South = 2, West = 3 }
+	public enum Ordinal { NorthEast = 0, SouthEast = 1, SouthWest = 2, NorthWest = 3 }
+
+	public static Vector2Int GetRandomDirection(Type type = Type.Cardinal)
 	{
-		return cardinals[Random.Range(0, cardinals.Count)];
+		return type switch {
+			Type.Cardinal => cardinals[Random.Range(0, cardinals.Count)],
+			Type.Ordinal => ordinals[Random.Range(0, ordinals.Count)],
+			Type.Cardinal | Type.Ordinal => compass[Random.Range(0, compass.Count)],
+			_ => Vector2Int.zero,
+		};
 	}
+
+	public static Vector2Int GetDirection(object value) => value switch {
+		Cardinal cardinal => cardinals[(int)cardinal],
+		Ordinal ordinal => ordinals[(int)ordinal],
+		_ => throw new ArgumentException("Value is not a direction.", nameof(value)),
+	};
 }

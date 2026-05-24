@@ -30,6 +30,9 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 			.Take(roomCount)
 			.ToList();
 
+		if (!roomPositions.Contains(_startPosition))
+			roomPositions.Add(_startPosition);
+
 		foreach (var position in roomPositions) {
 			var room = RunRandomWalk(position, _preset);
 			rooms.UnionWith(room);
@@ -57,7 +60,7 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 		potentialRooms = new HashSet<Vector2Int>() { _startPosition };
 		var currentPosition = _startPosition;
 		for (int i = 0; i < _corridorCount; i++) {
-			var corridor = ProcGen.RandomWalkCorridor(currentPosition, _corridorLength);
+			var corridor = ProcGen.RandomWalk(currentPosition, walkLength: 1, _corridorLength).ToArray();
 			currentPosition = corridor[^1];
 			potentialRooms.Add(currentPosition);
 			floor.UnionWith(corridor);

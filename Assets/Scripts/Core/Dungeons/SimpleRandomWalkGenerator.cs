@@ -28,7 +28,7 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		var currentPosition = startPosition;
 		var floor = new HashSet<Vector2Int>();
 		for (int i = 0; i < data.Iterations; i++) {
-			var path = ProcGen.SimpleRandomWalk(currentPosition, data.Length);
+			var path = ProcGen.RandomWalk(currentPosition, data.Length);
 			floor.UnionWith(path);
 			if (data.LargeRooms) {
 				currentPosition = floor.ElementAt(Random.Range(0, floor.Count));
