@@ -17,7 +17,6 @@ public class PathfindingManager : MonoBehaviour
 	[SerializeField] float test_seperationDist = 0.5f;
 	[SerializeField] bool test_generated = false;
 
-	List<GameObject> wps = new List<GameObject>();
 	List<Graph> graphs = new List<Graph>();
 
 	struct Graph
@@ -92,36 +91,40 @@ public class PathfindingManager : MonoBehaviour
 			for (int j = 0; j < numOfYPos; j++)
 			{
 				Node node = nodes[i, j];
-				if (node == null) continue;
-
-				// Create edges
-				if (i - 1 >= 0 && nodes[i - 1, j] != null)
-					node.edgeList.Add(new Edge(node, nodes[i - 1, j]));
-
-				if (i + 1 < numOfXPos && nodes[i + 1, j] != null)
-					node.edgeList.Add(new Edge(node, nodes[i + 1, j]));
-
-				if (j - 1 >= 0 && nodes[i, j - 1] != null)
-					node.edgeList.Add(new Edge(node, nodes[i, j - 1]));
-
-				if (j + 1 < numOfYPos && nodes[i, j + 1] != null)
-					node.edgeList.Add(new Edge(node, nodes[i, j + 1]));
-
-				if (diagonalLinks)
+				if (node != null)
 				{
-					// Implement diagonals
-					if (i - 1 >= 0 && j - 1 >= 0 && nodes[i - 1, j - 1] != null)
-						node.edgeList.Add(new Edge(node, nodes[i - 1, j - 1]));
+					// Create edges
+					if (i - 1 >= 0 && nodes[i - 1, j] != null)
+						node.edgeList.Add(new Edge(node, nodes[i - 1, j]));
 
-					if (i + 1 < numOfXPos && j - 1 >= 0 && nodes[i + 1, j - 1] != null)
-						node.edgeList.Add(new Edge(node, nodes[i + 1, j - 1]));
+					if (i + 1 < numOfXPos && nodes[i + 1, j] != null)
+						node.edgeList.Add(new Edge(node, nodes[i + 1, j]));
 
-					if (i - 1 >= 0 && j + 1 < numOfYPos && nodes[i - 1, j + 1] != null)
-						node.edgeList.Add(new Edge(node, nodes[i - 1, j + 1]));
+					if (j - 1 >= 0 && nodes[i, j - 1] != null)
+						node.edgeList.Add(new Edge(node, nodes[i, j - 1]));
 
-					if (i + 1 < numOfXPos && j + 1 < numOfYPos && nodes[i + 1, j + 1] != null)
-						node.edgeList.Add(new Edge(node, nodes[i + 1, j + 1]));
+					if (j + 1 < numOfYPos && nodes[i, j + 1] != null)
+						node.edgeList.Add(new Edge(node, nodes[i, j + 1]));
+
+					if (diagonalLinks)
+					{
+						// Implement diagonals
+						if (i - 1 >= 0 && j - 1 >= 0 && nodes[i - 1, j - 1] != null)
+							node.edgeList.Add(new Edge(node, nodes[i - 1, j - 1]));
+
+						if (i + 1 < numOfXPos && j - 1 >= 0 && nodes[i + 1, j - 1] != null)
+							node.edgeList.Add(new Edge(node, nodes[i + 1, j - 1]));
+
+						if (i - 1 >= 0 && j + 1 < numOfYPos && nodes[i - 1, j + 1] != null)
+							node.edgeList.Add(new Edge(node, nodes[i - 1, j + 1]));
+
+						if (i + 1 < numOfXPos && j + 1 < numOfYPos && nodes[i + 1, j + 1] != null)
+							node.edgeList.Add(new Edge(node, nodes[i + 1, j + 1]));
+					}
 				}
+
+				 
+				
 			}
 		}
 	}
@@ -151,8 +154,12 @@ public class PathfindingManager : MonoBehaviour
 		Graph graph = graphs[index];
 		foreach (Node node in graph.nodes)
 		{
-			GameObject obj = node.getId();
-			DestroyImmediate(obj);
+			if (node != null)
+			{
+				GameObject obj = node.getId();
+				DestroyImmediate(obj);
+			}
+			
 		}
 		graph.nodes = null;
 		DestroyImmediate(graph.obj);
@@ -176,8 +183,9 @@ public class PathfindingManager : MonoBehaviour
 	public void Test_Delete()
 	{
 		if (!test_generated) return;
-
-		DeleteWaypoints(0);
+		if (graphs.Count > 0)
+			DeleteWaypoints(0);
+		graphs.Clear();
 		test_generated = false;
 	}
 	#endregion
@@ -197,12 +205,16 @@ public class PathfindingManager : MonoBehaviour
 			Gizmos.color = Color.yellow;
 			foreach (Node node in graphs[0].nodes)
 			{
-				foreach (Edge edge in node.edgeList)
+				if (node != null)
 				{
-					Vector3 start = edge.startNode.getId().transform.position;
-					Vector3 end = edge.endNode.getId().transform.position;
-					Gizmos.DrawLine(start, end);
+					foreach (Edge edge in node.edgeList)
+					{
+						Vector3 start = edge.startNode.getId().transform.position;
+						Vector3 end = edge.endNode.getId().transform.position;
+						Gizmos.DrawLine(start, end);
+					}
 				}
+				
 			}
 			Gizmos.color = Color.white;
 		}
