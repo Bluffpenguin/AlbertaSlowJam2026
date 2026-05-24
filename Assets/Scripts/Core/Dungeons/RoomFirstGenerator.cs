@@ -57,7 +57,7 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		for (int i = 0; i < roomPositions.Count; i++) {
 			var bounds = PadRect(roomPositions[i], _offset);
 			var center = Vector2Int.RoundToInt(bounds.center);
-			var roomFloor = RunRandomWalk(center, _preset);
+			var roomFloor = GenerateRoom(center, _preset);
 			floor.UnionWith(roomFloor.Where(p => bounds.Contains(p)));
 		}
 		return floor;

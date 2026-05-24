@@ -34,7 +34,7 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 			roomPositions.Add(_startPosition);
 
 		foreach (var position in roomPositions) {
-			var room = RunRandomWalk(position, _preset);
+			var room = GenerateRoom(position, _preset);
 			rooms.UnionWith(room);
 		}
 
@@ -46,7 +46,7 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 						   select position;
 
 			foreach (var position in deadEnds) {
-				var room = RunRandomWalk(position, _preset);
+				var room = GenerateRoom(position, _preset);
 				rooms.UnionWith(room);
 			}
 		}

@@ -15,3 +15,4 @@ MonoBehaviour:
   _iterations: 30
   _length: 30
   _largeRooms: 1
+  _maxRoomSize: {x: 25, y: 25}
