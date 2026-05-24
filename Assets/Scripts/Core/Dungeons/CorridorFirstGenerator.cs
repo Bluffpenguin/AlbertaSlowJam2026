@@ -8,13 +8,26 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 	[Range(0, 1)]
 	private float _roomPercentage = 0.8f;
 
+	private readonly Dictionary<Vector2Int, RoomInfo> _rooms = new();
+
 	public override void Generate()
 	{
+		_rooms.Clear();
 		Clear();
 		var floor = CreateCorridors(out var potentialRooms);
 		var rooms = GenerateRooms(floor, potentialRooms);
 		floor.UnionWith(rooms);
 		_floorPainter.PaintTiles(floor);
+
+		using (UnityEngine.Pool.ListPool<IRoomPostProcessor>.Get(out var components)) {
+			this.GetComponents(components);
+			foreach (var room in _rooms.Values) {
+				for (int i = 0; i < components.Count; i++) {
+					components[i].ProcessRoom(room);
+				}
+			}
+		}
+
 		var walls = WallGenerator.CreateWalls(floor, _wallPainter);
 		floor.UnionWith(walls);
 		WallGenerator.CreateWalls(floor, _wallPainter);
@@ -35,6 +48,8 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 
 		foreach (var position in roomPositions) {
 			var room = GenerateRoom(position, _preset);
+			var info = new RoomInfo(position, room, 0);
+			_rooms.Add(position, info);
 			rooms.UnionWith(room);
 		}
 

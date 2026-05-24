@@ -1,6 +1,4 @@
 using System.Linq;
-using System.Xml.Schema;
-using UnityEngine;
 
 public class RoomFirstGenerator : SimpleRandomWalkGenerator
 {
@@ -13,6 +11,8 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 	[Min(0)] private int _offset;
 	[SerializeField]
 	private bool _useRandomWalk = false;
+
+	private readonly Dictionary<Vector2Int, RoomInfo> _rooms = new();
 
 	public override void Generate()
 	{
@@ -29,8 +29,17 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		var roomCenters = rooms.Select(room => room.center).Select(Vector2Int.RoundToInt).ToList();
 		var corridors = ConnectRooms(roomCenters);
 		floor.UnionWith(corridors);
-
 		_floorPainter.PaintTiles(floor);
+
+		using (UnityEngine.Pool.ListPool<IRoomPostProcessor>.Get(out var components)) {
+			this.GetComponents(components);
+			foreach (var room in _rooms.Values) {
+				for (int i = 0; i < components.Count; i++) {
+					components[i].ProcessRoom(room);
+				}
+			}
+		}
+
 		var walls = WallGenerator.CreateWalls(floor, _wallPainter);
 		floor.UnionWith(walls);
 		WallGenerator.CreateWalls(floor, _wallPainter);
@@ -41,12 +50,14 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		var floor = new HashSet<Vector2Int>();
 
 		foreach (var room in rooms) {
-			for (int c = _offset; c < room.width - _offset; c++) {
-				for (int r = _offset; r < room.height - _offset; r++) {
-					var position = room.min + new Vector2Int(c, r);
-					floor.Add(position);
-				}
+			var roomFloor = new HashSet<Vector2Int>();
+			var roomBounds = PadRect(room, _offset);
+			foreach (var position in roomBounds.allPositionsWithin) {
+				roomFloor.Add(position);
 			}
+			var origin = Vector2Int.RoundToInt(roomBounds.center);
+			_rooms.Add(origin, new RoomInfo(origin, roomFloor, 0));
+			floor.UnionWith(roomFloor);
 		}
 		return floor;
 	}
@@ -58,6 +69,7 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 			var bounds = PadRect(roomPositions[i], _offset);
 			var center = Vector2Int.RoundToInt(bounds.center);
 			var roomFloor = GenerateRoom(center, _preset);
+			_rooms.Add(center, new RoomInfo(center, roomFloor, 0));
 			floor.UnionWith(roomFloor.Where(p => bounds.Contains(p)));
 		}
 		return floor;
