@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class InteractableTest : MonoBehaviour, IInteractable
 {
-    public string Tooltip { get; }
+	[SerializeField] private string _tooltip;
+
+    public string Tooltip => _tooltip;
+
+	public bool CanInteract => enabled;
 
 	public void OnInteract()
 	{

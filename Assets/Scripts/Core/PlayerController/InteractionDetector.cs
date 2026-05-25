@@ -16,7 +16,8 @@ public class InteractionDetector : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (TryGetComponent(out IInteractable interactable)) {
+		if (collider.TryGetComponent(out IInteractable interactable)) {
+			Debug.Log("Target is " + collider.name);
 			_targets.Add(interactable);
 		}
 	}

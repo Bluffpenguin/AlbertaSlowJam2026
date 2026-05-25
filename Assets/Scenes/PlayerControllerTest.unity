@@ -364,7 +364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d838b5cc0b1a47b85048fd0bf016c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::Player
+  _detector: {fileID: 1297155358}
   _moveSpeed: 10
+  _dashSpeed: 50
+  _dashCooldown: 5
 --- !u!50 &160974328
 Rigidbody2D:
   serializedVersion: 5
@@ -717,6 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92732c2cf2c189f418eb33d26309a868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InteractableTest
+  _tooltip: Lmao
 --- !u!1 &1071506418
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297155356}
   - component: {fileID: 1297155357}
+  - component: {fileID: 1297155358}
   m_Layer: 0
   m_Name: InteractionDetector
   m_TagString: Untagged
@@ -912,6 +917,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.8
+--- !u!114 &1297155358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297155355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147ee16f75f66da4c81c2a6f559bd836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InteractionDetector
+  tryInteract: 0
 --- !u!1 &1580219661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,7 +1267,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:

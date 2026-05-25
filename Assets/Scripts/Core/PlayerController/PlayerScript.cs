@@ -5,11 +5,16 @@ public class Player : MonoBehaviour
 
 	public InputSystem_Actions playerInput;
 
-	[SerializeField] private float _moveSpeed = 10;
 	[SerializeField] private InteractionDetector _detector;
+	[SerializeField] private float _moveSpeed = 10;
+	[Space]
+	[SerializeField] private float _dashSpeed = 200;
+	[SerializeField] private float _dashCooldown = 5f;
 
-	private Vector2 _moveDir;
 	private Rigidbody2D _rb;
+	private Vector2 _moveDir;
+	private Vector2 _dashDirection;
+	private float _dashCooldownTimer;
 
 	private void Awake()
 	{
@@ -50,8 +55,17 @@ public class Player : MonoBehaviour
 	void FixedUpdate()
 	{
 		_moveDir = playerInput.Player.Move.ReadValue<Vector2>();
-		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
 
+		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
 		_rb.AddForce(displacement, ForceMode2D.Impulse);
+		if (_rb.linearVelocity != Vector2.zero) {
+			_dashDirection = _rb.linearVelocity.normalized;
+		}
+
+		_dashCooldownTimer -= Time.fixedDeltaTime;
+		if (playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0) {
+			_dashCooldownTimer = _dashCooldown;
+			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
+		}
 	}
 }
