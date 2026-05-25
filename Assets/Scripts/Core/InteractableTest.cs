@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class InteractableTest : MonoBehaviour, IInteractable
 {
-    public string tooltip { get; }
+    public string Tooltip { get; }
 
 	public void OnInteract()
 	{
-		Debug.Log(tooltip);
+		Debug.Log(Tooltip);
 	}
 }
