@@ -29,6 +29,8 @@ public class Pathfinder : MonoBehaviour
 		{
 			int i = lowestF(open);
 			Node thisNode = open[i];
+
+			
 			if (thisNode.getId() == end.getId())
 			{
 				ReconstructPath(start, end);
@@ -106,5 +108,10 @@ public class Pathfinder : MonoBehaviour
 			count++;
 		}
 		return iteratorCount;
+	}
+
+	public void ShavePath()
+	{
+
 	}
 }

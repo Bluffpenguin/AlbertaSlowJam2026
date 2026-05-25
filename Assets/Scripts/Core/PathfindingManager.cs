@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 using System.Collections;
 using JetBrains.Annotations;
 
+[RequireComponent(typeof(Pathfinder))]
 public class PathfindingManager : MonoBehaviour
 {
 	[Header("Waypoints")]
@@ -23,8 +24,16 @@ public class PathfindingManager : MonoBehaviour
 	List<Graph> graphs = new List<Graph>();
 
 	Dictionary<Vector2Int, Node> nodeDictionary;
+	Tilemap tileMap;
 	bool links_generated = false;
-	
+
+	public Pathfinder pf;
+
+
+	private void Start()
+	{
+		pf = GetComponent<Pathfinder>();
+	}
 
 	struct Graph
 	{
@@ -143,6 +152,7 @@ public class PathfindingManager : MonoBehaviour
 			}
 		}
 
+		tileMap = map;
 		links_generated = true;
 	}
 	void GenerateLinks(Node[,] nodes, int numOfXPos, int numOfYPos)
@@ -232,6 +242,16 @@ public class PathfindingManager : MonoBehaviour
 
 	#endregion
 
+	public Node GetNode(GameObject nodeObj)
+	{
+		Vector2Int pos = (Vector2Int)tileMap.WorldToCell(nodeObj.transform.position);
+		if (nodeDictionary.TryGetValue(pos, out Node node))
+			return node;
+
+		return null;
+
+	}
+	
 	#region Test Methods
 	public void Test_Generate()
 	{
