@@ -6,7 +6,6 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 	[SerializeField] protected TilePainter _floorPainter;
 	[SerializeField] protected TilePainter _wallPainter;
 	[SerializeField] protected TilePainter _pathPainter;
-	[SerializeField] protected Tilemap _pathTiles;
 	[SerializeField] protected PathfindingManager _pf;
 	[SerializeField] protected RandomWalkData _preset = null;
 
@@ -24,7 +23,7 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		_floorPainter.PaintTiles(floor);
 		_pathPainter.PaintTiles(floor);
 		WallGenerator.CreateWalls(floor, _wallPainter);
-		_pf.GenerateLink(floor, _pathTiles, false);
+		_pf.GenerateLink(floor, _pathPainter.Tilemap, false);
 	}
 
 	protected static HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition, RandomWalkData data)
