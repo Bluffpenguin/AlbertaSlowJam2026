@@ -1,27 +1,40 @@
-using UnityEngine;
+using UnityEngine.Pool;
+using System.Linq;
 
 public static class WallGenerator
 {
-	public static HashSet<Vector2Int> CreateWalls(HashSet<Vector2Int> floor, TilePainter painter)
+	public static void CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, int thickness = 2)
 	{
-		HashSet<Vector2Int> walls = FindWallsInDirections(floor, Direction2D.compass);
-		foreach (var position in walls) {
-			painter.PaintTile(position);
-		}
-		return walls;
+		CreateWalls(floor, painter, thickness, out _).Dispose();
 	}
 
-	private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floor, IEnumerable<Vector2Int> directions)
+	public static IDisposable CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, out HashSet<Vector2Int> walls)
+		=> CreateWalls(floor, painter, 2, out walls);
+	public static IDisposable CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, int thickness, out HashSet<Vector2Int> walls)
 	{
-		var walls = new HashSet<Vector2Int>();
-		foreach (var position in floor) {
-			foreach (var direction in directions) {
-				var neighbour = position + direction;
-				if (!floor.Contains(neighbour)) {
-					walls.Add(neighbour);
-				}
-			}
+		var obj = HashSetPool<Vector2Int>.Get(out walls);
+		using var _ = HashSetPool<Vector2Int>.Get(out var tiles);
+		tiles.UnionWith(floor);
+
+		Vector2Int[] directions = Direction2D.GetDirections(Direction2D.Type.Cardinal | Direction2D.Type.Ordinal);
+
+		for (int i = 0; i < thickness; i++) {
+			var layer = FindWallsInDirections(tiles, directions);
+			walls.UnionWith(layer);
+			tiles.UnionWith(layer);
 		}
-		return walls;
+
+		painter.PaintTiles(walls);
+
+		return obj;
+	}
+
+	private static IEnumerable<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floor, IEnumerable<Vector2Int> directions)
+	{
+		return from position in floor
+			   from direction in directions
+			   let neighbour = position + direction
+			   where !floor.Contains(neighbour)
+			   select neighbour;
 	}
 }

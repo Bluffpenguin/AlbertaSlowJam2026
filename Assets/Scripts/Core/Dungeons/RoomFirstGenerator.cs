@@ -18,8 +18,6 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 	{
 		Clear();
 		CreateRooms();
-		
-		
 	}
 
 	public override void Clear()
@@ -38,19 +36,8 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		var corridors = ConnectRooms(roomCenters);
 		floor.UnionWith(corridors);
 		_floorPainter.PaintTiles(floor);
-
-		using (UnityEngine.Pool.ListPool<IRoomPostProcessor>.Get(out var components)) {
-			this.GetComponents(components);
-			foreach (var room in _rooms.Values) {
-				for (int i = 0; i < components.Count; i++) {
-					components[i].ProcessRoom(room);
-				}
-			}
-		}
-
-		var walls = WallGenerator.CreateWalls(floor, _wallPainter);
-		floor.UnionWith(walls);
-		WallGenerator.CreateWalls(floor, _wallPainter);
+		WallGenerator.CreateWalls(floor, _wallPainter, _wallThickness);
+		base.ApplyPostProcessing(_rooms.Values);
 	}
 
 	private HashSet<Vector2Int> CreateSimpleRooms(List<RectInt> rooms)

@@ -1,10 +1,11 @@
 using System.Linq;
-using UnityEngine.Tilemaps;
+using UnityEngine.Pool;
 
 public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 {
 	[SerializeField] protected TilePainter _floorPainter;
 	[SerializeField] protected TilePainter _wallPainter;
+	[SerializeField, Range(1, 5)] protected int _wallThickness = 2;
 	[SerializeField] protected RandomWalkData _preset = null;
 
 	public override void Clear()
@@ -12,16 +13,12 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		_floorPainter.Clear();
 		_wallPainter.Clear();
 
-		using (UnityEngine.Pool.ListPool<IRoomPostProcessor>.Get(out var components))
-		{
+		using (ListPool<IRoomPostProcessor>.Get(out var components)) {
 			this.GetComponents(components);
-			
-			for (int i = 0; i < components.Count; i++)
-			{
+			components.Sort();
+			for (int i = 0; i < components.Count; i++) {
 				components[i].Clear();
-
 			}
-			
 		}
 	}
 
@@ -30,7 +27,34 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		Clear();
 		var floor = GenerateRoom(_startPosition, _preset);
 		_floorPainter.PaintTiles(floor);
-		WallGenerator.CreateWalls(floor, _wallPainter);
+		WallGenerator.CreateWalls(floor, _wallPainter, _wallThickness);
+
+		var roomInfo = new RoomInfo(_startPosition, floor, 0);
+		this.ApplyPostProcessing(roomInfo);
+	}
+
+	protected void ApplyPostProcessing(RoomInfo room)
+	{
+		var components = ListPool<IRoomPostProcessor>.Get();
+		this.GetComponents(components);
+		components.Sort();
+		for (int i = 0; i < components.Count; i++) {
+			components[i].ProcessRoom(room);
+		}
+		ListPool<IRoomPostProcessor>.Release(components);
+	}
+
+	protected void ApplyPostProcessing(IEnumerable<RoomInfo> rooms)
+	{
+		var components = ListPool<IRoomPostProcessor>.Get();
+		this.GetComponents(components);
+		components.Sort();
+		foreach (var room in rooms) {
+			for (int i = 0; i < components.Count; i++) {
+				components[i].ProcessRoom(room);
+			}
+		}
+		ListPool<IRoomPostProcessor>.Release(components);
 	}
 
 	protected static HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition, RandomWalkData data)
