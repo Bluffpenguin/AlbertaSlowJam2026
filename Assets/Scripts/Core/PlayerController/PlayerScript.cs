@@ -1,16 +1,71 @@
-using UnityEngine;
-
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+	public static Player Instance { get; private set; }
+	public static bool Exists { get => Instance != null; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public InputSystem_Actions playerInput;
+
+	[SerializeField] private InteractionDetector _detector;
+	[SerializeField] private float _moveSpeed = 10;
+	[Space]
+	[SerializeField] private float _dashSpeed = 200;
+	[SerializeField] private float _dashCooldown = 5f;
+
+	private Rigidbody2D _rb;
+	private Vector2 _moveDir;
+	private Vector2 _dashDirection;
+	private float _dashCooldownTimer;
+
+	private void Awake()
+	{
+		Instance = this;
+		playerInput = new();
+		_rb = GetComponent<Rigidbody2D>();
+	}
+
+	private void OnEnable()
+	{
+		playerInput.Player.Enable();
+		playerInput.Player.Interact.performed += this.Interact_performed;
+		playerInput.Player.Interact.canceled += this.Interact_canceled;
+	}
+
+	private void OnDisable()
+	{
+		playerInput.Player.Disable();
+		playerInput.Player.Interact.performed -= this.Interact_performed;
+		playerInput.Player.Interact.canceled -= this.Interact_canceled;
+	}
+
+	private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		if (_detector != null) {
+			_detector.tryInteract = true;
+		}
+	}
+
+	private void Interact_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		if (_detector != null) {
+			_detector.tryInteract = false;
+		}
+	}
+
+	// Update is called once per frame
+	void FixedUpdate()
+	{
+		_moveDir = playerInput.Player.Move.ReadValue<Vector2>();
+
+		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
+		_rb.AddForce(displacement, ForceMode2D.Impulse);
+		if (_rb.linearVelocity != Vector2.zero) {
+			_dashDirection = _rb.linearVelocity.normalized;
+		}
+
+		_dashCooldownTimer -= Time.fixedDeltaTime;
+		if (playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0) {
+			_dashCooldownTimer = _dashCooldown;
+			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
+		}
+	}
 }
