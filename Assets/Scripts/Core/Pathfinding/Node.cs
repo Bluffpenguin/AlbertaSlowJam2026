@@ -4,6 +4,7 @@ public class Node
 {
 	public List<Edge> edgeList = new List<Edge>();
 	GameObject id;
+	public Vector2Int position;
 
 	public float f, g, h;
 	public Node cameFrom;
