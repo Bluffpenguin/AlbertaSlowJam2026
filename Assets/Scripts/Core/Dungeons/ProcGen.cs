@@ -1,3 +1,5 @@
+using System.Linq;
+
 public static class ProcGen
 {
 	public static IEnumerable<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength, int stepLength = 1)
@@ -137,4 +139,15 @@ public static class Direction2D
 		Ordinal ordinal => ordinals[(int)ordinal],
 		_ => throw new ArgumentException("Value is not a direction.", nameof(value)),
 	};
+
+	public static Vector2Int[] GetDirections(Direction2D.Type type)
+	{
+		return type switch {
+			Type.None => Array.Empty<Vector2Int>(),
+			Type.Cardinal => cardinals.ToArray(),
+			Type.Ordinal => ordinals.ToArray(),
+			_ when type.HasFlag(Type.Cardinal | Type.Ordinal) => compass.ToArray(),
+			_ => throw new ArgumentOutOfRangeException(nameof(type)),
+		};
+	}
 }

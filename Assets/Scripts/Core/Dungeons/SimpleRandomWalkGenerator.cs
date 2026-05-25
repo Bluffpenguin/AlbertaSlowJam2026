@@ -30,7 +30,9 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		Clear();
 		var floor = GenerateRoom(_startPosition, _preset);
 		_floorPainter.PaintTiles(floor);
+		//_pathPainter.PaintTiles(floor);
 		WallGenerator.CreateWalls(floor, _wallPainter);
+		//_pf.GenerateLink(floor, _pathPainter.Tilemap, false);
 	}
 
 	protected static HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition, RandomWalkData data)

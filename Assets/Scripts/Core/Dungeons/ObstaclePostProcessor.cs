@@ -1,0 +1,33 @@
+using System.Linq;
+using UnityEngine;
+
+public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
+{
+	[SerializeField, Min(0)] private int _maxCount = 1;
+	[SerializeField] private ObstacleData _data;
+
+	public virtual void ProcessRoom(RoomInfo room)
+	{
+		Vector2Int[] directions = Direction2D.GetDirections(_data.CheckDirections);
+		for (int i = 0; i < _maxCount; i++) {
+			var position = room.Tiles.ElementAt(Random.Range(0, room.Tiles.Count));
+
+			bool placeable = true;
+			if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.NextToWall)) {
+				placeable &= directions.Count(d => !room.Tiles.Contains(position + d)) < directions.Length;
+			}
+
+			if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.OpenSpace)) {
+				placeable &= directions.All(d => room.Tiles.Contains(position + d));
+			}
+
+			if (placeable) {
+				base.PaintTile(position);
+			}
+
+			if (_data.Impassable) {
+				room.Tiles.Remove(position);
+			}
+		}
+	}
+}
