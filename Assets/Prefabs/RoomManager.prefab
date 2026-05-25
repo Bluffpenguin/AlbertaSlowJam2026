@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24121de58f38ab438d80dbc5323ad3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::Pathfinder
+  pathList: []
+  obstructions:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &6067123556048052674
 MonoBehaviour:
   m_ObjectHideFlags: 0

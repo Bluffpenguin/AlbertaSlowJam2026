@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class test_agent : MonoBehaviour
 {
-    [SerializeField] PathfindingManager manager;
+    internal RoomManager manager;
     [SerializeField] float speed = 2.0f;
     [SerializeField] GameObject startObj;
     [SerializeField] GameObject endObj;
@@ -19,13 +19,25 @@ public class test_agent : MonoBehaviour
 
 	private void Update()
 	{
+        if (manager == null)
+		{
+            Destroy(this.gameObject);
+		}
 		if (Keyboard.current.lKey.wasPressedThisFrame)
         {
             if (startObj != null && endObj != null)
             {
-                move(startObj, endObj);
+                Move(startObj, endObj);
             }
         }
+
+		if (Keyboard.current.mKey.wasPressedThisFrame)
+		{
+			if (startObj != null && endObj != null)
+			{
+				Move_Shaved(startObj, endObj);
+			}
+		}
 	}
 	// Update is called once per frame
 	void LateUpdate()
@@ -51,7 +63,7 @@ public class test_agent : MonoBehaviour
 		}
 	}
 
-    public void move(GameObject start, GameObject goal)
+    public void Move(GameObject start, GameObject goal)
     {
         currentWP = 0;
 		path.Clear();
@@ -67,6 +79,26 @@ public class test_agent : MonoBehaviour
             path = manager.pf.pathList;
             transform.position = start.transform.position;
         }
+
+	}
+
+	public void Move_Shaved(GameObject start, GameObject goal)
+	{
+		currentWP = 0;
+		path.Clear();
+
+		Node startNode = manager.GetNode(start);
+		if (startNode == null) return;
+
+		Node endNode = manager.GetNode(goal);
+		if (endNode == null) return;
+
+		if (manager.pf.AStar(startNode, endNode))
+		{
+			manager.pf.ShavePath();
+			path = manager.pf.pathList;
+			transform.position = start.transform.position;
+		}
 
 	}
 }

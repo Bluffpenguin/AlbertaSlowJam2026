@@ -4,6 +4,8 @@ public class Pathfinder : MonoBehaviour
 {
 	public List<Node> pathList = new List<Node>();
 
+	[SerializeField] LayerMask obstructions;
+
 	public bool AStar(Node start, Node end)
 	{
 		if (start.getId() == end.getId())
@@ -112,6 +114,37 @@ public class Pathfinder : MonoBehaviour
 
 	public void ShavePath()
 	{
+		if (pathList.Count <= 2) return;
+		List<Node> optimizedPath = new List<Node>();
 
+		int currentNode = 0;
+		int endNode = pathList.Count - 1;
+
+		optimizedPath.Add(pathList[currentNode]);
+
+		int prevention = 0;
+
+		while (currentNode != endNode && prevention != 99)
+		{
+			for (int i = endNode; i > currentNode; i--)
+			{
+				Vector2 currNodePos = (Vector2)pathList[currentNode].getId().transform.position;
+				Vector2 checkPos = (Vector2)pathList[i].getId().transform.position;
+				Vector2 direction = (checkPos - currNodePos).normalized;
+				float distance = Vector2.Distance(currNodePos, checkPos);
+
+				if (!Physics2D.Raycast(currNodePos, direction, distance, obstructions))
+				{
+					optimizedPath.Add(pathList[i]);
+					currentNode = i;
+					break;
+				}
+		
+			}
+			prevention++;
+		}
+
+		if(prevention != 99)
+			pathList = optimizedPath;
 	}
 }

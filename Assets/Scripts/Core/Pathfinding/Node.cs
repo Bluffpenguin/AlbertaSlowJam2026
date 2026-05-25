@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Node 
 {
 	public List<Edge> edgeList = new List<Edge>();

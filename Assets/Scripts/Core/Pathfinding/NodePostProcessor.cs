@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
 	[SerializeField] TileBase manager;
-	[SerializeField] TileBase enemy;
+	[SerializeField] GameObject enemyPrefab;
 	public void ProcessRoom(RoomInfo room)
 	{
 		base.PaintTiles(room.Tiles);
@@ -13,6 +13,12 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		GameObject rmObj = _tilemap.GetInstantiatedObject((Vector3Int)room.Origin);
 		RoomManager rm = rmObj.GetComponent<RoomManager>();
 		rm.GenerateLink(room.Tiles, _tilemap, false);
+
+		// Generate Enemy
+		Vector3 enemyPos = _tilemap.CellToWorld((Vector3Int)room.Origin);
+		GameObject enemyObj = Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+		test_agent agent = enemyObj.GetComponent<test_agent>();
+		agent.manager = rm;
 		
 	}
 }
