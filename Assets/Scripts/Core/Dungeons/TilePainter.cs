@@ -5,6 +5,8 @@ public abstract class TilePainter : MonoBehaviour
 {
 	[SerializeField] protected Tilemap _tilemap;
 
+	public Tilemap Tilemap => _tilemap;
+
 	public void Clear()
 	{
 		_tilemap.ClearAllTiles();
