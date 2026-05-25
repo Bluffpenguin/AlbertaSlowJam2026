@@ -230,8 +230,6 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
-  _pathPainter: {fileID: 0}
-  _pf: {fileID: 0}
   _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
   _dungeonSize: {x: 50, y: 50}
   _minRoomSize: {x: 10, y: 10}
@@ -544,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::SingleTilePainter
   _tilemap: {fileID: 1212294752}
-  _tile: {fileID: 11400000, guid: 229f16c6d19a1b147bfd0d88a298a108, type: 2}
+  _tile: {fileID: 11400000, guid: fec12b593feb3b043a6ec508be4ed35b, type: 2}
 --- !u!1839735485 &1212294752
 Tilemap:
   m_ObjectHideFlags: 0
@@ -564,8 +562,8 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 6
+  m_TileAnchor: {x: 1, y: 1, z: 0}
+  m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 0.53033006
     e01: -0.5303301
@@ -630,13 +628,13 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
 --- !u!4 &1212294754
@@ -731,7 +729,7 @@ Tilemap:
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 6
+  m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 0.53033006
     e01: -0.5303301
@@ -796,7 +794,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -833,7 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::SingleTilePainter
   _tilemap: {fileID: 1218275354}
-  _tile: {fileID: 11400000, guid: 0daf134f9bf4c6f44b237c4c3a831925, type: 2}
+  _tile: {fileID: 11400000, guid: a8346e2ef12c1cc418fc94872699c482, type: 2}
 --- !u!1 &1291431389
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,8 +865,6 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
-  _pathPainter: {fileID: 0}
-  _pf: {fileID: 0}
   _preset: {fileID: 11400000, guid: b850cae225a71d842804181c2538378b, type: 2}
   _corridorLength: 29
   _corridorCount: 7
@@ -1063,8 +1059,6 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
-  _pathPainter: {fileID: 0}
-  _pf: {fileID: 0}
   _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
 --- !u!4 &1851353467
 Transform:
