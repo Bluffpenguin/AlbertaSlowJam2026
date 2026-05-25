@@ -1,13 +1,18 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
-	[SerializeField] private PathfindingManager _manager;
-
+	[SerializeField] TileBase manager;
+	[SerializeField] TileBase enemy;
 	public void ProcessRoom(RoomInfo room)
 	{
 		base.PaintTiles(room.Tiles);
-		// Note: this doesn't work b/c the dictionary is cleared when this method is called
-		_manager.GenerateLink(room.Tiles, _tilemap, false);
+
+		PaintTile(room.Origin, _tilemap, manager);
+		GameObject rmObj = _tilemap.GetInstantiatedObject((Vector3Int)room.Origin);
+		RoomManager rm = rmObj.GetComponent<RoomManager>();
+		rm.GenerateLink(room.Tiles, _tilemap, false);
+		
 	}
 }

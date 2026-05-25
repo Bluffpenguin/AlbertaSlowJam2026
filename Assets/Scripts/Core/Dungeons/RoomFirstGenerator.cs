@@ -18,6 +18,14 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 	{
 		Clear();
 		CreateRooms();
+		
+		
+	}
+
+	public override void Clear()
+	{
+		base.Clear();
+		_rooms.Clear();
 	}
 
 	private void CreateRooms()
@@ -68,9 +76,10 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		for (int i = 0; i < roomPositions.Count; i++) {
 			var bounds = PadRect(roomPositions[i], _offset);
 			var center = Vector2Int.RoundToInt(bounds.center);
-			var roomFloor = GenerateRoom(center, _preset);
+			var roomFloor = GenerateRoom(center, _preset).Where(p => bounds.Contains(p)).ToHashSet();
+			
 			_rooms.Add(center, new RoomInfo(center, roomFloor, 0));
-			floor.UnionWith(roomFloor.Where(p => bounds.Contains(p)));
+			floor.UnionWith(roomFloor);
 		}
 		return floor;
 	}
