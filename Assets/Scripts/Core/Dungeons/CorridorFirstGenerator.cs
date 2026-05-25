@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine.Pool;
+using static PlasticGui.WorkspaceWindow.Merge.MergeInProgress;
 
 public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 {
@@ -41,10 +42,10 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 		if (!roomPositions.Contains(_startPosition))
 			roomPositions.Add(_startPosition);
 
+		var roomsDict = DictionaryPool<Vector2Int, HashSet<Vector2Int>>.Get();
 		foreach (var position in roomPositions) {
 			var room = GenerateRoom(position, _preset);
-			var info = new RoomInfo(position, room, 0);
-			_rooms.Add(position, info);
+			roomsDict.Add(position, room);
 			rooms.UnionWith(room);
 		}
 
@@ -57,9 +58,20 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 
 			foreach (var position in deadEnds) {
 				var room = GenerateRoom(position, _preset);
+				roomsDict.Add(position, room);
 				rooms.UnionWith(room);
 			}
 		}
+
+		var distances = roomsDict.Keys.ToDictionary(static p => p, p => Vector2Int.Distance(p, _startPosition));
+		float min = distances.Values.Min();
+		float max = distances.Values.Max();
+
+		foreach (var key in roomsDict.Keys) {
+			var info = new RoomInfo(key, roomsDict[key], Mathf.InverseLerp(min, max, distances[key]));
+			_rooms.Add(key, info);
+		}
+		DictionaryPool<Vector2Int, HashSet<Vector2Int>>.Release(roomsDict);
 
 		return rooms;
 	}
@@ -76,5 +88,19 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 			floor.UnionWith(corridor);
 		}
 		return floor;
+	}
+
+	private static void NormalizeValues(float[] values)
+	{
+		var min = Mathf.Min(values);
+		var max = Mathf.Max(values);
+
+		for (int i = 0; i < values.Length; i++) {
+			if (min != max) {
+				values[i] = (values[i] - min) / (max - min);
+			} else {
+				values[i] = 0;
+			}
+		}
 	}
 }
