@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364588649}
   - component: {fileID: 364588648}
+  - component: {fileID: 364588650}
   m_Layer: 0
   m_Name: Rooms First
   m_TagString: Untagged
@@ -230,9 +231,6 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
-  _pathPainter: {fileID: 985529514}
-  _pathTiles: {fileID: 985529513}
-  _pf: {fileID: 1280598286}
   _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
   _dungeonSize: {x: 50, y: 50}
   _minRoomSize: {x: 10, y: 10}
@@ -253,6 +251,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &364588650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364588647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302174ef5f5fbd04f9abcbb5245285fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::NodePostProcessor
+  _tilemap: {fileID: 985529513}
+  _tile: {fileID: 11400000, guid: fbcfa5101b4ba6a49924cb22ca806238, type: 2}
+  manager: {fileID: 11400000, guid: 74c17e91b3eeeef4ca44f639000fd58a, type: 2}
+  enemy: {fileID: 0}
 --- !u!1 &386778658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291431391}
   - component: {fileID: 1291431390}
+  - component: {fileID: 1291431392}
   m_Layer: 0
   m_Name: Corridor First
   m_TagString: Untagged
@@ -1192,9 +1207,6 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
-  _pathPainter: {fileID: 985529514}
-  _pathTiles: {fileID: 0}
-  _pf: {fileID: 0}
   _preset: {fileID: 11400000, guid: b850cae225a71d842804181c2538378b, type: 2}
   _corridorLength: 29
   _corridorCount: 7
@@ -1214,6 +1226,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1291431392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291431389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302174ef5f5fbd04f9abcbb5245285fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::NodePostProcessor
+  _tilemap: {fileID: 985529513}
+  _tile: {fileID: 11400000, guid: fbcfa5101b4ba6a49924cb22ca806238, type: 2}
+  manager: {fileID: 11400000, guid: 74c17e91b3eeeef4ca44f639000fd58a, type: 2}
+  enemy: {fileID: 0}
 --- !u!1 &1727151919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,9 +1401,6 @@ MonoBehaviour:
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
   _wallPainter: {fileID: 1212294751}
-  _pathPainter: {fileID: 985529514}
-  _pathTiles: {fileID: 985529513}
-  _pf: {fileID: 1280598286}
   _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
 --- !u!4 &1851353467
 Transform:
