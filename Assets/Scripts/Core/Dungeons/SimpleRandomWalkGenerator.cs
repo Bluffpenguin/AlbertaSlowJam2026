@@ -1,15 +1,20 @@
 using System.Linq;
+using UnityEngine.Tilemaps;
 
 public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 {
 	[SerializeField] protected TilePainter _floorPainter;
 	[SerializeField] protected TilePainter _wallPainter;
+	[SerializeField] protected TilePainter _pathPainter;
+	[SerializeField] protected Tilemap _pathTiles;
+	[SerializeField] protected PathfindingManager _pf;
 	[SerializeField] protected RandomWalkData _preset = null;
 
 	public override void Clear()
 	{
 		_floorPainter.Clear();
 		_wallPainter.Clear();
+		_pathPainter.Clear();
 	}
 
 	public override void Generate()
@@ -17,7 +22,9 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		Clear();
 		var floor = GenerateRoom(_startPosition, _preset);
 		_floorPainter.PaintTiles(floor);
+		_pathPainter.PaintTiles(floor);
 		WallGenerator.CreateWalls(floor, _wallPainter);
+		_pf.GenerateLink(floor, _pathTiles, false);
 	}
 
 	protected static HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition, RandomWalkData data)

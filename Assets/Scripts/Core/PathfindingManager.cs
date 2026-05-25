@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class PathfindingManager : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PathfindingManager : MonoBehaviour
 	List<Graph> graphs = new List<Graph>();
 
 	Dictionary<Vector2Int, Node> nodeDictionary;
-
+	bool links_generated = false;
 	
 
 	struct Graph
@@ -83,13 +84,12 @@ public class PathfindingManager : MonoBehaviour
 		return graphs.Count - 1;
 	}
 
-	void GenerateLink(HashSet<Vector2Int> tiles, Tilemap map, bool diagonal)
+	public void GenerateLink(HashSet<Vector2Int> tiles, Tilemap map, bool diagonal)
 	{
 		if (tiles.Count == 0)
 			return;
 
-
-		nodeDictionary.Clear();
+		links_generated = false;
 		nodeDictionary = new Dictionary<Vector2Int, Node>();
 
 		// Set Up Nodes
@@ -142,6 +142,8 @@ public class PathfindingManager : MonoBehaviour
 					node.edgeList.Add(new Edge(node, neighbor));
 			}
 		}
+
+		links_generated = true;
 	}
 	void GenerateLinks(Node[,] nodes, int numOfXPos, int numOfYPos)
 	{
@@ -280,6 +282,21 @@ public class PathfindingManager : MonoBehaviour
 			}
 			Gizmos.color = Color.white;
 		}
-		
+
+		if (links_generated && nodeDictionary.Count > 0)
+		{
+			Gizmos.color = Color.yellow;
+			foreach (Node node in  nodeDictionary.Values)
+			{
+				foreach (Edge edge in node.edgeList)
+				{
+					Vector3 start = edge.startNode.getId().transform.position;
+					Vector3 end = edge.endNode.getId().transform.position;
+					Gizmos.DrawLine(start, end);
+				}
+			}
+			Gizmos.color = Color.white;
+		}
+
 	}
 }
