@@ -79,7 +79,7 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 			var center = Vector2Int.RoundToInt(bounds.center);
 			var roomFloor = GenerateRoom(center, _preset).Where(p => bounds.Contains(p)).ToHashSet();
 			
-			roomsDict.Add(center, roomFloor);
+			roomsDict.TryAdd(center, roomFloor);
 			floor.UnionWith(roomFloor);
 		}
 

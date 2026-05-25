@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts.Core::RandomWalkData
   _iterations: 30
   _length: 30
-  _largeRooms: 1
+  _largeRooms: 0
   _maxRoomSize: {x: 25, y: 25}

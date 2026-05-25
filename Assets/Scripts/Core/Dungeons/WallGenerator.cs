@@ -19,7 +19,7 @@ public static class WallGenerator
 		Vector2Int[] directions = Direction2D.GetDirections(Direction2D.Type.Cardinal | Direction2D.Type.Ordinal);
 
 		for (int i = 0; i < thickness; i++) {
-			var layer = FindWallsInDirections(tiles, directions);
+			var layer = FindWallsInDirections(tiles, directions).ToArray();
 			walls.UnionWith(layer);
 			tiles.UnionWith(layer);
 		}
