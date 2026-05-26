@@ -48,7 +48,7 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 		if (!_corridorData.RoundedCorners) {
 			directions |= Direction2D.Type.Ordinal;
 		}
-		WallGenerator.ExtendFloorInDirections(floor, _corridorData.Width, Direction2D.GetDirections(directions));
+		WallGenerator.ExtendFloorInDirections(floor, _corridorData.Width - 1, Direction2D.GetDirections(directions));
 		return floor;
 	}
 
