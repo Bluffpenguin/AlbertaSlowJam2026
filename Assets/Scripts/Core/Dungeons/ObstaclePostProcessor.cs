@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
-	[SerializeField, Min(0)] private int _maxCount = 1;
-	[SerializeField] private ObstacleData _data;
+	[SerializeField] protected int _processingOrder;
+	[SerializeField, Min(0)] protected int _maxCount = 1;
+	[SerializeField] protected ObstacleData _data;
+
+	public int Order => _processingOrder;
 
 	public virtual void ProcessRoom(RoomInfo room)
 	{
