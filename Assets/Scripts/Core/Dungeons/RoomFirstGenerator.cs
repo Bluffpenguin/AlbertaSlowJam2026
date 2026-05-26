@@ -1,4 +1,5 @@
 using System.Linq;
+using UnityEngine.Pool;
 
 public class RoomFirstGenerator : SimpleRandomWalkGenerator
 {
@@ -18,8 +19,6 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 	{
 		Clear();
 		CreateRooms();
-		
-		
 	}
 
 	public override void Clear()
@@ -38,25 +37,15 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		var corridors = ConnectRooms(roomCenters);
 		floor.UnionWith(corridors);
 		_floorPainter.PaintTiles(floor);
-
-		using (UnityEngine.Pool.ListPool<IRoomPostProcessor>.Get(out var components)) {
-			this.GetComponents(components);
-			foreach (var room in _rooms.Values) {
-				for (int i = 0; i < components.Count; i++) {
-					components[i].ProcessRoom(room);
-				}
-			}
-		}
-
-		var walls = WallGenerator.CreateWalls(floor, _wallPainter);
-		floor.UnionWith(walls);
-		WallGenerator.CreateWalls(floor, _wallPainter);
+		WallGenerator.CreateWalls(floor, _wallPainter, _wallThickness);
+		base.ApplyPostProcessing(_rooms.Values);
 	}
 
 	private HashSet<Vector2Int> CreateSimpleRooms(List<RectInt> rooms)
 	{
 		var floor = new HashSet<Vector2Int>();
 
+		var roomsDict = DictionaryPool<Vector2Int, HashSet<Vector2Int>>.Get();
 		foreach (var room in rooms) {
 			var roomFloor = new HashSet<Vector2Int>();
 			var roomBounds = PadRect(room, _offset);
@@ -64,23 +53,46 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 				roomFloor.Add(position);
 			}
 			var origin = Vector2Int.RoundToInt(roomBounds.center);
-			_rooms.Add(origin, new RoomInfo(origin, roomFloor, 0));
+			roomsDict.Add(origin, roomFloor);
 			floor.UnionWith(roomFloor);
 		}
+
+		var distances = roomsDict.Keys.ToDictionary(static p => p, p => Vector2Int.Distance(p, _startPosition));
+		float min = distances.Values.Min();
+		float max = distances.Values.Max();
+
+		foreach (var key in roomsDict.Keys) {
+			var info = new RoomInfo(key, roomsDict[key], Mathf.InverseLerp(min, max, distances[key]));
+			_rooms.Add(key, info);
+		}
+		DictionaryPool<Vector2Int, HashSet<Vector2Int>>.Release(roomsDict);
 		return floor;
 	}
 
 	private HashSet<Vector2Int> CreateRandomWalkRooms(List<RectInt> roomPositions)
 	{
 		HashSet<Vector2Int> floor = new();
+
+		var roomsDict = DictionaryPool<Vector2Int, HashSet<Vector2Int>>.Get();
 		for (int i = 0; i < roomPositions.Count; i++) {
 			var bounds = PadRect(roomPositions[i], _offset);
 			var center = Vector2Int.RoundToInt(bounds.center);
 			var roomFloor = GenerateRoom(center, _preset).Where(p => bounds.Contains(p)).ToHashSet();
 			
-			_rooms.Add(center, new RoomInfo(center, roomFloor, 0));
+			roomsDict.TryAdd(center, roomFloor);
 			floor.UnionWith(roomFloor);
 		}
+
+		var distances = roomsDict.Keys.ToDictionary(static p => p, p => Vector2Int.Distance(p, _startPosition));
+		float min = distances.Values.Min();
+		float max = distances.Values.Max();
+
+		foreach (var key in roomsDict.Keys) {
+			var info = new RoomInfo(key, roomsDict[key], Mathf.InverseLerp(min, max, distances[key]));
+			_rooms.Add(key, info);
+		}
+		DictionaryPool<Vector2Int, HashSet<Vector2Int>>.Release(roomsDict);
+
 		return floor;
 	}
 
