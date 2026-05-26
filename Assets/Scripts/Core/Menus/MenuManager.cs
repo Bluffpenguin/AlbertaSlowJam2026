@@ -18,19 +18,6 @@ public class MenuManager : MonoBehaviour
 			DontDestroyOnLoad(Instance);
 		}
 		currentScene = SceneManager.GetActiveScene().name;
-		Debug.Log($"Current scene is: {currentScene}");
+		//Debug.Log($"Current scene is: {currentScene}");
 	}
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-	
 }

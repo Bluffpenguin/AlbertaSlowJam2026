@@ -26,6 +26,12 @@ public class LoadScene : MonoBehaviour
 		//Debug.Log($"Loaded: {MenuManager.Instance.currentScene}");
 	}
 
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Fuck this shit, I'm out");
+    }
+
     /// <summary>
     /// Subject to change (will / can remove or alter for better pausing)
     /// </summary>
