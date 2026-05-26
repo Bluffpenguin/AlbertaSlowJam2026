@@ -24,10 +24,14 @@ public class SimpleEnemy : MonoBehaviour
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.white;
-		var direction = Quaternion.AngleAxis(currentState.visAngle, heading.forward) * (currentState.visDist * rm.tileMap.cellSize.magnitude * heading.up);
-		Gizmos.DrawRay(transform.position, direction);
 
-		direction = Quaternion.AngleAxis(-currentState.visAngle, heading.forward) * (currentState.visDist * rm.tileMap.cellSize.magnitude * heading.up);
-		Gizmos.DrawRay(transform.position, direction);
+		var direction = Quaternion.AngleAxis(currentState.visAngle, heading.forward) * heading.up;
+		Gizmos.DrawRay(transform.position, direction * (3 / rm.tileMap.cellSize.magnitude));
+		
+
+		direction = Quaternion.AngleAxis(-currentState.visAngle, heading.forward) * heading.up;
+		Gizmos.DrawRay(transform.position, direction * (3 / rm.tileMap.cellSize.magnitude));
+
+
 	}
 }
