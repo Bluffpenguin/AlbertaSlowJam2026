@@ -1,5 +1,5 @@
-[CreateAssetMenu(fileName = "Preset", menuName = "Data/Random Walk Data")]
-public class RandomWalkData : ScriptableObject
+[CreateAssetMenu(fileName = "Preset", menuName = "Proc Gen/Room Data")]
+public class ProcGenRoomData : ScriptableObject
 {
 	[SerializeField] protected int _iterations = 10;
 	[SerializeField] protected int _length = 10;

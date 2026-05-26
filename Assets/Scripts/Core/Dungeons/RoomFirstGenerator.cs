@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine.Pool;
 
+[Obsolete]
 public class RoomFirstGenerator : SimpleRandomWalkGenerator
 {
 	[SerializeField]
@@ -37,7 +38,7 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		var corridors = ConnectRooms(roomCenters);
 		floor.UnionWith(corridors);
 		_floorPainter.PaintTiles(floor);
-		WallGenerator.CreateWalls(floor, _wallPainter, _wallThickness);
+		WallGenerator.CreateWalls(floor, _wallPainter, _wallData);
 		base.ApplyPostProcessing(_rooms.Values);
 	}
 
@@ -77,7 +78,7 @@ public class RoomFirstGenerator : SimpleRandomWalkGenerator
 		for (int i = 0; i < roomPositions.Count; i++) {
 			var bounds = PadRect(roomPositions[i], _offset);
 			var center = Vector2Int.RoundToInt(bounds.center);
-			var roomFloor = GenerateRoom(center, _preset).Where(p => bounds.Contains(p)).ToHashSet();
+			var roomFloor = GenerateRoom(center, _roomData).Where(p => bounds.Contains(p)).ToHashSet();
 			
 			roomsDict.TryAdd(center, roomFloor);
 			floor.UnionWith(roomFloor);
