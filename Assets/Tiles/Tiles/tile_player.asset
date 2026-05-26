@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
   m_Name: tile_player
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.IsometricRuleTile
-  m_DefaultSprite: {fileID: 1053006213846151300, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
-  m_DefaultGameObject: {fileID: 0}
-  m_DefaultColliderType: 2
+  m_DefaultSprite: {fileID: 0}
+  m_DefaultGameObject: {fileID: 8638706844493832600, guid: 1b1ad4dfc231ea5428be15b37439abc9, type: 3}
+  m_DefaultColliderType: 0
   m_TilingRules: []
