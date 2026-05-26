@@ -1,12 +1,15 @@
 using System.Linq;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 {
 	[SerializeField] protected TilePainter _floorPainter;
+	[FormerlySerializedAs("_preset")]
+	[SerializeField] protected ProcGenRoomData _roomData;
+	[Space]
 	[SerializeField] protected TilePainter _wallPainter;
-	[SerializeField, Range(1, 5)] protected int _wallThickness = 2;
-	[SerializeField] protected RandomWalkData _preset = null;
+	[SerializeField] protected ProcGenWallData _wallData;
 
 	public override void Clear()
 	{
@@ -25,9 +28,9 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 	public override void Generate()
 	{
 		Clear();
-		var floor = GenerateRoom(_startPosition, _preset);
+		var floor = GenerateRoom(_startPosition, _roomData);
 		_floorPainter.PaintTiles(floor);
-		WallGenerator.CreateWalls(floor, _wallPainter, _wallThickness);
+		WallGenerator.CreateWalls(floor, _wallPainter, _wallData);
 
 		var roomInfo = new RoomInfo(_startPosition, floor, 0);
 		this.ApplyPostProcessing(roomInfo);
@@ -57,7 +60,7 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		ListPool<IRoomPostProcessor>.Release(components);
 	}
 
-	protected static HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition, RandomWalkData data)
+	protected static HashSet<Vector2Int> GenerateRoom(Vector2Int startPosition, ProcGenRoomData data)
 	{
 		if (data == null)
 			throw new ArgumentNullException(nameof(data));

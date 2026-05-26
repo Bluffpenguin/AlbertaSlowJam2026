@@ -3,14 +3,12 @@ using System.Linq;
 
 public static class WallGenerator
 {
-	public static void CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, int thickness = 2)
+	public static void CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, ProcGenWallData data)
 	{
-		CreateWalls(floor, painter, thickness, out _).Dispose();
+		CreateWalls(floor, painter, data, out _).Dispose();
 	}
 
-	public static IDisposable CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, out HashSet<Vector2Int> walls)
-		=> CreateWalls(floor, painter, 2, out walls);
-	public static IDisposable CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, int thickness, out HashSet<Vector2Int> walls)
+	public static IDisposable CreateWalls(HashSet<Vector2Int> floor, TilePainter painter, ProcGenWallData data, out HashSet<Vector2Int> walls)
 	{
 		var obj = HashSetPool<Vector2Int>.Get(out walls);
 		using var _ = HashSetPool<Vector2Int>.Get(out var tiles);
@@ -18,7 +16,7 @@ public static class WallGenerator
 
 		Vector2Int[] directions = Direction2D.GetDirections(Direction2D.Type.Cardinal | Direction2D.Type.Ordinal);
 
-		for (int i = 0; i < thickness; i++) {
+		for (int i = 0; i < data.Thickness; i++) {
 			var layer = FindWallsInDirections(tiles, directions).ToArray();
 			walls.UnionWith(layer);
 			tiles.UnionWith(layer);
@@ -27,6 +25,20 @@ public static class WallGenerator
 		painter.PaintTiles(walls);
 
 		return obj;
+	}
+
+	public static void ExtendFloorInDirections(HashSet<Vector2Int> floor, int iterations, params Vector2Int[] directions)
+	{
+		if (floor is null)
+			throw new ArgumentNullException(nameof(floor));
+
+		if (directions?.Length is null or 0)
+			return;
+
+		for (int i = 0; i < iterations; i++) {
+			var layer = FindWallsInDirections(floor, directions).ToArray();
+			floor.UnionWith(layer);
+		}
 	}
 
 	private static IEnumerable<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floor, IEnumerable<Vector2Int> directions)

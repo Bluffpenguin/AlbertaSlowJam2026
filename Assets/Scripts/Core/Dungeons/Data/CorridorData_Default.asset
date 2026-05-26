@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1be163250f2a4499f9dc95e335ed68, type: 3}
-  m_Name: RandomWalkPreset_Small
-  m_EditorClassIdentifier: Scripts.Core::RandomWalkData
-  _iterations: 30
-  _length: 30
-  _largeRooms: 0
-  _maxRoomSize: {x: 25, y: 25}
+  m_Script: {fileID: 11500000, guid: e39b8f0ffacbbfc41bfc571f0011dad4, type: 3}
+  m_Name: CorridorData_Default
+  m_EditorClassIdentifier: Scripts.Core::ProcGenCorridorData
+  _corridorLength: 20
+  _corridorWidth: 1
+  _corridorCount: 5
+  _roundedCorners: 0
