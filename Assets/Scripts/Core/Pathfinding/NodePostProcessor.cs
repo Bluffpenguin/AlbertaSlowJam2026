@@ -17,8 +17,8 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		// Generate Enemy
 		Vector3 enemyPos = _tilemap.CellToWorld((Vector3Int)room.Origin);
 		GameObject enemyObj = Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
-		test_agent agent = enemyObj.GetComponent<test_agent>();
-		agent.manager = rm;
+		SimpleEnemy agent = enemyObj.GetComponent<SimpleEnemy>();
+		agent.rm = rm;
 		
 	}
 }

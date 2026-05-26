@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class RoomManager : MonoBehaviour
 {
 	Dictionary<Vector2Int, Node> nodeDictionary;
-	Tilemap tileMap;
+	internal Tilemap tileMap;
 	bool links_generated = false;
 
 	internal Pathfinder pf;
