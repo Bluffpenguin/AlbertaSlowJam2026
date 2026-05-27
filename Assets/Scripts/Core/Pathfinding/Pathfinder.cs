@@ -5,6 +5,7 @@ public class Pathfinder : MonoBehaviour
 	public List<Node> pathList = new List<Node>();
 
 	[SerializeField] LayerMask obstructions;
+	[SerializeField] RoomManager rm;
 
 	public bool AStar(Node start, Node end)
 	{
@@ -126,18 +127,17 @@ public class Pathfinder : MonoBehaviour
 
 		while (currentNode < endNode && prevention != 99)
 		{
-			Vector2 currNodePos = (Vector2)pathList[currentNode].getId().transform.position;
+			Vector3 currPos = rm.tileMap.CellToWorld((Vector3Int)pathList[currentNode].position);
 			bool foundShortcut = false;
 
 			for (int i = endNode; i > currentNode; i--)
 			{
-				
-				Vector2 checkPos = (Vector2)pathList[i].getId().transform.position;
+				Vector3 checkPos = rm.tileMap.CellToWorld((Vector3Int)pathList[i].position);
 				//Vector2 direction = (checkPos - currNodePos).normalized;
 				//float distance = Vector2.Distance(currNodePos, checkPos);
 
 				
-				if (!Physics2D.Linecast(currNodePos, checkPos, obstructions))
+				if (!Physics2D.Linecast(currPos, checkPos, obstructions))
 				{
 					optimizedPath.Add(pathList[i]);
 					currentNode = i;
