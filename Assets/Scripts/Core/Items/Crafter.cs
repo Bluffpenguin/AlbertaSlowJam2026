@@ -13,9 +13,11 @@ public class Crafter : MonoBehaviour
 	public IList<Ingredient> Contents => _contents;
 	public Ingredient Output { get => _output; set => _output = value; }
 
+	[ContextMenu("Craft")]
 	public void CraftFromContents()
 	{
 		_output = Craft(_contents);
+		_contents.Clear();
 	}
 
 	const string NO_RESOLUTION_ERROR = "Recipe conflicts detected. Cannot resolve conflicts due to missing resolver.";

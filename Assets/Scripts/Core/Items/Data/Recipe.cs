@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 public class Recipe : ScriptableObject
 {
 	[SerializeField]
-	[Min(0)] private float _sellValueBonus = 2;
+	[Min(0)] private float _sellValueBonus = 1;
 
 	[SerializeField]
 	private RecipeIngredient[] _ingredients;

@@ -7,7 +7,14 @@ public abstract class InventoryItem : ScriptableObject
 	[SerializeField]
 	[TextArea] protected string _description;
 
-	public string DisplayName => _displayName;
+	public string DisplayName {
+		get {
+			if (string.IsNullOrWhiteSpace(_displayName))
+				return name;
+			return _displayName;
+		}
+	}
+
 	public Sprite Sprite => _sprite;
 	public string Description => _description;
 }
