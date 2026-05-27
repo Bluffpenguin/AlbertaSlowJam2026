@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class State_SimplePatrol : AIState
 {
 	float patrolSpeed = 5f;
-	int currentPatrolIndex = 0;
 	private readonly float stallTimeMax = 2f;
 	private readonly float stallTimeMin = 0.5f;
 	private bool reversePatrol = false, stalling = false;
@@ -61,6 +60,9 @@ public class State_SimplePatrol : AIState
 	public override void FixedUpdate()
 	{
 		if (stalling)
+			return;
+
+		if (currentWP == path.Count)
 			return;
 
 		if (Vector2.Distance(path[currentWP].getId().transform.position, enemyInfo.npc.transform.position) < accuracy)
