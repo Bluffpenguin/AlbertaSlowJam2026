@@ -1,28 +1,34 @@
 using System.Linq;
 
-public class Crafter : MonoBehaviour
+public class Crafter : Inventory
 {
 	[SerializeField]
 	private CraftingData _database;
 	[SerializeField]
 	private CraftingResolver _resolver;
-	[SerializeField] private List<Ingredient> _contents = new();
-	[SerializeField] private Ingredient _output;
 
 	public CraftingData Database => _database;
-	public IList<Ingredient> Contents => _contents;
-	public Ingredient Output { get => _output; set => _output = value; }
+	public ItemStack Output { get => base[Count - 1]; }
+
+	public override bool Add(ItemStack item)
+	{
+		if (item.Data is Ingredient)
+			return base.Add(item);
+		else
+			return false;
+	}
 
 	[ContextMenu("Craft")]
 	public void CraftFromContents()
 	{
-		_output = Craft(_contents);
-		_contents.Clear();
+		var result = Craft(_contents.Take(Count - 2).Select(s => s.Data as Ingredient).ToArray());
+		Clear();
+		_contents.Add(result);
 	}
 
 	const string NO_RESOLUTION_ERROR = "Recipe conflicts detected. Cannot resolve conflicts due to missing resolver.";
 	const string NO_RESULT_ERROR = "The ingredients ({0}) does not produce a result. Consider adding a default recipe without any requirements to the database.";
-	public Ingredient Craft(IReadOnlyList<Ingredient> ingredients)
+	public ItemStack Craft(IReadOnlyList<Ingredient> ingredients)
 	{
 		if (ingredients?.Count is null or 0)
 			throw new ArgumentException("No items provided.");
@@ -49,10 +55,10 @@ public class Crafter : MonoBehaviour
 			throw new Exception(string.Format(NO_RESULT_ERROR, message));
 		}
 
-		int sellValue = resolvedRecipe.CalculateSellValue(ingredients);
 		var result = resolvedRecipe.Result;
 		Debug.Assert(result != null);
-		return result;
+		int sellValue = resolvedRecipe.CalculateSellValue(ingredients);
+		return new ItemStack(result, 1, sellValue);
 	}
 }
 

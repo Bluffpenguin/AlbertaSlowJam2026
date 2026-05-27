@@ -47,7 +47,7 @@ public class Recipe : ScriptableObject
 
 	public int CalculateSellValue(IEnumerable<Ingredient> ingredients)
 	{
-		float value = ingredients.Sum(static i => i.BaseSellValue) * _sellValueBonus;
+		float value = ingredients.Sum(static i => i.SellValue) * _sellValueBonus;
 		return Mathf.RoundToInt(value);
 	}
 }
