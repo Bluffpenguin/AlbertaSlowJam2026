@@ -10,8 +10,17 @@ public class RoomManager : MonoBehaviour
 	bool links_generated = false;
 
 	internal Pathfinder pf;
+	[System.Serializable] struct Patrol { public List<Vector2Int> wps; }
+	[SerializeField] private Patrol[] patrolList = new Patrol[3];
+	private int numOfPatrols = 0;
 
-
+	private void Awake()
+	{
+		for (int i = 0; i < 3; i++) 
+		{
+			patrolList[i].wps = new List<Vector2Int>();
+		}
+	}
 	private void Start()
 	{
 		pf = GetComponent<Pathfinder>();
@@ -88,6 +97,32 @@ public class RoomManager : MonoBehaviour
 
 		return null;
 
+	}
+
+	public Node GetNode(Vector2Int pos)
+	{
+		if (nodeDictionary.TryGetValue(pos, out Node node))
+			return node;
+
+		return null;
+
+	}
+
+	public void AddPatrol(List<Vector2Int> patrol)
+	{
+		if (numOfPatrols == 3)
+		{
+			Debug.Log("This room can only support 3 patrols");
+			return;
+		}
+
+		patrolList[numOfPatrols].wps = patrol;
+		numOfPatrols++;
+	}
+
+	public List<Vector2Int> GetPatrol(int index)
+	{
+		return patrolList[index].wps;
 	}
 
 

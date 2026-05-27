@@ -105,8 +105,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f4c76fb76a23846ad80c6ba077f3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player: {fileID: 0}
-  heading: {fileID: 2725107953375690274}
+  enemyInfo:
+    enemyId: 0
+    heading: {fileID: 2725107953375690274}
+    npc: {fileID: 279617531443849418}
+    rm: {fileID: 0}
+    sightObstructions:
+      serializedVersion: 2
+      m_Bits: 1024
+    defaultState: 0
 --- !u!1 &8947975246359769607
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 8947975246359769607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

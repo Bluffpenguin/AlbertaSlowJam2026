@@ -206,7 +206,7 @@ public class PathfindingManager : MonoBehaviour
 	/// <summary>
 	/// Check that the provided position is a valid point to place a node
 	/// </summary>
-	/// <param name="position"></param>
+	/// <param stateName="position"></param>
 	/// <returns></returns>
 	bool IsPosValid(Vector2 position)
 	{
@@ -222,7 +222,7 @@ public class PathfindingManager : MonoBehaviour
 	/// <summary>
 	/// Delete the graph and its nodes at the corresponding index
 	/// </summary>
-	/// <param name="index"></param>
+	/// <param stateName="index"></param>
 	public void DeleteWaypoints(int index)
 	{
 		Graph graph = graphs[index];

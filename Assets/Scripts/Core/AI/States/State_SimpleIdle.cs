@@ -4,10 +4,10 @@ using System.Collections;
 
 public class State_SimpleIdle : AIState
 { 
-	public State_SimpleIdle(GameObject _npc, Animator _anim, Transform _player, RoomManager _rm, Transform _heading)
-        : base(_npc, _anim, _player, _rm, _heading)
+	public State_SimpleIdle(EnemyInfo _enemyInfo, Transform _player)
+        : base(_enemyInfo, _player)
     {
-        name = STATE.IDLE;
+        stateName = STATE.IDLE;
     }
 
 	public override void Enter()
@@ -21,7 +21,7 @@ public class State_SimpleIdle : AIState
 		if (CanSeePlayer())
 		{
 			Debug.Log("Found Player");
-			nextState = new State_SimplePatrol(npc, anim, player, rm, heading);
+			nextState = new State_SimplePatrol(enemyInfo, player);
 		}
 		base.Update();
 	}

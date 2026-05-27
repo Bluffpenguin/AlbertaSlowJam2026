@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class AIState
+public class AIState 
 {
 	public enum STATE
 	{
@@ -15,14 +15,11 @@ public class AIState
 		ENTER, UPDATE, EXIT
 	};
 
-	public STATE name;
+	public STATE stateName;
 	protected EVENT stage;
-	protected GameObject npc;
-	protected Animator anim;
+	protected EnemyInfo enemyInfo;
 	protected Transform player;
 	protected AIState nextState;
-	protected RoomManager rm;
-	protected Transform heading;
 
 	internal float visDist = 3.0f;
 	internal float visAngle = 30.0f;
@@ -35,14 +32,13 @@ public class AIState
 	protected GameObject currentNode = null;
 
 
-	public AIState(GameObject _npc, Animator _anim, Transform _player, RoomManager _rm, Transform _heading)
+	public AIState(EnemyInfo _enemyInfo, Transform _player)
 	{
-		npc = _npc;
-		anim = _anim;
+		
 		stage = EVENT.ENTER;
 		player = _player;
-		rm = _rm;
-		heading = _heading;
+		enemyInfo = _enemyInfo;
+		
 	}
 
 	public virtual void Enter() { stage = EVENT.UPDATE; }
@@ -64,13 +60,20 @@ public class AIState
 	public bool CanSeePlayer()
 	{
 		
-		Vector3 direction = player.position - npc.transform.position;
-		float angle = Vector3.Angle(direction, heading.up);
-		float scaledDist = direction.magnitude * rm.tileMap.cellSize.magnitude;
+		Vector3 direction = player.position - enemyInfo.npc.transform.position;
+		float angle = Vector3.Angle(direction, enemyInfo.heading.up);
+		float scaledDist = direction.magnitude * enemyInfo.rm.tileMap.cellSize.magnitude;
 
 		if (scaledDist  < visDist && angle < visAngle)
 		{
-			return true;
+			 direction = direction.normalized;
+			float distance = Vector2.Distance(enemyInfo.npc.transform.position, player.position);
+
+			if (!Physics2D.Raycast(enemyInfo.npc.transform.position, direction, distance, enemyInfo.sightObstructions))
+			{
+				return true;
+			}
+			
 		}
 		return false;
 	}
@@ -80,16 +83,35 @@ public class AIState
 		currentWP = 0;
 		path.Clear();
 
-		Node startNode = rm.GetNode(start);
+		Node startNode = enemyInfo.rm.GetNode(start);
 		if (startNode == null) return;
 
-		Node endNode = rm.GetNode(goal);
+		Node endNode = enemyInfo.rm.GetNode(goal);
 		if (endNode == null) return;
 
-		if (rm.pf.AStar(startNode, endNode))
+		if (enemyInfo.rm.pf.AStar(startNode, endNode))
 		{
-			path = rm.pf.pathList;
-			npc.transform.position = start.transform.position;
+			path = enemyInfo.rm.pf.pathList;
+			enemyInfo.npc.transform.position = start.transform.position;
+		}
+
+	}
+
+	public void Move(Vector2Int start, Vector2Int goal)
+	{
+		currentWP = 0;
+		path.Clear();
+
+		Node startNode = enemyInfo.rm.GetNode(start);
+		if (startNode == null) return;
+
+		Node endNode = enemyInfo.rm.GetNode(goal);
+		if (endNode == null) return;
+
+		if (enemyInfo.rm.pf.AStar(startNode, endNode))
+		{
+			path = enemyInfo.rm.pf.pathList;
+			
 		}
 
 	}
@@ -99,19 +121,51 @@ public class AIState
 		currentWP = 0;
 		path.Clear();
 
-		Node startNode = rm.GetNode(start);
+		Node startNode = enemyInfo.rm.GetNode(start);
 		if (startNode == null) return;
 
-		Node endNode = rm.GetNode(goal);
+		Node endNode = enemyInfo.rm.GetNode(goal);
 		if (endNode == null) return;
 
-		if (rm.pf.AStar(startNode, endNode))
+		if (enemyInfo.rm.pf.AStar(startNode, endNode))
 		{
-			rm.pf.ShavePath();
-			path = rm.pf.pathList;
-			npc.transform.position = start.transform.position;
+			enemyInfo.rm.pf.ShavePath();
+			path = enemyInfo.rm.pf.pathList;
+			enemyInfo.npc.transform.position = start.transform.position;
 		}
 
+	}
+
+	public void Move_Shaved(Vector2Int start, Vector2Int goal)
+	{
+		currentWP = 0;
+		path.Clear();
+
+		Node startNode = enemyInfo.rm.GetNode(start);
+		if (startNode == null) return;
+
+		Node endNode = enemyInfo.rm.GetNode(goal);
+		if (endNode == null) return;
+
+		if (enemyInfo.rm.pf.AStar(startNode, endNode))
+		{
+			enemyInfo.rm.pf.ShavePath();
+			path = enemyInfo.rm.pf.pathList;
+		}
+
+	}
+
+	public void LookTowards(Vector2 pos)
+	{
+		//Quaternion rot = Quaternion.LookRotation(Vector3.forward, pos);
+
+		float angle = Mathf.Atan2(pos.y - enemyInfo.heading.position.y, pos.x - enemyInfo.heading.position.x) * Mathf.Rad2Deg;
+		Quaternion rot = Quaternion.Euler(0, 0, angle - 90);
+		enemyInfo.heading.rotation = rot;
+
+		//enemyInfo.heading.rotation = rot;
+
+		// TODO: Animation
 	}
 
 

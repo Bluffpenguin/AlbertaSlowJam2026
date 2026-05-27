@@ -124,27 +124,40 @@ public class Pathfinder : MonoBehaviour
 
 		int prevention = 0;
 
-		while (currentNode != endNode && prevention != 99)
+		while (currentNode < endNode && prevention != 99)
 		{
+			Vector2 currNodePos = (Vector2)pathList[currentNode].getId().transform.position;
+			bool foundShortcut = false;
+
 			for (int i = endNode; i > currentNode; i--)
 			{
-				Vector2 currNodePos = (Vector2)pathList[currentNode].getId().transform.position;
+				
 				Vector2 checkPos = (Vector2)pathList[i].getId().transform.position;
-				Vector2 direction = (checkPos - currNodePos).normalized;
-				float distance = Vector2.Distance(currNodePos, checkPos);
+				//Vector2 direction = (checkPos - currNodePos).normalized;
+				//float distance = Vector2.Distance(currNodePos, checkPos);
 
-				if (!Physics2D.Raycast(currNodePos, direction, distance, obstructions))
+				
+				if (!Physics2D.Linecast(currNodePos, checkPos, obstructions))
 				{
 					optimizedPath.Add(pathList[i]);
 					currentNode = i;
+					foundShortcut = true;
 					break;
 				}
-		
+				Debug.Log("Detected wall");
 			}
 			prevention++;
+
+			if (!foundShortcut)
+			{
+				currentNode++;
+				optimizedPath.Add(pathList[currentNode]);
+			}
 		}
 
-		if(prevention != 99)
+		if (prevention != 99)
 			pathList = optimizedPath;
+		else
+			Debug.Log("Failed to find smooth path");
 	}
 }

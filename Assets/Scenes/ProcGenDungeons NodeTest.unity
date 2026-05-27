@@ -230,8 +230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts.Core::RoomFirstGenerator
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
+  _roomData: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
   _wallPainter: {fileID: 1212294751}
-  _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
+  _wallData: {fileID: 0}
   _dungeonSize: {x: 50, y: 50}
   _minRoomSize: {x: 10, y: 10}
   _offset: 1
@@ -936,7 +937,7 @@ TilemapCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1118,10 +1119,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts.Core::CorridorFirstGenerator
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
+  _roomData: {fileID: 11400000, guid: b850cae225a71d842804181c2538378b, type: 2}
   _wallPainter: {fileID: 1212294751}
-  _preset: {fileID: 11400000, guid: b850cae225a71d842804181c2538378b, type: 2}
-  _corridorLength: 29
-  _corridorCount: 7
+  _wallData: {fileID: 11400000, guid: 08b8df2df5731234699830e2107d7b57, type: 2}
+  _corridorPainter: {fileID: 1218275357}
+  _corridorData: {fileID: 11400000, guid: a4292737b4d716a45a7060be74c8a057, type: 2}
   _roomPercentage: 1
 --- !u!4 &1291431391
 Transform:
@@ -1312,8 +1314,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts.Core::SimpleRandomWalkGenerator
   _startPosition: {x: 0, y: 0}
   _floorPainter: {fileID: 1218275357}
+  _roomData: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
   _wallPainter: {fileID: 1212294751}
-  _preset: {fileID: 11400000, guid: 43bd7b271b6da9e46b21b5d173da642c, type: 2}
+  _wallData: {fileID: 0}
 --- !u!4 &1851353467
 Transform:
   m_ObjectHideFlags: 0
