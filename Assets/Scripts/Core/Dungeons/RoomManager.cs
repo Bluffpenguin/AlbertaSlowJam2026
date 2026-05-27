@@ -6,15 +6,26 @@ using UnityEngine.Tilemaps;
 public class RoomManager : MonoBehaviour
 {
 	Dictionary<Vector2Int, Node> nodeDictionary;
-	Tilemap tileMap;
+	internal Tilemap tileMap;
 	bool links_generated = false;
 
 	internal Pathfinder pf;
+	[System.Serializable] struct Patrol { public List<Node> smoothedPath; }
+	[SerializeField] private Patrol[] patrolList = new Patrol[3];
+	internal bool calculatedPatrols = false;
+	private int numOfPatrols = 0;
 
-
+	private void Awake()
+	{
+		for (int i = 0; i < 3; i++) 
+		{
+			patrolList[i].smoothedPath = new List<Node>();
+		}
+	}
 	private void Start()
 	{
 		pf = GetComponent<Pathfinder>();
+
 	}
 
 	public void GenerateLink(HashSet<Vector2Int> tiles, Tilemap map, bool diagonal)
@@ -88,6 +99,33 @@ public class RoomManager : MonoBehaviour
 
 		return null;
 
+	}
+
+	public Node GetNode(Vector2Int pos)
+	{
+		if (nodeDictionary.TryGetValue(pos, out Node node))
+			return node;
+
+		return null;
+
+	}
+
+	public void AddPatrol(List<Node> patrol)
+	{
+		if (numOfPatrols == 3)
+		{
+			Debug.Log("This room can only support 3 patrols");
+			return;
+		}
+
+		patrolList[numOfPatrols].smoothedPath = patrol;
+		numOfPatrols++;
+		calculatedPatrols = true;
+	}
+
+	public List<Node> GetPatrol(int index)
+	{
+		return patrolList[index].smoothedPath;
 	}
 
 

@@ -95,7 +95,7 @@ public class test_agent : MonoBehaviour
 
 		if (manager.pf.AStar(startNode, endNode))
 		{
-			manager.pf.ShavePath();
+			//manager.pf.ShavePath();
 			path = manager.pf.pathList;
 			transform.position = start.transform.position;
 		}
