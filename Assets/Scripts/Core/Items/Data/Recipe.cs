@@ -15,7 +15,7 @@ public class Recipe : ScriptableObject
 	public float SellValueBonus => _sellValueBonus;
 	public Ingredient Result => _result;
 
-	public bool CheckRecipe(IEnumerable<Ingredient> ingredients)
+	public bool CheckRecipe(IReadOnlyList<Ingredient> ingredients)
 	{
 		static string Name(Ingredient ingredient) => ingredient.name;
 
@@ -26,7 +26,7 @@ public class Recipe : ScriptableObject
 			requirements.TryAdd(_ingredients[i].Ingredient.name, _ingredients[i].RequiredCount);
 		}
 
-		bool valid = true;
+		bool valid = ingredients.Count >= requirements.Values.Sum();
 		var groups = ingredients.OrderBy(Name).GroupBy(Name);
 		foreach (var group in groups) {
 			string key = group.Key;

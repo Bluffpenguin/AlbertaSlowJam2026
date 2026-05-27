@@ -22,8 +22,11 @@ public class Crafter : MonoBehaviour
 
 	const string NO_RESOLUTION_ERROR = "Recipe conflicts detected. Cannot resolve conflicts due to missing resolver.";
 	const string NO_RESULT_ERROR = "The ingredients ({0}) does not produce a result. Consider adding a default recipe without any requirements to the database.";
-	public Ingredient Craft(IEnumerable<Ingredient> ingredients)
+	public Ingredient Craft(IReadOnlyList<Ingredient> ingredients)
 	{
+		if (ingredients?.Count is null or 0)
+			throw new ArgumentException("No items provided.");
+
 		var query = _database.Recipes.Where(recipe => recipe.CheckRecipe(ingredients)).ToArray();
 
 		Recipe resolvedRecipe;
