@@ -21,7 +21,8 @@ public class State_SimpleIdle : AIState
 		if (CanSeePlayer())
 		{
 			Debug.Log("Found Player");
-			nextState = new State_SimplePatrol(enemyInfo, player);
+			nextState = new State_SimplePursue(enemyInfo, player);
+			stage = EVENT.EXIT;
 		}
 		base.Update();
 	}

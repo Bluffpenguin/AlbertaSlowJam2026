@@ -585,9 +585,9 @@ Tilemap:
   m_TileMatrixArray: []
   m_TileColorArray: []
   m_TileObjectToInstantiateArray:
-  - m_RefCount: 2847
+  - m_RefCount: 655
     m_Data: {fileID: 4164311523602927295, guid: 62561c28c6b851747aae6bf2381e5726, type: 3}
-  - m_RefCount: 12
+  - m_RefCount: 4
     m_Data: {fileID: 5265685831754520929, guid: d9e65c055f4b5da4cb2b1a1f6d045c10, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}

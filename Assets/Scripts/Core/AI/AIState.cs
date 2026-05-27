@@ -31,6 +31,22 @@ public class AIState
 	protected int currentWP = 0;
 	protected GameObject currentNode = null;
 
+	protected Vector2Int PlayerPosition
+	{
+		get
+		{
+			return (Vector2Int)enemyInfo.rm.tileMap.WorldToCell(player.position);
+		}
+	}
+
+	protected Vector2Int EnemyPosition
+	{
+		get
+		{
+			return (Vector2Int)enemyInfo.rm.tileMap.WorldToCell(enemyInfo.npc.transform.position);
+		}
+	}
+
 
 	public AIState(EnemyInfo _enemyInfo, Transform _player)
 	{
@@ -43,6 +59,7 @@ public class AIState
 
 	public virtual void Enter() { stage = EVENT.UPDATE; }
 	public virtual void Update() { stage = EVENT.UPDATE; }
+	public virtual void FixedUpdate() { stage = EVENT.UPDATE; }
 	public virtual void Exit() { stage = EVENT.EXIT; }
 
 	public AIState Process()
@@ -54,6 +71,12 @@ public class AIState
 			Exit();
 			return nextState;
 		}
+		return this;
+	}
+
+	public AIState ProcessFixed()
+	{
+		if (stage == EVENT.UPDATE) FixedUpdate();
 		return this;
 	}
 

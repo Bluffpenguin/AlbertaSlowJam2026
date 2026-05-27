@@ -44,7 +44,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 
 	IEnumerator WaitForColliders(RoomManager rm, RoomInfo room)
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.5f);
 		List<Node> col_patrolPath = new List<Node>();
 		List<Vector2Int> sing_patrolPath = GenerateRandomPatrol(room);
 		for (int i = 0; i+1 < sing_patrolPath.Count; i++)

@@ -1,7 +1,17 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct EnemyInfo { internal Animator anim; public int enemyId; public Transform heading; public GameObject npc; public RoomManager rm; public LayerMask sightObstructions; public AIState.STATE defaultState; }
+public struct EnemyInfo { 
+	internal Animator anim;
+	public int enemyId;
+	public Transform heading;
+	public GameObject npc;
+	public RoomManager rm;
+	public LayerMask sightObstructions;
+	public AIState.STATE defaultState;
+	public Rigidbody2D rb;
+	public float attackRange;
+}
 
 public class SimpleEnemy : MonoBehaviour
 {
@@ -13,7 +23,9 @@ public class SimpleEnemy : MonoBehaviour
 	void Start()
 	{
 		//enemyInfo.anim = this.GetComponent<Animator>();
+		enemyInfo.attackRange = 2;
 		enemyInfo.npc = this.gameObject;
+		enemyInfo.rb = GetComponent<Rigidbody2D>();
 		player = GameObject.FindWithTag("Player").transform;
 
 		if (enemyInfo.defaultState == AIState.STATE.IDLE)
@@ -27,6 +39,11 @@ public class SimpleEnemy : MonoBehaviour
 	{
 		if (enemyInfo.rm == null) Destroy(this.gameObject);
 		currentState = currentState.Process();
+	}
+
+	private void FixedUpdate()
+	{
+		currentState.ProcessFixed();
 	}
 
 	private void OnDrawGizmosSelected()

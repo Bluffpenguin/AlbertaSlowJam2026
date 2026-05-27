@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class State_SimplePatrol : AIState
 {
-	float patrolSpeed = 0.5f;
+	float patrolSpeed = 5f;
 	int currentPatrolIndex = 0;
 	private readonly float stallTimeMax = 2f;
 	private readonly float stallTimeMin = 0.5f;
@@ -30,7 +30,8 @@ public class State_SimplePatrol : AIState
 
 		if (CanSeePlayer())
 		{
-			//nextState = new State_SimplePursue(enemyInfo, player);
+			nextState = new State_SimplePursue(enemyInfo, player);
+			stage = EVENT.EXIT;
 			return;
 		}
 
@@ -53,6 +54,15 @@ public class State_SimplePatrol : AIState
 
 
 
+		
+		base.Update();
+	}
+
+	public override void FixedUpdate()
+	{
+		if (stalling)
+			return;
+
 		if (Vector2.Distance(path[currentWP].getId().transform.position, enemyInfo.npc.transform.position) < accuracy)
 		{
 			currentNode = path[currentWP].getId();
@@ -61,7 +71,7 @@ public class State_SimplePatrol : AIState
 			{
 				currentWP++;
 			}
-			else 
+			else
 				currentWP--;
 
 		}
@@ -74,9 +84,10 @@ public class State_SimplePatrol : AIState
 			Vector2 direction = (lookAtGoal - (Vector2)enemyInfo.npc.transform.position).normalized;
 
 			LookTowards(goal.position);
-			enemyInfo.npc.transform.Translate(patrolSpeed * Time.deltaTime * direction);
+			enemyInfo.rb.AddForce(patrolSpeed * Time.fixedDeltaTime * direction, ForceMode2D.Impulse);
+			//enemyInfo.npc.transform.Translate(patrolSpeed * Time.deltaTime * direction);
 		}
-		base.Update();
+		base.FixedUpdate();
 	}
 
 	public override void Exit()
