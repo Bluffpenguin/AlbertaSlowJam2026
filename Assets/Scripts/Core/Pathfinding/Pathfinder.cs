@@ -113,37 +113,39 @@ public class Pathfinder : MonoBehaviour
 		return iteratorCount;
 	}
 
-	public void ShavePath()
+	public List<Node> ShavePath(List<Node> path)
 	{
-		if (pathList.Count <= 2) return;
+		if (path.Count <= 2) return path;
 		List<Node> optimizedPath = new List<Node>();
 
 		int currentNode = 0;
-		int endNode = pathList.Count - 1;
+		int endNode = path.Count - 1;
 
-		optimizedPath.Add(pathList[currentNode]);
+		optimizedPath.Add(path[currentNode]);
 
 		int prevention = 0;
 
 		while (currentNode < endNode && prevention != 99)
 		{
-			Vector3 currPos = rm.tileMap.CellToWorld((Vector3Int)pathList[currentNode].position);
+			Vector3 currPos = rm.tileMap.CellToWorld((Vector3Int)path[currentNode].position);
 			bool foundShortcut = false;
 
 			for (int i = endNode; i > currentNode; i--)
 			{
-				Vector3 checkPos = rm.tileMap.CellToWorld((Vector3Int)pathList[i].position);
-				//Vector2 direction = (checkPos - currNodePos).normalized;
-				//float distance = Vector2.Distance(currNodePos, checkPos);
+				Vector3 checkPos = rm.tileMap.CellToWorld((Vector3Int)path[i].position);
+				//Vector2 direction = (checkPos - currPos).normalized;
+				//float distance = Vector2.Distance(currPos, checkPos);
 
 				
 				if (!Physics2D.Linecast(currPos, checkPos, obstructions))
 				{
-					optimizedPath.Add(pathList[i]);
+					optimizedPath.Add(path[i]);
 					currentNode = i;
 					foundShortcut = true;
 					break;
 				}
+				
+				
 				Debug.Log("Detected wall");
 			}
 			prevention++;
@@ -151,13 +153,14 @@ public class Pathfinder : MonoBehaviour
 			if (!foundShortcut)
 			{
 				currentNode++;
-				optimizedPath.Add(pathList[currentNode]);
+				optimizedPath.Add(path[currentNode]);
 			}
 		}
 
 		if (prevention != 99)
-			pathList = optimizedPath;
+			return optimizedPath;
 		else
 			Debug.Log("Failed to find smooth path");
+		return path;
 	}
 }

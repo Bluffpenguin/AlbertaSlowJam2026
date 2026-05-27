@@ -27,7 +27,7 @@ public class AIState
 	protected GameObject startObj;
 	protected GameObject endObj;
 	protected List<Node> path = new List<Node>();
-	protected float accuracy = 0.25f;
+	protected float accuracy = 0.1f;
 	protected int currentWP = 0;
 	protected GameObject currentNode = null;
 
@@ -129,9 +129,7 @@ public class AIState
 
 		if (enemyInfo.rm.pf.AStar(startNode, endNode))
 		{
-			enemyInfo.rm.pf.ShavePath();
-			path = enemyInfo.rm.pf.pathList;
-			enemyInfo.npc.transform.position = start.transform.position;
+			path = enemyInfo.rm.pf.ShavePath(enemyInfo.rm.pf.pathList);
 		}
 
 	}
@@ -149,8 +147,8 @@ public class AIState
 
 		if (enemyInfo.rm.pf.AStar(startNode, endNode))
 		{
-			enemyInfo.rm.pf.ShavePath();
-			path = enemyInfo.rm.pf.pathList;
+			
+			path = enemyInfo.rm.pf.ShavePath(enemyInfo.rm.pf.pathList);
 		}
 
 	}

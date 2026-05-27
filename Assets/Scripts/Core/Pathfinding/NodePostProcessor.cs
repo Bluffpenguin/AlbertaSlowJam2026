@@ -22,7 +22,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		agent.enemyInfo.rm = rm;
 		agent.enemyInfo.enemyId = 0;
 		agent.enemyInfo.defaultState = AIState.STATE.PATROL;
-		rm.AddPatrol(GenerateRandomPatrol(room));
+		StartCoroutine(WaitForColliders(rm, room));
 		
 	}
 
@@ -41,4 +41,23 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		}
 		return patrol;
 	}
+
+	IEnumerator WaitForColliders(RoomManager rm, RoomInfo room)
+	{
+		yield return new WaitForSeconds(1);
+		List<Node> col_patrolPath = new List<Node>();
+		List<Vector2Int> sing_patrolPath = GenerateRandomPatrol(room);
+		for (int i = 0; i+1 < sing_patrolPath.Count; i++)
+		{
+			rm.pf.AStar(rm.GetNode(sing_patrolPath[i]), rm.GetNode(sing_patrolPath[i + 1]));
+			List<Node> shavedPath = rm.pf.ShavePath(rm.pf.pathList);
+			col_patrolPath.AddRange(shavedPath);
+		}
+
+		// Remove duplicates
+		col_patrolPath = col_patrolPath.Distinct().ToList();
+		rm.AddPatrol(col_patrolPath);
+	}
+
+	
 }

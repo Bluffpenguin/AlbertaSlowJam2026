@@ -10,20 +10,22 @@ public class RoomManager : MonoBehaviour
 	bool links_generated = false;
 
 	internal Pathfinder pf;
-	[System.Serializable] struct Patrol { public List<Vector2Int> wps; }
+	[System.Serializable] struct Patrol { public List<Node> smoothedPath; }
 	[SerializeField] private Patrol[] patrolList = new Patrol[3];
+	internal bool calculatedPatrols = false;
 	private int numOfPatrols = 0;
 
 	private void Awake()
 	{
 		for (int i = 0; i < 3; i++) 
 		{
-			patrolList[i].wps = new List<Vector2Int>();
+			patrolList[i].smoothedPath = new List<Node>();
 		}
 	}
 	private void Start()
 	{
 		pf = GetComponent<Pathfinder>();
+
 	}
 
 	public void GenerateLink(HashSet<Vector2Int> tiles, Tilemap map, bool diagonal)
@@ -108,7 +110,7 @@ public class RoomManager : MonoBehaviour
 
 	}
 
-	public void AddPatrol(List<Vector2Int> patrol)
+	public void AddPatrol(List<Node> patrol)
 	{
 		if (numOfPatrols == 3)
 		{
@@ -116,13 +118,14 @@ public class RoomManager : MonoBehaviour
 			return;
 		}
 
-		patrolList[numOfPatrols].wps = patrol;
+		patrolList[numOfPatrols].smoothedPath = patrol;
 		numOfPatrols++;
+		calculatedPatrols = true;
 	}
 
-	public List<Vector2Int> GetPatrol(int index)
+	public List<Node> GetPatrol(int index)
 	{
-		return patrolList[index].wps;
+		return patrolList[index].smoothedPath;
 	}
 
 
