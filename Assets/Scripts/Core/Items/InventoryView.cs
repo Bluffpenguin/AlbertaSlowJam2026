@@ -1,95 +1,50 @@
+using UnityEngine;
+
 public class InventoryView : MonoBehaviour
 {
 	[SerializeField]
-	private bool _refreshOnStart = true;
+	protected Inventory _model;
 	[SerializeField]
-	private InventorySlot _slotPrefab;
+	protected InventoryView _other;
 	[SerializeField]
-	private Transform _slotParent;
-	[SerializeField]
-	private Inventory _target;
-	[SerializeField]
-	private InventoryView _other;
+	protected InventorySlot[] _slots;
 
-	[Space]
-	[SerializeField]
-	private InventorySlot[] _itemSlots = new InventorySlot[0];
+	public Inventory Source { get => _model; }
 
-	public void Start()
+	public virtual void ClearView()
 	{
-		if (_refreshOnStart)
-			Refresh();
-	}
-
-	[ContextMenu("Refresh View")]
-	public void Refresh()
-	{
-		var target = _target;
-		var other = _other;
-		ResetView();
-		CreateView(target, other);
-	}
-
-	public void ClearView()
-	{
-		foreach (Transform child in _slotParent) {
-			if (child.TryGetComponent(out InventorySlot component)) {
-				component.OnClicked -= TransferSlot;
-				Destroy(component.gameObject);
-			}
+		_model.OnContentsChanged -= UpdateSlotValue;
+		for (int i = 0; i < _slots.Length; i++) {
+			var slot = _slots[i];
+			slot.OnClicked -= Slot_OnClicked;
 		}
-		_target = null;
-		_other = null;
 	}
 
-	public void ResetView()
+	public virtual void CreateView(Inventory model, InventoryView otherView)
 	{
-		for (int i = 0; i < _itemSlots.Length; i++) {
-			InventorySlot slot = _itemSlots[i];
-			slot.OnClicked -= TransferSlot;
-		}
-		_target.OnContentsChanged -= UpdateSlot;
-	}
-
-	public void CreateView(Inventory inventory, InventoryView otherView = null)
-	{
-		_target = inventory;
+		Debug.Assert(model.Capacity == _slots.Length);
+		_model = model;
 		_other = otherView;
 
-		if (_itemSlots.Length != inventory.Capacity) {
-			Array.Resize(ref _itemSlots, inventory.Capacity);
+		for (int i = 0; i < model.Capacity; i++) {
+			var slot = _slots[i];
+			slot.SetItemStack(model[i], i);
+			slot.OnClicked += this.Slot_OnClicked;
 		}
-
-		for (int i = 0; i < inventory.Capacity; i++) {
-			InventorySlot slotComponent;
-			if (_itemSlots[i] == null) {
-				var slotObj = Instantiate(_slotPrefab.gameObject, _slotParent);
-				slotComponent = slotObj.GetComponent<InventorySlot>();
-				_itemSlots[i] = slotComponent;
-			} else {
-				slotComponent = _itemSlots[i];
-			}
-
-			slotComponent.SetItemStack(inventory[i], i);
-			slotComponent.OnClicked += TransferSlot;
-		}
-		_target.OnContentsChanged += UpdateSlot;
+		model.OnContentsChanged += UpdateSlotValue;
 	}
 
-	public void TransferSlot(int index)
+	private void Slot_OnClicked(int slotIndex)
 	{
-		Debug.Log($"Attempting to move slot {index}");
-		if (_other == null)
+		if (_other == null) {
 			return;
+		}
 
-		var stack = _target[index];
-		if (_other._target.Add(stack)) {
-			_target.RemoveAllAt(index);
+		var stack = _model[slotIndex];
+		if (_other.Source.Add(stack)) {
+			Source.RemoveAllAt(slotIndex);
 		}
 	}
 
-	public void UpdateSlot(int index)
-	{
-		_itemSlots[index].SetItemStack(_target[index], index);
-	}
+	protected void UpdateSlotValue(int index) => _slots[index].SetItemStack(Source[index], index);
 }
