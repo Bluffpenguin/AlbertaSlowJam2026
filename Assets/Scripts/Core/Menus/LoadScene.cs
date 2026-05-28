@@ -23,6 +23,11 @@ public class LoadScene : MonoBehaviour
 		SceneManager.LoadScene(wantedSceneName);
 		SceneManager.UnloadSceneAsync(MenuManager.Instance.currentScene);
 		MenuManager.Instance.currentScene = wantedSceneName;
+
+        if (MenuManager.Instance.currentScene.Contains("Game"))
+        {
+			MenuManager.Instance.inGame = true;
+		}
 		//Debug.Log($"Loaded: {MenuManager.Instance.currentScene}");
 	}
 

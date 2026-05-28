@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour
 			DontDestroyOnLoad(Instance);
 		}
 		currentScene = SceneManager.GetActiveScene().name;
+		inGame = false;
 		//Debug.Log($"Current scene is: {currentScene}");
 	}
 
