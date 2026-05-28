@@ -1,4 +1,5 @@
-public abstract class InventoryItem : ScriptableObject
+[CreateAssetMenu(fileName = "Item_", menuName = "Crafting/Inventory Item")]
+public class InventoryItem : ScriptableObject
 {
 	[SerializeField]
 	protected string _displayName;

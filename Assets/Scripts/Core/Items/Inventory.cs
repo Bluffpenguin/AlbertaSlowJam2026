@@ -20,9 +20,11 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 		get => _contents[index];
 		set {
 			_contents[index] = value;
-			if (_autoSort)
-				Array.Sort(_contents);
-			_onContentsChanged.Invoke(index);
+			if (_autoSort) {
+				Sort();
+			} else {
+				_onContentsChanged.Invoke(index);
+			}
 		}
 	}
 	public ItemStack this[Index index] {
@@ -64,8 +66,7 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 		if (this[slot].IsEmpty() || (_itemsStack && this[slot].Data == item.Data)) {
 			this[slot] += item;
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -157,6 +158,7 @@ public struct ItemStack : IEquatable<ItemStack>, IComparable<ItemStack>
 	public int SellValue { readonly get => _sellValue; set => _sellValue = value; }
 
 	public ItemStack(InventoryItem data) : this(data, 1, data.SellValue) { }
+	public ItemStack(InventoryItem data, int count) : this(data, count, data.SellValue) { }
 	public ItemStack(InventoryItem data, int count, int sellValue)
 	{
 		_data = data;
@@ -166,14 +168,17 @@ public struct ItemStack : IEquatable<ItemStack>, IComparable<ItemStack>
 
 	public readonly bool IsEmpty() => Data == null || Count <= 0;
 
-	public readonly bool Equals(ItemStack other) => _data == other._data && _sellValue == other._sellValue;
+	public readonly bool Equals(ItemStack other) => _data == other._data;
 	public override readonly bool Equals(object obj) => obj is ItemStack stack && Equals(stack);
 	public override readonly int GetHashCode() => HashCode.Combine(_sellValue, _data.name.GetHashCode());
+
+	public override readonly string ToString() => IsEmpty() ? "ItemStack (Empty)" : $"ItemStack({Data.name} x{Count})";
 
 	public readonly int CompareTo(ItemStack other) => (IsEmpty(), other.IsEmpty()) switch {
 		(true, true) => 0,
 		// Empty stacks are placed last
-		(true, false) => +1, (false, true) => -1,
+		(true, false) => +1,
+		(false, true) => -1,
 		(false, false) => Data.name.CompareTo(other.Data.name),
 	};
 

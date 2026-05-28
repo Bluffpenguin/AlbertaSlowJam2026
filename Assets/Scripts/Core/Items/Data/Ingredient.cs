@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewIngredientData", menuName = "Crafting/Ingredient Data")]
+[CreateAssetMenu(fileName = "Part_", menuName = "Crafting/Ingredient Item")]
 public class Ingredient : InventoryItem
 {
 	

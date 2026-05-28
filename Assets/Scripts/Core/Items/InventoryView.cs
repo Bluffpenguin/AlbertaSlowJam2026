@@ -50,8 +50,12 @@ public class InventoryView : MonoBehaviour
 		}
 
 		var stack = _model[slotIndex];
+		if (!_other.Source.ItemsStack) {
+			stack.Count = 1;
+		}
+			
 		if (_other.Source.Add(stack)) {
-			Source.RemoveAllAt(slotIndex);
+			Debug.Assert(Source.RemoveAt(slotIndex, stack.Count, out _));
 		}
 	}
 

@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine.Pool;
 
-[CreateAssetMenu(fileName = "NewRecipeData", menuName = "Crafting/Recipe Data")]
+[CreateAssetMenu(fileName = "Recipe_", menuName = "Crafting/Recipe")]
 public class Recipe : ScriptableObject
 {
 	[SerializeField]
@@ -10,10 +10,10 @@ public class Recipe : ScriptableObject
 	[SerializeField]
 	private RecipeIngredient[] _ingredients;
 	[SerializeField]
-	private Ingredient _result;
+	private InventoryItem _result;
 
 	public float SellValueBonus => _sellValueBonus;
-	public Ingredient Result => _result;
+	public InventoryItem Result => _result;
 
 	public bool CheckRecipe(IEnumerable<Ingredient> input)
 	{

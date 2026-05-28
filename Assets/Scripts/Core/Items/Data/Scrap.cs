@@ -1,19 +1,20 @@
-[CreateAssetMenu(fileName = "NewScrapData", menuName = "Crafting/Scrap Data")]
+[CreateAssetMenu(fileName = "Scrap_", menuName = "Crafting/Scrap Item")]
 public class Scrap : InventoryItem
 {
 	[SerializeField]
 	private ScrapResult[] _results = Array.Empty<ScrapResult>();
 
-	public Dictionary<Ingredient, int> GenerateResults()
+	public Dictionary<Ingredient, int> GenerateResults(int itemCount = 1)
 	{
 		var result = new Dictionary<Ingredient, int>();
 
 		foreach (var item in _results) {
 			int count = 0;
 			for (int i = 0; i < item.Count; i++) {
-				if (Random.value < item.DropRate)
+				if (Random.value <= item.DropRate)
 					count++;
 			}
+			count *= itemCount;
 
 			if (result.ContainsKey(item.Ingredient)) {
 				result[item.Ingredient] += count;
