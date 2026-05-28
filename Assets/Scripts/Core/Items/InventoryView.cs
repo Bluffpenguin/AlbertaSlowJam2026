@@ -1,7 +1,10 @@
-using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InventoryView : MonoBehaviour
 {
+	[SerializeField]
+	[FormerlySerializedAs("_refreshOnStart")]
+	protected bool _createOnStart = false;
 	[SerializeField]
 	protected Inventory _model;
 	[SerializeField]
@@ -10,6 +13,12 @@ public class InventoryView : MonoBehaviour
 	protected InventorySlot[] _slots;
 
 	public Inventory Source { get => _model; }
+
+	protected virtual void Start()
+	{
+		if (_createOnStart && _model != null)
+			CreateView(_model, _other);
+	}
 
 	public virtual void ClearView()
 	{

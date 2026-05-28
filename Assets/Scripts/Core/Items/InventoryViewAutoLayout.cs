@@ -2,17 +2,9 @@ public class InventoryViewAutoLayout : InventoryView
 {
 	[Space]
 	[SerializeField]
-	private bool _refreshOnStart = true;
-	[SerializeField]
 	private InventorySlot _slotPrefab;
 	[SerializeField]
 	private Transform _slotParent;
-
-	protected virtual void Start()
-	{
-		if (_refreshOnStart)
-			CreateView(_model, _other);
-	}
 
 	public override void ClearView()
 	{
