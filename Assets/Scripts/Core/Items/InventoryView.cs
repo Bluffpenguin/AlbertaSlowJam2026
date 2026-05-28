@@ -36,7 +36,7 @@ public class InventoryView : MonoBehaviour
 		_target = inventory;
 		_other = otherView;
 
-		for (int i = 0; i < inventory.Count; i++) {
+		for (int i = 0; i < ((IReadOnlyCollection<ItemStack>)inventory).Count; i++) {
 			ItemStack item = inventory[i];
 			var slotObj = Instantiate(_slotPrefab.gameObject, _slotParent);
 			var slotComponent = slotObj.GetComponent<InventorySlot>();
@@ -52,7 +52,7 @@ public class InventoryView : MonoBehaviour
 
 		var stack = _target[index];
 		if (_other._target.Add(stack)) {
-			_target.Remove(stack);
+			_target.RemoveAllAt(index);
 		}
 	}
 }

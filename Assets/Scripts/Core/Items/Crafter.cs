@@ -8,29 +8,45 @@ public class Crafter : Inventory
 	private CraftingResolver _resolver;
 
 	public CraftingData Database => _database;
-	public ItemStack Output { get => base[Count - 1]; }
+
+	public ItemStack[] Input => base[..^1];
+	public ItemStack Output { get => base[^1]; set => base[^1] = value; }
 
 	public override bool Add(ItemStack item)
 	{
 		if (item.Data is Ingredient)
 			return base.Add(item);
-		else
-			return false;
+		else return false;
+	}
+
+	public override bool Insert(int slot, ItemStack item)
+	{
+		if (item.Data is Ingredient)
+			return base.Insert(slot, item);
+		else return false;
 	}
 
 	[ContextMenu("Craft")]
 	public void CraftFromContents()
 	{
-		var result = Craft(_contents.Take(Count - 2).Select(s => s.Data as Ingredient).ToArray());
-		Clear();
-		_contents.Add(result);
+		if (!Output.IsEmpty()) {
+			Debug.LogWarning("Cannot craft, output is full");
+			return;
+		}
+
+		Debug.Log(Input.Length);
+		var result = Craft(Recipe.GetIngredients(Input));
+		if (!result.IsEmpty()) {
+			Clear();
+			Output = result;
+		}
 	}
 
 	const string NO_RESOLUTION_ERROR = "Recipe conflicts detected. Cannot resolve conflicts due to missing resolver.";
 	const string NO_RESULT_ERROR = "The ingredients ({0}) does not produce a result. Consider adding a default recipe without any requirements to the database.";
-	public ItemStack Craft(IReadOnlyList<Ingredient> ingredients)
+	public ItemStack Craft(IEnumerable<Ingredient> ingredients)
 	{
-		if (ingredients?.Count is null or 0)
+		if (ingredients?.Count() is null or 0)
 			throw new ArgumentException("No items provided.");
 
 		var query = _database.Recipes.Where(recipe => recipe.CheckRecipe(ingredients)).ToArray();
@@ -52,7 +68,8 @@ public class Crafter : Inventory
 			break;
 		default:
 			var message = string.Join(", ", ingredients.Select(static i => i.name));
-			throw new Exception(string.Format(NO_RESULT_ERROR, message));
+			Debug.LogWarningFormat(NO_RESULT_ERROR, message);
+			return ItemStack.Empty;
 		}
 
 		var result = resolvedRecipe.Result;

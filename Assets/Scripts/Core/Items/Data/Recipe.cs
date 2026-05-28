@@ -15,9 +15,9 @@ public class Recipe : ScriptableObject
 	public float SellValueBonus => _sellValueBonus;
 	public Ingredient Result => _result;
 
-	public bool CheckRecipe(IReadOnlyList<Ingredient> ingredients)
+	public bool CheckRecipe(IEnumerable<Ingredient> input)
 	{
-		static string Name(Ingredient ingredient) => ingredient.name;
+		static string Name(Ingredient ingredient) => ingredient == null ? string.Empty : ingredient.name;
 
 		var requirements = DictionaryPool<string, int>.Get();
 		for (int i = 0; i < _ingredients.Length; i++) {
@@ -26,7 +26,9 @@ public class Recipe : ScriptableObject
 			requirements.TryAdd(_ingredients[i].Ingredient.name, _ingredients[i].RequiredCount);
 		}
 
-		bool valid = ingredients.Count >= requirements.Values.Sum();
+		var ingredients = input.ToArray();
+		bool valid = ingredients.Length >= requirements.Values.Sum();
+		Debug.Log(valid, this);
 		var groups = ingredients.OrderBy(Name).GroupBy(Name);
 		foreach (var group in groups) {
 			string key = group.Key;
@@ -47,8 +49,23 @@ public class Recipe : ScriptableObject
 
 	public int CalculateSellValue(IEnumerable<Ingredient> ingredients)
 	{
-		float value = ingredients.Sum(static i => i.SellValue) * _sellValueBonus;
+		float value = ingredients.Sum(static i => i == null ? 0 : i.SellValue) * _sellValueBonus;
 		return Mathf.RoundToInt(value);
+	}
+
+	public static Ingredient[] GetIngredients(IEnumerable<ItemStack> input)
+	{
+		return input.Where(static i => !i.IsEmpty()).SelectMany(Expand).ToArray();
+
+		static IEnumerable<Ingredient> Expand(ItemStack item)
+		{
+			if (item.Data is not Ingredient)
+				yield break;
+
+			for (int i = 0; i < item.Count; i++) {
+				yield return item.Data as Ingredient;
+			}
+		}
 	}
 }
 
