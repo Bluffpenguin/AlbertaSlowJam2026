@@ -29,14 +29,6 @@ public class LoadScene : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Fuck this shit, I'm out");
-    }
-
-    /// <summary>
-    /// Subject to change (will / can remove or alter for better pausing)
-    /// </summary>
-    public void CloseCurrentScene()
-    {
-        SceneManager.UnloadSceneAsync("PauseMenu");
+        //Debug.Log("Fuck this shit, I'm out");
     }
 }
