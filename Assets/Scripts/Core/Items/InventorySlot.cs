@@ -1,13 +1,14 @@
 using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour
 {
 	[SerializeField] private InventoryItem _data;
 	[SerializeField] private Button _button;
 	[SerializeField] private Image _iconImage;
-	[SerializeField] private Text _fallbackLabel;
-	[SerializeField] private Text _countLabel;
-	[SerializeField] private Text _valueLabel;
+	[SerializeField] private TextMeshProUGUI _fallbackLabel;
+	[SerializeField] private TextMeshProUGUI _countLabel;
+	[SerializeField] private TextMeshProUGUI _valueLabel;
 
 	private int _slotIndex;
 
