@@ -3,6 +3,7 @@ using UnityEngine.Events;
 public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 {
 	[SerializeField] protected bool _itemsStack = true;
+	[SerializeField] protected bool _autoSort = false;
 	[SerializeField] protected ItemStack[] _contents = new ItemStack[0];
 	[SerializeField] protected UnityEvent<int> _onContentsChanged;
 
@@ -19,6 +20,8 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 		get => _contents[index];
 		set {
 			_contents[index] = value;
+			if (_autoSort)
+				Array.Sort(_contents);
 			_onContentsChanged.Invoke(index);
 		}
 	}
@@ -104,6 +107,7 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 
 	public virtual bool RemoveAllAt(int slot) => RemoveAt(slot, this[slot].Count, out _);
 
+	[ContextMenu("Clear Inventory")]
 	/// <summary>
 	/// Clears the inventory.
 	/// </summary>
@@ -111,6 +115,18 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 	{
 		for (int i = 0; i < Capacity; i++) {
 			this[i] = ItemStack.Empty;
+			_onContentsChanged.Invoke(i);
+		}
+	}
+
+	/// <summary>
+	/// Sorts the inventory.
+	/// </summary>
+	[ContextMenu("Sort")]
+	public void Sort()
+	{
+		Array.Sort(_contents);
+		for (int i = 0; i < Capacity; i++) {
 			_onContentsChanged.Invoke(i);
 		}
 	}
@@ -125,7 +141,7 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 }
 
 [Serializable]
-public struct ItemStack : IEquatable<ItemStack>
+public struct ItemStack : IEquatable<ItemStack>, IComparable<ItemStack>
 {
 	public static ItemStack Empty { get => new(null, 0, 0); }
 
@@ -153,6 +169,13 @@ public struct ItemStack : IEquatable<ItemStack>
 	public readonly bool Equals(ItemStack other) => _data == other._data && _sellValue == other._sellValue;
 	public override readonly bool Equals(object obj) => obj is ItemStack stack && Equals(stack);
 	public override readonly int GetHashCode() => HashCode.Combine(_sellValue, _data.name.GetHashCode());
+
+	public readonly int CompareTo(ItemStack other) => (IsEmpty(), other.IsEmpty()) switch {
+		(true, true) => 0,
+		// Empty stacks are placed last
+		(true, false) => +1, (false, true) => -1,
+		(false, false) => Data.name.CompareTo(other.Data.name),
+	};
 
 	public static ItemStack operator +(ItemStack left, ItemStack right)
 	{
