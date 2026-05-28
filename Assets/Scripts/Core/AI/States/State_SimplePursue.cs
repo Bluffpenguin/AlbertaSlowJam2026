@@ -43,6 +43,8 @@ public class State_SimplePursue : AIState
 		if (distance <= enemyInfo.attackRange && CanSeePlayer())
 		{
 			// Enter attack state
+			nextState = new State_SimpleAttack(enemyInfo, player);
+			stage = EVENT.EXIT;
 			return;
 		}
 

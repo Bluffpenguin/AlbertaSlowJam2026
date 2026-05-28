@@ -18,10 +18,8 @@ public class State_SimplePatrol : AIState
 
 	public override void Enter()
 	{
-		stalling = true;
-		enemyInfo.rm.StartCoroutine(WaitForPathToBeCalculated());
-		
-        base.Enter();
+		path = enemyInfo.rm.GetPatrol(enemyInfo.enemyId);
+		base.Enter();
 	}
 
 	public override void Update()
@@ -101,16 +99,6 @@ public class State_SimplePatrol : AIState
 	{
 		float stallTime = Random.Range(stallTimeMin, stallTimeMax);
 		yield return new WaitForSeconds(stallTime);
-		stalling = false;
-	}
-
-	IEnumerator WaitForPathToBeCalculated()
-	{
-		while (!enemyInfo.rm.calculatedPatrols)
-		{
-			yield return null;
-		}
-		path = enemyInfo.rm.GetPatrol(enemyInfo.enemyId);
 		stalling = false;
 	}
 }
