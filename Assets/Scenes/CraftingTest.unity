@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8ccf5aff7782040b82c9c92384fe90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::Scrapper
-  _itemsStack: 1
+  _itemsStack: 0
   _autoSort: 0
   _contents:
   - _data: {fileID: 0}
