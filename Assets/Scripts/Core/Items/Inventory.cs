@@ -144,7 +144,7 @@ public struct ItemStack : IEquatable<ItemStack>
 	public ItemStack(InventoryItem data, int count, int sellValue)
 	{
 		_data = data;
-		_count = 0;
+		_count = count;
 		_sellValue = sellValue;
 	}
 

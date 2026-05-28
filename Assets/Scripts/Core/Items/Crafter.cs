@@ -36,10 +36,8 @@ public class Crafter : Inventory
 
 		Debug.Log(Input.Length);
 		var result = Craft(Recipe.GetIngredients(Input));
-		if (!result.IsEmpty()) {
-			Clear();
-			Output = result;
-		}
+		Clear();
+		Output = result;
 	}
 
 	const string NO_RESOLUTION_ERROR = "Recipe conflicts detected. Cannot resolve conflicts due to missing resolver.";
