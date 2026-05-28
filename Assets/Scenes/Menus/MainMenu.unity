@@ -276,6 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162924394}
   - component: {fileID: 162924395}
+  - component: {fileID: 162924396}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -311,7 +312,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::MenuManager
   currentScene: 
+  _paused: 0
   inGame: 0
+--- !u!81 &162924396
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162924393}
+  m_Enabled: 1
 --- !u!1 &477629506
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +815,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 812759506}
-  m_PlaneDistance: 0.3
+  m_PlaneDistance: 0.4
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -851,7 +861,6 @@ GameObject:
   m_Component:
   - component: {fileID: 812759507}
   - component: {fileID: 812759506}
-  - component: {fileID: 812759505}
   - component: {fileID: 812759508}
   m_Layer: 0
   m_Name: Main Camera
@@ -860,14 +869,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &812759505
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812759504}
-  m_Enabled: 1
 --- !u!20 &812759506
 Camera:
   m_ObjectHideFlags: 0

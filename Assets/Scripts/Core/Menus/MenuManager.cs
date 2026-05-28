@@ -5,7 +5,8 @@ public class MenuManager : MonoBehaviour
 {
 	public static MenuManager Instance { get; private set; }
 	public string currentScene;
-	private bool _paused;
+	[SerializeField] private bool _paused;
+	public bool Paused => _paused;
 	public bool inGame;
 
 	private void Awake()
@@ -26,7 +27,7 @@ public class MenuManager : MonoBehaviour
 
 	public void Pause_and_Unpause()
 	{
-		if (_paused && inGame)
+		if (Paused && inGame)
 		{
 			SceneManager.UnloadSceneAsync("PauseMenu");
 			Time.timeScale = 1;

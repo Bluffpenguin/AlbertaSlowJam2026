@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106747735}
+  - component: {fileID: 106747739}
   - component: {fileID: 106747738}
   - component: {fileID: 106747737}
   - component: {fileID: 106747736}
@@ -201,7 +202,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 106747737}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 106747739}
+        m_TargetAssemblyTypeName: LoadScene, Scripts.Core
+        m_MethodName: UnpauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &106747737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +253,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106747734}
   m_CullTransparentMesh: 1
+--- !u!114 &106747739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106747734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::LoadScene
+  wantedSceneName: 
 --- !u!1 &376802761
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +404,6 @@ GameObject:
   - component: {fileID: 429825691}
   - component: {fileID: 429825690}
   - component: {fileID: 429825692}
-  - component: {fileID: 429825693}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -496,14 +521,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &429825693
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429825688}
-  m_Enabled: 1
 --- !u!1 &585503770
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 962909665}
+  - component: {fileID: 962909669}
   - component: {fileID: 962909668}
   - component: {fileID: 962909667}
   - component: {fileID: 962909666}
@@ -692,7 +710,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 962909667}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 962909669}
+        m_TargetAssemblyTypeName: LoadScene, Scripts.Core
+        m_MethodName: LoadSelectedScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &962909667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,6 +761,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962909664}
   m_CullTransparentMesh: 1
+--- !u!114 &962909669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962909664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::LoadScene
+  wantedSceneName: MainMenu
 --- !u!1 &1079392617
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392661565}
+  - component: {fileID: 1392661569}
   - component: {fileID: 1392661568}
   - component: {fileID: 1392661567}
   - component: {fileID: 1392661566}
@@ -1029,7 +1073,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1392661567}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1392661569}
+        m_TargetAssemblyTypeName: LoadScene, Scripts.Core
+        m_MethodName: LoadSelectedScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1392661567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,6 +1124,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392661564}
   m_CullTransparentMesh: 1
+--- !u!114 &1392661569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392661564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::LoadScene
+  wantedSceneName: SettingsMenu
 --- !u!1 &1434477853
 GameObject:
   m_ObjectHideFlags: 0
