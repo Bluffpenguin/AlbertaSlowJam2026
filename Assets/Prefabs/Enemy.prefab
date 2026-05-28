@@ -117,6 +117,8 @@ MonoBehaviour:
       m_Bits: 1024
     defaultState: 0
     rb: {fileID: 0}
+    attackRange: 0
+  active: 0
 --- !u!50 &2234780179259722852
 Rigidbody2D:
   serializedVersion: 5
@@ -143,7 +145,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &-5229107880185994514
 CircleCollider2D:
   m_ObjectHideFlags: 0

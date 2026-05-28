@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class State_SimpleIdle : AIState
-{ 
+{
+	Node guardNode;
 	public State_SimpleIdle(EnemyInfo _enemyInfo, Transform _player)
         : base(_enemyInfo, _player)
     {
@@ -12,7 +13,7 @@ public class State_SimpleIdle : AIState
 
 	public override void Enter()
 	{
-		
+		guardNode = enemyInfo.rm.GetGuardSpot(enemyInfo.enemyId);
 		base.Enter();
 	}
 
