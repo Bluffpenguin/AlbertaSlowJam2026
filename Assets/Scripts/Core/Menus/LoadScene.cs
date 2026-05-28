@@ -24,8 +24,9 @@ public class LoadScene : MonoBehaviour
         {
             UnpauseGame();
         }
+
 		SceneManager.LoadScene(wantedSceneName);
-		SceneManager.UnloadSceneAsync(MenuManager.Instance.currentScene);
+		
 		MenuManager.Instance.currentScene = wantedSceneName;
 
         if (MenuManager.Instance.currentScene.Contains("Game"))
@@ -33,6 +34,11 @@ public class LoadScene : MonoBehaviour
 			MenuManager.Instance.inGame = true;
 		}
 		//Debug.Log($"Loaded: {MenuManager.Instance.currentScene}");
+	}
+
+    public void CloseScene()
+    {
+		SceneManager.UnloadSceneAsync(MenuManager.Instance.currentScene);
 	}
 
     public void UnpauseGame()
