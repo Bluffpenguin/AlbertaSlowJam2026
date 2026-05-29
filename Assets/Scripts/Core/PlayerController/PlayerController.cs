@@ -70,5 +70,10 @@ public class PlayerController : MonoBehaviour
 			_dashCooldownTimer = _dashCooldown;
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
 		}
+
+		if (playerInput.Player.Pause.ReadValue<float>() > 0)
+		{
+			MenuManager.Instance.Pause_and_Unpause();
+		}
 	}
 }
