@@ -31,11 +31,13 @@ public class MenuManager : MonoBehaviour
 		{
 			SceneManager.UnloadSceneAsync("PauseMenu");
 			Time.timeScale = 1;
+			_paused = false;
 		}
 		else
 		{
 			Time.timeScale = 0;
 			SceneManager.LoadScene("PauseMenu",LoadSceneMode.Additive);
+			_paused = true;
 		}
 	}
 }
