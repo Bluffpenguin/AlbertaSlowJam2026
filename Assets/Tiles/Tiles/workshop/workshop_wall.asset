@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
-  m_Name: tile_player
+  m_Name: workshop_wall
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.IsometricRuleTile
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 4836639521576397119, guid: 4b61a82be01289947babf640feb000e1, type: 3}
-  m_DefaultColliderType: 0
+  m_DefaultSprite: {fileID: 2094943551, guid: b9322abd4f2aaad4c979c052daa67961, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 2
   m_TilingRules: []
