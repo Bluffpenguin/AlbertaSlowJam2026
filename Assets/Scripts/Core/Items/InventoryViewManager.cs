@@ -37,12 +37,12 @@ public class InventoryViewManager : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Player.Input.UI.Cancel.performed += this.Cancel_performed;
+		Player.Input.Player.Pause.performed += this.Cancel_performed;
 	}
 
 	private void OnDisable()
 	{
-		Player.Input.UI.Cancel.performed -= this.Cancel_performed;
+		Player.Input.Player.Pause.performed -= this.Cancel_performed;
 	}
 
 	private void Cancel_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) => CloseAllOpenViews();

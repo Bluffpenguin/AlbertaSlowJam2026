@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -40,11 +41,12 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
 	}
 
-	private void Start()
+	private async void Start()
 	{
 		// Testing
-		SceneManager.LoadScene(_dungeonScene, LoadSceneMode.Additive);
+		await SceneManager.LoadSceneAsync(_dungeonScene, LoadSceneMode.Additive);
 		ResetGame();
+		await Awaitable.MainThreadAsync();
 		MoveToNextDay();
 	}
 
