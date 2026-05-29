@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class State_SimplePatrol : AIState
 {
 	float patrolSpeed = 5f;
-	int currentPatrolIndex = 0;
 	private readonly float stallTimeMax = 2f;
 	private readonly float stallTimeMin = 0.5f;
 	private bool reversePatrol = false, stalling = false;
@@ -19,10 +18,8 @@ public class State_SimplePatrol : AIState
 
 	public override void Enter()
 	{
-		stalling = true;
-		enemyInfo.rm.StartCoroutine(WaitForPathToBeCalculated());
-		
-        base.Enter();
+		path = enemyInfo.rm.GetPatrol(enemyInfo.enemyId);
+		base.Enter();
 	}
 
 	public override void Update()
@@ -63,6 +60,9 @@ public class State_SimplePatrol : AIState
 		if (stalling)
 			return;
 
+		if (currentWP == path.Count)
+			return;
+
 		if (Vector2.Distance(path[currentWP].getId().transform.position, enemyInfo.npc.transform.position) < accuracy)
 		{
 			currentNode = path[currentWP].getId();
@@ -99,16 +99,6 @@ public class State_SimplePatrol : AIState
 	{
 		float stallTime = Random.Range(stallTimeMin, stallTimeMax);
 		yield return new WaitForSeconds(stallTime);
-		stalling = false;
-	}
-
-	IEnumerator WaitForPathToBeCalculated()
-	{
-		while (!enemyInfo.rm.calculatedPatrols)
-		{
-			yield return null;
-		}
-		path = enemyInfo.rm.GetPatrol(enemyInfo.enemyId);
 		stalling = false;
 	}
 }

@@ -17,6 +17,7 @@ MonoBehaviour:
   _description: A large mechanical part from an old machine. It's impossible to tell
     what it was once a part of.
   _baseSellValue: 1
+  _itemTile: {fileID: 11400000, guid: 2f9967da9e430954a890d4c02ae06ba6, type: 2}
   _results:
   - _ingredient: {fileID: 11400000, guid: fef7fc9d202f6184abfb05f5ee298a44, type: 2}
     _count: 2

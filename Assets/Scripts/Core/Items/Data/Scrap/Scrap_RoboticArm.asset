@@ -17,6 +17,7 @@ MonoBehaviour:
   _description: The arm of an automaton. Its craftmanship is immaculate, only missing
     a few parts. Who would throw out something like this...
   _baseSellValue: 3
+  _itemTile: {fileID: 11400000, guid: 58a9c82cd65ae954385ef682a925ae50, type: 2}
   _results:
   - _ingredient: {fileID: 11400000, guid: fef7fc9d202f6184abfb05f5ee298a44, type: 2}
     _count: 4
