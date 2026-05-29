@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 185136439}
   - component: {fileID: 185136438}
   - component: {fileID: 185136437}
+  - component: {fileID: 185136441}
   - component: {fileID: 185136440}
   m_Layer: 0
   m_Name: Hatch
@@ -329,13 +330,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 185136435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e5885bc5e66bd41a04a635a1bb2228, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e7c219fe15d6e6479cb37ba315ddd2c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Scripts.Core::EventInteractable
-  _tooltip: Interact
-  _onInteracted:
+  m_EditorClassIdentifier: Scripts.Core::TransitionToDungeon
+  _tooltip: Leave
+--- !u!114 &185136441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185136435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1155c29ca31dfd141ab38b2b84617302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::Hatch
+  OnEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 814729905}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 814729905}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &199991167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,6 +3151,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1129267430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129267432}
+  - component: {fileID: 1129267431}
+  m_Layer: 0
+  m_Name: TransitionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1129267431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129267430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfb917967f68394390d74b234afe0b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::TransitionManager
+  fadeToBlack: {fileID: 0}
+--- !u!4 &1129267432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129267430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.75822, y: -0.44318, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397316222
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,3 +4987,4 @@ SceneRoots:
   - {fileID: 1974764909}
   - {fileID: 946096992}
   - {fileID: 8982211540251277230}
+  - {fileID: 1129267432}

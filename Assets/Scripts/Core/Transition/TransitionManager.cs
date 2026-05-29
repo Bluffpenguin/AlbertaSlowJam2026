@@ -34,9 +34,9 @@ public class TransitionManager : MonoBehaviour
 	}
 	void Start()
     {
-        shipPlayer = Player.Instance.transform;
+        dungeonPlayer = shipPlayer = Player.Instance.transform;
 
-        sceneCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        sceneCamera = Camera.main;
         sceneCamera.transform.SetParent(shipPlayer);
         cameraLocalPos = sceneCamera.transform.localPosition;
 	}
@@ -56,9 +56,9 @@ public class TransitionManager : MonoBehaviour
     {
         //activeDungeon = true; //TEMP 
         
+			StartCoroutine(TransportToDungeon());
         if (activeDungeon)
         {
-			StartCoroutine(TransportToDungeon());
 		}
         
     }
@@ -74,6 +74,8 @@ public class TransitionManager : MonoBehaviour
         BeginTransition.Invoke();
         yield return new WaitForSeconds(1);
         dungeonPlayer.gameObject.SetActive(false);
+        Player.Controller.transform.position = Vector3.zero; // Hacky
+        activeDungeon = false;
         shipPlayer.gameObject.SetActive(true);
         MoveCamera(shipPlayer);
 		EndTransition.Invoke();
@@ -84,10 +86,13 @@ public class TransitionManager : MonoBehaviour
 		BeginTransition.Invoke();
 		yield return new WaitForSeconds(1);
 		shipPlayer.gameObject.SetActive(false);
+        Player.Controller.transform.position = 10 * Vector3.forward;
+        activeDungeon = true;
 		if (dungeonPlayer == null)
         {
             dungeonPlayer = Player.Instance.transform;
         }
+        dungeonPlayer.gameObject.SetActive(true);
         MoveCamera(dungeonPlayer);
 		EndTransition.Invoke();
 	}
