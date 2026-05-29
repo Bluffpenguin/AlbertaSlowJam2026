@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Linq;
 using UnityEngine;
 
@@ -13,24 +14,29 @@ public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 	{
 		Vector2Int[] directions = Direction2D.GetDirections(_data.CheckDirections);
 		for (int i = 0; i < _maxCount; i++) {
-			var position = room.Tiles.ElementAt(Random.Range(0, room.Tiles.Count));
+			PlaceObstacle(room, directions);
+		}
+	}
 
-			bool placeable = true;
-			if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.NextToWall)) {
-				placeable &= directions.Count(d => !room.Tiles.Contains(position + d)) < directions.Length;
-			}
+	public virtual void PlaceObstacle(RoomInfo room, Vector2Int[] directions)
+	{
+		var position = room.Tiles.ElementAt(Random.Range(0, room.Tiles.Count));
 
-			if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.OpenSpace)) {
-				placeable &= directions.All(d => room.Tiles.Contains(position + d));
-			}
+		bool placeable = true;
+		if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.NextToWall)) {
+			placeable &= directions.Count(d => !room.Tiles.Contains(position + d)) < directions.Length;
+		}
 
-			if (placeable) {
-				base.PaintTile(position);
-			}
+		if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.OpenSpace)) {
+			placeable &= directions.All(d => room.Tiles.Contains(position + d));
+		}
 
-			if (_data.Impassable) {
-				room.Tiles.Remove(position);
-			}
+		if (placeable) {
+			base.PaintTile(position);
+		}
+
+		if (_data.Impassable) {
+			room.Tiles.Remove(position);
 		}
 	}
 }
