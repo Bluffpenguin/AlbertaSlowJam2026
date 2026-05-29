@@ -17,6 +17,11 @@ public class InventoryViewManager : MonoBehaviour
 
 	private void Awake()
 	{
+		if (Instance != null) {
+			Destroy(this.gameObject);
+			return;
+		}
+
 		Instance = this;
 
 		_windowsDict = new(capacity: _windows.Length);
@@ -24,6 +29,8 @@ public class InventoryViewManager : MonoBehaviour
 			var data = _windows[i];
 			_windowsDict.TryAdd(data.window, (data.view, data.model));
 		}
+
+		CloseAllOpenViews();
 	}
 
 	private void OnEnable()
@@ -78,6 +85,7 @@ public class InventoryViewManager : MonoBehaviour
 	{
 		return window switch {
 			InventoryWindow.None => (null, null),
+			InventoryWindow.Player => (_windowsDict[InventoryWindow.Player].Item1, Player.Inventory),
 			_ when _windowsDict.ContainsKey(window) => _windowsDict[window],
 			_ => throw new KeyNotFoundException("View does not exist"),
 		};
