@@ -6,18 +6,6 @@ public class LoadScene : MonoBehaviour
     // NOTE: This is applied to menu buttons that send you to different scenes.
     [SerializeField] private string wantedSceneName;
 
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	void Start()
-    {
-		
-	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 	public void LoadSelectedScene()
 	{
 		SceneManager.LoadScene(wantedSceneName);
