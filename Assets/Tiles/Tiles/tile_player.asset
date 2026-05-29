@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: tile_player
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.IsometricRuleTile
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 8638706844493832600, guid: 1b1ad4dfc231ea5428be15b37439abc9, type: 3}
+  m_DefaultGameObject: {fileID: 4836639521576397119, guid: 4b61a82be01289947babf640feb000e1, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []
