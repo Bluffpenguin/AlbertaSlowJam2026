@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
 	[Header("Game Settings")]
 	public float DayLength = 600f;
-	[Range(0, 24)] public int StartingHour = 6;
 	[Min(1)] public int DaysToWin = 7;
 
 	[Header("Dynamic Data")]
@@ -44,7 +43,7 @@ public class GameManager : MonoBehaviour
 		if (!AdvanceClock) {
 			return;
 		}
-		
+
 		TimeElapsed += Time.deltaTime;
 		if (TimeElapsed >= DayLength) {
 			// TODO: temporary, remove later
@@ -60,6 +59,7 @@ public class GameManager : MonoBehaviour
 
 	public void MoveToNextDay()
 	{
+		AdvanceClock = false;
 		DayIndex++;
 		TimeElapsed = 0;
 
@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
 		foreach (var listener in _listeners) {
 			listener.StartDay(DayIndex);
 		}
+
+		AdvanceClock = true;
 	}
 
 	public void EndGame()
