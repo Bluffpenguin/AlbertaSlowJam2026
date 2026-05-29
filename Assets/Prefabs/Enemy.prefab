@@ -117,7 +117,7 @@ MonoBehaviour:
       m_Bits: 1024
     defaultState: 0
     rb: {fileID: 0}
-    attackRange: 0
+    attackRange: 1
   active: 0
 --- !u!50 &2234780179259722852
 Rigidbody2D:

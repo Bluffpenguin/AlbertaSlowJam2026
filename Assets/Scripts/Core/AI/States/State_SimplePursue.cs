@@ -4,7 +4,7 @@ using System.Collections;
 
 public class State_SimplePursue : AIState
 {
-	float pathUpdateDelay = 0.5f;
+	float pathUpdateDelay = 0.2f;
 	float pursueSpeed = 8f;
 	public State_SimplePursue(EnemyInfo _enemyInfo, Transform _player)
         : base(_enemyInfo, _player)
@@ -56,6 +56,7 @@ public class State_SimplePursue : AIState
 		{
 			currentNode = path[currentWP].getId();
 			currentWP++;
+			return;
 		}
 
 		if (currentWP < path.Count)
@@ -80,7 +81,7 @@ public class State_SimplePursue : AIState
 		{
 			Node playerNode = enemyInfo.rm.GetNode(PlayerPosition);
 			Node enemyNode = enemyInfo.rm.GetNode(EnemyPosition);
-			currentWP = 0;
+			currentWP = 1;
 			if (enemyInfo.rm.pf.AStar(enemyNode, playerNode))
 			{
 				path = enemyInfo.rm.pf.ShavePath(enemyInfo.rm.pf.pathList);
@@ -92,6 +93,8 @@ public class State_SimplePursue : AIState
 					nextState = new State_SimplePatrol(enemyInfo, player);
 				else
 					nextState = new State_SimpleIdle(enemyInfo, player);
+
+				stage = EVENT.EXIT;
 				return;
 			}
 		}
