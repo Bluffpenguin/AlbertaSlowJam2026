@@ -69,11 +69,11 @@ public class SimpleEnemy : MonoBehaviour
 		Gizmos.color = Color.white;
 
 		var direction = Quaternion.AngleAxis(currentState.visAngle, enemyInfo.heading.forward) * enemyInfo.heading.up;
-		Gizmos.DrawRay(transform.position, direction * (3 / enemyInfo.rm.tileMap.cellSize.magnitude));
+		Gizmos.DrawRay(transform.position, direction * (3 / enemyInfo.rm.navTileMap.cellSize.magnitude));
 		
 
 		direction = Quaternion.AngleAxis(-currentState.visAngle, enemyInfo.heading.forward) * enemyInfo.heading.up;
-		Gizmos.DrawRay(transform.position, direction * (3 / enemyInfo.rm.tileMap.cellSize.magnitude));
+		Gizmos.DrawRay(transform.position, direction * (3 / enemyInfo.rm.navTileMap.cellSize.magnitude));
 
 
 	}

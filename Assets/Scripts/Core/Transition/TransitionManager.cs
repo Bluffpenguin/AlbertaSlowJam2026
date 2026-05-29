@@ -16,13 +16,9 @@ public class TransitionManager : MonoBehaviour
 
     Transform shipPlayer;
     Transform dungeonPlayer;
-    Vector3 lastDungeonPos;
     bool activeDungeon = false;
     Camera sceneCamera;
     Vector3 cameraLocalPos;
-
-    GameObject dungeonGenerator;
-    CorridorFirstGenerator corridorFirstGenerator;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Awake()
@@ -43,9 +39,6 @@ public class TransitionManager : MonoBehaviour
         sceneCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         sceneCamera.transform.SetParent(shipPlayer);
         cameraLocalPos = sceneCamera.transform.localPosition;
-        Scene dungeonScene = SceneManager.GetSceneByName("TransitionTest"); //TEMP
-        dungeonGenerator = dungeonScene.GetRootGameObjects().Where(obj => obj.name == "Corridor First").First();
-        corridorFirstGenerator = dungeonGenerator.GetComponent<CorridorFirstGenerator>();
 	}
 
     // Update is called once per frame
@@ -62,16 +55,11 @@ public class TransitionManager : MonoBehaviour
     void ToDungeon()
     {
         //activeDungeon = true; //TEMP 
-        shipPlayer.gameObject.SetActive(false);
+        
         if (activeDungeon)
         {
 			StartCoroutine(TransportToDungeon());
 		}
-        else
-        {
-            
-            StartCoroutine(TransportToNewDungeon());
-        }
         
     }
 
@@ -95,17 +83,11 @@ public class TransitionManager : MonoBehaviour
 	{
 		BeginTransition.Invoke();
 		yield return new WaitForSeconds(1);
-		EndTransition.Invoke();
-	}
-
-	IEnumerator TransportToNewDungeon()
-	{
-		BeginTransition.Invoke();
-		yield return new WaitForSeconds(1);
-		corridorFirstGenerator.Clear();
-		corridorFirstGenerator.Generate();
-        shipPlayer.gameObject.SetActive(false);
-		dungeonPlayer = Player.Instance.transform;
+		shipPlayer.gameObject.SetActive(false);
+		if (dungeonPlayer == null)
+        {
+            dungeonPlayer = Player.Instance.transform;
+        }
         MoveCamera(dungeonPlayer);
 		EndTransition.Invoke();
 	}

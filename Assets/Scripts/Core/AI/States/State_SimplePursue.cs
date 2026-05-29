@@ -26,9 +26,9 @@ public class State_SimplePursue : AIState
 
 	public override void FixedUpdate()
 	{
-		Vector3Int playerPos = enemyInfo.rm.tileMap.WorldToCell(player.position);
-		float distance = Vector3Int.Distance(playerPos, enemyInfo.rm.tileMap.WorldToCell(enemyInfo.npc.transform.position));
-		if (enemyInfo.rm.tileMap.GetTile(playerPos) == null)
+		Vector3Int playerPos = enemyInfo.rm.navTileMap.WorldToCell(player.position);
+		float distance = Vector3Int.Distance(playerPos, enemyInfo.rm.navTileMap.WorldToCell(enemyInfo.npc.transform.position));
+		if (enemyInfo.rm.navTileMap.GetTile(playerPos) == null)
 		{
 			// Player left room
 			if (enemyInfo.defaultState == STATE.PATROL)

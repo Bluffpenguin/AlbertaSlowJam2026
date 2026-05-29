@@ -35,7 +35,7 @@ public class AIState
 	{
 		get
 		{
-			return (Vector2Int)enemyInfo.rm.tileMap.WorldToCell(player.position);
+			return (Vector2Int)enemyInfo.rm.navTileMap.WorldToCell(player.position);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class AIState
 	{
 		get
 		{
-			return (Vector2Int)enemyInfo.rm.tileMap.WorldToCell(enemyInfo.npc.transform.position);
+			return (Vector2Int)enemyInfo.rm.navTileMap.WorldToCell(enemyInfo.npc.transform.position);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class AIState
 		
 		Vector3 direction = player.position - enemyInfo.npc.transform.position;
 		float angle = Vector3.Angle(direction, enemyInfo.heading.up);
-		float scaledDist = direction.magnitude * enemyInfo.rm.tileMap.cellSize.magnitude;
+		float scaledDist = direction.magnitude * enemyInfo.rm.navTileMap.cellSize.magnitude;
 
 		if (scaledDist  < visDist && angle < visAngle)
 		{

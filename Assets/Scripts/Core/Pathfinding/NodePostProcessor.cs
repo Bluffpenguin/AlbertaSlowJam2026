@@ -7,6 +7,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
 	[SerializeField] TileBase manager;
 	[SerializeField] GameObject enemyPrefab;
+	[SerializeField] Tilemap itemMap;
 	public void ProcessRoom(RoomInfo room)
 	{
 		base.PaintTiles(room.Tiles);
@@ -14,6 +15,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		PaintTile(room.Origin, _tilemap, manager);
 		GameObject rmObj = _tilemap.GetInstantiatedObject((Vector3Int)room.Origin);
 		RoomManager rm = rmObj.GetComponent<RoomManager>();
+		rm.itemTileMap = itemMap;
 		rm.GenerateLink(room.Tiles, _tilemap, false);
 
 		// Spawn Enemies
