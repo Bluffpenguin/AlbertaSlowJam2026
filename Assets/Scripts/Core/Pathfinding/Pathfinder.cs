@@ -5,6 +5,7 @@ public class Pathfinder : MonoBehaviour
 	public List<Node> pathList = new List<Node>();
 
 	[SerializeField] LayerMask obstructions;
+	[SerializeField] RoomManager rm;
 
 	public bool AStar(Node start, Node end)
 	{
@@ -112,39 +113,54 @@ public class Pathfinder : MonoBehaviour
 		return iteratorCount;
 	}
 
-	public void ShavePath()
+	public List<Node> ShavePath(List<Node> path)
 	{
-		if (pathList.Count <= 2) return;
+		if (path.Count <= 2) return path;
 		List<Node> optimizedPath = new List<Node>();
 
 		int currentNode = 0;
-		int endNode = pathList.Count - 1;
+		int endNode = path.Count - 1;
 
-		optimizedPath.Add(pathList[currentNode]);
+		optimizedPath.Add(path[currentNode]);
 
 		int prevention = 0;
 
-		while (currentNode != endNode && prevention != 99)
+		while (currentNode < endNode && prevention != 99)
 		{
+			Vector3 currPos = rm.tileMap.CellToWorld((Vector3Int)path[currentNode].position);
+			bool foundShortcut = false;
+
 			for (int i = endNode; i > currentNode; i--)
 			{
-				Vector2 currNodePos = (Vector2)pathList[currentNode].getId().transform.position;
-				Vector2 checkPos = (Vector2)pathList[i].getId().transform.position;
-				Vector2 direction = (checkPos - currNodePos).normalized;
-				float distance = Vector2.Distance(currNodePos, checkPos);
+				Vector3 checkPos = rm.tileMap.CellToWorld((Vector3Int)path[i].position);
+				//Vector2 direction = (checkPos - currPos).normalized;
+				//float distance = Vector2.Distance(currPos, checkPos);
 
-				if (!Physics2D.Raycast(currNodePos, direction, distance, obstructions))
+				
+				if (!Physics2D.Linecast(currPos, checkPos, obstructions))
 				{
-					optimizedPath.Add(pathList[i]);
+					optimizedPath.Add(path[i]);
 					currentNode = i;
+					foundShortcut = true;
 					break;
 				}
-		
+				
+				
+				Debug.Log("Detected wall");
 			}
 			prevention++;
+
+			if (!foundShortcut)
+			{
+				currentNode++;
+				optimizedPath.Add(path[currentNode]);
+			}
 		}
 
-		if(prevention != 99)
-			pathList = optimizedPath;
+		if (prevention != 99)
+			return optimizedPath;
+		else
+			Debug.Log("Failed to find smooth path");
+		return path;
 	}
 }

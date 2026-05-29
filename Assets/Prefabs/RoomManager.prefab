@@ -50,6 +50,7 @@ MonoBehaviour:
   obstructions:
     serializedVersion: 2
     m_Bits: 1024
+  rm: {fileID: 6067123556048052674}
 --- !u!114 &6067123556048052674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +63,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fddabd4999b81489e5ac3d5c65e421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::RoomManager
+  patrolList:
+  - wps: []
+  - wps: []
+  - wps: []
 --- !u!114 &5070411708757630840
 MonoBehaviour:
   m_ObjectHideFlags: 0
