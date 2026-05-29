@@ -2,7 +2,7 @@ using UnityEngine.Tilemaps;
 
 public class SingleTilePainter : TilePainter
 {
-	[SerializeField] private TileBase _tile;
+	[SerializeField] protected TileBase _tile;
 
 	public override void PaintTile(Vector2Int position)
 	{
