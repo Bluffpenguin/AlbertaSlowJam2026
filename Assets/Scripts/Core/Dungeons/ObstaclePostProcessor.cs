@@ -1,18 +1,18 @@
-using System.Data.Common;
 using System.Linq;
-using UnityEngine;
 
 public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
 	[SerializeField] protected int _processingOrder;
 	[SerializeField, Min(0)] protected int _maxCount = 1;
+	[SerializeField] protected AnimationCurve _countScalingByDistance = new(new Keyframe(0, 1), new Keyframe(1, 1));
 	[SerializeField] protected ObstacleData _data;
 
 	public int Order => _processingOrder;
 
 	public virtual void ProcessRoom(RoomInfo room)
 	{
-		for (int i = 0; i < _maxCount; i++) {
+		int count = Mathf.RoundToInt(_countScalingByDistance.Evaluate(room.Distance) * _maxCount);
+		for (int i = 0; i < count; i++) {
 			PlaceObstacle(room);
 		}
 	}
