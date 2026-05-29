@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 185136439}
   - component: {fileID: 185136438}
   - component: {fileID: 185136437}
+  - component: {fileID: 185136440}
   m_Layer: 0
   m_Name: Hatch
   m_TagString: Untagged
@@ -244,8 +245,8 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 3
-  m_Mode: 0
+  m_SortOrder: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
 --- !u!1839735485 &185136439
 Tilemap:
@@ -319,6 +320,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &185136440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185136435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e5885bc5e66bd41a04a635a1bb2228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::EventInteractable
+  _tooltip: Interact
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &199991167
 GameObject:
   m_ObjectHideFlags: 0
