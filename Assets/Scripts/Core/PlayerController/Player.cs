@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 	public static bool Exists { get => Instance != null; }
 	public static PlayerController Controller { get => Instance._controller; }
 	public static Inventory Inventory { get => Instance._inventory; }
-	public static InputSystem_Actions Input { get => Instance._controller._playerInput; }
+	public static InputSystem_Actions Input { get => Instance._controller.PlayerInput; }
 
 	[SerializeField] private PlayerController _controller;
 	[SerializeField] private Inventory _inventory;
