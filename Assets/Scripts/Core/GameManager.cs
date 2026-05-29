@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance { get; private set; }
 
 	[SerializeField] private List<InvokeOnDayStart> _listeners = new();
+	[SerializeField] private string _dungeonScene = "Dungeon";
 
 	[Header("Game Settings")]
 	public float DayLength = 600f;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 	public int DayIndex = -1;
 	public float TimeElapsed;
 	public bool AdvanceClock = false;
+	public int PlayerMoney;
 
 	public void AddListener(InvokeOnDayStart listener)
 	{
@@ -36,6 +38,14 @@ public class GameManager : MonoBehaviour
 		Instance = this;
 		this.transform.SetParent(null);
 		DontDestroyOnLoad(this.gameObject);
+	}
+
+	private void Start()
+	{
+		// Testing
+		SceneManager.LoadScene(_dungeonScene, LoadSceneMode.Additive);
+		ResetGame();
+		MoveToNextDay();
 	}
 
 	public void Update()
