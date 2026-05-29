@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
 	private InputSystem_Actions _playerInput;
 
+	[SerializeField] private bool _disablePause;
 	[SerializeField] private InteractionDetector _detector;
 	[SerializeField] private float _moveSpeed = 10;
 	[Space]
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
 		}
 
-		if (PlayerInput.Player.Pause.ReadValue<float>() > 0)
+		if (!_disablePause && PlayerInput.Player.Pause.ReadValue<float>() > 0)
 		{
 			MenuManager.Instance.Pause_and_Unpause();
 		}

@@ -1,3 +1,5 @@
+using System.Linq;
+
 public enum InventoryWindow
 {
 	None = 0,
@@ -53,6 +55,17 @@ public class InventoryViewManager : MonoBehaviour
 		}
 	}
 
+	public void CloseAllExcept(params InventoryWindow[] window)
+	{
+		foreach (var kvp in _windowsDict) {
+			if (window.Contains(kvp.Key))
+				continue;
+			var view = kvp.Value.Item1;
+			view.ClearView();
+			view.gameObject.SetActive(false);
+		}
+	}
+
 	public void OpenView(InventoryWindow windowA, InventoryWindow windowB = InventoryWindow.None)
 	{
 		InventoryView viewA, viewB;
@@ -67,7 +80,7 @@ public class InventoryViewManager : MonoBehaviour
 			return;
 		}
 
-		CloseAllOpenViews();
+		CloseAllExcept(windowA, windowB);
 		if (viewA != null) {
 			Debug.Assert(modelA != null);
 			viewA.gameObject.SetActive(true);
