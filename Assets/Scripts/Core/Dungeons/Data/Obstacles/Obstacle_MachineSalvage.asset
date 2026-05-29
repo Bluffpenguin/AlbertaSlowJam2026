@@ -15,7 +15,7 @@ MonoBehaviour:
   _impassable: 1
   _checkDirections: 1
   _requirements: 0
-  _obstacleTile: {fileID: 0}
+  _obstacleTile: {fileID: 11400000, guid: 2f9967da9e430954a890d4c02ae06ba6, type: 2}
   _distribution:
     serializedVersion: 2
     m_Curve:

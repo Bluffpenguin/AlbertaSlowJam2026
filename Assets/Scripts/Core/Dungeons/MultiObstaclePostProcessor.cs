@@ -11,6 +11,7 @@ public class MultiObstaclePostProcessor : ObstaclePostProcessor
 			return;
 		var data = potentialObstacles[Random.Range(0, potentialObstacles.Length)];
 		base._tile = data.ObstacleTile;
+		Debug.Log(_tile, this);
 		base._data = data;
 		base.PlaceObstacle(room);
 	}

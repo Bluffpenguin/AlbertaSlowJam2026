@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
   m_Name: item_MachineSalvage
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.IsometricRuleTile
-  m_DefaultSprite: {fileID: 3136550281646277714, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
+  m_DefaultSprite: {fileID: 6801152492180024973, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
   m_DefaultGameObject: {fileID: 5363528267526599182, guid: 17b82d2bd0280f14a80d6fb096633eac, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
