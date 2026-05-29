@@ -9,14 +9,14 @@ public class Pathfinder : MonoBehaviour
 
 	public bool AStar(Node start, Node end)
 	{
+		if (start == null || end == null) return false;
+
+
 		if (start.getId() == end.getId())
 		{
 			pathList.Clear();
 			return false;
 		}
-
-
-		if (start == null || end == null) return false;
 
 		List<Node> open = new List<Node>();
 		List<Node> closed = new List<Node>();

@@ -120,7 +120,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""stateName"": ""Rewind"",
+                    ""name"": ""Rewind"",
                     ""type"": ""Button"",
                     ""id"": ""00bdf667-1fe7-424e-a963-41b8c6a4520d"",
                     ""expectedControlType"": """",
@@ -217,7 +217,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""stateName"": """",
+                    ""name"": """",
                     ""id"": ""7296a26a-495c-4f03-8059-e768feaab2ea"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
