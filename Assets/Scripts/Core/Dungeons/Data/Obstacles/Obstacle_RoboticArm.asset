@@ -15,13 +15,13 @@ MonoBehaviour:
   _impassable: 1
   _checkDirections: 1
   _requirements: 0
-  _obstacleTile: {fileID: 0}
+  _obstacleTile: {fileID: 11400000, guid: 58a9c82cd65ae954385ef682a925ae50, type: 2}
   _distribution:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
