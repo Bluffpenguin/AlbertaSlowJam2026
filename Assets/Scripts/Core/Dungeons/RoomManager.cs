@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -107,6 +108,24 @@ public class RoomManager : MonoBehaviour
 
 		return null;
 
+	}
+
+	public Node GetRandomFleePosition(Transform retreatFrom, float minDistance)
+	{
+		List<Vector2Int> roomPositions = nodeDictionary.Keys.ToList();
+		Vector2Int retreatFromPos = (Vector2Int)tileMap.WorldToCell(retreatFrom.position);
+
+		int fallback = 0;
+		Vector2Int currPosition = retreatFromPos;
+		while (Vector2Int.Distance(currPosition, retreatFromPos) < minDistance && fallback < 25)
+		{
+			int rand = Random.Range(0, roomPositions.Count);
+			currPosition = roomPositions[rand];
+			fallback++;
+		}
+
+		return GetNode(currPosition);
+		
 	}
 
 	public void AddPatrol(List<Node> patrol, int enemyId)

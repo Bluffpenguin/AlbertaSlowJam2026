@@ -24,7 +24,7 @@ public class SimpleEnemy : MonoBehaviour
 	void Start()
 	{
 		//enemyInfo.anim = this.GetComponent<Animator>();
-		enemyInfo.attackRange = 2;
+		enemyInfo.attackRange = 0.25f;
 		enemyInfo.npc = this.gameObject;
 		enemyInfo.rb = GetComponent<Rigidbody2D>();
 		player = GameObject.FindWithTag("Player").transform;

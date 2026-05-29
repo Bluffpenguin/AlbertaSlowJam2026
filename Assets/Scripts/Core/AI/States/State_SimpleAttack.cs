@@ -13,34 +13,22 @@ public class State_SimpleAttack : AIState
 
 	public override void Enter()
 	{
-		enemyInfo.rm.StartCoroutine(TempWait());
+		Node fleeDestination = enemyInfo.rm.GetRandomFleePosition(player, 5);
+		Node currentNode = enemyInfo.rm.GetNode((Vector2Int)enemyInfo.rm.tileMap.WorldToCell(enemyInfo.npc.transform.position));
+		
+		// Steal Item
+		
+
+		// Get path for running away
+		Move_Shaved(currentNode.position, fleeDestination.position);
+		
 		base.Enter();
 	}
 
 	public override void Update()
 	{
-		if (tempWait)
-			return;
+		
 
-
-		if (CanSeePlayer())
-		{
-			nextState = new State_SimplePursue(enemyInfo, player);
-			stage = EVENT.EXIT;
-		}
-		else
-		{
-			if (enemyInfo.defaultState == STATE.IDLE)
-			{
-				nextState = new State_SimpleIdle(enemyInfo, player);
-				stage = EVENT.EXIT;
-			}
-			else
-			{
-				nextState = new State_SimplePatrol(enemyInfo, player);
-				stage = EVENT.EXIT;
-			}
-		}
 		
 		base.Update();
 	}
@@ -50,10 +38,5 @@ public class State_SimpleAttack : AIState
 		base.Exit();
 	}
 
-	IEnumerator TempWait()
-	{
-		tempWait = true;
-		yield return new WaitForSeconds(2);
-		tempWait = false;
-	}
+
 }
