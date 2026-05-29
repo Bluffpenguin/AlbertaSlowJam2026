@@ -205,7 +205,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 126633219}
         m_TargetAssemblyTypeName: LoadScene, Scripts.Core
-        m_MethodName: LoadSelectedScene
+        m_MethodName: LoadSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

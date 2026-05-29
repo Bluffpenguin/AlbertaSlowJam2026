@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 1392661567}
   - component: {fileID: 1392661566}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: Go To Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,7 +1088,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1392661569}
         m_TargetAssemblyTypeName: LoadScene, Scripts.Core
-        m_MethodName: LoadSelectedScene
+        m_MethodName: LoadSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

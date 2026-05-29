@@ -3,24 +3,31 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    // NOTE: This is applied to menu buttons that send you to different scenes.
-    [SerializeField] private string wantedSceneName;
+	// NOTE: This is applied to menu buttons that send you to different scenes.
+	[SerializeField] private string wantedSceneName;
 
 	public void LoadSelectedScene()
 	{
 		SceneManager.LoadScene(wantedSceneName);
-		
+
 		MenuManager.Instance.currentScene = wantedSceneName;
 
-        if (MenuManager.Instance.currentScene.Contains("Game"))
-        {
+		if (MenuManager.Instance.currentScene.Contains("Game"))
+		{
 			MenuManager.Instance.inGame = true;
 		}
 		//Debug.Log($"Loaded: {MenuManager.Instance.currentScene}");
 	}
 
-    public void CloseScene()
-    {
+	public void LoadSettings()
+	{
+		SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
+
+		MenuManager.Instance.currentScene = "SettingsMenu";
+	}
+
+	public void CloseScene()
+	{
 		SceneManager.UnloadSceneAsync(MenuManager.Instance.currentScene);
 	}
 
@@ -29,9 +36,9 @@ public class LoadScene : MonoBehaviour
 		MenuManager.Instance.Pause_and_Unpause();
 	}
 
-    public void QuitGame()
-    {
-        Application.Quit();
-        //Debug.Log("Fuck this shit, I'm out");
-    }
+	public void QuitGame()
+	{
+		Application.Quit();
+		//Debug.Log("Fuck this shit, I'm out");
+	}
 }
