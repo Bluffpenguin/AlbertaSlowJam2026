@@ -24,7 +24,7 @@ public class ItemTile : MonoBehaviour, IInteractable
 			return;
 
 		var stack = new ItemStack(_item);
-		var inventory = Player.Instance.GetComponent<Inventory>();
+		var inventory = Player.Inventory;
 		Debug.Assert(inventory != null, context: this);
 		inventory.Add(stack);
 		_tilemap.SetTile(_cellPosition, null);

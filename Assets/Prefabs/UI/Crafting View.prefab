@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfd208361dc79d4fa2b68decfb07f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InventoryView
-  _createOnStart: 1
+  _createOnStart: 0
   _model: {fileID: 0}
   _other: {fileID: 0}
   _slots:

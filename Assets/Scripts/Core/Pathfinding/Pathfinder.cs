@@ -127,12 +127,12 @@ public class Pathfinder : MonoBehaviour
 
 		while (currentNode < endNode && prevention != 99)
 		{
-			Vector3 currPos = rm.tileMap.CellToWorld((Vector3Int)path[currentNode].position);
+			Vector3 currPos = rm.navTileMap.CellToWorld((Vector3Int)path[currentNode].position);
 			bool foundShortcut = false;
 
 			for (int i = endNode; i > currentNode; i--)
 			{
-				Vector3 checkPos = rm.tileMap.CellToWorld((Vector3Int)path[i].position);
+				Vector3 checkPos = rm.navTileMap.CellToWorld((Vector3Int)path[i].position);
 				//Vector2 direction = (checkPos - currPos).normalized;
 				//float distance = Vector2.Distance(currPos, checkPos);
 

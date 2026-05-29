@@ -1,9 +1,13 @@
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-	public static Player Instance { get; private set; }
+	[Obsolete]
+	public static PlayerController Instance { get; private set; }
+	[Obsolete]
 	public static bool Exists { get => Instance != null; }
+	public InputSystem_Actions PlayerInput { get => _playerInput; }
+	public Rigidbody2D Rigidbody { get => _rb; }
 
-	public InputSystem_Actions playerInput;
+	private InputSystem_Actions _playerInput;
 
 	[SerializeField] private InteractionDetector _detector;
 	[SerializeField] private float _moveSpeed = 10;
@@ -18,23 +22,22 @@ public class Player : MonoBehaviour
 
 	private void Awake()
 	{
-		Instance = this;
-		playerInput = new();
+		_playerInput = new();
 		_rb = GetComponent<Rigidbody2D>();
 	}
 
 	private void OnEnable()
 	{
-		playerInput.Player.Enable();
-		playerInput.Player.Interact.performed += this.Interact_performed;
-		playerInput.Player.Interact.canceled += this.Interact_canceled;
+		_playerInput.Player.Enable();
+		_playerInput.Player.Interact.performed += this.Interact_performed;
+		_playerInput.Player.Interact.canceled += this.Interact_canceled;
 	}
 
 	private void OnDisable()
 	{
-		playerInput.Player.Disable();
-		playerInput.Player.Interact.performed -= this.Interact_performed;
-		playerInput.Player.Interact.canceled -= this.Interact_canceled;
+		_playerInput.Player.Disable();
+		_playerInput.Player.Interact.performed -= this.Interact_performed;
+		_playerInput.Player.Interact.canceled -= this.Interact_canceled;
 	}
 
 	private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -54,7 +57,7 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		_moveDir = playerInput.Player.Move.ReadValue<Vector2>();
+		_moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
 
 		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
 		_rb.AddForce(displacement, ForceMode2D.Impulse);
@@ -63,7 +66,7 @@ public class Player : MonoBehaviour
 		}
 
 		_dashCooldownTimer -= Time.fixedDeltaTime;
-		if (playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0) {
+		if (_playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0) {
 			_dashCooldownTimer = _dashCooldown;
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
 		}

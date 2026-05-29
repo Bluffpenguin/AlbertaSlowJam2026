@@ -1,3 +1,5 @@
+using UnityEngine.Tilemaps;
+
 [CreateAssetMenu(fileName = "Item_", menuName = "Crafting/Inventory Item")]
 public class InventoryItem : ScriptableObject
 {
@@ -9,6 +11,8 @@ public class InventoryItem : ScriptableObject
 	[TextArea] protected string _description;
 	[SerializeField]
 	private int _baseSellValue = 1;
+	[SerializeField]
+	protected TileBase _itemTile;
 
 	public string DisplayName {
 		get {
@@ -21,4 +25,5 @@ public class InventoryItem : ScriptableObject
 	public Sprite Sprite => _sprite;
 	public string Description => _description;
 	public int SellValue { get => _baseSellValue; }
+	public TileBase ItemTile { get => _itemTile; }
 }

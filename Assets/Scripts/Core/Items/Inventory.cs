@@ -203,8 +203,10 @@ public struct ItemStack : IEquatable<ItemStack>, IComparable<ItemStack>
 
 	public static ItemStack operator -(ItemStack left, ItemStack right)
 	{
-		if (left.IsEmpty() || right.IsEmpty())
+		if (left.IsEmpty())
 			return ItemStack.Empty;
+		else if (right.IsEmpty())
+			return left;
 		Debug.Assert(left.Data == right.Data);
 		var remainder = left with { Count = left.Count - right.Count };
 		if (remainder.IsEmpty())
