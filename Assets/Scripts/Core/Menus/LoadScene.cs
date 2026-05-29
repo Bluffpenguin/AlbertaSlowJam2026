@@ -24,6 +24,11 @@ public class LoadScene : MonoBehaviour
 		SceneManager.UnloadSceneAsync(MenuManager.Instance.currentScene);
 	}
 
+	public void Unpause()
+	{
+		MenuManager.Instance.Pause_and_Unpause();
+	}
+
     public void QuitGame()
     {
         Application.Quit();
