@@ -20,11 +20,6 @@ public class LoadScene : MonoBehaviour
 
 	public void LoadSelectedScene()
 	{
-        if (MenuManager.Instance.Paused)
-        {
-            UnpauseGame();
-        }
-
 		SceneManager.LoadScene(wantedSceneName);
 		
 		MenuManager.Instance.currentScene = wantedSceneName;
