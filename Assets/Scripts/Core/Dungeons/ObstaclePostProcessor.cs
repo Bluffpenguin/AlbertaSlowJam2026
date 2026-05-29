@@ -12,14 +12,14 @@ public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 
 	public virtual void ProcessRoom(RoomInfo room)
 	{
-		Vector2Int[] directions = Direction2D.GetDirections(_data.CheckDirections);
 		for (int i = 0; i < _maxCount; i++) {
-			PlaceObstacle(room, directions);
+			PlaceObstacle(room);
 		}
 	}
 
-	public virtual void PlaceObstacle(RoomInfo room, Vector2Int[] directions)
+	public virtual void PlaceObstacle(RoomInfo room)
 	{
+		Vector2Int[] directions = Direction2D.GetDirections(_data.CheckDirections);
 		var position = room.Tiles.ElementAt(Random.Range(0, room.Tiles.Count));
 
 		bool placeable = true;
