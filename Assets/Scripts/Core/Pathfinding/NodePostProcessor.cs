@@ -17,7 +17,24 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		rm.GenerateLink(room.Tiles, _tilemap, false);
 
 		// Spawn Enemies
-		int numOfEnemies = 2; //TODO: Make num scale depending on distance from starting room
+		Debug.Log(room.Distance);
+		float enemyWeight = 1 + room.Distance * 1.5f;
+		float leftOver = enemyWeight - Mathf.Floor(enemyWeight);
+		int numOfEnemies = 0;
+		if (leftOver < 0.3f)
+		{
+			numOfEnemies = Mathf.FloorToInt(enemyWeight);
+		}
+		else
+		{
+			numOfEnemies = Mathf.FloorToInt(enemyWeight);
+			// Roll to see if an additional enemy is added
+			float rand = Random.Range(0f, 1f);
+			if (rand <= leftOver)
+			{
+				numOfEnemies++;
+			}
+		}
 		rm.expectedEnemiesCount = numOfEnemies;
 		int numOfPatrollingEnemies = 0;
 		List<SimpleEnemy> enemies = new List<SimpleEnemy>();
@@ -130,7 +147,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		return allPatrols;
 	}
 
-	// Check if the provided tile is at least 5 tiles away from any other tile
+	// Check if the provided tile is at least 5 tiles away from any other stop
 	bool CheckRule1(Vector2Int pos, List<Vector2Int> previousStops)
 	{
 		foreach (Vector2Int stop in previousStops)
