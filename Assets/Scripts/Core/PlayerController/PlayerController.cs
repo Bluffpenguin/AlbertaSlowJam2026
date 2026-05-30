@@ -1,9 +1,5 @@
 public class PlayerController : MonoBehaviour
 {
-	[Obsolete]
-	public static PlayerController Instance { get; private set; }
-	[Obsolete]
-	public static bool Exists { get => Instance != null; }
 	public InputSystem_Actions PlayerInput { get => _playerInput; }
 	public Rigidbody2D Rigidbody { get => _rb; }
 
@@ -23,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
 	private bool _canMove = true;
 	Coroutine _currentStun = null;
-
 
 	private void Awake()
 	{
