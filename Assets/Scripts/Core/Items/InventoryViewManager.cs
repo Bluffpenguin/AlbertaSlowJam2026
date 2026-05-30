@@ -1,3 +1,5 @@
+using System.Linq;
+
 public enum InventoryWindow
 {
 	None = 0,
@@ -5,6 +7,7 @@ public enum InventoryWindow
 	Storage = 2,
 	Scrapper = 3,
 	Crafter = 4,
+	Seller = 5,
 }
 
 public class InventoryViewManager : MonoBehaviour
@@ -35,12 +38,12 @@ public class InventoryViewManager : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Player.Input.UI.Cancel.performed += this.Cancel_performed;
+		Player.Input.Player.Pause.performed += this.Cancel_performed;
 	}
 
 	private void OnDisable()
 	{
-		Player.Input.UI.Cancel.performed -= this.Cancel_performed;
+		Player.Input.Player.Pause.performed -= this.Cancel_performed;
 	}
 
 	private void Cancel_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) => CloseAllOpenViews();
@@ -48,6 +51,17 @@ public class InventoryViewManager : MonoBehaviour
 	public void CloseAllOpenViews()
 	{
 		foreach ((var view, _) in _windowsDict.Values) {
+			view.ClearView();
+			view.gameObject.SetActive(false);
+		}
+	}
+
+	public void CloseAllExcept(params InventoryWindow[] window)
+	{
+		foreach (var kvp in _windowsDict) {
+			if (window.Contains(kvp.Key))
+				continue;
+			var view = kvp.Value.Item1;
 			view.ClearView();
 			view.gameObject.SetActive(false);
 		}
@@ -67,7 +81,7 @@ public class InventoryViewManager : MonoBehaviour
 			return;
 		}
 
-		CloseAllOpenViews();
+		CloseAllExcept(windowA, windowB);
 		if (viewA != null) {
 			Debug.Assert(modelA != null);
 			viewA.gameObject.SetActive(true);

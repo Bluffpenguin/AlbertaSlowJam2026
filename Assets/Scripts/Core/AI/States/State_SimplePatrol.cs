@@ -84,6 +84,8 @@ public class State_SimplePatrol : AIState
 			Vector2 direction = (lookAtGoal - (Vector2)enemyInfo.npc.transform.position).normalized;
 
 			LookTowards(goal.position);
+			if (enemyInfo.rb == null) Debug.Log("No rb");
+
 			enemyInfo.rb.AddForce(patrolSpeed * Time.fixedDeltaTime * direction, ForceMode2D.Impulse);
 			//enemyInfo.npc.transform.Translate(patrolSpeed * Time.deltaTime * direction);
 		}

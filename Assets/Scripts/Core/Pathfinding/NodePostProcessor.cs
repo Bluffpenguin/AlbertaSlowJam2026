@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
@@ -6,10 +7,11 @@ using UnityEngine.Tilemaps;
 public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
 	[SerializeField] TileBase manager;
-	[SerializeField] GameObject enemyPrefab;
+	[SerializeField] TileBase enemy;
 	[SerializeField] Tilemap itemMap;
 	public void ProcessRoom(RoomInfo room)
 	{
+		if (room.Distance == 0) return;
 		base.PaintTiles(room.Tiles);
 
 		PaintTile(room.Origin, _tilemap, manager);
@@ -39,42 +41,29 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		}
 		rm.expectedEnemiesCount = numOfEnemies;
 		int numOfPatrollingEnemies = 0;
-		List<SimpleEnemy> enemies = new List<SimpleEnemy>();
 		for (int i = 0; i < numOfEnemies; i++)
 		{
-			Vector3 enemyPos = _tilemap.CellToWorld((Vector3Int)room.Origin);
-			GameObject enemyObj = Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
-			SimpleEnemy agent = enemyObj.GetComponent<SimpleEnemy>();
-			agent.enemyInfo.rm = rm;
-			agent.enemyInfo.enemyId = i;
 			
-
 			if (i >= 1)
 			{
 				// Determine if enemy will patrol or guard
 				int rand = Random.Range(0, 2);
 				if (rand == 0)
 				{
-					agent.enemyInfo.defaultState = AIState.STATE.PATROL;
+					
 					numOfPatrollingEnemies++;
 				}
-				else
-				{
-					agent.enemyInfo.defaultState = AIState.STATE.IDLE;
-				}
+				
 			}
 			else
 			{
-				agent.enemyInfo.defaultState = AIState.STATE.PATROL;
 				numOfPatrollingEnemies++;
 			}
-				
-			enemies.Add(agent);
 		}
 
 		List<Vector2Int>[] patrols = GeneratePatrols(room, 3, numOfPatrollingEnemies);
 
-		StartCoroutine(WaitForColliders(rm, room, patrols, enemies));
+		StartCoroutine(WaitForColliders(rm, room, patrols, numOfPatrollingEnemies, numOfEnemies - numOfPatrollingEnemies));
 		
 	}
 
@@ -91,6 +80,9 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		List<Vector2Int> arrayFromHashset = room.Tiles.ToList();
 		List<Vector2Int> usedPositions = new List<Vector2Int>();
 		List<Vector2Int>[] allPatrols = new List<Vector2Int>[numOfPatrols];
+		HashSet<Vector2Int> usableTiles = room.Tiles;
+		usableTiles.Remove(room.Origin);
+
 
 		for (int i = 0; i <numOfPatrols; i++)
 		{
@@ -99,9 +91,9 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 
 		int currPatrol = 0;
 		int currStop = 0;
-		foreach (Vector2Int tile in room.Tiles)
+		foreach (Vector2Int tile in usableTiles)
 		{
-			if (currStop == 0)
+			if (currStop == 0 && tile != room.Origin)
 			{
 				allPatrols[currPatrol].Add(tile);
 				usedPositions.Add(tile);
@@ -206,7 +198,9 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		foreach (Vector2Int tile in room.Tiles)
 		{
 			invalidTile = false;
-			// Check if the node is already in use
+			if (tile != room.Origin)
+			{
+				// Check if the node is already in use
 			foreach (Node node in occupiedGuardSpots)
 			{
 				if (node.position == tile)
@@ -234,59 +228,75 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 			{
 				return rm.GetNode(tile);
 			}
+			}
+			
 		}
 
 		// No valid Node
 		return null;
 	}
 
-	IEnumerator WaitForColliders(RoomManager rm, RoomInfo room, List<Vector2Int>[] allPatrols, List<SimpleEnemy> enemies)
+	IEnumerator WaitForColliders(RoomManager rm, RoomInfo room, List<Vector2Int>[] allPatrols, int numOfPatrollingEnemies, int numOfIdleEnemies)
 	{
 		yield return new WaitForSeconds(0.5f);
 		int currPatrol = 0;
+		int enemiesSpawned = 0;
+		int idleEnemiesToBeSpawned = numOfIdleEnemies;
 		List<Node>[] shavedPatrols = new List<Node>[allPatrols.Length];
-		foreach (SimpleEnemy enemy in enemies)
+		for (int i = 0; i < numOfPatrollingEnemies; i++)
 		{
-			if (enemy.enemyInfo.defaultState == AIState.STATE.PATROL)
+			if (allPatrols[currPatrol] != null)
 			{
-				if (allPatrols[currPatrol] != null)
-				{
-					List<Node> patrol = GetCollectivePatrolPath(allPatrols[currPatrol], rm);
-					shavedPatrols[currPatrol] = patrol;
-					rm.AddPatrol(patrol, enemy.enemyInfo.enemyId);
-					enemy.gameObject.transform.position = patrol[0].getId().transform.position;
-					enemy.SetActive(true);
-				}
-				else
-				{
-					enemy.enemyInfo.defaultState = AIState.STATE.IDLE;
-				}
-				currPatrol++;
+				List<Node> patrol = GetCollectivePatrolPath(allPatrols[currPatrol], rm);
+				shavedPatrols[currPatrol] = patrol;
+
+				_tilemap.SetTile((Vector3Int)patrol[0].position, enemy);
+				GameObject obj = _tilemap.GetInstantiatedObject((Vector3Int)patrol[0].position);
+				patrol[0].setId(obj);
+
+				SimpleEnemy enemyScript = obj.GetComponentInChildren<SimpleEnemy>();
+				enemyScript.enemyInfo.enemyId = enemiesSpawned;
+				enemiesSpawned++;
+
+				enemyScript.enemyInfo.defaultState = AIState.STATE.PATROL; 
+				enemyScript.enemyInfo.rm = rm;
+				
+				rm.AddPatrol(patrol, enemyScript.enemyInfo.enemyId);
+				enemyScript.gameObject.transform.position = patrol[0].getId().transform.position;
 			}
+			else
+			{
+				idleEnemiesToBeSpawned++;
+			}
+			currPatrol++;
 		}
+		
 
 		// After all patrols are set, set up guard positions
 		List<Node> previousGuardSpots = new List<Node>();
-		foreach (SimpleEnemy enemy in enemies)
+		for (int i = 0; i < idleEnemiesToBeSpawned; i++)
 		{
-
-			if (enemy.enemyInfo.defaultState == AIState.STATE.IDLE)
+			Node guardSpot = GetGuardPosition(shavedPatrols, previousGuardSpots, room, rm);
+			if (guardSpot != null)
 			{
-				Node guardSpot = GetGuardPosition(shavedPatrols, previousGuardSpots, room, rm);
-				if (guardSpot != null)
-				{
-					rm.AddGuard(guardSpot, enemy.enemyInfo.enemyId);
-					enemy.SetActive(true);
-					enemy.gameObject.transform.position = guardSpot.getId().transform.position;
-					previousGuardSpots.Add(guardSpot);
-				}
-				else
-					enemy.Remove();
+				_tilemap.SetTile((Vector3Int)guardSpot.position, enemy);
+				GameObject obj = _tilemap.GetInstantiatedObject((Vector3Int)guardSpot.position);
+				guardSpot.setId(obj);
 
+
+				SimpleEnemy enemyScript = obj.GetComponentInChildren<SimpleEnemy>();
+				enemyScript.enemyInfo.enemyId = enemiesSpawned;
+				enemiesSpawned++;
+
+				enemyScript.enemyInfo.defaultState = AIState.STATE.IDLE;
+				enemyScript.enemyInfo.rm = rm;
+
+
+				rm.AddGuard(guardSpot, enemyScript.enemyInfo.enemyId);
+				previousGuardSpots.Add(guardSpot);
+				enemyScript.gameObject.transform.position = guardSpot.getId().transform.position;
 			}
 		}
-		
-		
 		
 	}
 

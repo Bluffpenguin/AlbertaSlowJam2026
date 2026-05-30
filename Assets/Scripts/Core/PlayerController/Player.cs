@@ -16,5 +16,6 @@ public class Player : MonoBehaviour
 		if (Instance != null)
 			Debug.LogWarning("Multiple player instances!");
 		Instance = this;
+		transform.SetParent(null);
 	}
 }

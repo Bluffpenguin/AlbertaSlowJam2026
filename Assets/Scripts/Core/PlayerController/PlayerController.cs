@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
 	private InputSystem_Actions _playerInput;
 
+	[SerializeField] private bool _disablePause;
 	[SerializeField] private InteractionDetector _detector;
 	[SerializeField] private float _moveSpeed = 10;
 	[Space]
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
 	private Vector2 _moveDir;
 	private Vector2 _dashDirection;
 	private float _dashCooldownTimer;
+
+	private bool _canMove = true;
+	Coroutine _currentStun = null;
+
 
 	private void Awake()
 	{
@@ -57,6 +62,12 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		if (!_disablePause && PlayerInput.Player.Pause.ReadValue<float>() > 0)
+		{
+			MenuManager.Instance.Pause_and_Unpause();
+		}
+
+		if (!_canMove) return;
 		_moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
 
 		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
@@ -71,9 +82,24 @@ public class PlayerController : MonoBehaviour
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
 		}
 
-		if (playerInput.Player.Pause.ReadValue<float>() > 0)
-		{
-			MenuManager.Instance.Pause_and_Unpause();
-		}
+		
+	}
+
+	public void Stun(float stunDuration)
+	{
+		_canMove = false;
+		if (_currentStun != null)
+			StopCoroutine(_currentStun);
+
+		_currentStun = StartCoroutine(PlayerStun(stunDuration));
+		
+	}
+
+	IEnumerator PlayerStun(float duration)
+	{
+		yield return new WaitForSeconds(duration);
+		_canMove = true;
+		_currentStun = null;
+		
 	}
 }

@@ -21,7 +21,7 @@ public class State_SimpleAttack : AIState
 		Node fleeDestination = enemyInfo.rm.GetRandomFleePosition(player, 5);
 		Node currentNode = enemyInfo.rm.GetNode((Vector2Int)enemyInfo.rm.navTileMap.WorldToCell(enemyInfo.npc.transform.position));
 
-		// TODO: Stun Player
+		Player.Controller.Stun(2f);
 
 		// Steal Item
 		int slot = Random.Range(0, Player.Inventory.Capacity);

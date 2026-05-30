@@ -83,6 +83,11 @@ public class AIState
 	public bool CanSeePlayer()
 	{
 		
+		if (player == null) 
+		{
+			player = GameObject.FindGameObjectWithTag("Player").transform;
+			return false;
+		}
 		Vector3 direction = player.position - enemyInfo.npc.transform.position;
 		float angle = Vector3.Angle(direction, enemyInfo.heading.up);
 		float scaledDist = direction.magnitude * enemyInfo.rm.navTileMap.cellSize.magnitude;

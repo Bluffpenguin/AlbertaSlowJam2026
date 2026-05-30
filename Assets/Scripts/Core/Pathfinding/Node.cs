@@ -19,6 +19,11 @@ public class Node
 	{
 		return id;
 	}
+
+	public void setId(GameObject obj)
+	{
+		id = obj;
+	}
 }
 
 public class Edge
