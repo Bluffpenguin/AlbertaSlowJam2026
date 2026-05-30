@@ -7,6 +7,7 @@ public enum InventoryWindow
 	Storage = 2,
 	Scrapper = 3,
 	Crafter = 4,
+	Seller = 5,
 }
 
 public class InventoryViewManager : MonoBehaviour
