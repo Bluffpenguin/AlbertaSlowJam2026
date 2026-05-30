@@ -2,7 +2,7 @@ using UnityEngine.Events;
 
 public class InvokeOnDayStart : MonoBehaviour
 {
-	[SerializeField, Min(1)] private int _dayIndex = 0;
+	[SerializeField, Min(0)] private int _dayIndex = 0;
 	[SerializeField] private UnityEvent _onDayStart = new();
 
 	public event UnityAction OnDayStart {
