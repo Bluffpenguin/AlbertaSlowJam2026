@@ -26,44 +26,86 @@ public class Seller : Inventory
 	[SerializeField]
 	TextMeshProUGUI _sellTotalText;
 
-	
-
 	public int _sellTotal { get; private set; }
 
 	public ItemStack[] Input => base[.._inputCount];
 
-	private void Awake()
-	{
-		// TODO: Add listener for on day start to call SetDailySales
-		SetDailySales();
-	}
 
 	public override bool Add(ItemStack item)
 	{
-		if (_sales.Contains(item.Data))
+
+		int index;
+		for (index = 0; index < Capacity; index++)
 		{
-			_sellTotal += Mathf.CeilToInt(item.SellValue * _saleMultiplier);
+			if (this[index].IsEmpty() || (_itemsStack && this[index].Data == item.Data))
+			{
+				break;
+			}
+		}
+
+		if (index >= Capacity)
+		{
+			Debug.LogWarning("Cannot Insert item; inventory is full.", this);
+			return false;
 		}
 		else
-			_sellTotal += item.SellValue;
-		
+		{
+			this[index] += item;
+			if (_sales.Contains(item.Data))
+			{
+				_sellTotal += Mathf.CeilToInt(item.SellValue * _saleMultiplier * item.Count);
+			}
+			else
+				_sellTotal += item.SellValue * item.Count;
 
-		_sellTotalText.text = '$' + _sellTotal.ToString();
-		return base.Add(item);
+
+			_sellTotalText.text = '$' + _sellTotal.ToString();
+			return true;
+		}
+
 	}
 
 	public override bool Remove(ItemStack item)
 	{
+		Debug.Log("Remove ran");
+
 		if (_sales.Contains(item.Data))
 		{
-			_sellTotal -= Mathf.CeilToInt(item.SellValue * _saleMultiplier);
+			_sellTotal -= Mathf.CeilToInt(item.SellValue * _saleMultiplier * item.Count);
 		}
 		else
-			_sellTotal -= item.SellValue;
+			_sellTotal -= item.SellValue * item.Count;
 
 		_sellTotalText.text = '$' + _sellTotal.ToString();
 		return base.Remove(item);
 	}
+
+	public override bool RemoveAllAt(int slot)
+	{
+		if (_sales.Contains(Input[slot].Data))
+		{
+			_sellTotal -= Mathf.CeilToInt(Input[slot].SellValue * _saleMultiplier * Input[slot].Count);
+		}
+		else
+			_sellTotal -= Input[slot].SellValue * Input[slot].Count;
+
+		_sellTotalText.text = '$' + _sellTotal.ToString();
+		return base.RemoveAllAt(slot);
+	}
+
+	public override bool RemoveAt(int slot, int count, out ItemStack removed)
+	{
+		if (_sales.Contains(Input[slot].Data))
+		{
+			_sellTotal -= Mathf.CeilToInt(Input[slot].SellValue * _saleMultiplier * count);
+		}
+		else
+			_sellTotal -= Input[slot].SellValue * count;
+
+		_sellTotalText.text = '$' + _sellTotal.ToString();
+		return base.RemoveAt(slot, count, out removed);
+	}
+
 
 	[ContextMenu("Sell Contents")]
 	public void SellContents()
@@ -79,14 +121,17 @@ public class Seller : Inventory
 		}
 	}
 
-	void SetDailySales()
+	public void SetDailySales(int saleCount)
 	{
+		Debug.Log("Setting Sales");
+		_saleCount = saleCount;
 		_sales.Clear();
 		for (int i = 0; i < _saleCount; i++)
 		{
 			int rand = Random.Range(0, _acceptedCatalogue.Count);
 
 			if (_sales.Contains(_acceptedCatalogue[rand])) i--;
+			else if (_saleCount == 1 && _acceptedCatalogue[rand] is Scrap) i--;
 			else
 			{
 				_sales.Add(_acceptedCatalogue[rand]);

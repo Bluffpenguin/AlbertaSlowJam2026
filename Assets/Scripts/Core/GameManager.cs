@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
 	public void MoveToNextDay()
 	{
+		Debug.Log("Moving to next day");
 		AdvanceClock = false;
 		DayIndex++;
 		TimeElapsed = 0;

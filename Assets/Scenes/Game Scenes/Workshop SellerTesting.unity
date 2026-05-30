@@ -390,6 +390,13 @@ GameObject:
   - component: {fileID: 199991169}
   - component: {fileID: 199991173}
   - component: {fileID: 199991172}
+  - component: {fileID: 199991174}
+  - component: {fileID: 199991180}
+  - component: {fileID: 199991179}
+  - component: {fileID: 199991178}
+  - component: {fileID: 199991177}
+  - component: {fileID: 199991176}
+  - component: {fileID: 199991175}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Untagged
@@ -663,6 +670,202 @@ MonoBehaviour:
   _saleCount: 2
   _saleMultiplier: 1.5
   _sellTotalText: {fileID: 1571275022}
+--- !u!114 &199991174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 0
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &199991175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 6
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &199991176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 5
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &199991177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 4
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &199991178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 3
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &199991179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 2
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &199991180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199991167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1e8baf6de94f64eb549d5828ebd9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
+  _dayIndex: 1
+  _onDayStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 199991173}
+        m_TargetAssemblyTypeName: Seller, Scripts.Core
+        m_MethodName: SetDailySales
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &208059871 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 308255138041527464, guid: 6c8b4be37a0e6204787baa252402e28f, type: 3}
@@ -5389,6 +5592,6 @@ SceneRoots:
   - {fileID: 814729907}
   - {fileID: 453132759}
   - {fileID: 1974764909}
-  - {fileID: 946096992}
   - {fileID: 8982211540251277230}
+  - {fileID: 946096992}
   - {fileID: 1129267432}
