@@ -139,6 +139,24 @@ public class Pathfinder : MonoBehaviour
 				
 				if (!Physics2D.Linecast(currPos, checkPos, obstructions))
 				{
+					Vector2Int dir = path[i].position - path[currentNode].position;
+					if (dir.x > 1 && rm.GetNode(path[currentNode].position + new Vector2Int(1,0)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+					else if (dir.x < -1 && rm.GetNode(path[currentNode].position + new Vector2Int(-1, 0)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+					else if (dir.y > 1 && rm.GetNode(path[currentNode].position + new Vector2Int(0, 1)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+					else if (dir.y < -1 && rm.GetNode(path[currentNode].position + new Vector2Int(0, -1)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+
 					optimizedPath.Add(path[i]);
 					currentNode = i;
 					foundShortcut = true;

@@ -80,7 +80,8 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		List<Vector2Int> arrayFromHashset = room.Tiles.ToList();
 		List<Vector2Int> usedPositions = new List<Vector2Int>();
 		List<Vector2Int>[] allPatrols = new List<Vector2Int>[numOfPatrols];
-
+		HashSet<Vector2Int> usableTiles = room.Tiles;
+		usableTiles.Remove(room.Origin);
 
 
 		for (int i = 0; i <numOfPatrols; i++)
@@ -90,7 +91,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 
 		int currPatrol = 0;
 		int currStop = 0;
-		foreach (Vector2Int tile in room.Tiles)
+		foreach (Vector2Int tile in usableTiles)
 		{
 			if (currStop == 0 && tile != room.Origin)
 			{
@@ -197,7 +198,9 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		foreach (Vector2Int tile in room.Tiles)
 		{
 			invalidTile = false;
-			// Check if the node is already in use
+			if (tile != room.Origin)
+			{
+				// Check if the node is already in use
 			foreach (Node node in occupiedGuardSpots)
 			{
 				if (node.position == tile)
@@ -225,6 +228,8 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 			{
 				return rm.GetNode(tile);
 			}
+			}
+			
 		}
 
 		// No valid Node
