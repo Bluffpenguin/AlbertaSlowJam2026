@@ -18,4 +18,18 @@ public class Player : MonoBehaviour
 		Instance = this;
 		transform.SetParent(null);
 	}
+
+	public void OnEnable()
+	{
+		if (MenuManager.Instance != null) {
+			MenuManager.Instance.inGame = true;
+		}
+	}
+
+	public void OnDisable()
+	{
+		if (MenuManager.Instance != null) {
+			MenuManager.Instance.inGame = false;
+		}
+	}
 }

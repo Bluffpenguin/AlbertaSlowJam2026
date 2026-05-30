@@ -17,7 +17,7 @@ public class InteractionDetector : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
 		if (collider.TryGetComponent(out IInteractable interactable)) {
-			Debug.Log("Target is " + collider.name);
+			Debug.Log($"Interaction target is {collider.name}. Tooltip: \"{interactable.Tooltip}\"");
 			_targets.Add(interactable);
 		}
 	}

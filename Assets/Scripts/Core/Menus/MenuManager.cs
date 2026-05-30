@@ -27,7 +27,10 @@ public class MenuManager : MonoBehaviour
 
 	public void Pause_and_Unpause()
 	{
-		if (Paused && inGame)
+		if (!inGame)
+			return;
+
+		if (Paused)
 		{
 			SceneManager.UnloadSceneAsync("PauseMenu");
 			Time.timeScale = 1;
