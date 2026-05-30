@@ -1,6 +1,4 @@
 using System.Linq;
-using UnityEditor.Graphs;
-using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Pathfinder))]
