@@ -678,6 +678,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 316119123}
+        m_TargetAssemblyTypeName: DungeonDisabler, Scripts.Core
+        m_MethodName: StartRoutine
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &264039324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,6 +707,52 @@ MonoBehaviour:
   manager: {fileID: 11400000, guid: 74c17e91b3eeeef4ca44f639000fd58a, type: 2}
   enemy: {fileID: 11400000, guid: ba48fb4363213654988bb2be2ebd7f16, type: 2}
   itemMap: {fileID: 2073177229}
+--- !u!1 &316119122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 316119124}
+  - component: {fileID: 316119123}
+  m_Layer: 0
+  m_Name: DungeonDisabler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &316119123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316119122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0387c2b7161c281439cb1dcb3a7642eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::DungeonDisabler
+  _timeDelay: 1.5
+  _grid: {fileID: 549788244}
+--- !u!4 &316119124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316119122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.92898, y: 1.76015, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &549788244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,3 +1544,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 549788246}
   - {fileID: 264039321}
+  - {fileID: 316119124}

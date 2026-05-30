@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 		_playerInput.Player.Enable();
 		_playerInput.Player.Interact.performed += this.Interact_performed;
 		_playerInput.Player.Interact.canceled += this.Interact_canceled;
+		_playerInput.Player.Pause.performed += this.Pause_performed;
 	}
 
 	private void OnDisable()
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
 		_playerInput.Player.Disable();
 		_playerInput.Player.Interact.performed -= this.Interact_performed;
 		_playerInput.Player.Interact.canceled -= this.Interact_canceled;
+		_playerInput.Player.Pause.performed -= this.Pause_performed;
 	}
 
 	private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -59,15 +61,18 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		if (_disablePause)
+			return;
+		MenuManager.Instance.Pause_and_Unpause();
+	}
+
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (!_disablePause && PlayerInput.Player.Pause.ReadValue<float>() > 0)
-		{
-			MenuManager.Instance.Pause_and_Unpause();
-		}
-
 		if (!_canMove) return;
+
 		_moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
 
 		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
@@ -82,7 +87,7 @@ public class PlayerController : MonoBehaviour
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
 		}
 
-		
+
 	}
 
 	public void Stun(float stunDuration)
@@ -92,7 +97,7 @@ public class PlayerController : MonoBehaviour
 			StopCoroutine(_currentStun);
 
 		_currentStun = StartCoroutine(PlayerStun(stunDuration));
-		
+
 	}
 
 	IEnumerator PlayerStun(float duration)
@@ -100,6 +105,6 @@ public class PlayerController : MonoBehaviour
 		yield return new WaitForSeconds(duration);
 		_canMove = true;
 		_currentStun = null;
-		
+
 	}
 }
