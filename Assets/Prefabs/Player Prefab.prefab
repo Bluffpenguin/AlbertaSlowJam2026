@@ -46,7 +46,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts.Core::Inventory
   _itemsStack: 1
   _autoSort: 0
-  _contents: []
+  _contents:
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
   _onContentsChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
 	private InputSystem_Actions _playerInput;
 
+	[SerializeField] private bool _disablePause;
 	[SerializeField] private InteractionDetector _detector;
 	[SerializeField] private float _moveSpeed = 10;
 	[Space]
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (PlayerInput.Player.Pause.ReadValue<float>() > 0)
+		if (!_disablePause && PlayerInput.Player.Pause.ReadValue<float>() > 0)
 		{
 			MenuManager.Instance.Pause_and_Unpause();
 		}
@@ -99,5 +100,6 @@ public class PlayerController : MonoBehaviour
 		yield return new WaitForSeconds(duration);
 		_canMove = true;
 		_currentStun = null;
+		
 	}
 }

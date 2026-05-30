@@ -8,8 +8,11 @@ public class InventoryViewAutoLayout : InventoryView
 
 	public override void ClearView()
 	{
+		if (_model == null)
+			return;
 		base.ClearView();
 		for (int i = 0; i < _slots.Length; i++) {
+			if (_slots[i] == null) continue;
 			Destroy(_slots[i].gameObject);
 		}
 	}
