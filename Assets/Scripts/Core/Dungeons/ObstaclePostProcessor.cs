@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Xml.Schema;
 
 public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
