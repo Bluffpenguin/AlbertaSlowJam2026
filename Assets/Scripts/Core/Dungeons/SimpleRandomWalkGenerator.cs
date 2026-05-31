@@ -17,7 +17,7 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		_wallPainter.Clear();
 
 		using (ListPool<IRoomPostProcessor>.Get(out var components)) {
-			this.GetComponents(components);
+			this.GetComponentsInChildren(components);
 			components.Sort();
 			for (int i = 0; i < components.Count; i++) {
 				components[i].Clear();
@@ -39,10 +39,11 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 	protected void ApplyPostProcessing(RoomInfo room)
 	{
 		var components = ListPool<IRoomPostProcessor>.Get();
-		this.GetComponents(components);
+		this.GetComponentsInChildren(components);
 		components.Sort();
 		for (int i = 0; i < components.Count; i++) {
-			components[i].ProcessRoom(room);
+			if (components[i].enabled)
+				components[i].ProcessRoom(room);
 		}
 		ListPool<IRoomPostProcessor>.Release(components);
 	}
@@ -50,11 +51,12 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 	protected void ApplyPostProcessing(IEnumerable<RoomInfo> rooms)
 	{
 		var components = ListPool<IRoomPostProcessor>.Get();
-		this.GetComponents(components);
+		this.GetComponentsInChildren(components);
 		components.Sort();
 		foreach (var room in rooms) {
 			for (int i = 0; i < components.Count; i++) {
-				components[i].ProcessRoom(room);
+				if (components[i].enabled)
+					components[i].ProcessRoom(room);
 			}
 		}
 		ListPool<IRoomPostProcessor>.Release(components);

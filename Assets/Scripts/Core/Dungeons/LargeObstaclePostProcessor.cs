@@ -69,11 +69,15 @@ public class LargeObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 			return;
 
 		foreach (var position in area) {
-			
+			if (true || position == origin) {
+				base.PaintTile(position);
+			} else {
+				PaintTile(position, _tilemap, _dummyTile);
+			}
 		}
 
 		if (_data.Impassable) {
-			room.Tiles.ExceptWith(dimensions.Area());
+			room.Tiles.ExceptWith(area);
 		}
 	}
 }
@@ -82,8 +86,8 @@ public static class RectUtils
 {
 	public static IEnumerable<Vector2Int> Area(this RectInt rect)
 	{
-		for (int y = rect.yMin; y <= rect.yMax; y++) {
-			for (int x = rect.xMin; x <= rect.xMax; x++) {
+		for (int y = rect.yMin; y < rect.yMax; y++) {
+			for (int x = rect.xMin; x < rect.xMax; x++) {
 				yield return new Vector2Int(x, y);
 			}
 		}
@@ -91,8 +95,8 @@ public static class RectUtils
 
 	public static IEnumerable<Vector2Int> Perimeter(this RectInt rect)
 	{
-		for (int y = rect.yMin; y <= rect.yMax; y++) {
-			for (int x = rect.xMin; x <= rect.xMax; x++) {
+		for (int y = rect.yMin; y < rect.yMax; y++) {
+			for (int x = rect.xMin; x < rect.xMax; x++) {
 				if (x == rect.xMin || x == rect.xMax || y == rect.yMin || y == rect.yMax) {
 					yield return new Vector2Int(x, y);
 				}
@@ -102,14 +106,14 @@ public static class RectUtils
 
 	public static IEnumerable<Vector2Int> Row(this RectInt rect, int y)
 	{
-		for (int x = rect.xMin; x <= rect.xMax; x++) {
+		for (int x = rect.xMin; x < rect.xMax; x++) {
 			yield return new Vector2Int(x, y);
 		}
 	}
 
 	public static IEnumerable<Vector2Int> Column(this RectInt rect, int x)
 	{
-		for (int y = rect.yMin; y <= rect.yMax; y++) {
+		for (int y = rect.yMin; y < rect.yMax; y++) {
 			yield return new Vector2Int(x, y);
 		}
 	}

@@ -32,10 +32,9 @@ public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 			placeable &= directions.All(d => room.Tiles.Contains(position + d));
 		}
 
-		if (placeable) {
-			base.PaintTile(position);
-		}
-
+		if (!placeable)
+			return;
+		base.PaintTile(position);
 		if (_data.Impassable) {
 			room.Tiles.Remove(position);
 		}
