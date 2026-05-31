@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba37347ced9a194a946150e8cd37831, type: 3}
-  m_Name: ObstacleData_pillar
-  m_EditorClassIdentifier: Scripts.Core::ObstacleData
+  m_Script: {fileID: 11500000, guid: 726fa12e4472673489a085055e6d34c3, type: 3}
+  m_Name: Obstacle_2x3
+  m_EditorClassIdentifier: Scripts.Core::LargeObstacleData
   _impassable: 1
   _checkDirections: -1
   _requirements: 2
+  _size: {x: 2, y: 3}
+  _allowMirror: 0

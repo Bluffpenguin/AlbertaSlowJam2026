@@ -2,6 +2,7 @@ public readonly record struct RoomInfo(Vector2Int Origin, HashSet<Vector2Int> Ti
 
 public interface IRoomPostProcessor : IComparable<IRoomPostProcessor>
 {
+	bool enabled { get; }
 	int Order { get => 0; }
 
 	void Clear() { }

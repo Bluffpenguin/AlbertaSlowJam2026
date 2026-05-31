@@ -12,6 +12,7 @@ public class ObstacleData : ScriptableObject
 		OpenSpace = 1 << 1,
 	}
 
+	[Tooltip("This obstacle will block any others from being placed its tiles.")]
 	[SerializeField] private bool _impassable = true;
 	[SerializeField] private Direction2D.Type _checkDirections = Direction2D.Type.Cardinal;
 	[SerializeField] private SpaceRequirements _requirements;
