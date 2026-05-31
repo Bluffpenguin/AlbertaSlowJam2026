@@ -453,8 +453,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../../../FMOD/Slowjam2026/Slowjam2026.fspro
-  sourceBankPath: ../../../../../FMOD/Slowjam2026/Build
+  sourceProjectPath: Assets/FMOD/Slowjam2026.fspro
+  sourceBankPath: Assets/FMOD/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -491,7 +491,7 @@ MonoBehaviour:
   SharedLibraryUpdateStage: 0
   SharedLibraryTimeSinceStart: 0
   CurrentVersion: 131859
-  HideSetupWizard: 0
+  HideSetupWizard: 1
   LastEventReferenceScanVersion: 131859
   Platforms:
   - {fileID: 3355810046157165940}
