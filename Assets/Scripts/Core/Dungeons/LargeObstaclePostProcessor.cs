@@ -68,7 +68,10 @@ public class LargeObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 		if (!placeable)
 			return;
 
-		base.PaintTile(origin);
+		foreach (var position in area) {
+			
+		}
+
 		if (_data.Impassable) {
 			room.Tiles.ExceptWith(dimensions.Area());
 		}
