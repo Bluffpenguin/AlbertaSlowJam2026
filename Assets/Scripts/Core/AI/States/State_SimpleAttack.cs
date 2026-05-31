@@ -5,6 +5,7 @@ using System.Collections;
 public class State_SimpleAttack : AIState
 {
 	ItemStack stolenItem;
+	bool stoleItem = false;
 	float fleeSpeed = 5f;
 
 	float stallDuration = 2f;
@@ -18,14 +19,17 @@ public class State_SimpleAttack : AIState
 
 	public override void Enter()
 	{
-		Node fleeDestination = enemyInfo.rm.GetRandomFleePosition(player, 5);
+		Node fleeDestination = enemyInfo.rm.GetRandomFleePosition(player, 8);
 		Node currentNode = enemyInfo.rm.GetNode((Vector2Int)enemyInfo.rm.navTileMap.WorldToCell(enemyInfo.npc.transform.position));
 
 		Player.Controller.Stun(2f);
 
 		// Steal Item
 		int slot = Random.Range(0, Player.Inventory.Capacity);
-		Player.Inventory.RemoveAt(slot, 1, out stolenItem);
+		if (Player.Inventory.RemoveAt(slot, 1, out stolenItem))
+		{
+			stoleItem = true;
+		}
 		
 
 		// Get path for running away
@@ -50,7 +54,9 @@ public class State_SimpleAttack : AIState
 		// Upon reaching the flee destination, wait a couple seconds then return to normal behaviour
 		if (currentWP == path.Count)
 		{
-			enemyInfo.rm.PlaceItem(path[currentWP-1].position, stolenItem);
+			if (stoleItem)
+				enemyInfo.rm.PlaceItem(path[currentWP-1].position, stolenItem);
+
 			enemyInfo.rm.StartCoroutine(Stall());
 			stalling = true;
 			return;
