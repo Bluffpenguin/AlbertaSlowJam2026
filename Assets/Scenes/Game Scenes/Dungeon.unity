@@ -12238,9 +12238,9 @@ Tilemap:
   - m_RefCount: 471
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray:
-  - m_RefCount: 115435
+  - m_RefCount: 468
     m_Data: {fileID: 4164311523602927295, guid: 62561c28c6b851747aae6bf2381e5726, type: 3}
-  - m_RefCount: 169
+  - m_RefCount: 3
     m_Data: {fileID: 5265685831754520929, guid: d9e65c055f4b5da4cb2b1a1f6d045c10, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -12278,7 +12278,7 @@ GameObject:
   - component: {fileID: 933279405}
   - component: {fileID: 933279404}
   - component: {fileID: 933279403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12334,7 +12334,7 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.25}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
@@ -22640,7 +22640,7 @@ GameObject:
   - component: {fileID: 1558919288}
   - component: {fileID: 1558919287}
   - component: {fileID: 1558919286}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22779,7 +22779,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -22839,7 +22839,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -22879,7 +22879,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -22919,7 +22919,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -23034,10 +23034,10 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 7
     m_Data: {fileID: 21300000, guid: 083b9957b49bcbb4abae54776080fa9e, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: a80c2787d40b96149a0a683782554d34, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: eadab361c2a060a44aeb5b44adc6fc87, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: a80c2787d40b96149a0a683782554d34, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 24
     m_Data:
