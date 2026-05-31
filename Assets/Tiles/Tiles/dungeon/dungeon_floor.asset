@@ -12,21 +12,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f3fbb560bd6041a202ea918fa4f23, type: 3}
   m_Name: dungeon_floor
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.IsometricRuleTile
-  m_DefaultSprite: {fileID: -145335099, guid: b9322abd4f2aaad4c979c052daa67961, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: 4fd99d9fd3cc0ef44a2673f4ce67e4c0, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: 676242818, guid: b9322abd4f2aaad4c979c052daa67961, type: 3}
-    - {fileID: -145335099, guid: b9322abd4f2aaad4c979c052daa67961, type: 3}
-    - {fileID: 1050930451, guid: b9322abd4f2aaad4c979c052daa67961, type: 3}
-    - {fileID: 978493776, guid: b9322abd4f2aaad4c979c052daa67961, type: 3}
+    - {fileID: 21300000, guid: 0a00bd7d86b4f654da2d7ab195fff63b, type: 3}
+    - {fileID: 21300000, guid: 6a4ae43f6aadcf349bfc37ab768b5417, type: 3}
+    - {fileID: 21300000, guid: 6dbae745c0764a541acc713a944aede2, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
-    m_PerlinScale: 0.207
+    m_PerlinScale: 0.5
+    m_Output: 0
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 020000000200000002000000
+    m_NeighborPositions:
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 1
+    m_Sprites:
+    - {fileID: 21300000, guid: d2a4d0784005b3c4d8d3f5ce9dfdee79, type: 3}
+    - {fileID: 21300000, guid: 6a4ae43f6aadcf349bfc37ab768b5417, type: 3}
+    - {fileID: 21300000, guid: 6dbae745c0764a541acc713a944aede2, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
     m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 02000000
+    m_NeighborPositions:
+    - {x: 0, y: 1, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 2
+    m_Sprites:
+    - {fileID: 21300000, guid: 60bccab56688e6545aba34a4be1541c0, type: 3}
+    - {fileID: 21300000, guid: 0d07a0c87c3ee4e4f82d8194ea93eb08, type: 3}
+    - {fileID: 21300000, guid: 836b1f4a2dca9414692de8de279721ce, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 02000000
+    m_NeighborPositions:
+    - {x: 1, y: 0, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 3
+    m_Sprites:
+    - {fileID: 21300000, guid: 4fd99d9fd3cc0ef44a2673f4ce67e4c0, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 0
     m_ColliderType: 1
     m_RandomTransform: 0
     m_Neighbors: 
