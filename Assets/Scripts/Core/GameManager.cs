@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,12 +8,16 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private string _dungeonScene = "Dungeon";
 
 	[Header("Game Settings")]
-	public float DayLength = 600f;
+	[Range(1, 12)] public int WakeUpHour = 6;
+	[Range(13, 24)] public int EndOfDayHour = 18;
+	[Tooltip("The ratio between realtime seconds to in-game minutes.")]
+	public float SecondsPerMinute = 1;
 	[Min(1)] public int DaysToWin = 7;
 
 	[Header("Dynamic Data")]
 	public int DayIndex = -1;
 	public float TimeElapsed;
+	public float CurrentHour, CurrentMinute;
 	public bool AdvanceClock = false;
 	public int PlayerMoney;
 
@@ -57,10 +60,9 @@ public class GameManager : MonoBehaviour
 		}
 
 		TimeElapsed += Time.deltaTime;
-		if (TimeElapsed >= DayLength) {
-			// TODO: temporary, remove later
-			MoveToNextDay();
-		}
+		var minutesPassed = Mathf.Floor(TimeElapsed / SecondsPerMinute);
+		CurrentHour = WakeUpHour + (minutesPassed / 60);
+		CurrentMinute = minutesPassed % 60;
 	}
 
 	public void ResetGame()
