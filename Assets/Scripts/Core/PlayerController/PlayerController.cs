@@ -45,14 +45,14 @@ public class PlayerController : MonoBehaviour
 	private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 	{
 		if (_detector != null) {
-			_detector.tryInteract = true;
+			//_detector.tryInteract = true;
 		}
 	}
 
 	private void Interact_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 	{
 		if (_detector != null) {
-			_detector.tryInteract = false;
+			//_detector.tryInteract = false;
 		}
 	}
 
