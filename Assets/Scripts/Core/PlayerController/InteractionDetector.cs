@@ -1,4 +1,5 @@
 using System.Linq;
+using UnityEngine.Tilemaps;
 
 public interface IInteractable
 {
@@ -19,13 +20,24 @@ public class InteractionDetector : MonoBehaviour
 		if (collider.TryGetComponent(out IInteractable interactable)) {
 			Debug.Log($"Interaction target is {collider.name}. Tooltip: \"{interactable.Tooltip}\"");
 			_targets.Add(interactable);
+
+			if (interactable.CanInteract)
+			{
+				
+				TooltipManager.CallTooltip.Invoke(collider.transform.position, interactable.Tooltip);
+			}
+				
 		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collider)
 	{
 		if (collider.TryGetComponent(out IInteractable interactable)) {
+			if (interactable.CanInteract && interactable == _targets.LastOrDefault(t => t != null && t.CanInteract))
+				TooltipManager.DismisTooltip.Invoke();
+
 			_targets.Remove(interactable);
+
 		}
 	}
 
@@ -36,5 +48,7 @@ public class InteractionDetector : MonoBehaviour
 			tryInteract = false;
 			_targets[0].OnInteract();
 		}
+
+		
 	}
 }

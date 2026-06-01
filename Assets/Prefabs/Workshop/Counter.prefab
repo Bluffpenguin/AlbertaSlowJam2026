@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8182994332271754940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5929872673975181154}
+  - component: {fileID: 2805158729010508872}
+  - component: {fileID: 5493692312182447183}
+  - component: {fileID: 7998984253243777810}
+  m_Layer: 0
+  m_Name: Counter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5929872673975181154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182994332271754940}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2805158729010508872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182994332271754940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13700d3af114e30438c5bc65f8b1bf81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::Seller
+  _itemsStack: 0
+  _autoSort: 0
+  _contents:
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  - _data: {fileID: 0}
+    _count: 0
+    _sellValue: 0
+  _onContentsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _acceptedCatalogue:
+  - {fileID: 11400000, guid: fef7fc9d202f6184abfb05f5ee298a44, type: 2}
+  - {fileID: 11400000, guid: 2a1c8d49a3463654b85186f02921b0c3, type: 2}
+  - {fileID: 11400000, guid: bacff74ee694cb041bdd1502867026f1, type: 2}
+  - {fileID: 11400000, guid: b987d61430b7c0047ab9056493e0b77e, type: 2}
+  - {fileID: 11400000, guid: 5d01da093f9ddcc43be6b1f9f85355fa, type: 2}
+  - {fileID: 11400000, guid: 134fd293a77524e4b8f28df3186bdb4b, type: 2}
+  - {fileID: 11400000, guid: a4e3adbb1c94d014b84d5fec68e527ec, type: 2}
+  - {fileID: 11400000, guid: f498eae36075f06438b8ac4080365fa4, type: 2}
+  _sales: []
+  _saleSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _inputCount: 3
+  _oneTradePerDay: 0
+  _saleCount: 3
+  _saleMultiplier: 1.5
+  _sellTotalText: {fileID: 0}
+--- !u!114 &5493692312182447183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182994332271754940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e276e45603066944b94557b49e093a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts.Core::InventoryInteractable
+  _tooltip: Sell
+  _window1: 1
+  _window2: 5
+--- !u!61 &7998984253243777810
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182994332271754940}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
