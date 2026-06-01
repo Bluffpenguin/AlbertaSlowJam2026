@@ -198,6 +198,8 @@ MonoBehaviour:
   _tooltipTransform: {fileID: 4425388668045231180}
   _tooltipTextObj: {fileID: 3248781898953032793}
   _loadedTooltip: 
+  testTransform: {fileID: 5546935159215618956}
+  rotationSpeed: 90
 --- !u!1 &3741459824784828106
 GameObject:
   m_ObjectHideFlags: 0

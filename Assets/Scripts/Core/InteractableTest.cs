@@ -16,6 +16,9 @@ public class InteractableTest : MonoBehaviour, IInteractable
 
 	public Material OutlineMaterial => throw new NotImplementedException();
 
+	[SerializeField] private float _interactTime = 1f;
+	public float InteractTime => _interactTime;
+
 	public void OnInteract()
 	{
 		Debug.Log(Tooltip);

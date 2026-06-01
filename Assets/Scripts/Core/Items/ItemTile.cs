@@ -9,6 +9,9 @@ public class ItemTile : MonoBehaviour, IInteractable
 	[SerializeField] private Vector2 _tooltipOffset;
 	[SerializeField] private InventoryItem _item;
 
+	[SerializeField] private float _interactTime = 2f;
+	public float InteractTime => _interactTime;
+
 	[Header("Outline (Optional)")]
 	[SerializeField] private Renderer _renderer;
 	[SerializeField] private Material _regularMaterial;

@@ -6,6 +6,9 @@ public class EventInteractable : MonoBehaviour, IInteractable
 	[SerializeField] private Vector2 _tooltipOffset;
 	[SerializeField] protected UnityEvent _onInteracted = new();
 
+	[SerializeField] private float _interactTime = 1f;
+	public float InteractTime => _interactTime;
+
 	[Header("Outline (Optional)")]
 	[SerializeField] private Renderer _renderer;
 	[SerializeField] private Material _regularMaterial;

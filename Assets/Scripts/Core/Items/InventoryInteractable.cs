@@ -4,6 +4,9 @@ public class InventoryInteractable : MonoBehaviour, IInteractable
 	[SerializeField] private Vector2 _tooltipOffset;
 	[SerializeField] private InventoryWindow _window1, _window2;
 
+	[SerializeField] private float _interactTime = .5f;
+	public float InteractTime => _interactTime;
+
 	[Header("Outline (Optional)")]
 	[SerializeField] private Renderer _renderer;
 	[SerializeField] private Material _regularMaterial;
@@ -18,6 +21,8 @@ public class InventoryInteractable : MonoBehaviour, IInteractable
 	public Material RegularMaterial => _regularMaterial;
 
 	public Material OutlineMaterial => _outlineMaterial;
+
+
 
 	public void OnInteract()
 	{

@@ -6,6 +6,7 @@ public interface IInteractable
 	string Tooltip { get; }
 	Vector2 TooltipOffset { get; }
 	bool CanInteract { get; }
+	float InteractTime { get; }
 
 	Renderer MaterialRenderer { get; }
 	Material RegularMaterial { get; }
@@ -19,8 +20,12 @@ public interface IInteractable
 public class InteractionDetector : MonoBehaviour
 {
 	public bool tryInteract;
+	bool progressInteract = false;
 
 	private readonly List<IInteractable> _targets = new();
+
+	float _timeHeld = 0;
+	float _targetTime;
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
@@ -30,7 +35,9 @@ public class InteractionDetector : MonoBehaviour
 
 			if (interactable.CanInteract)
 			{
+				_timeHeld = 0;
 				interactable.ToggleOutline(true);
+				_targetTime = interactable.InteractTime;
 				TooltipManager.CallTooltip.Invoke(collider.transform.position + (Vector3)interactable.TooltipOffset, interactable.Tooltip);
 			}
 				
@@ -42,13 +49,38 @@ public class InteractionDetector : MonoBehaviour
 		if (collider.TryGetComponent(out IInteractable interactable)) {
 			if (interactable.CanInteract && interactable == _targets.LastOrDefault(t => t != null && t.CanInteract))
 			{
-				
+				_timeHeld = 0;
 				TooltipManager.DismisTooltip.Invoke();
 			}
 
 			interactable.ToggleOutline(false);
 			_targets.Remove(interactable);
 
+		}
+	}
+
+	private void Update()
+	{
+		if (_targets.Count == 0) return;
+
+		if (Player.Input.Player.Interact.WasPressedThisFrame())
+		{
+			progressInteract = true;
+		}
+		else if (Player.Input.Player.Interact.WasReleasedThisFrame())
+		{
+			progressInteract = false;
+		}
+
+		if (progressInteract)
+		{
+			_timeHeld += Time.deltaTime;
+
+			if (_timeHeld >= _targetTime)
+			{
+				progressInteract = false;
+				tryInteract = true;
+			}
 		}
 	}
 

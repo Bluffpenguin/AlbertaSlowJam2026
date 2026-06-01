@@ -5,6 +5,9 @@ public class Bed : MonoBehaviour, IInteractable
 	[SerializeField] private string _tooltip = "Sleep";
 	[SerializeField] private Vector2 _tooltipOffset;
 
+	[SerializeField] private float _interactTime = 1f;
+	public float InteractTime => _interactTime;
+
 	[Header("Outline (Optional)")]
 	[SerializeField] private Renderer _renderer;
 	[SerializeField] private Material _regularMaterial;
@@ -19,6 +22,8 @@ public class Bed : MonoBehaviour, IInteractable
 	public Material RegularMaterial => _regularMaterial;
 
 	public Material OutlineMaterial => _outlineMaterial;
+
+	
 
 	public void OnInteract()
 	{
