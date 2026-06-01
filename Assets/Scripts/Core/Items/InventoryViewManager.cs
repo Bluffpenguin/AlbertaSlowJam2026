@@ -14,7 +14,7 @@ public class InventoryViewManager : MonoBehaviour
 {
 	public static InventoryViewManager Instance { get; private set; }
 
-	[SerializeField] private InventoryWindowData[] _windows;
+	[SerializeField] private ViewModel[] _windows;
 
 	private Dictionary<InventoryWindow, (InventoryView, Inventory)> _windowsDict;
 
@@ -114,7 +114,7 @@ public class InventoryViewManager : MonoBehaviour
 	}
 
 	[Serializable]
-	public struct InventoryWindowData
+	public struct ViewModel
 	{
 		public InventoryWindow window;
 		public InventoryView view;
