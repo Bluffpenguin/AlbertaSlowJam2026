@@ -17,8 +17,6 @@ public class Recipe : ScriptableObject
 
 	public bool CheckRecipe(IEnumerable<Ingredient> input)
 	{
-		static string Name(Ingredient ingredient) => ingredient == null ? string.Empty : ingredient.name;
-
 		var requirements = DictionaryPool<string, int>.Get();
 		for (int i = 0; i < _ingredients.Length; i++) {
 			if (_ingredients[i].Ingredient == null)
@@ -26,24 +24,28 @@ public class Recipe : ScriptableObject
 			requirements.TryAdd(_ingredients[i].Ingredient.name, _ingredients[i].RequiredCount);
 		}
 
-		var ingredients = input.ToArray();
-		bool valid = ingredients.Length >= requirements.Values.Sum();
-		Debug.Log(valid, this);
-		var groups = ingredients.OrderBy(Name).GroupBy(Name);
-		foreach (var group in groups) {
-			string key = group.Key;
-			if (!requirements.ContainsKey(key))
+		var ingredients = DictionaryPool<string, int>.Get();
+		foreach (var item in input) {
+			if (item == null)
 				continue;
 
-			valid &= requirements[key] >= 0;
-			int itemCount = group.Count();
-			valid &= itemCount >= requirements[key];
+			if (!ingredients.TryAdd(item.name, 1)) {
+				ingredients[item.name] += 1;
+			}
+		}
 
+		bool valid = true;
+		foreach (var key in requirements.Keys) {
+			valid &= ingredients.TryGetValue(key, out var inputCount);
+			if (!valid)
+				break;
+			valid &= inputCount >= requirements[key];
 			if (!valid)
 				break;
 		}
 
 		DictionaryPool<string, int>.Release(requirements);
+		DictionaryPool<string, int>.Release(ingredients);
 		return valid;
 	}
 

@@ -299,10 +299,7 @@ MonoBehaviour:
   _autoSort: 1
   _contents:
   - _data: {fileID: 11400000, guid: a4e3adbb1c94d014b84d5fec68e527ec, type: 2}
-    _count: 1
-    _sellValue: 1
-  - _data: {fileID: 11400000, guid: a4e3adbb1c94d014b84d5fec68e527ec, type: 2}
-    _count: 1
+    _count: 10
     _sellValue: 1
   - _data: {fileID: 0}
     _count: 0
@@ -564,37 +561,10 @@ MonoBehaviour:
   - _data: {fileID: 0}
     _count: 0
     _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
-  - _data: {fileID: 0}
-    _count: 0
-    _sellValue: 0
   _onContentsChanged:
     m_PersistentCalls:
       m_Calls: []
-  _inputCount: 5
+  _inputCount: 1
 --- !u!4 &823935350
 Transform:
   m_ObjectHideFlags: 0
@@ -869,6 +839,10 @@ PrefabInstance:
       propertyPath: _other
       value: 
       objectReference: {fileID: 1904677674}
+    - target: {fileID: 2705400913782129175, guid: 68e065285f3f6a54b81c1935f6873463, type: 3}
+      propertyPath: _createOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3078820990146274389, guid: 68e065285f3f6a54b81c1935f6873463, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1173,6 +1147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scrapping View
       objectReference: {fileID: 0}
+    - target: {fileID: 8563000244124295802, guid: 68e065285f3f6a54b81c1935f6873463, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1318,6 +1296,10 @@ PrefabInstance:
       propertyPath: _other
       value: 
       objectReference: {fileID: 1443037631}
+    - target: {fileID: 2430353787558631492, guid: 428f2cc6ebe510946b8d26036c7bf6df, type: 3}
+      propertyPath: _createOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3871856003631631024, guid: 428f2cc6ebe510946b8d26036c7bf6df, type: 3}
       propertyPath: m_Size
       value: 0.9968117
@@ -1732,6 +1714,10 @@ PrefabInstance:
       propertyPath: _other
       value: 
       objectReference: {fileID: 1904677674}
+    - target: {fileID: 8040933881734263956, guid: 2153dfbae19a309498aabec8fbd3a5b8, type: 3}
+      propertyPath: _createOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8124063407969570108, guid: 2153dfbae19a309498aabec8fbd3a5b8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
