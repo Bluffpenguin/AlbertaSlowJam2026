@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 	public float CurrentHour, CurrentMinute;
 	public bool AdvanceClock = false;
 	public int PlayerMoney;
-	public int MoneyMadeToday;
 	public int TodaysQuota;
 
 	public int DaysToWin => _quotas.Length;
@@ -88,7 +87,7 @@ public class GameManager : MonoBehaviour
 		AdvanceClock = false;
 		DayIndex++;
 		TimeElapsed = 0;
-		MoneyMadeToday = 0;
+		PlayerMoney = 0;
 
 		if (DayIndex >= DaysToWin) {
 			EndGame();

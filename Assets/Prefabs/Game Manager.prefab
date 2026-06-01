@@ -45,8 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::GameManager
   _listeners: []
-  DayLength: 600
-  DaysToWin: 7
+  _dungeonScene: Dungeon
+  _hudScene: HUD
+  WakeUpHour: 6
+  EndOfDayHour: 18
+  SecondsPerMinute: 2
+  _quotas: 28000000
   DayIndex: -1
   TimeElapsed: 0
+  CurrentHour: 0
+  CurrentMinute: 0
   AdvanceClock: 0
+  PlayerMoney: 0
+  TodaysQuota: 0
