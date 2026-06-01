@@ -50,7 +50,7 @@ MonoBehaviour:
   WakeUpHour: 6
   EndOfDayHour: 18
   SecondsPerMinute: 2
-  _quotas: 28000000
+  _quotas: 2800000050000000
   DayIndex: -1
   TimeElapsed: 0
   CurrentHour: 0
