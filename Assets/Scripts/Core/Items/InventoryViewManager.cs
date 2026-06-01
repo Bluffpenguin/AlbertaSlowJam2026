@@ -58,6 +58,10 @@ public class InventoryViewManager : MonoBehaviour
 		if (MenuManager.Instance != null) {
 			MenuManager.Instance.inGame = true;
 		}
+
+		if (HUD.Instance != null) {
+			HUD.Instance.gameObject.SetActive(true);
+		}
 	}
 
 	public void CloseAllExcept(params InventoryWindow[] window)
@@ -75,6 +79,9 @@ public class InventoryViewManager : MonoBehaviour
 	{
 		if (MenuManager.Instance != null) {
 			MenuManager.Instance.inGame = false;
+		}
+		if (HUD.Instance != null) {
+			HUD.Instance.gameObject.SetActive(false);
 		}
 
 		InventoryView viewA, viewB;
