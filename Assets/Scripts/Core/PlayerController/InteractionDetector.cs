@@ -4,9 +4,16 @@ using UnityEngine.Tilemaps;
 public interface IInteractable
 {
 	string Tooltip { get; }
+	Vector2 TooltipOffset { get; }
 	bool CanInteract { get; }
 
+	Renderer MaterialRenderer { get; }
+	Material RegularMaterial { get; }
+	Material OutlineMaterial { get; }
+	
+
 	void OnInteract();
+	void ToggleOutline(bool outline);
 }
 
 public class InteractionDetector : MonoBehaviour
@@ -23,8 +30,8 @@ public class InteractionDetector : MonoBehaviour
 
 			if (interactable.CanInteract)
 			{
-				
-				TooltipManager.CallTooltip.Invoke(collider.transform.position, interactable.Tooltip);
+				interactable.ToggleOutline(true);
+				TooltipManager.CallTooltip.Invoke(collider.transform.position + (Vector3)interactable.TooltipOffset, interactable.Tooltip);
 			}
 				
 		}
@@ -34,8 +41,12 @@ public class InteractionDetector : MonoBehaviour
 	{
 		if (collider.TryGetComponent(out IInteractable interactable)) {
 			if (interactable.CanInteract && interactable == _targets.LastOrDefault(t => t != null && t.CanInteract))
+			{
+				
 				TooltipManager.DismisTooltip.Invoke();
+			}
 
+			interactable.ToggleOutline(false);
 			_targets.Remove(interactable);
 
 		}
