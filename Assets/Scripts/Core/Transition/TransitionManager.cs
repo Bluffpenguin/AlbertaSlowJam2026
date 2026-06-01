@@ -16,7 +16,6 @@ public class TransitionManager : MonoBehaviour
 
     Transform shipPlayer;
     Transform dungeonPlayer;
-    bool activeDungeon = false;
     Camera sceneCamera;
     Vector3 cameraLocalPos;
 
@@ -41,25 +40,16 @@ public class TransitionManager : MonoBehaviour
         cameraLocalPos = sceneCamera.transform.localPosition;
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void ToShip()
     {
-		StartCoroutine(TransportToShip());
+		StartCoroutine(TransportToShip(3));
 	}
 
     void ToDungeon()
     {
-        //activeDungeon = true; //TEMP 
         
-			StartCoroutine(TransportToDungeon());
-        if (activeDungeon)
-        {
-		}
+			StartCoroutine(TransportToDungeon(3));
+        
         
     }
 
@@ -69,31 +59,70 @@ public class TransitionManager : MonoBehaviour
         sceneCamera.transform.localPosition = cameraLocalPos;
     }
 
-    IEnumerator TransportToShip()
+    IEnumerator TransportToShip(float time)
     {
+        fadeToBlack.enabled = true;
         BeginTransition.Invoke();
-        yield return new WaitForSeconds(1);
-        dungeonPlayer.gameObject.SetActive(false);
+		while (fadeToBlack.color.a < 1)
+		{
+			Color color = fadeToBlack.color;
+			color.a += (time / 3) * Time.deltaTime;
+			fadeToBlack.color = color;
+			yield return null;
+		}
+
+		dungeonPlayer.gameObject.SetActive(false);
         Player.Controller.transform.position = Vector3.zero; // Hacky
-        activeDungeon = false;
+
         shipPlayer.gameObject.SetActive(true);
         MoveCamera(shipPlayer);
+        yield return new WaitForSeconds(time / 3);
+
+		while (fadeToBlack.color.a > 0)
+		{
+			Color color = fadeToBlack.color;
+			color.a -= (time / 3) * Time.deltaTime;
+			fadeToBlack.color = color;
+			yield return null;
+		}
+
 		EndTransition.Invoke();
+        fadeToBlack.enabled = false;
 	}
 
-	IEnumerator TransportToDungeon()
+	IEnumerator TransportToDungeon(float time)
 	{
-		BeginTransition.Invoke();
-		yield return new WaitForSeconds(1);
+        fadeToBlack.enabled = true;
+        BeginTransition.Invoke();
+        while (fadeToBlack.color.a < 1)
+        {
+            Color color = fadeToBlack.color;
+            color.a += (time / 3) * Time.deltaTime;
+            fadeToBlack.color = color;
+            yield return null;
+        }
+		
+
 		shipPlayer.gameObject.SetActive(false);
         Player.Controller.transform.position = 10 * Vector3.forward;
-        activeDungeon = true;
+
 		if (dungeonPlayer == null)
         {
             dungeonPlayer = Player.Instance.transform;
         }
         dungeonPlayer.gameObject.SetActive(true);
         MoveCamera(dungeonPlayer);
+        yield return new WaitForSeconds(time/3);
+
+		while (fadeToBlack.color.a > 0)
+		{
+			Color color = fadeToBlack.color;
+			color.a -= (time / 3) * Time.deltaTime;
+			fadeToBlack.color = color;
+			yield return null;
+		}
+
 		EndTransition.Invoke();
+        fadeToBlack.enabled = false;
 	}
 }

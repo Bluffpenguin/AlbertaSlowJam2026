@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 7633337567265966634, guid: 594c2e5d7b235264fb34c592c5605f37, type: 3}
       propertyPath: _outlineMaterial
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 371b3602872fbe944894a82751705886, type: 3}
+      objectReference: {fileID: 2100000, guid: 7850c65b765e84741a22284f30e5d527, type: 2}
     - target: {fileID: 7633337567265966634, guid: 594c2e5d7b235264fb34c592c5605f37, type: 3}
       propertyPath: _regularMaterial
       value: 

@@ -7,6 +7,9 @@ public class State_SimpleIdle : AIState
 	Node guardNode;
 	bool atGuardNode = false;
 	float returnSpeed = 3f;
+	float rotationDelay;
+	float timeToNextRotate = 0;
+	Queue<float> rotationQueue = new Queue<float>();
 	public State_SimpleIdle(EnemyInfo _enemyInfo, Transform _player)
         : base(_enemyInfo, _player)
     {
@@ -16,10 +19,13 @@ public class State_SimpleIdle : AIState
 	public override void Enter()
 	{
 		guardNode = enemyInfo.rm.GetGuardSpot(enemyInfo.enemyId);
+		rotationDelay = Random.Range(1.5f, 3f);
+		FillRotationQueue(4, 45);
 
 		if (Vector3.Distance(enemyInfo.npc.transform.position, guardNode.getId().transform.position) < accuracy)
 		{
 			atGuardNode = true;
+			enemyInfo.heading.rotation = Quaternion.Euler(0, 0, GetNextDirection());
 		}
 		else
 		{
@@ -36,6 +42,17 @@ public class State_SimpleIdle : AIState
 			nextState = new State_SimplePursue(enemyInfo, player);
 			stage = EVENT.EXIT;
 		}
+
+		// Look around
+		if (atGuardNode)
+		{
+			timeToNextRotate += Time.deltaTime;
+			if (timeToNextRotate >= rotationDelay)
+			{
+				timeToNextRotate = 0;
+				enemyInfo.heading.rotation = Quaternion.Euler(0, 0, GetNextDirection());
+			}
+		}
 		base.Update();
 	}
 
@@ -47,6 +64,7 @@ public class State_SimpleIdle : AIState
 		{
 			atGuardNode = true;
 			enemyInfo.npc.transform.position = guardNode.getId().transform.position;
+			enemyInfo.heading.rotation = Quaternion.Euler(0, 0, GetNextDirection());
 			return;
 		}
 
@@ -73,5 +91,29 @@ public class State_SimpleIdle : AIState
 	public override void Exit()
 	{
 		base.Exit();
+	}
+
+	void FillRotationQueue(int directions, float offset)
+	{
+		int totalDirections = directions;
+		List<float> orderedRotations = new List<float>();
+		for (int i = 0; i < totalDirections; i++)
+		{
+			orderedRotations.Add(i*(360/4) + offset);
+		}
+
+		for (int i = 0; i < totalDirections;i++)
+		{
+			int rand = Random.Range(0, orderedRotations.Count);
+			rotationQueue.Enqueue(orderedRotations[rand]);
+			orderedRotations.RemoveAt(rand);
+		}
+	}
+
+	float GetNextDirection()
+	{
+		float dir = rotationQueue.Dequeue();
+		rotationQueue.Enqueue(dir);
+		return dir;
 	}
 }
