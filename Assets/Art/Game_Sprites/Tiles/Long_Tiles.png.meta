@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Long_Tiles_0
+      name: L_Sidewall_01
       rect:
         serializedVersion: 2
         x: 0
@@ -119,7 +119,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_1
+      name: L_Sidewall_02
       rect:
         serializedVersion: 2
         x: 256
@@ -141,7 +141,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_2
+      name: Ground_01
       rect:
         serializedVersion: 2
         x: 512
@@ -163,7 +163,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_3
+      name: Ground_02
       rect:
         serializedVersion: 2
         x: 768
@@ -185,7 +185,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_4
+      name: Ground_03
       rect:
         serializedVersion: 2
         x: 1024
@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_5
+      name: Ground_04
       rect:
         serializedVersion: 2
         x: 1280
@@ -229,7 +229,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_6
+      name: Ground_05
       rect:
         serializedVersion: 2
         x: 1536
@@ -251,7 +251,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_7
+      name: L_Corner
       rect:
         serializedVersion: 2
         x: 0
@@ -273,7 +273,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_8
+      name: R_Corner
       rect:
         serializedVersion: 2
         x: 256
@@ -295,7 +295,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_9
+      name: Mid_Corner
       rect:
         serializedVersion: 2
         x: 512
@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_10
+      name: L_Sidewall_03
       rect:
         serializedVersion: 2
         x: 768
@@ -339,7 +339,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_11
+      name: R_Sidewall_01
       rect:
         serializedVersion: 2
         x: 1024
@@ -361,7 +361,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_12
+      name: R_Sidewall_02
       rect:
         serializedVersion: 2
         x: 1280
@@ -383,7 +383,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Long_Tiles_13
+      name: R_Sidewall_03
       rect:
         serializedVersion: 2
         x: 1536
@@ -420,20 +420,20 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.75},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Long_Tiles_0: -991931072
-      Long_Tiles_1: 1389356868
-      Long_Tiles_10: -404938303
-      Long_Tiles_11: 1517750757
-      Long_Tiles_12: -1052789055
-      Long_Tiles_13: 548078558
-      Long_Tiles_2: 830100912
-      Long_Tiles_3: -808328586
-      Long_Tiles_4: 855713017
-      Long_Tiles_5: 1281235454
-      Long_Tiles_6: 33868578
-      Long_Tiles_7: 1643278976
-      Long_Tiles_8: -577627810
-      Long_Tiles_9: -1523477246
+      Ground_01: 830100912
+      Ground_02: -808328586
+      Ground_03: 855713017
+      Ground_04: 1281235454
+      Ground_05: 33868578
+      L_Corner: 1643278976
+      L_Sidewall_01: -991931072
+      L_Sidewall_02: 1389356868
+      L_Sidewall_03: -404938303
+      Mid_Corner: -1523477246
+      R_Corner: -577627810
+      R_Sidewall_01: 1517750757
+      R_Sidewall_02: -1052789055
+      R_Sidewall_03: 548078558
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
