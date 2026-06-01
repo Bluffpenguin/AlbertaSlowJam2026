@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/SettingsMenu.unity
     guid: ccfa0687a5f617b41b7a23c2c40b5d40
   - enabled: 1
+    path: Assets/Scenes/Menus/HUD.unity
+    guid: 3c15a4787e4f33d499dc5a9b7aa4299c
+  - enabled: 1
     path: Assets/Scenes/Game Scenes/Dungeon.unity
     guid: 13eeb1da4e5b14f45b55225da5e43a8d
   - enabled: 1

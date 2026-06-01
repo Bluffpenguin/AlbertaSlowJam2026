@@ -22,10 +22,10 @@ public class Clock : MonoBehaviour
 		_progress = (hour / HOURS_PER_DAY) + (minute / MINUTES_PER_DAY);
 	}
 
-	public void SetHours(int wakeUp, int afterHours)
+	public void SetHours(int wakeUp, int closingTime)
 	{
-		_maskProgress = 1 - (wakeUp / HOURS_PER_DAY);
-		_sellHoursProgress = afterHours / HOURS_PER_DAY;
+		_maskProgress = wakeUp / HOURS_PER_DAY;
+		_sellHoursProgress = (closingTime - wakeUp) / HOURS_PER_DAY;
 	}
 
 	public void Update()
@@ -33,7 +33,7 @@ public class Clock : MonoBehaviour
 		var hour = _progress;
 		_hourHand.transform.eulerAngles = new Vector3(0, 0, -360f * hour);
 		var minute = _progress * MINUTES_PER_DAY / MINUTES_PER_HOUR;
-		_minuteHand.transform.eulerAngles = new Vector3(0, 0, -360f * minute);
+		_minuteHand.transform.eulerAngles = new Vector3(0, 0, -180f * minute);
 
 		if (_mask != null) {
 			_mask.fillAmount = 1 - _maskProgress;

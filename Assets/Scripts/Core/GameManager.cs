@@ -6,13 +6,14 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private List<InvokeOnDayStart> _listeners = new();
 	[SerializeField] private string _dungeonScene = "Dungeon";
+	[SerializeField] private string _hudScene = "HUD";
 
 	[Header("Game Settings")]
 	[Range(1, 12)] public int WakeUpHour = 6;
 	[Range(13, 24)] public int EndOfDayHour = 18;
 	[Tooltip("The ratio between realtime seconds to in-game minutes.")]
 	public float SecondsPerMinute = 1;
-	[Min(1)] public int DaysToWin = 7;
+	[SerializeField] private int[] _quotas = new int[1] { 40 };
 
 	[Header("Dynamic Data")]
 	public int DayIndex = -1;
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
 	public float CurrentHour, CurrentMinute;
 	public bool AdvanceClock = false;
 	public int PlayerMoney;
+	public int MoneyMadeToday;
+	public int TodaysQuota;
+
+	public int DaysToWin => _quotas.Length;
 
 	public void AddListener(InvokeOnDayStart listener)
 	{
@@ -44,13 +49,10 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
 	}
 
-	private async void Start()
+	private void Start()
 	{
 		// Testing
-		await SceneManager.LoadSceneAsync(_dungeonScene, LoadSceneMode.Additive);
-		ResetGame();
-		await Awaitable.MainThreadAsync();
-		MoveToNextDay();
+		StartGame();
 	}
 
 	public void Update()
@@ -60,9 +62,18 @@ public class GameManager : MonoBehaviour
 		}
 
 		TimeElapsed += Time.deltaTime;
-		var minutesPassed = Mathf.Floor(TimeElapsed / SecondsPerMinute);
+		var minutesPassed = TimeElapsed / SecondsPerMinute;
 		CurrentHour = WakeUpHour + (minutesPassed / 60);
 		CurrentMinute = minutesPassed % 60;
+	}
+
+	public async void StartGame()
+	{
+		await SceneManager.LoadSceneAsync(_hudScene, LoadSceneMode.Additive);
+		await SceneManager.LoadSceneAsync(_dungeonScene, LoadSceneMode.Additive);
+		ResetGame();
+		await Awaitable.MainThreadAsync();
+		MoveToNextDay();
 	}
 
 	public void ResetGame()
@@ -77,11 +88,14 @@ public class GameManager : MonoBehaviour
 		AdvanceClock = false;
 		DayIndex++;
 		TimeElapsed = 0;
+		MoneyMadeToday = 0;
 
 		if (DayIndex >= DaysToWin) {
 			EndGame();
 			return;
 		}
+
+		TodaysQuota = _quotas[DayIndex];
 
 		foreach (var listener in _listeners) {
 			listener.StartDay(DayIndex);

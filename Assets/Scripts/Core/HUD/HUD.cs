@@ -1,12 +1,10 @@
 using TMPro;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
 	public static HUD Instance { get; private set; }
 
+	[SerializeField] private TextMeshProUGUI _playerMoneyLabel;
 	[SerializeField] private TextMeshProUGUI _currentDayLabel;
 	[SerializeField] private Clock _clock;
 
@@ -20,6 +18,7 @@ public class HUD : MonoBehaviour
 		if (GameManager.Instance == null)
 			return;
 
+		_playerMoneyLabel.text = $"${GameManager.Instance.MoneyMadeToday}/{GameManager.Instance.TodaysQuota}";
 		_currentDayLabel.text = ((DayOfWeek)GameManager.Instance.DayIndex).ToString();
 
 		_clock.SetHours(GameManager.Instance.WakeUpHour, GameManager.Instance.EndOfDayHour);
