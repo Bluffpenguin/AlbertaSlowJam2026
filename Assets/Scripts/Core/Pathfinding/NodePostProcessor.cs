@@ -6,6 +6,10 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 	[SerializeField] TileBase manager;
 	[SerializeField] TileBase enemy;
 	[SerializeField] Tilemap itemMap;
+
+	[SerializeField] protected int processingOrder = 0;
+
+	public int Order => processingOrder;
 	public void ProcessRoom(RoomInfo room)
 	{
 		if (room.Distance == 0) return;
@@ -161,7 +165,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 		}
 
 		// Remove duplicates
-		col_patrolPath = col_patrolPath.Distinct().ToList();
+		//col_patrolPath = col_patrolPath.Distinct().ToList();
 		return col_patrolPath;
 	}
 

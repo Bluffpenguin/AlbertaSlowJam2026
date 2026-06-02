@@ -82,6 +82,7 @@ public class InteractionDetector : MonoBehaviour
 				tryInteract = true;
 			}
 		}
+		else _timeHeld = 0;
 	}
 
 	private void FixedUpdate()
@@ -89,6 +90,7 @@ public class InteractionDetector : MonoBehaviour
 		IInteractable target = _targets.LastOrDefault(t => t != null && t.CanInteract);
 		if (tryInteract && target != null) {
 			tryInteract = false;
+			progressInteract = false;
 			_targets[0].OnInteract();
 		}
 
