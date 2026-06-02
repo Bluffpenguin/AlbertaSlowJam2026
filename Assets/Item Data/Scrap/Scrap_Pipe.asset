@@ -29,4 +29,4 @@ MonoBehaviour:
     _dropRate: 0.5
   - _ingredient: {fileID: 11400000, guid: 4a2c8bdcf2ba2a748b2981c23b0b70e1, type: 2}
     _count: 1
-    _dropRate: 0.15
+    _dropRate: 0.2
