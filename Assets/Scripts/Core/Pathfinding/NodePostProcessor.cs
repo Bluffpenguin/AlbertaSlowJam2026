@@ -7,7 +7,7 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 	[SerializeField] TileBase enemy;
 	[SerializeField] Tilemap itemMap;
 
-	[SerializeField] protected int processingOrder = 0;
+	[SerializeField] protected int processingOrder = 2;
 
 	public int Order => processingOrder;
 	public void ProcessRoom(RoomInfo room)
