@@ -110,6 +110,15 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 		return removed.Count == count;
 	}
 
+	public bool IsEmpty()
+	{
+		foreach (ItemStack item in _contents)
+		{
+			if (item.Data != null) return false;
+		}
+		return true;
+	}
+
 	public virtual bool RemoveAllAt(int slot) => RemoveAt(slot, this[slot].Count, out _);
 
 	[ContextMenu("Clear Inventory")]
