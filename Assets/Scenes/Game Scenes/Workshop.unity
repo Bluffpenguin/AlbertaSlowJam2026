@@ -732,6 +732,7 @@ MonoBehaviour:
   _tooltipOffset: {x: 0, y: 0}
   _window1: 1
   _window2: 5
+  _interactTime: 0.5
   _renderer: {fileID: 0}
   _regularMaterial: {fileID: 0}
   _outlineMaterial: {fileID: 0}
@@ -2454,7 +2455,7 @@ PrefabInstance:
     - target: {fileID: 7253189975564657194, guid: 2153dfbae19a309498aabec8fbd3a5b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 609739353}
     - target: {fileID: 7253189975564657194, guid: 2153dfbae19a309498aabec8fbd3a5b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CraftFromContents
@@ -2760,7 +2761,7 @@ PrefabInstance:
     - target: {fileID: 4031369946699140520, guid: 6c8b4be37a0e6204787baa252402e28f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 953531777}
     - target: {fileID: 4031369946699140520, guid: 6c8b4be37a0e6204787baa252402e28f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SellContents
@@ -4413,7 +4414,7 @@ PrefabInstance:
     - target: {fileID: 3365350924374021289, guid: 68e065285f3f6a54b81c1935f6873463, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1910012809}
     - target: {fileID: 3365350924374021289, guid: 68e065285f3f6a54b81c1935f6873463, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ScrapContents
