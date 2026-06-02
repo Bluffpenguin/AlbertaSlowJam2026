@@ -43,11 +43,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 9
-  spritePivot: {x: 0.4, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -108,7 +108,127 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Garbagepile01_env_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 192
+        height: 512
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e56e2c8cb0fba543bc86c4f648f441f
+      internalID: -62418672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Garbagepile01_env_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 1
+        width: 128
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bca910d0f447d64a9abdd4f4a3bc606
+      internalID: -730411341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Garbagepile01_env_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 1
+        width: 128
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8566d1cd07475bf4783aca3e84b1d9b6
+      internalID: 145975531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Garbagepile01_env_3
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 1
+        width: 192
+        height: 512
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -256}
+        - {x: 64, y: 0}
+        - {x: 0, y: 256}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55e76060a3864b24ba842d2749d1486d
+      internalID: -1931398816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -121,8 +241,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":3,"keepEmptyRects":false,"isAlternate":true}'
+    nameFileIdTable:
+      Garbagepile01_env_0: -62418672
+      Garbagepile01_env_1: -730411341
+      Garbagepile01_env_2: 145975531
+      Garbagepile01_env_3: -1931398816
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

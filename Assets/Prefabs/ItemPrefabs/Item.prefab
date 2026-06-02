@@ -49,7 +49,7 @@ MonoBehaviour:
   _tooltip: Pick Up
   _tooltipOffset: {x: 0, y: 0}
   _item: {fileID: 0}
-  _interactTime: 2
+  _interactTime: 0.5
   _renderer: {fileID: 7944443622152733876}
   _regularMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   _outlineMaterial: {fileID: 2100000, guid: 7850c65b765e84741a22284f30e5d527, type: 2}

@@ -1,4 +1,4 @@
-[CreateAssetMenu(fileName = "Obstacle_", menuName = "Proc Gen/Large Obstacle Data")]
+[Obsolete]
 public class LargeObstacleData : ObstacleData
 {
 	[SerializeField]

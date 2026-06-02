@@ -50,12 +50,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4640660949736250272, guid: 594c2e5d7b235264fb34c592c5605f37, type: 3}
       propertyPath: m_Name
-      value: Broken Pump
+      value: Scrap_Pump
       objectReference: {fileID: 0}
     - target: {fileID: 7633337567265966634, guid: 594c2e5d7b235264fb34c592c5605f37, type: 3}
       propertyPath: _item
       value: 
-      objectReference: {fileID: 11400000, guid: 134fd293a77524e4b8f28df3186bdb4b, type: 2}
+      objectReference: {fileID: 11400000, guid: e3223b43a7d781d4b8778d1deefc0f1d, type: 2}
     - target: {fileID: 7633337567265966634, guid: 594c2e5d7b235264fb34c592c5605f37, type: 3}
       propertyPath: _renderer
       value: 
