@@ -16,15 +16,15 @@ MonoBehaviour:
   _checkDirections: -1
   _requirements: 2
   _dimensions: {x: 3, y: 2}
-  _obstacleTile: {fileID: 0}
+  _obstacleTile: {fileID: 11400000, guid: cdaf0f1419ec5724399a59283ab1b907, type: 2}
   _distribution:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -32,8 +32,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
