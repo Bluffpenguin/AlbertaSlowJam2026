@@ -7,8 +7,16 @@ public class AudioManager : MonoBehaviour
 	[field: Header("Volume")]
 	[Range(0, 1)]
 	public float masterVolume = 1;
+
+	[Range(0, 1)]
 	public float musicVolume = 1;
+
+	[Range(0, 1)]
 	public float sfxVolume = 1;
+
+	private Bus masterBus;
+	private Bus musicBus;
+	private Bus sfxBus;
 
 	private List<EventInstance> eventInstances;
 
@@ -27,11 +35,22 @@ public class AudioManager : MonoBehaviour
 			DontDestroyOnLoad(Instance);
 		}
 		eventInstances = new List<EventInstance>();
+
+		masterBus = RuntimeManager.GetBus("bus:/");
+		musicBus = RuntimeManager.GetBus("bus:/Music");
+		sfxBus = RuntimeManager.GetBus("bus:/SFX");
 	}
 
 	private void Start()
 	{
 		//InitializeMusic(FMODEvents.Instance.music);
+	}
+
+	private void Update()
+	{
+		masterBus.setVolume(masterVolume);
+		musicBus.setVolume(musicVolume);
+		sfxBus.setVolume(sfxVolume);
 	}
 
 	private void InitializeMusic(EventReference musicEventReference)
