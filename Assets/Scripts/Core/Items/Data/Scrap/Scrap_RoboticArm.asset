@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scrap_RoboticArm
   m_EditorClassIdentifier: Scripts.Core::Scrap
   _displayName: Robotic Arm
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 3256637c35e12ae40a093ff3e0515ba2, type: 3}
   _description: The arm of an automaton. Its craftmanship is immaculate, only missing
     a few parts. Who would throw out something like this...
   _baseSellValue: 3
