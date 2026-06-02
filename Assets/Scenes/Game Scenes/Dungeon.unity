@@ -10411,6 +10411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InvokeOnDayStart
   _dayIndex: 0
+  _length: 7
   _onDayStart:
     m_PersistentCalls:
       m_Calls:
