@@ -9,15 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d5df387b7b7f649897b4a5ba2a7531, type: 3}
-  m_Name: Recipe_SteamEngine
-  m_EditorClassIdentifier: Scripts.Core::Recipe
-  _sellValueBonus: 2
-  _ingredients:
+  m_Script: {fileID: 11500000, guid: 5ff7510e56d14c541ad65321eaa2f000, type: 3}
+  m_Name: Scrap_SteamEngine
+  m_EditorClassIdentifier: Scripts.Core::Scrap
+  _displayName: 
+  _sprite: {fileID: 0}
+  _description: 
+  _baseSellValue: 15
+  _itemTile: {fileID: 0}
+  _results:
   - _ingredient: {fileID: 11400000, guid: 9da5fbf9bccf8d84e86302b8b9123365, type: 2}
-    _requiredCount: 1
+    _count: 1
+    _dropRate: 0.5
   - _ingredient: {fileID: 11400000, guid: d6b89cfd217a2d7448535f27f36f2ad2, type: 2}
-    _requiredCount: 1
+    _count: 1
+    _dropRate: 0.5
   - _ingredient: {fileID: 11400000, guid: c630a53855bd1414e92e5d5aab2062a7, type: 2}
-    _requiredCount: 1
-  _result: {fileID: 11400000, guid: f636317587566304a851778d929e6893, type: 2}
+    _count: 1
+    _dropRate: 0.5
+  - _ingredient: {fileID: 11400000, guid: 99c08c377963c7f4db84d782a6b1c214, type: 2}
+    _count: 1
+    _dropRate: 0.5
