@@ -18,15 +18,6 @@ MonoBehaviour:
   _baseSellValue: 1
   _itemTile: {fileID: 11400000, guid: 2f9967da9e430954a890d4c02ae06ba6, type: 2}
   _results:
-  - _ingredient: {fileID: 11400000, guid: 9da5fbf9bccf8d84e86302b8b9123365, type: 2}
+  - _ingredient: {fileID: 11400000, guid: d6b89cfd217a2d7448535f27f36f2ad2, type: 2}
     _count: 3
     _dropRate: 0.75
-  - _ingredient: {fileID: 11400000, guid: d6b89cfd217a2d7448535f27f36f2ad2, type: 2}
-    _count: 1
-    _dropRate: 0.5
-  - _ingredient: {fileID: 11400000, guid: 99c08c377963c7f4db84d782a6b1c214, type: 2}
-    _count: 1
-    _dropRate: 0.5
-  - _ingredient: {fileID: 11400000, guid: 4a2c8bdcf2ba2a748b2981c23b0b70e1, type: 2}
-    _count: 1
-    _dropRate: 0.2
