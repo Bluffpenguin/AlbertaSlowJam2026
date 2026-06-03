@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 		ResetGame();
 		await Awaitable.MainThreadAsync();
 		MoveToNextDay();
-		AudioManager.Instance.InitializeMusic(FMODEvents.Instance.music);
+		AudioManager.Instance.InitializeMusic(FMODEvents.Instance.ShopMusic);
 	}
 
 	public void ResetGame()

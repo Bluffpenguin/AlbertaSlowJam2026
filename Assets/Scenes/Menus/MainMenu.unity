@@ -1449,7 +1449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc376f92eaa4cc94e8e961c84a337df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::FMODEvents
-  <music>k__BackingField:
+  <ShopMusic>k__BackingField:
     Guid:
       Data1: -231751510
       Data2: 1162454270
