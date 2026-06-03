@@ -13,6 +13,8 @@ public class NodePostProcessor : SingleTilePainter, IRoomPostProcessor
 	public void ProcessRoom(RoomInfo room)
 	{
 		if (room.Distance == 0) return;
+
+		
 		base.PaintTiles(room.Tiles);
 
 		PaintTile(room.Origin, _tilemap, manager);

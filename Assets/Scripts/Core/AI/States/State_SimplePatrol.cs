@@ -60,7 +60,7 @@ public class State_SimplePatrol : AIState
 		if (stalling)
 			return;
 
-		if (currentWP == path.Count)
+		if (currentWP == path.Count || currentWP <= -1)
 			return;
 
 		if (Vector2.Distance(path[currentWP].getId().transform.position, enemyInfo.npc.transform.position) < accuracy)
