@@ -36,10 +36,9 @@ public class AudioManager : MonoBehaviour
 		}
 		eventInstances = new List<EventInstance>();
 
-		//not hooked up yet
 		masterBus = RuntimeManager.GetBus("bus:/");
 		musicBus = RuntimeManager.GetBus("bus:/Music");
-		//sfxBus = RuntimeManager.GetBus("bus:/SFX");
+		sfxBus = RuntimeManager.GetBus("bus:/SFX");
 	}
 
 	private void Update()

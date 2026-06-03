@@ -1734,6 +1734,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc376f92eaa4cc94e8e961c84a337df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::FMODEvents
+  <PickUpItem>k__BackingField:
+    Guid:
+      Data1: 1327706644
+      Data2: 1293316534
+      Data3: -1944071773
+      Data4: 859925470
+    Path: event:/SFX/Items/PickUpItem
+  <MoneyGained>k__BackingField:
+    Guid:
+      Data1: -406081979
+      Data2: 1112047403
+      Data3: -1088892795
+      Data4: 1201266261
+    Path: event:/SFX/Items/MoneyGain
   <ShopMusic>k__BackingField:
     Guid:
       Data1: -231751510
