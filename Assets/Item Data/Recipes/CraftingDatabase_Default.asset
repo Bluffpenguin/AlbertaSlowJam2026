@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts.Core::CraftingData
   _recipes:
   - {fileID: 11400000, guid: 8f3aa2722fbc2f14bbfdec56d0e3940d, type: 2}
+  - {fileID: 11400000, guid: 4241d54158947da47835a6d710dcff29, type: 2}
+  - {fileID: 11400000, guid: 5126d0d9b4eaf0143997d5cd92bcac90, type: 2}
+  - {fileID: 11400000, guid: 24871cee11d3377479aa07c3713c3f12, type: 2}
+  - {fileID: 11400000, guid: 649cb190026fbd1458d72b2ae40d1673, type: 2}
   - {fileID: 11400000, guid: 91edea7fe2d9bfd408cbee9f5dc2d568, type: 2}
