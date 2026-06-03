@@ -18,7 +18,7 @@ public class HUD : MonoBehaviour
 		if (GameManager.Instance == null)
 			return;
 
-		_playerMoneyLabel.text = $"${GameManager.Instance.MoneyMadeToday}/{GameManager.Instance.TodaysQuota}";
+		_playerMoneyLabel.text = $"${GameManager.Instance.PlayerMoney}/{GameManager.Instance.TodaysQuota}";
 		_currentDayLabel.text = ((DayOfWeek)GameManager.Instance.DayIndex).ToString();
 
 		_clock.SetHours(GameManager.Instance.WakeUpHour, GameManager.Instance.EndOfDayHour);

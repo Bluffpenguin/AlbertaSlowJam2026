@@ -2,7 +2,7 @@ public class Ladder : Hatch
 {
 	protected override void Start()
 	{
-		TransitionManager.Instance.TransitionToDungeon.AddListener(OnEnter.Invoke);
-		TransitionManager.Instance.TransitionToShip.AddListener(OnExit.Invoke);
+		TransitionManager.Instance.MidDungeonTransition.AddListener(OnEnter.Invoke);
+		TransitionManager.Instance.MidShipTransition.AddListener(OnExit.Invoke);
 	}
 }
