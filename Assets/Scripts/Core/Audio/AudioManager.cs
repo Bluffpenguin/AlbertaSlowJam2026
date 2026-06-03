@@ -42,11 +42,6 @@ public class AudioManager : MonoBehaviour
 		//sfxBus = RuntimeManager.GetBus("bus:/SFX");
 	}
 
-	private void Start()
-	{
-		//InitializeMusic(FMODEvents.Instance.music);
-	}
-
 	private void Update()
 	{
 		masterBus.setVolume(masterVolume);
@@ -54,7 +49,7 @@ public class AudioManager : MonoBehaviour
 		sfxBus.setVolume(sfxVolume);
 	}
 
-	private void InitializeMusic(EventReference musicEventReference)
+	public void InitializeMusic(EventReference musicEventReference)
 	{
 		musicEventInstance = CreateEventInstance(musicEventReference);
 		musicEventInstance.start();
