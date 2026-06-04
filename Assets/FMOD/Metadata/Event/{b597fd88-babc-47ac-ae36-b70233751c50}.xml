@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{b597fd88-babc-47ac-ae36-b70233751c50}">
 		<property name="name">
-			<value>ButtonClick</value>
+			<value>ButtonClickHiss</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
