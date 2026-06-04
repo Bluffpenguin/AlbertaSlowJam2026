@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6f20fac94dea44da479f2e050992f8, type: 3}
+  m_Name: Ingredient_Metal
+  m_EditorClassIdentifier: Scripts.Core::Ingredient
+  _displayName: Metal
+  _sprite: {fileID: 21300000, guid: d4ed557f2e1b1df43b3853e481b255da, type: 3}
+  _description: Corrugated sheet metal. Can be used to make many, many things.
+  _baseSellValue: 1
+  _itemTile: {fileID: 11400000, guid: 73eae2fc58652b4488abd487d1c7f727, type: 2}

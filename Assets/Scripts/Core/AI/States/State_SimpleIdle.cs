@@ -37,7 +37,7 @@ public class State_SimpleIdle : AIState
 
 	public override void Update()
 	{
-		if (CanSeePlayer())
+		if (CanSeePlayer() && !Player.Inventory.IsEmpty())
 		{
 			nextState = new State_SimplePursue(enemyInfo, player);
 			stage = EVENT.EXIT;

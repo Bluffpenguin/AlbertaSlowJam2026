@@ -25,7 +25,7 @@ public class State_SimplePatrol : AIState
 	public override void Update()
 	{
 
-		if (CanSeePlayer())
+		if (CanSeePlayer() && !Player.Inventory.IsEmpty())
 		{
 			nextState = new State_SimplePursue(enemyInfo, player);
 			stage = EVENT.EXIT;
@@ -60,7 +60,7 @@ public class State_SimplePatrol : AIState
 		if (stalling)
 			return;
 
-		if (currentWP == path.Count)
+		if (currentWP == path.Count || currentWP <= -1)
 			return;
 
 		if (Vector2.Distance(path[currentWP].getId().transform.position, enemyInfo.npc.transform.position) < accuracy)

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d5df387b7b7f649897b4a5ba2a7531, type: 3}
+  m_Name: Recipe_Telescope
+  m_EditorClassIdentifier: Scripts.Core::Recipe
+  _sellValueBonus: 3
+  _ingredients:
+  - _ingredient: {fileID: 11400000, guid: 4a2c8bdcf2ba2a748b2981c23b0b70e1, type: 2}
+    _requiredCount: 2
+  - _ingredient: {fileID: 11400000, guid: c6d4f3808de126c4e8beed923f557577, type: 2}
+    _requiredCount: 1
+  _result: {fileID: 11400000, guid: 5b3733da81b049f4d8446a4a5b99b5a8, type: 2}

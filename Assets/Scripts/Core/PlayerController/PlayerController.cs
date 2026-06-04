@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
 		if (!_canMove) return;
 
 		_moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
+		_moveDir.y *= 0.5f;
 
 		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
 		_rb.AddForce(displacement, ForceMode2D.Impulse);

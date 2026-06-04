@@ -10,7 +10,9 @@ public class TransitionManager : MonoBehaviour
     internal UnityEvent TransitionToShip = new UnityEvent();
 	internal UnityEvent TransitionToDungeon = new UnityEvent();
 	internal UnityEvent BeginTransition = new UnityEvent();
-    internal UnityEvent EndTransition = new UnityEvent();
+    internal UnityEvent MidShipTransition = new UnityEvent();
+	internal UnityEvent MidDungeonTransition = new UnityEvent();
+	internal UnityEvent EndTransition = new UnityEvent();
 
     [SerializeField] private Image fadeToBlack;
 
@@ -61,7 +63,8 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator TransportToShip(float time)
     {
-        fadeToBlack.enabled = true;
+		Player.Controller.PlayerInput.Disable();
+		fadeToBlack.enabled = true;
         BeginTransition.Invoke();
 		while (fadeToBlack.color.a < 1)
 		{
@@ -71,13 +74,15 @@ public class TransitionManager : MonoBehaviour
 			yield return null;
 		}
 
+        MidShipTransition.Invoke();
 		dungeonPlayer.gameObject.SetActive(false);
         Player.Controller.transform.position = Vector3.zero; // Hacky
+        
 
         shipPlayer.gameObject.SetActive(true);
         MoveCamera(shipPlayer);
         yield return new WaitForSeconds(time / 3);
-
+		Player.Controller.PlayerInput.Enable();
 		while (fadeToBlack.color.a > 0)
 		{
 			Color color = fadeToBlack.color;
@@ -92,7 +97,8 @@ public class TransitionManager : MonoBehaviour
 
 	IEnumerator TransportToDungeon(float time)
 	{
-        fadeToBlack.enabled = true;
+		Player.Controller.PlayerInput.Disable();
+		fadeToBlack.enabled = true;
         BeginTransition.Invoke();
         while (fadeToBlack.color.a < 1)
         {
@@ -102,7 +108,7 @@ public class TransitionManager : MonoBehaviour
             yield return null;
         }
 		
-
+        MidDungeonTransition.Invoke();
 		shipPlayer.gameObject.SetActive(false);
         Player.Controller.transform.position = 10 * Vector3.forward;
 
@@ -113,7 +119,7 @@ public class TransitionManager : MonoBehaviour
         dungeonPlayer.gameObject.SetActive(true);
         MoveCamera(dungeonPlayer);
         yield return new WaitForSeconds(time/3);
-
+		Player.Controller.PlayerInput.Enable();
 		while (fadeToBlack.color.a > 0)
 		{
 			Color color = fadeToBlack.color;
@@ -123,6 +129,7 @@ public class TransitionManager : MonoBehaviour
 		}
 
 		EndTransition.Invoke();
-        fadeToBlack.enabled = false;
+		
+		fadeToBlack.enabled = false;
 	}
 }

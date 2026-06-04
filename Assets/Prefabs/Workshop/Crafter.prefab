@@ -48,8 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InventoryInteractable
   _tooltip: Open
+  _tooltipOffset: {x: 0, y: 0}
   _window1: 1
   _window2: 4
+  _interactTime: 0.5
+  _renderer: {fileID: 0}
+  _regularMaterial: {fileID: 0}
+  _outlineMaterial: {fileID: 0}
 --- !u!114 &2240677748426239627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +91,7 @@ MonoBehaviour:
   _onContentsChanged:
     m_PersistentCalls:
       m_Calls: []
-  _database: {fileID: 11400000, guid: 48459dcbcd650eb449a4f300cc9e8359, type: 2}
+  _database: {fileID: 11400000, guid: f0b7359a7ec99fa4a9cb2053df4aaa10, type: 2}
   _resolver: {fileID: 2986117707734776887}
 --- !u!114 &2986117707734776887
 MonoBehaviour:
