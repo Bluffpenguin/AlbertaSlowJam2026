@@ -8,7 +8,7 @@ public class LoadScene : MonoBehaviour
 
 	public void LoadSelectedScene()
 	{
-		if (wantedSceneName.Contains("Game"))
+		if (wantedSceneName.Contains("WorkShop"))
 		{
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayGameButtonWhistle, this.transform.position);
 		}
@@ -17,7 +17,7 @@ public class LoadScene : MonoBehaviour
 
 		MenuManager.Instance.currentScene = wantedSceneName;
 
-		if (MenuManager.Instance.currentScene.Contains("Game"))
+		if (MenuManager.Instance.currentScene.Contains("WorkShop"))
 		{
 			MenuManager.Instance.inGame = true;
 		}
