@@ -25,9 +25,15 @@ public class AudioManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance != null)
-			Debug.LogWarning("Multiple audio manager instances!");
-		Instance = this;
+		if (Instance != null && Instance != this)
+		{
+			Destroy(this);
+		}
+		else
+		{
+			Instance = this;
+			DontDestroyOnLoad(Instance);
+		}
 		eventInstances = new List<EventInstance>();
 
 		masterBus = RuntimeManager.GetBus("bus:/");

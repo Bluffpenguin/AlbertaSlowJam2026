@@ -14,8 +14,14 @@ public class FMODEvents : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance != null)
-			Debug.LogWarning("Multiple FMOD event instances!");
-		Instance = this;
+		if (Instance != null && Instance != this)
+		{
+			Destroy(this);
+		}
+		else
+		{
+			Instance = this;
+			DontDestroyOnLoad(Instance);
+		}
 	}
 }
