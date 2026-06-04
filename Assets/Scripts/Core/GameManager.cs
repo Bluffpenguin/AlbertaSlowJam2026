@@ -16,13 +16,13 @@ public class GameManager : MonoBehaviour
 	public float SecondsPerMinute = 1;
 	[SerializeField] private int[] _quotas = new int[1] { 40 };
 
-	enum GameState
+	public enum GameState
 	{
 		InDungeon,
 		InShip,
 		EndScreen
 	}
-	[SerializeField] GameState gameState = GameState.InShip;
+	public GameState gameState = GameState.InShip;
 	bool dayStarted = false;
 
 	[Header("Dynamic Data")]
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 	public float CurrentHour, CurrentMinute;
 	public bool AdvanceClock = false;
 	public int PlayerMoney;
+	public int PlayerMoneyOverall = 0;
 	public int TodaysQuota;
 
 	public int DaysToWin => _quotas.Length;
@@ -106,10 +107,16 @@ public class GameManager : MonoBehaviour
 
 	public void EndDay()
 	{
+		PlayerMoneyOverall += PlayerMoney;
 		if (PlayerMoney >= _quotas[DayIndex] && gameState == GameState.InShip)
 		{
 			// Passed, proceed to next day
-			TransitionManager.Instance.SleepToNextDay.Invoke();
+			if (DayIndex + 1 >= DaysToWin)
+			{
+				TransitionManager.Instance.GameWin.Invoke("You win");
+			}
+			else
+				TransitionManager.Instance.SleepToNextDay.Invoke();
 		}
 		else
 		{
@@ -126,11 +133,6 @@ public class GameManager : MonoBehaviour
 		TimeElapsed = 0;
 		PlayerMoney = 0;
 		dayStarted = false;
-
-		if (DayIndex >= DaysToWin) {
-			EndGame();
-			return;
-		}
 
 		TodaysQuota = _quotas[DayIndex];
 

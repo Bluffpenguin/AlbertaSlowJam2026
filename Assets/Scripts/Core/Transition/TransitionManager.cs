@@ -15,16 +15,22 @@ public class TransitionManager : MonoBehaviour
 	internal UnityEvent MidDungeonTransition = new UnityEvent();
 	internal UnityEvent EndTransition = new UnityEvent();
     internal UnityEvent<string> GameOver = new UnityEvent<string>();
+	internal UnityEvent<string> GameWin = new UnityEvent<string>();
 	internal UnityEvent SleepToNextDay = new UnityEvent();
 
     [SerializeField] private Image fadeToBlack;
 
-    [Header("Game Over Objs")]
-    [SerializeField] private Image gameOverScreen;
+    [Header("Game End Screen Objs")]
+    [SerializeField] private Image gameEndScreen;
     [SerializeField] private GameObject gameOverButtons;
-	[SerializeField] private TextMeshProUGUI gameOverText;
+	[SerializeField] private GameObject gameWinButtons;
+	[SerializeField] private TextMeshProUGUI gameEndText;
+	[Space]
+	[SerializeField] private GameObject runInfo;
+	[SerializeField] private TextMeshProUGUI daysSurvivedText;
+	[SerializeField] private TextMeshProUGUI totalScoreText;
 
-    Transform shipPlayer;
+	Transform shipPlayer;
     Transform dungeonPlayer;
     Camera sceneCamera;
     Vector3 cameraLocalPos;
@@ -41,11 +47,12 @@ public class TransitionManager : MonoBehaviour
         TransitionToShip.AddListener(ToShip);
         TransitionToDungeon.AddListener(ToDungeon);
 		GameOver.AddListener(OnGameOver);
+		GameWin.AddListener(OnGameWin);
 		SleepToNextDay.AddListener(OnSleep);
 	}
 	void Start()
     {
-        gameOverScreen.gameObject.SetActive(false);
+        gameEndScreen.gameObject.SetActive(false);
         gameOverButtons.SetActive(false);
         dungeonPlayer = shipPlayer = Player.Instance.transform;
 
@@ -66,9 +73,10 @@ public class TransitionManager : MonoBehaviour
 
 	void OnSleep() { StartCoroutine(Sleep()); }
 	void OnGameOver(string message) { StartCoroutine(GameOverTransition(message)); }
-
 	public void OnGameOverRestartClicked() { StartCoroutine(GameOverRestart()); }
 	public void OnGameOverExitClicked() { return; }
+
+	void OnGameWin(string message) { StartCoroutine(GameWinTransition(message)); }
 
 	void MoveCamera(Transform player)
     {
@@ -153,30 +161,41 @@ public class TransitionManager : MonoBehaviour
     {
 
 		// Ensure the screen and text is transparent
-		Color transparent = gameOverScreen.color;
+		Color transparent = gameEndScreen.color;
         transparent.a = 0;
-        gameOverScreen.color = transparent;
-		transparent = gameOverText.color;
+        gameEndScreen.color = transparent;
+		transparent = gameEndText.color;
 		transparent.a = 0;
-		gameOverText.color = transparent;
+		gameEndText.color = transparent;
 
 		Player.Controller.PlayerInput.Disable();
-		gameOverScreen.gameObject.SetActive(true);
-		gameOverText.text = gameOverMessage;
+		gameEndScreen.gameObject.SetActive(true);
+		gameEndText.text = gameOverMessage;
 		gameOverButtons.SetActive(false);
-		while (gameOverScreen.color.a < 1 || gameOverText.color.a < 1)
+		while (gameEndScreen.color.a < 1 || gameEndText.color.a < 1)
 		{
-			Color screenColor = gameOverScreen.color;
+			Color screenColor = gameEndScreen.color;
 			screenColor.a += 1 * Time.unscaledDeltaTime;
-			gameOverScreen.color = screenColor;
+			gameEndScreen.color = screenColor;
 
-			Color textColor = gameOverText.color;
+			Color textColor = gameEndText.color;
 			textColor.a += 1 * Time.unscaledDeltaTime;
-			gameOverText.color = textColor;
+			gameEndText.color = textColor;
 			yield return null;
 		}
-
-        gameOverButtons.SetActive(true);
+		
+		if (gameOverMessage == "Abandoned")
+		{
+			daysSurvivedText.text = "You survived " + GameManager.Instance.DayIndex.ToString() + " days";
+			totalScoreText.text = "and made $" + GameManager.Instance.PlayerMoneyOverall.ToString();
+		}
+		else
+		{
+			daysSurvivedText.text = "You had a job for " + GameManager.Instance.DayIndex.ToString() + " days";
+			totalScoreText.text = "and made $" + GameManager.Instance.PlayerMoneyOverall.ToString();
+		}
+		runInfo.SetActive(true);
+		gameOverButtons.SetActive(true);
 	}
 
     IEnumerator GameOverRestart()
@@ -187,7 +206,9 @@ public class TransitionManager : MonoBehaviour
 
 		fadeToBlack.enabled = true;
 		gameOverButtons.SetActive(false);
-		gameOverScreen.gameObject.SetActive(false);
+		gameWinButtons.SetActive(false);
+		runInfo.SetActive(false);
+		gameEndScreen.gameObject.SetActive(false);
 
 		MidShipTransition.Invoke();
 		dungeonPlayer.gameObject.SetActive(false);
@@ -210,6 +231,40 @@ public class TransitionManager : MonoBehaviour
 
 		EndTransition.Invoke();
 		fadeToBlack.enabled = false;
+	}
+
+	IEnumerator GameWinTransition(string gameOverMessage)
+	{
+
+		// Ensure the screen and text is transparent
+		Color transparent = gameEndScreen.color;
+		transparent.a = 0;
+		gameEndScreen.color = transparent;
+		transparent = gameEndText.color;
+		transparent.a = 0;
+		gameEndText.color = transparent;
+
+		Player.Controller.PlayerInput.Disable();
+		gameEndScreen.gameObject.SetActive(true);
+		gameEndText.text = gameOverMessage;
+		gameWinButtons.SetActive(false);
+		while (gameEndScreen.color.a < 1 || gameEndText.color.a < 1)
+		{
+			Color screenColor = gameEndScreen.color;
+			screenColor.a += 1 * Time.unscaledDeltaTime;
+			gameEndScreen.color = screenColor;
+
+			Color textColor = gameEndText.color;
+			textColor.a += 1 * Time.unscaledDeltaTime;
+			gameEndText.color = textColor;
+			yield return null;
+		}
+
+		daysSurvivedText.text = "You survived the entire week";
+		totalScoreText.text = "and made $" + GameManager.Instance.PlayerMoneyOverall.ToString();
+		runInfo.SetActive(true);
+
+		gameWinButtons.SetActive(true);
 	}
 
 	IEnumerator Sleep()
