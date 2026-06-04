@@ -12,8 +12,12 @@ public class LoadScene : MonoBehaviour
 		{
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayGameButtonWhistle, this.transform.position);
 		}
+		else
+		{
+			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
+		}
 
-		SceneManager.LoadScene(wantedSceneName);
+			SceneManager.LoadScene(wantedSceneName);
 
 		MenuManager.Instance.currentScene = wantedSceneName;
 
