@@ -20,10 +20,10 @@ MonoBehaviour:
   _itemTile: {fileID: 11400000, guid: 58a9c82cd65ae954385ef682a925ae50, type: 2}
   _results:
   - _ingredient: {fileID: 11400000, guid: d6b89cfd217a2d7448535f27f36f2ad2, type: 2}
-    _count: 5
+    _count: 3
     _dropRate: 0.9
   - _ingredient: {fileID: 11400000, guid: 9da5fbf9bccf8d84e86302b8b9123365, type: 2}
-    _count: 4
+    _count: 2
     _dropRate: 0.9
   - _ingredient: {fileID: 11400000, guid: c630a53855bd1414e92e5d5aab2062a7, type: 2}
     _count: 1

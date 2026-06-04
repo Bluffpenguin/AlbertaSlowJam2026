@@ -43,6 +43,7 @@ public class ItemTile : MonoBehaviour, IInteractable
 		var inventory = Player.Inventory;
 		Debug.Assert(inventory != null, context: this);
 		inventory.Add(stack);
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PickUpItem, this.transform.position);
 		_tilemap.SetTile(_cellPosition, null);
 	}
 
