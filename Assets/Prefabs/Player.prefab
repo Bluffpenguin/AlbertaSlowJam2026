@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d838b5cc0b1a47b85048fd0bf016c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::Player
+  _disablePause: 0
   _detector: {fileID: 2383901432766672761}
   _moveSpeed: 10
   _dashSpeed: 50
