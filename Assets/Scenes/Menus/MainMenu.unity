@@ -1606,6 +1606,20 @@ MonoBehaviour:
       Data3: -1697402234
       Data4: 904945904
     Path: event:/SFX/Player/Footsteps
+  <ButtonHiss>k__BackingField:
+    Guid:
+      Data1: 1338868759
+      Data2: 1229241439
+      Data3: -1320920399
+      Data4: -648371073
+    Path: event:/SFX/UI/ButtonHiss
+  <PlayGameButtonWhistle>k__BackingField:
+    Guid:
+      Data1: 323357674
+      Data2: 1315804330
+      Data3: 203520917
+      Data4: 601499597
+    Path: event:/SFX/UI/PlayGameWhistle
   <ShopMusic>k__BackingField:
     Guid:
       Data1: -231751510
