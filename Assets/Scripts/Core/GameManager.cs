@@ -9,11 +9,21 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private string _hudScene = "HUD";
 
 	[Header("Game Settings")]
+	[SerializeField] public bool AdvanceClockInShip = true;
 	[Range(1, 12)] public int WakeUpHour = 6;
 	[Range(13, 24)] public int EndOfDayHour = 18;
 	[Tooltip("The ratio between realtime seconds to in-game minutes.")]
 	public float SecondsPerMinute = 1;
 	[SerializeField] private int[] _quotas = new int[1] { 40 };
+
+	public enum GameState
+	{
+		InDungeon,
+		InShip,
+		EndScreen
+	}
+	public GameState gameState = GameState.InShip;
+	bool dayStarted = false;
 
 	[Header("Dynamic Data")]
 	public int DayIndex = -1;
@@ -21,6 +31,7 @@ public class GameManager : MonoBehaviour
 	public float CurrentHour, CurrentMinute;
 	public bool AdvanceClock = false;
 	public int PlayerMoney;
+	public int PlayerMoneyOverall = 0;
 	public int TodaysQuota;
 
 	public int DaysToWin => _quotas.Length;
@@ -46,6 +57,9 @@ public class GameManager : MonoBehaviour
 		Instance = this;
 		this.transform.SetParent(null);
 		DontDestroyOnLoad(this.gameObject);
+
+		TransitionManager.Instance.TransitionToShip.AddListener(SwitchToShip);
+		TransitionManager.Instance.TransitionToDungeon.AddListener(SwitchToDungeon);
 	}
 
 	private void Start()
@@ -56,14 +70,23 @@ public class GameManager : MonoBehaviour
 
 	public void Update()
 	{
-		if (!AdvanceClock) {
+		if (!AdvanceClock || !dayStarted) {
 			return;
 		}
+
+		if (!AdvanceClockInShip && gameState == GameState.InShip) return;
 
 		TimeElapsed += Time.deltaTime;
 		var minutesPassed = TimeElapsed / SecondsPerMinute;
 		CurrentHour = WakeUpHour + (minutesPassed / 60);
 		CurrentMinute = minutesPassed % 60;
+
+		if (CurrentHour >= EndOfDayHour)
+		{
+			AdvanceClock = false;
+			EndDay();
+		}
+
 	}
 
 	public async void StartGame()
@@ -80,6 +103,27 @@ public class GameManager : MonoBehaviour
 	{
 		DayIndex = -1;
 		TimeElapsed = 0;
+		gameState = GameState.InShip;
+	}
+
+	public void EndDay()
+	{
+		PlayerMoneyOverall += PlayerMoney;
+		if (PlayerMoney >= _quotas[DayIndex] && gameState == GameState.InShip)
+		{
+			// Passed, proceed to next day
+			if (DayIndex + 1 >= DaysToWin)
+			{
+				TransitionManager.Instance.GameWin.Invoke("You win");
+			}
+			else
+				TransitionManager.Instance.SleepToNextDay.Invoke();
+		}
+		else
+		{
+			// Failed quota
+			EndGame();
+		}
 	}
 
 	public void MoveToNextDay()
@@ -89,11 +133,7 @@ public class GameManager : MonoBehaviour
 		DayIndex++;
 		TimeElapsed = 0;
 		PlayerMoney = 0;
-
-		if (DayIndex >= DaysToWin) {
-			EndGame();
-			return;
-		}
+		dayStarted = false;
 
 		TodaysQuota = _quotas[DayIndex];
 
@@ -104,8 +144,25 @@ public class GameManager : MonoBehaviour
 		AdvanceClock = true;
 	}
 
+	void SwitchToDungeon() 
+	{
+		gameState = GameState.InDungeon;
+		dayStarted = true;
+	}
+	void SwitchToShip() {  gameState = GameState.InShip; }
+
 	public void EndGame()
 	{
+		Time.timeScale = 0;
+		
+		if (gameState == GameState.InDungeon)
+		{
+			TransitionManager.Instance.GameOver.Invoke("Abandoned");
+		}
+		else { TransitionManager.Instance.GameOver.Invoke("Unemployed"); }
+
+		gameState = GameState.EndScreen;
+
 		Debug.Log("Game has ended");
 	}
 }
