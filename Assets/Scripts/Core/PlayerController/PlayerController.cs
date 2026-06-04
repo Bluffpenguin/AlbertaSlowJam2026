@@ -1,3 +1,4 @@
+using FMOD.Studio;
 public class PlayerController : MonoBehaviour
 {
 	public InputSystem_Actions PlayerInput { get => _playerInput; }
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 _moveDir;
 	private Vector2 _dashDirection;
 	private float _dashCooldownTimer;
+	private EventInstance _playerFootsteps;
 
 	private bool _canMove = true;
 	Coroutine _currentStun = null;

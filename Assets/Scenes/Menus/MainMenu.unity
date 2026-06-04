@@ -1748,6 +1748,13 @@ MonoBehaviour:
       Data3: -1088892795
       Data4: 1201266261
     Path: event:/SFX/Items/MoneyGain
+  <PlayerFootsteps>k__BackingField:
+    Guid:
+      Data1: -331703091
+      Data2: 1167550090
+      Data3: -1697402234
+      Data4: 904945904
+    Path: event:/SFX/Player/Footsteps
   <ShopMusic>k__BackingField:
     Guid:
       Data1: -231751510
