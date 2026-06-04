@@ -38,7 +38,7 @@ public class InteractionDetector : MonoBehaviour
 				_timeHeld = 0;
 				interactable.ToggleOutline(true);
 				_targetTime = interactable.InteractTime;
-				TooltipManager.CallTooltip.Invoke(collider.transform.position + (Vector3)interactable.TooltipOffset, interactable.Tooltip);
+				TooltipManager.CallTooltip.Invoke(collider.transform.position + (Vector3)interactable.TooltipOffset, interactable.Tooltip, interactable.InteractTime);
 			}
 				
 		}
