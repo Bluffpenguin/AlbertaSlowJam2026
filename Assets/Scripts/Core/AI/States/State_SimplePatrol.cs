@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class State_SimplePatrol : AIState
 {
 	float patrolSpeed = 5f;
-	int currentPatrolIndex = 0;
 	private readonly float stallTimeMax = 2f;
 	private readonly float stallTimeMin = 0.5f;
 	private bool reversePatrol = false, stalling = false;
@@ -19,16 +18,14 @@ public class State_SimplePatrol : AIState
 
 	public override void Enter()
 	{
-		stalling = true;
-		enemyInfo.rm.StartCoroutine(WaitForPathToBeCalculated());
-		
-        base.Enter();
+		path = enemyInfo.rm.GetPatrol(enemyInfo.enemyId);
+		base.Enter();
 	}
 
 	public override void Update()
 	{
 
-		if (CanSeePlayer())
+		if (CanSeePlayer() && !Player.Inventory.IsEmpty())
 		{
 			nextState = new State_SimplePursue(enemyInfo, player);
 			stage = EVENT.EXIT;
@@ -63,6 +60,9 @@ public class State_SimplePatrol : AIState
 		if (stalling)
 			return;
 
+		if (currentWP == path.Count || currentWP <= -1)
+			return;
+
 		if (Vector2.Distance(path[currentWP].getId().transform.position, enemyInfo.npc.transform.position) < accuracy)
 		{
 			currentNode = path[currentWP].getId();
@@ -84,6 +84,8 @@ public class State_SimplePatrol : AIState
 			Vector2 direction = (lookAtGoal - (Vector2)enemyInfo.npc.transform.position).normalized;
 
 			LookTowards(goal.position);
+			if (enemyInfo.rb == null) Debug.Log("No rb");
+
 			enemyInfo.rb.AddForce(patrolSpeed * Time.fixedDeltaTime * direction, ForceMode2D.Impulse);
 			//enemyInfo.npc.transform.Translate(patrolSpeed * Time.deltaTime * direction);
 		}
@@ -99,16 +101,6 @@ public class State_SimplePatrol : AIState
 	{
 		float stallTime = Random.Range(stallTimeMin, stallTimeMax);
 		yield return new WaitForSeconds(stallTime);
-		stalling = false;
-	}
-
-	IEnumerator WaitForPathToBeCalculated()
-	{
-		while (!enemyInfo.rm.calculatedPatrols)
-		{
-			yield return null;
-		}
-		path = enemyInfo.rm.GetPatrol(enemyInfo.enemyId);
 		stalling = false;
 	}
 }

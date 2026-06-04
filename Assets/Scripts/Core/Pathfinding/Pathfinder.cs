@@ -9,14 +9,14 @@ public class Pathfinder : MonoBehaviour
 
 	public bool AStar(Node start, Node end)
 	{
+		if (start == null || end == null) return false;
+
+
 		if (start.getId() == end.getId())
 		{
 			pathList.Clear();
 			return false;
 		}
-
-
-		if (start == null || end == null) return false;
 
 		List<Node> open = new List<Node>();
 		List<Node> closed = new List<Node>();
@@ -127,18 +127,36 @@ public class Pathfinder : MonoBehaviour
 
 		while (currentNode < endNode && prevention != 99)
 		{
-			Vector3 currPos = rm.tileMap.CellToWorld((Vector3Int)path[currentNode].position);
+			Vector3 currPos = rm.navTileMap.CellToWorld((Vector3Int)path[currentNode].position);
 			bool foundShortcut = false;
 
 			for (int i = endNode; i > currentNode; i--)
 			{
-				Vector3 checkPos = rm.tileMap.CellToWorld((Vector3Int)path[i].position);
+				Vector3 checkPos = rm.navTileMap.CellToWorld((Vector3Int)path[i].position);
 				//Vector2 direction = (checkPos - currPos).normalized;
 				//float distance = Vector2.Distance(currPos, checkPos);
 
 				
 				if (!Physics2D.Linecast(currPos, checkPos, obstructions))
 				{
+					Vector2Int dir = path[i].position - path[currentNode].position;
+					if (dir.x > 1 && rm.GetNode(path[currentNode].position + new Vector2Int(1,0)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+					else if (dir.x < -1 && rm.GetNode(path[currentNode].position + new Vector2Int(-1, 0)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+					else if (dir.y > 1 && rm.GetNode(path[currentNode].position + new Vector2Int(0, 1)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+					else if (dir.y < -1 && rm.GetNode(path[currentNode].position + new Vector2Int(0, -1)) == null)
+					{
+						optimizedPath.Add(path[currentNode + 1]);
+					}
+
 					optimizedPath.Add(path[i]);
 					currentNode = i;
 					foundShortcut = true;

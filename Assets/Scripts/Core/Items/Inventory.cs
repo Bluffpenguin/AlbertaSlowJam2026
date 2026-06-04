@@ -40,14 +40,18 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 	/// <returns></returns>
 	public virtual bool Add(ItemStack item)
 	{
-		int index;
-		for (index = 0; index < Capacity; index++) {
-			if (this[index].IsEmpty() || (_itemsStack && this[index].Data == item.Data)) {
+		int index = -1;
+		for (int i = 0; i < Capacity; i++) {
+			if (this[i].IsEmpty()) {
+				if (index < 0)
+					index = i;
+			} else if (this[i].IsCompatible(item, _itemsStack)) {
+				index = i;
 				break;
 			}
 		}
 
-		if (index >= Capacity) {
+		if (index < 0 || index >= Capacity) {
 			Debug.LogWarning("Cannot Insert item; inventory is full.", this);
 			return false;
 		} else {
@@ -63,7 +67,7 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 	/// <returns></returns>
 	public virtual bool Insert(int slot, ItemStack item)
 	{
-		if (this[slot].IsEmpty() || (_itemsStack && this[slot].Data == item.Data)) {
+		if (item.IsCompatible(this[slot], _itemsStack)) {
 			this[slot] += item;
 			return true;
 		} else {
@@ -104,6 +108,15 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 		removed = this[slot] with { Count = Mathf.Min(count, this[slot].Count) };
 		this[slot] -= removed;
 		return removed.Count == count;
+	}
+
+	public bool IsEmpty()
+	{
+		foreach (ItemStack item in _contents)
+		{
+			if (item.Data != null) return false;
+		}
+		return true;
 	}
 
 	public virtual bool RemoveAllAt(int slot) => RemoveAt(slot, this[slot].Count, out _);
@@ -182,33 +195,55 @@ public struct ItemStack : IEquatable<ItemStack>, IComparable<ItemStack>
 		(false, false) => Data.name.CompareTo(other.Data.name),
 	};
 
-	public static ItemStack operator +(ItemStack left, ItemStack right)
+	/// <summary>
+	/// Checks if two item stacks can be combined.
+	/// </summary>
+	/// <param name="other"></param>
+	/// <param name="allowStacking"></param>
+	/// <returns></returns>
+	public readonly bool IsCompatible(ItemStack other, bool allowStacking = true)
 	{
-		switch (left.IsEmpty(), right.IsEmpty()) {
+		if (this.IsEmpty() || other.IsEmpty()) {
+			return true;
+		} else if (allowStacking) {
+			return this.Data == other.Data && this.SellValue == other.SellValue;
+		} else {
+			return false;
+		}
+	}
+
+	public static ItemStack Combine(ItemStack a, ItemStack b, bool allowStacking = true)
+	{
+		if (!a.IsCompatible(b, allowStacking)) {
+			throw new ArgumentException($"Cannot combine stacks {a} and {b} because they are not compatible.");
+		}
+
+		switch (a.IsEmpty(), b.IsEmpty()) {
 		case (true, true):
-			return ItemStack.Empty;
+			return Empty;
 		case (true, false):
-			return right;
+			return b;
 		case (false, true):
-			return left;
+			return a;
 		case (false, false):
-			Debug.Assert(left.Data == right.Data);
-			float avg = (left.SellValue + right.SellValue) / 2f;
-			return left with {
-				Count = left.Count + right.Count,
+			float avg = (a.SellValue + b.SellValue) / 2f;
+			return a with {
+				Count = a.Count + b.Count,
 				SellValue = Mathf.RoundToInt(avg),
 			};
 		}
 	}
 
-	public static ItemStack operator -(ItemStack left, ItemStack right)
+	public static ItemStack operator +(ItemStack left, ItemStack right) => Combine(left, right);
+	public static ItemStack operator +(ItemStack left, int right)
 	{
-		if (left.IsEmpty() || right.IsEmpty())
-			return ItemStack.Empty;
-		Debug.Assert(left.Data == right.Data);
-		var remainder = left with { Count = left.Count - right.Count };
-		if (remainder.IsEmpty())
-			remainder = ItemStack.Empty;
-		return remainder;
+		left = left with { Count = left.Count + right };
+		if (left.IsEmpty())
+			return Empty;
+		else
+			return left;
 	}
+
+	public static ItemStack operator -(ItemStack left, ItemStack right) => left + -right.Count;
+	public static ItemStack operator -(ItemStack left, int right) => left + -right;
 }

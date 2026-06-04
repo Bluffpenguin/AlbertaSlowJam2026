@@ -1,31 +1,29 @@
-using UnityEditor.Graphs;
-using UnityEngine;
+using System.Linq;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Pathfinder))]
 public class RoomManager : MonoBehaviour
 {
 	Dictionary<Vector2Int, Node> nodeDictionary;
-	internal Tilemap tileMap;
+	internal Tilemap navTileMap, itemTileMap;
 	bool links_generated = false;
 
 	internal Pathfinder pf;
-	[System.Serializable] struct Patrol { public List<Node> smoothedPath; }
-	[SerializeField] private Patrol[] patrolList = new Patrol[3];
-	internal bool calculatedPatrols = false;
-	private int numOfPatrols = 0;
+	[System.Serializable] struct Patrol { public List<Node> patrolPath; public Node guardSpot; }
+	[SerializeField] private Patrol[] patrolList;
+	private int actualEnemiesCount = 0;
+	public int expectedEnemiesCount = 0;
 
-	private void Awake()
-	{
-		for (int i = 0; i < 3; i++) 
-		{
-			patrolList[i].smoothedPath = new List<Node>();
-		}
-	}
+
 	private void Start()
 	{
 		pf = GetComponent<Pathfinder>();
-
+		patrolList = new Patrol[expectedEnemiesCount];
+		for (int i = 0; i < expectedEnemiesCount; i++)
+		{
+			patrolList[i].patrolPath = null;
+			patrolList[i].guardSpot = null;
+		}
 	}
 
 	public void GenerateLink(HashSet<Vector2Int> tiles, Tilemap map, bool diagonal)
@@ -87,13 +85,13 @@ public class RoomManager : MonoBehaviour
 			}
 		}
 
-		tileMap = map;
+		navTileMap = map;
 		links_generated = true;
 	}
 
 	public Node GetNode(GameObject nodeObj)
 	{
-		Vector2Int pos = (Vector2Int)tileMap.WorldToCell(nodeObj.transform.position);
+		Vector2Int pos = (Vector2Int)navTileMap.WorldToCell(nodeObj.transform.position);
 		if (nodeDictionary.TryGetValue(pos, out Node node))
 			return node;
 
@@ -110,22 +108,60 @@ public class RoomManager : MonoBehaviour
 
 	}
 
-	public void AddPatrol(List<Node> patrol)
+	public void PlaceItem(Vector2Int pos, ItemStack item)
 	{
-		if (numOfPatrols == 3)
+		itemTileMap.SetTile((Vector3Int)pos, item.Data.ItemTile);
+	}
+
+	public Node GetRandomFleePosition(Transform retreatFrom, float minDistance)
+	{
+		List<Vector2Int> roomPositions = nodeDictionary.Keys.ToList();
+		Vector2Int retreatFromPos = (Vector2Int)navTileMap.WorldToCell(retreatFrom.position);
+
+		int fallback = 0;
+		Vector2Int currPosition = retreatFromPos;
+		while (Vector2Int.Distance(currPosition, retreatFromPos) < minDistance && fallback < 25)
 		{
-			Debug.Log("This room can only support 3 patrols");
+			int rand = Random.Range(0, roomPositions.Count);
+			currPosition = roomPositions[rand];
+			fallback++;
+		}
+
+		return GetNode(currPosition);
+		
+	}
+
+	public void AddPatrol(List<Node> patrol, int enemyId)
+	{
+		if (actualEnemiesCount == expectedEnemiesCount)
+		{
+			Debug.Log("This room cant support that many enemies");
 			return;
 		}
 
-		patrolList[numOfPatrols].smoothedPath = patrol;
-		numOfPatrols++;
-		calculatedPatrols = true;
+		patrolList[enemyId].patrolPath = patrol;
+		actualEnemiesCount++;
+	}
+
+	public void AddGuard(Node guardSpot, int enemyId)
+	{
+		if (actualEnemiesCount == expectedEnemiesCount)
+		{
+			Debug.Log("This room cant support that many enemies");
+			return;
+		}
+		patrolList[enemyId].guardSpot = guardSpot;
+		actualEnemiesCount++;
 	}
 
 	public List<Node> GetPatrol(int index)
 	{
-		return patrolList[index].smoothedPath;
+		return patrolList[index].patrolPath;
+	}
+
+	public Node GetGuardSpot(int index)
+	{
+		return patrolList[index].guardSpot;
 	}
 
 
@@ -146,6 +182,36 @@ public class RoomManager : MonoBehaviour
 			}
 			Gizmos.color = Color.white;
 		}
+
+		if (actualEnemiesCount > 0)
+		{
+			foreach (Patrol patrol in patrolList)
+			{
+				
+				if (patrol.patrolPath != null)
+				{
+					Gizmos.color = new Color(0f, 0f, 1f, 0.4f);
+					for (int i = 0; i < patrol.patrolPath.Count; i++)
+					{
+						if (i + 1 < patrol.patrolPath.Count)
+						{
+							// Draw lines between points
+							Gizmos.DrawLine(patrol.patrolPath[i].getId().transform.position,
+											patrol.patrolPath[i+1].getId().transform.position);
+						}
+
+						Gizmos.DrawSphere(patrol.patrolPath[i].getId().transform.position, navTileMap.cellSize.x / 5);
+					}
+				}
+				else
+				{
+					Gizmos.color = new Color(1f, 0.27f, 0f, 0.4f);
+					Gizmos.DrawSphere(patrol.guardSpot.getId().transform.position, navTileMap.cellSize.x / 5);
+				}
+			}
+			Gizmos.color = Color.white;
+		}
+		
 
 	}
 }

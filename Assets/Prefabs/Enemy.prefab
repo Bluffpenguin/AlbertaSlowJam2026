@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41332203, y: 0.41332203, z: 0.68887}
+  m_LocalScale: {x: 0.22999999, y: 0.22999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2725107953375690274}
@@ -116,7 +116,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1024
     defaultState: 0
-    rb: {fileID: 0}
+    rb: {fileID: 2234780179259722852}
+    attackRange: 1
+  active: 0
 --- !u!50 &2234780179259722852
 Rigidbody2D:
   serializedVersion: 5
@@ -143,7 +145,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &-5229107880185994514
 CircleCollider2D:
   m_ObjectHideFlags: 0

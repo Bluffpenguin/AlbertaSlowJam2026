@@ -619,10 +619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a87f757a93f5c04d97182448af1d246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InventoryViewAutoLayout
+  _createOnStart: 0
   _model: {fileID: 0}
   _other: {fileID: 0}
   _slots: []
-  _refreshOnStart: 1
   _slotPrefab: {fileID: 431893191232389085}
   _slotParent: {fileID: 1956470781711145973}
 --- !u!222 &6026057154524852161

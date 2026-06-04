@@ -21,6 +21,7 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 
 	public override void Generate()
 	{
+		Debug.Log("Generating Dungeon...", this);
 		Clear();
 		var floor = CreateCorridors(out var potentialRooms);
 		_corridorPainter.PaintTiles(floor);
@@ -28,7 +29,9 @@ public class CorridorFirstGenerator : SimpleRandomWalkGenerator
 		_floorPainter.PaintTiles(rooms);
 		floor.UnionWith(rooms);
 		WallGenerator.CreateWalls(floor, _wallPainter, _wallData);
+		Debug.Log("Applying post-processors...", this);
 		base.ApplyPostProcessing(_rooms.Values);
+		Debug.Log("Generation Complete.", this);
 	}
 
 	private HashSet<Vector2Int> CreateCorridors(out HashSet<Vector2Int> potentialRooms)

@@ -22,6 +22,8 @@ public class InventoryView : MonoBehaviour
 
 	public virtual void ClearView()
 	{
+		if (_model == null)
+			return;
 		_model.OnContentsChanged -= UpdateSlotValue;
 		for (int i = 0; i < _slots.Length; i++) {
 			var slot = _slots[i];
@@ -55,7 +57,8 @@ public class InventoryView : MonoBehaviour
 		}
 			
 		if (_other.Source.Add(stack)) {
-			Debug.Assert(Source.RemoveAt(slotIndex, stack.Count, out _));
+			bool removed = Source.RemoveAt(slotIndex, stack.Count, out _);
+			Debug.Assert(removed);
 		}
 	}
 

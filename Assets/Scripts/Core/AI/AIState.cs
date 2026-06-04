@@ -7,7 +7,7 @@ public class AIState
 {
 	public enum STATE
 	{
-		IDLE, PATROL, PURSUE
+		IDLE, PATROL, PURSUE, ATTACK
 	};
 
 	public enum EVENT
@@ -35,7 +35,7 @@ public class AIState
 	{
 		get
 		{
-			return (Vector2Int)enemyInfo.rm.tileMap.WorldToCell(player.position);
+			return (Vector2Int)enemyInfo.rm.navTileMap.WorldToCell(player.position);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class AIState
 	{
 		get
 		{
-			return (Vector2Int)enemyInfo.rm.tileMap.WorldToCell(enemyInfo.npc.transform.position);
+			return (Vector2Int)enemyInfo.rm.navTileMap.WorldToCell(enemyInfo.npc.transform.position);
 		}
 	}
 
@@ -83,9 +83,14 @@ public class AIState
 	public bool CanSeePlayer()
 	{
 		
+		if (player == null) 
+		{
+			player = GameObject.FindGameObjectWithTag("Player").transform;
+			return false;
+		}
 		Vector3 direction = player.position - enemyInfo.npc.transform.position;
 		float angle = Vector3.Angle(direction, enemyInfo.heading.up);
-		float scaledDist = direction.magnitude * enemyInfo.rm.tileMap.cellSize.magnitude;
+		float scaledDist = direction.magnitude * enemyInfo.rm.navTileMap.cellSize.magnitude;
 
 		if (scaledDist  < visDist && angle < visAngle)
 		{
