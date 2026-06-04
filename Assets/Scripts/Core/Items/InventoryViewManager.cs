@@ -110,6 +110,20 @@ public class InventoryViewManager : MonoBehaviour
 		}
 	}
 
+	public void ClearAllInventories()
+	{
+		CloseAllOpenViews();
+		foreach (InventoryWindow window in Enum.GetValues(typeof(InventoryWindow)))
+		{
+			if (_windowsDict.ContainsKey(window) && _windowsDict[window].Item2 != null)
+			{
+				_windowsDict[window].Item2.Clear();
+				Debug.Log("Clearing " +  window.ToString());
+			}
+				
+		}
+	}
+
 	private (InventoryView view, Inventory model) GetViewModel(InventoryWindow window)
 	{
 		return window switch {
