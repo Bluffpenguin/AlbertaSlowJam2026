@@ -1,3 +1,4 @@
+using FMOD.Studio;
 public class PlayerController : MonoBehaviour
 {
 	public InputSystem_Actions PlayerInput { get => _playerInput; }
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 _moveDir;
 	private Vector2 _dashDirection;
 	private float _dashCooldownTimer;
+	private EventInstance _playerFootsteps;
 
 	private bool _canMove = true;
 	Coroutine _currentStun = null;
@@ -24,6 +26,11 @@ public class PlayerController : MonoBehaviour
 	{
 		_playerInput = new();
 		_rb = GetComponent<Rigidbody2D>();
+	}
+
+	private void Start()
+	{
+		_playerFootsteps = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerFootsteps);
 	}
 
 	private void OnEnable()
@@ -83,7 +90,7 @@ public class PlayerController : MonoBehaviour
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
 		}
 
-
+		UpdateSound(_moveDir);
 	}
 
 	public void Stun(float stunDuration)
@@ -102,5 +109,26 @@ public class PlayerController : MonoBehaviour
 		_canMove = true;
 		_currentStun = null;
 
+	}
+
+	private void UpdateSound(Vector2 moveDir)
+	{
+		// start footsteps event if the player is moving
+		if (moveDir != Vector2.zero)
+		{
+			// get playback state
+			PLAYBACK_STATE playbackState;
+			_playerFootsteps.getPlaybackState(out playbackState);
+
+			if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+			{
+				_playerFootsteps.start();
+			}
+		}
+		// otherwise stop the footsteps event
+		else
+		{
+			_playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+		}
 	}
 }

@@ -112,6 +112,7 @@ public class Seller : Inventory
 	{
 
 		GameManager.Instance.PlayerMoney += _sellTotal;
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.MoneyGained, this.transform.position);
 		_sellTotal = 0;
 		_sellTotalText.text = "$0";
 
