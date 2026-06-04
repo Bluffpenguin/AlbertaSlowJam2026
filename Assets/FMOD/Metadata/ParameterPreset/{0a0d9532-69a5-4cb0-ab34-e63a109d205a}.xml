@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{0a0d9532-69a5-4cb0-ab34-e63a109d205a}">
+		<property name="name">
+			<value>Hover</value>
+		</property>
+		<relationship name="folder">
+			<destination>{0151c5de-7fae-4a3b-8b90-e084f5178358}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{0352ed0a-28fe-4897-b3e4-6251b98b9b05}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{0352ed0a-28fe-4897-b3e4-6251b98b9b05}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

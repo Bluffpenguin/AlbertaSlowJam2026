@@ -14,7 +14,7 @@ public class UI_OnHighlight : MonoBehaviour
 	void Start()
     {
         button = GetComponent<Button>();
-        //_buttonHover = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ButtonHover);
+        _buttonHover = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ButtonHover);
 	}
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class UI_OnHighlight : MonoBehaviour
 			_leftGear.Rotate(new Vector3(0, 0, _leftGearSpeed * Time.deltaTime));
 			_rightGear.Rotate(new Vector3(0, 0, _rightGearSpeed * Time.deltaTime));
 		}
-		//UpdateSound();
+		UpdateSound();
 	}
 
     public void Highlight(bool isPointerOverButton)
@@ -35,7 +35,7 @@ public class UI_OnHighlight : MonoBehaviour
 
 	private void UpdateSound()
 	{
-		// start footsteps event if the player is moving
+		// play hover sounds if the button is highlighted
 		if (isHighlighted)
 		{
 			// get playback state
@@ -52,5 +52,11 @@ public class UI_OnHighlight : MonoBehaviour
 		{
 			_buttonHover.stop(STOP_MODE.ALLOWFADEOUT);
 		}
+	}
+
+	public void ForceStopSound()
+	{
+		isHighlighted = false;
+		_buttonHover.stop(STOP_MODE.ALLOWFADEOUT);
 	}
 }

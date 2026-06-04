@@ -41,7 +41,7 @@ public class TooltipManager : MonoBehaviour
 	{
 		CallTooltip.AddListener(OpenTooltip);
 		DismisTooltip.AddListener(CloseTooltip);
-		_tooltipTextObj.gameObject.SetActive(false);
+		_tooltipTransform.gameObject.SetActive(false);
 	}
 
 	private void Start()
@@ -92,6 +92,7 @@ public class TooltipManager : MonoBehaviour
 			{
 				isInteractPressed = false;
 				_fillBar.localScale = new Vector3(0, _fillBar.localScale.y);
+				CloseTooltip();
 			}
 		}
 	}
@@ -102,14 +103,14 @@ public class TooltipManager : MonoBehaviour
 		_tooltipTransform.position = pos;
 		_tooltipPromptObj.text = "E";
 		_tooltipTextObj.text = tip;
-		_tooltipTextObj.gameObject.SetActive(true);
+		_tooltipTransform.gameObject.SetActive(true);
 		_timeToCompleteCurrentAction = timeToComplete;
 		_isTooltipOpen = true;
 	}
 
 	void CloseTooltip()
 	{
-		_tooltipTextObj.gameObject.SetActive(false);
+		_tooltipTransform.gameObject.SetActive(false);
 		_loadedTooltip = null;
 		_tooltipTextObj.text = "";
 		_fillBar.localScale = new Vector3(0, _fillBar.localScale.y);

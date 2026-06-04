@@ -110,6 +110,9 @@ public class GameManager : MonoBehaviour
 
 	public void ResetGame()
 	{
+		Player.Inventory.Clear();
+
+		PlayerMoneyOverall = 0;
 		DayIndex = -1;
 		TimeElapsed = 0;
 		gameState = GameState.InShip;
@@ -146,6 +149,9 @@ public class GameManager : MonoBehaviour
 
 		TodaysQuota = _quotas[DayIndex];
 
+		CurrentHour = WakeUpHour;
+		CurrentMinute = 0;
+
 		foreach (var listener in _listeners)
 		{
 			listener.StartDay(DayIndex);
@@ -164,6 +170,8 @@ public class GameManager : MonoBehaviour
 	public void EndGame()
 	{
 		Time.timeScale = 0;
+		
+
 
 		if (gameState == GameState.InDungeon)
 		{
@@ -172,8 +180,13 @@ public class GameManager : MonoBehaviour
 		else { TransitionManager.Instance.GameOver.Invoke("Unemployed"); }
 
 		gameState = GameState.EndScreen;
-
 		Debug.Log("Game has ended");
+	}
+
+	public void StopMusic()
+	{
+		_ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
+		_shopMusic.stop(STOP_MODE.ALLOWFADEOUT);
 	}
 
 	private void UpdateMusic()
@@ -223,6 +236,8 @@ public class GameManager : MonoBehaviour
 			case GameState.EndScreen:
 				{
 					Debug.Log("Endscreen music / SFX");
+					_ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
+					_shopMusic.stop(STOP_MODE.ALLOWFADEOUT);
 					break;
 				}
 			default:

@@ -1606,6 +1606,13 @@ MonoBehaviour:
       Data3: -1697402234
       Data4: 904945904
     Path: event:/SFX/Player/Footsteps
+  <ButtonHover>k__BackingField:
+    Guid:
+      Data1: 650340056
+      Data2: 1286041328
+      Data3: -2115793262
+      Data4: -72296143
+    Path: event:/SFX/UI/Button_Hover
   <ShopMusic>k__BackingField:
     Guid:
       Data1: -231751510
