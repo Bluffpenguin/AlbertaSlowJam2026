@@ -57,7 +57,8 @@ public class InventoryView : MonoBehaviour
 		}
 			
 		if (_other.Source.Add(stack)) {
-			Debug.Assert(Source.RemoveAt(slotIndex, stack.Count, out _));
+			bool removed = Source.RemoveAt(slotIndex, stack.Count, out _);
+			Debug.Assert(removed);
 		}
 	}
 

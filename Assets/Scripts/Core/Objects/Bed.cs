@@ -27,7 +27,7 @@ public class Bed : MonoBehaviour, IInteractable
 
 	public void OnInteract()
 	{
-		GameManager.Instance.MoveToNextDay();
+		GameManager.Instance.EndDay();
 	}
 
 	public void ToggleOutline(bool outline)

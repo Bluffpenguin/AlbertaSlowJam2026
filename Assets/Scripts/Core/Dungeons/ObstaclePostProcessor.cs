@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Xml.Schema;
 
 public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
@@ -20,23 +19,54 @@ public class ObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 
 	public virtual void PlaceObstacle(RoomInfo room)
 	{
+		var size = _data.Dimensions;
+
 		Vector2Int[] directions = Direction2D.GetDirections(_data.CheckDirections);
-		var position = room.Tiles.ElementAt(Random.Range(0, room.Tiles.Count));
+		var origin = room.Tiles.ElementAt(Random.Range(0, room.Tiles.Count));
 
+		var dimensions = new RectInt(origin, size);
 		bool placeable = true;
-		if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.NextToWall)) {
-			placeable &= directions.Count(d => !room.Tiles.Contains(position + d)) < directions.Length;
-		}
 
-		if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.OpenSpace)) {
-			placeable &= directions.All(d => room.Tiles.Contains(position + d));
+		var area = dimensions.Area().ToArray();
+		for (int i = 0; i < area.Length; i++) {
+			Vector2Int position = area[i];
+			placeable &= room.Tiles.Contains(position);
 		}
 
 		if (!placeable)
 			return;
-		base.PaintTile(position);
+
+		int wallCount = 0, floorCount = 0;
+		for (int i = 0; i < directions.Length; i++) {
+			Vector2Int direction = directions[i];
+			var tiles = (from position in dimensions.Perimeter()
+						 let tile = direction + position
+						 where !dimensions.Contains(tile)
+						 select tile).ToArray();
+
+			if (tiles.All(t => room.Tiles.Contains(t)))
+				floorCount++;
+			else
+				wallCount++;
+		}
+
+		if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.NextToWall)) {
+			placeable &= wallCount < directions.Length;
+		}
+
+		if (_data.Requirements.HasFlag(ObstacleData.SpaceRequirements.OpenSpace)) {
+			placeable &= floorCount == directions.Length;
+		}
+
+		if (!placeable)
+			return;
+
+		foreach (var position in area) {
+			base.PaintTile(position);
+		}
+
 		if (_data.Impassable) {
-			room.Tiles.Remove(position);
+			room.Tiles.ExceptWith(area);
 		}
 	}
 }

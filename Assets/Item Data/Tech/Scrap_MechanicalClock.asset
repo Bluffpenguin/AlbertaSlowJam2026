@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff7510e56d14c541ad65321eaa2f000, type: 3}
+  m_Name: Scrap_MechanicalClock
+  m_EditorClassIdentifier: Scripts.Core::Scrap
+  _displayName: Mechanical Clock
+  _sprite: {fileID: 21300000, guid: 2cdc145ee9369f445a69d37f25294083, type: 3}
+  _description: 
+  _baseSellValue: 10
+  _itemTile: {fileID: 0}
+  _results:
+  - _ingredient: {fileID: 11400000, guid: 9da5fbf9bccf8d84e86302b8b9123365, type: 2}
+    _count: 1
+    _dropRate: 0.5
+  - _ingredient: {fileID: 11400000, guid: d6b89cfd217a2d7448535f27f36f2ad2, type: 2}
+    _count: 1
+    _dropRate: 0.5
+  - _ingredient: {fileID: 11400000, guid: c6d4f3808de126c4e8beed923f557577, type: 2}
+    _count: 1
+    _dropRate: 0.5
+  - _ingredient: {fileID: 11400000, guid: 4a2c8bdcf2ba2a748b2981c23b0b70e1, type: 2}
+    _count: 1
+    _dropRate: 0.5

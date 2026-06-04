@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine.Tilemaps;
 
+[Obsolete("Use Obstacle Post Processor instead.")]
 public class LargeObstaclePostProcessor : SingleTilePainter, IRoomPostProcessor
 {
 	[Tooltip("The tile used only for collisions")]

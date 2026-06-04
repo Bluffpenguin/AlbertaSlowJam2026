@@ -6,6 +6,7 @@ public class DungeonDisabler : MonoBehaviour
 
 	public void StartRoutine()
 	{
+		_grid.SetActive(true);
 		StartCoroutine(DisableAfter());
 	}
 
