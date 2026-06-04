@@ -10,6 +10,8 @@ public class FMODEvents : MonoBehaviour
 
 	[field: Header("Music")]
 	[field: SerializeField] public EventReference ShopMusic { get; private set; }
+	[field: SerializeField] public EventReference ScavengingMusic { get; private set; }
+	//[field: SerializeField] public EventReference SpottedMusic { get; private set; }
 	public static FMODEvents Instance { get; private set; }
 
 	private void Awake()

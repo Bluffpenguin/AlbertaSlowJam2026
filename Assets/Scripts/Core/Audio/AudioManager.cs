@@ -54,6 +54,11 @@ public class AudioManager : MonoBehaviour
 		musicEventInstance.start();
 	}
 
+	public void SetSpottedMusic(SpottedMusic spottedMusic)
+	{
+		musicEventInstance.setParameterByName("spotted", (float) spottedMusic);
+	}
+
 	public void PlayOneShot(EventReference sound, Vector3 worldPos)
 	{
 		RuntimeManager.PlayOneShot(sound, worldPos);

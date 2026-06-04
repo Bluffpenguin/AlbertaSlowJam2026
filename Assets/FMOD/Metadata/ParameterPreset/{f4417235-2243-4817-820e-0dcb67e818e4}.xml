@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{f4417235-2243-4817-820e-0dcb67e818e4}">
+		<property name="name">
+			<value>Spotted</value>
+		</property>
+		<relationship name="folder">
+			<destination>{0151c5de-7fae-4a3b-8b90-e084f5178358}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{175074c2-dea7-4760-bf92-a09068f1439c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{175074c2-dea7-4760-bf92-a09068f1439c}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>NotSpotted</value>
+			<value>Spotted</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

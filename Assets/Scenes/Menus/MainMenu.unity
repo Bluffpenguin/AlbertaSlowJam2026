@@ -1605,6 +1605,13 @@ MonoBehaviour:
       Data3: -1993051756
       Data4: 767251626
     Path: event:/Music/ShopMusic
+  <ScavengingMusic>k__BackingField:
+    Guid:
+      Data1: -1081259834
+      Data2: 1341099504
+      Data3: -236997499
+      Data4: 1472627898
+    Path: event:/Music/ScavengingMusic
 --- !u!1 &1675468254
 GameObject:
   m_ObjectHideFlags: 0

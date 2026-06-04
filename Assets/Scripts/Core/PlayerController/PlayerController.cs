@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
 		if (_playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0) {
 			_dashCooldownTimer = _dashCooldown;
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
+			//AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, this.transform.position);
 		}
 
 		UpdateSound(_moveDir);
