@@ -1,7 +1,6 @@
 using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.UI;
-using FMOD.Studio;
 
 public class UI_OnHighlight : MonoBehaviour
 {
