@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
 		CurrentHour = WakeUpHour;
 		CurrentMinute = 0;
 
+		Player.Inventory.Clear();
+
 		foreach (var listener in _listeners)
 		{
 			listener.StartDay(DayIndex);
