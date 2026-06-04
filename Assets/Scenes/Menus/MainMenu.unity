@@ -382,6 +382,14 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4835149251383923709, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835149251383923709, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4956332167937698799, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -473,7 +481,7 @@ PrefabInstance:
     - target: {fileID: 5111697378080301033, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 989348863}
     - target: {fileID: 5111697378080301033, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

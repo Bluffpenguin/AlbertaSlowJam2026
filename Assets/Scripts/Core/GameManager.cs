@@ -1,4 +1,5 @@
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private List<InvokeOnDayStart> _listeners = new();
 	[SerializeField] private string _dungeonScene = "Dungeon";
 	[SerializeField] private string _hudScene = "HUD";
+	private EventInstance _shopMusic, _ScavengeMusic;
 
 	[Header("Game Settings")]
 	[SerializeField] public bool AdvanceClockInShip = true;
@@ -49,7 +51,8 @@ public class GameManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance != null && Instance != this) {
+		if (Instance != null && Instance != this)
+		{
 			Destroy(this.gameObject);
 			return;
 		}
@@ -64,13 +67,16 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		_shopMusic = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ShopMusic);
+		_ScavengeMusic = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ScavengingMusic);
 		// Testing
 		StartGame();
 	}
 
 	public void Update()
 	{
-		if (!AdvanceClock || !dayStarted) {
+		if (!AdvanceClock || !dayStarted)
+		{
 			return;
 		}
 
@@ -86,7 +92,11 @@ public class GameManager : MonoBehaviour
 			AdvanceClock = false;
 			EndDay();
 		}
+	}
 
+	private void FixedUpdate()
+	{
+		UpdateMusic();
 	}
 
 	public async void StartGame()
@@ -96,7 +106,6 @@ public class GameManager : MonoBehaviour
 		ResetGame();
 		await Awaitable.MainThreadAsync();
 		MoveToNextDay();
-		AudioManager.Instance.InitializeMusic(FMODEvents.Instance.ShopMusic);
 	}
 
 	public void ResetGame()
@@ -137,24 +146,25 @@ public class GameManager : MonoBehaviour
 
 		TodaysQuota = _quotas[DayIndex];
 
-		foreach (var listener in _listeners) {
+		foreach (var listener in _listeners)
+		{
 			listener.StartDay(DayIndex);
 		}
 
 		AdvanceClock = true;
 	}
 
-	void SwitchToDungeon() 
+	void SwitchToDungeon()
 	{
 		gameState = GameState.InDungeon;
 		dayStarted = true;
 	}
-	void SwitchToShip() {  gameState = GameState.InShip; }
+	void SwitchToShip() { gameState = GameState.InShip; }
 
 	public void EndGame()
 	{
 		Time.timeScale = 0;
-		
+
 		if (gameState == GameState.InDungeon)
 		{
 			TransitionManager.Instance.GameOver.Invoke("Abandoned");
@@ -164,5 +174,62 @@ public class GameManager : MonoBehaviour
 		gameState = GameState.EndScreen;
 
 		Debug.Log("Game has ended");
+	}
+
+	private void UpdateMusic()
+	{
+		switch (gameState)
+		{
+			case GameState.InShip:
+				{
+					if (gameState == GameState.InShip)
+					{
+						// get playback state
+						_shopMusic.getPlaybackState(out PLAYBACK_STATE playbackState);
+
+						if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+						{
+							_shopMusic.start();
+						}
+						_ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
+					}
+					else
+					{
+						_shopMusic.stop(STOP_MODE.ALLOWFADEOUT);
+
+					}
+					break;
+				}
+			case GameState.InDungeon:
+				{
+					if (gameState == GameState.InDungeon)
+					{
+						// get playback state
+						_ScavengeMusic.getPlaybackState(out PLAYBACK_STATE playbackState);
+
+						if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+						{
+							_ScavengeMusic.start();
+						}
+
+						_shopMusic.stop(STOP_MODE.ALLOWFADEOUT);
+					}
+					else
+					{
+						_ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
+					}
+					break;
+				}
+			case GameState.EndScreen:
+				{
+					Debug.Log("Endscreen music / SFX");
+					break;
+				}
+			default:
+				{
+					Debug.LogWarning($"No GameState '{gameState}' Found");
+					break;
+				}
+		}
 	}
 }

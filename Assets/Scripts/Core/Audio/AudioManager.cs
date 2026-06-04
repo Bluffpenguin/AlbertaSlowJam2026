@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 
 	private Bus masterBus;
 	private Bus musicBus;
-	private Bus sfxBus;
+	private Bus sfxBus;	
 
 	private List<EventInstance> eventInstances;
 
@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour
 
 	public void SetSpottedMusic(SpottedMusic spottedMusic)
 	{
-		musicEventInstance.setParameterByName("spotted", (float) spottedMusic);
+		musicEventInstance.setParameterByName("Spotted", (float) spottedMusic);
 	}
 
 	public void PlayOneShot(EventReference sound, Vector3 worldPos)
