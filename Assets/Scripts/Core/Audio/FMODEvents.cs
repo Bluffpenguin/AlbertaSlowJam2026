@@ -7,6 +7,7 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference PickUpItem { get; private set; }
 	[field: SerializeField] public EventReference MoneyGained { get; private set; }
 	[field: SerializeField] public EventReference PlayerFootsteps { get; private set; }
+	[field: SerializeField] public EventReference PlayerDash { get; private set; }
 	[field: SerializeField] public EventReference ButtonHiss { get; private set; }
 	[field: SerializeField] public EventReference PlayGameButtonWhistle { get; private set; }
 
