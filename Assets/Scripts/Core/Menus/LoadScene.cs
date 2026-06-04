@@ -8,11 +8,20 @@ public class LoadScene : MonoBehaviour
 
 	public void LoadSelectedScene()
 	{
-		SceneManager.LoadScene(wantedSceneName);
+		if (wantedSceneName.Contains("WorkShop"))
+		{
+			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayGameButtonWhistle, this.transform.position);
+		}
+		else
+		{
+			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
+		}
+
+			SceneManager.LoadScene(wantedSceneName);
 
 		MenuManager.Instance.currentScene = wantedSceneName;
 
-		if (MenuManager.Instance.currentScene.Contains("Game"))
+		if (MenuManager.Instance.currentScene.Contains("WorkShop"))
 		{
 			MenuManager.Instance.inGame = true;
 		}
@@ -21,13 +30,14 @@ public class LoadScene : MonoBehaviour
 
 	public void LoadSettings()
 	{
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
 		SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
-
 		MenuManager.Instance.currentScene = "SettingsMenu";
 	}
 
 	public void CloseScene()
 	{
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
 		SceneManager.UnloadSceneAsync(MenuManager.Instance.currentScene);
 	}
 

@@ -55,6 +55,7 @@
 	<object class="GroupTrack" id="{4ab76989-7cc3-4909-b582-9f26fe90e7f0}">
 		<relationship name="modules">
 			<destination>{e7fdf2a1-a8a3-4862-9e4d-81fd933e91b0}</destination>
+			<destination>{1ef3bf15-9a40-4637-a413-9e6df0f00c5a}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{d33ad5a1-a925-47e2-b851-748f6c2f79f9}</destination>
@@ -63,12 +64,16 @@
 	<object class="Timeline" id="{14322ee1-affa-4ca8-8a55-e4138d8600e8}">
 		<relationship name="modules">
 			<destination>{e7fdf2a1-a8a3-4862-9e4d-81fd933e91b0}</destination>
+			<destination>{1ef3bf15-9a40-4637-a413-9e6df0f00c5a}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{a8591b37-ac17-4db5-94e2-142cf430db29}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{cded7d32-b85e-44ab-b45a-6078da275f1c}">
+		<property name="volume">
+			<value>-9</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{6648e240-e11a-4e47-9456-7db5cb70c29a}</destination>
 		</relationship>
@@ -86,11 +91,22 @@
 	</object>
 	<object class="MixerBusPanner" id="{75fd48ef-eef4-4ad4-aa3d-6b3c08b97553}" />
 	<object class="SingleSound" id="{e7fdf2a1-a8a3-4862-9e4d-81fd933e91b0}">
+		<property name="start">
+			<value>133.84614512471654</value>
+		</property>
 		<property name="length">
 			<value>118.15383219954649</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{9bd9e962-8992-43c0-b599-e67306ba7eee}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{1ef3bf15-9a40-4637-a413-9e6df0f00c5a}">
+		<property name="length">
+			<value>133.84614512471654</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{051bcfde-9142-4b44-86d5-9bb7beaf32da}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d33ad5a1-a925-47e2-b851-748f6c2f79f9}">
@@ -109,7 +125,7 @@
 	</object>
 	<object class="LoopRegion" id="{a8591b37-ac17-4db5-94e2-142cf430db29}">
 		<property name="position">
-			<value>0</value>
+			<value>133.84614512471654</value>
 		</property>
 		<property name="length">
 			<value>118.15383219954649</value>
