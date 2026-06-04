@@ -74,7 +74,10 @@ public class TransitionManager : MonoBehaviour
 	void OnSleep() { StartCoroutine(Sleep()); }
 	void OnGameOver(string message) { StartCoroutine(GameOverTransition(message)); }
 	public void OnGameOverRestartClicked() { StartCoroutine(GameOverRestart()); }
-	public void OnGameOverExitClicked() { return; }
+	public void OnGameOverExitClicked()
+	{
+		StartCoroutine(GameOverToMainMenu());
+	}
 
 	void OnGameWin(string message) { StartCoroutine(GameWinTransition(message)); }
 
@@ -159,7 +162,6 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator GameOverTransition(string gameOverMessage)
     {
-
 		// Ensure the screen and text is transparent
 		Color transparent = gameEndScreen.color;
         transparent.a = 0;
@@ -231,6 +233,36 @@ public class TransitionManager : MonoBehaviour
 
 		EndTransition.Invoke();
 		fadeToBlack.enabled = false;
+	}
+
+	IEnumerator GameOverToMainMenu()
+	{
+		SceneManager.LoadScene("MainMenu");
+
+		Color whole = fadeToBlack.color;
+		whole.a = 1;
+		fadeToBlack.color = whole;
+
+		fadeToBlack.enabled = true;
+		gameOverButtons.SetActive(false);
+		gameWinButtons.SetActive(false);
+		runInfo.SetActive(false);
+		gameEndScreen.gameObject.SetActive(false);
+		GameManager.Instance.StopMusic();
+		Destroy(GameManager.Instance.gameObject);
+
+		Player.Controller.PlayerInput.Enable();
+		Time.timeScale = 1;
+		while (fadeToBlack.color.a > 0)
+		{
+			Color color = fadeToBlack.color;
+			color.a -= (1) * Time.deltaTime;
+			fadeToBlack.color = color;
+			yield return null;
+		}
+
+		fadeToBlack.enabled = false;
+		Destroy(this.gameObject);
 	}
 
 	IEnumerator GameWinTransition(string gameOverMessage)

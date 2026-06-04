@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 	private void OnDisable()
 	{
 		_playerInput.Player.Disable();
+		_playerInput.UI.Disable();
 		_playerInput.Player.Interact.performed -= this.Interact_performed;
 		_playerInput.Player.Interact.canceled -= this.Interact_canceled;
 		_playerInput.Player.Pause.performed -= this.Pause_performed;
