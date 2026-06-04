@@ -110,8 +110,8 @@ public class GameManager : MonoBehaviour
 
 	public void ResetGame()
 	{
+		InventoryViewManager.Instance.ClearAllInventories();
 		Player.Inventory.Clear();
-
 		PlayerMoneyOverall = 0;
 		DayIndex = -1;
 		TimeElapsed = 0;
