@@ -11,9 +11,15 @@ public class MenuManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance != null)
-			Debug.LogWarning("Multiple menu manager instances!");
-		Instance = this;
+		if (Instance != null && Instance != this)
+		{
+			Destroy(this);
+		}
+		else
+		{
+			Instance = this;
+			DontDestroyOnLoad(Instance);
+		}
 		currentScene = SceneManager.GetActiveScene().name;
 		inGame = false;
 		//Debug.Log($"Current scene is: {currentScene}");
