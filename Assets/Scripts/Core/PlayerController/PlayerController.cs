@@ -102,8 +102,10 @@ public class PlayerController : MonoBehaviour
 		if (_playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0)
 		{
 			_dashCooldownTimer = _dashCooldown;
+			
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, this.transform.position);
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
+			UpdateAnimation();
 			_dashUI.OnDash(_dashCooldown);
 		}
 
@@ -129,6 +131,12 @@ public class PlayerController : MonoBehaviour
 			// Player is moving
 			_animDir = _rb.linearVelocity.normalized;
 			_anim.SetBool("IsWalking", true);
+			if (_dashCooldownTimer > 4.5f)
+			{
+				_anim.SetBool("IsDashing", true);
+			}
+			else _anim.SetBool("IsDashing", false);
+			
 			_anim.SetFloat("DirX", _animDir.x);
 			_anim.SetFloat("DirY", _animDir.y);
 

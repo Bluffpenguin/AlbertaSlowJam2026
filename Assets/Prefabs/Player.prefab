@@ -193,8 +193,10 @@ MonoBehaviour:
   _disablePause: 0
   _detector: {fileID: 2383901432766672761}
   _moveSpeed: 10
-  _dashSpeed: 50
+  _dashSpeed: 5
   _dashCooldown: 5
+  _dashUI: {fileID: 0}
+  _stunUI: {fileID: 0}
 --- !u!50 &5607530753002017595
 Rigidbody2D:
   serializedVersion: 5
