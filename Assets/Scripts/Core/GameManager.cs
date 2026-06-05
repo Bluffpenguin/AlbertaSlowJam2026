@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		UpdateMusic();
+		
 	}
 
 	public async void StartGame()
@@ -165,9 +165,14 @@ public class GameManager : MonoBehaviour
 	void SwitchToDungeon()
 	{
 		gameState = GameState.InDungeon;
+		UpdateMusic();
 		dayStarted = true;
 	}
-	void SwitchToShip() { gameState = GameState.InShip; }
+	void SwitchToShip() 
+	{
+		gameState = GameState.InShip;
+		UpdateMusic();
+	}
 
 	public void EndGame()
 	{

@@ -14,6 +14,7 @@ public class State_SimpleIdle : AIState
         : base(_enemyInfo, _player)
     {
         stateName = STATE.IDLE;
+		enemyInfo.anim.speed = 1;
     }
 
 	public override void Enter()
@@ -53,6 +54,7 @@ public class State_SimpleIdle : AIState
 				enemyInfo.heading.rotation = Quaternion.Euler(0, 0, GetNextDirection());
 			}
 		}
+		HandleAnimation();
 		base.Update();
 	}
 

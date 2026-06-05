@@ -80,6 +80,79 @@ public class AIState
 		return this;
 	}
 
+	public void HandleAnimation()
+	{
+		if (enemyInfo.rb.linearVelocity.magnitude > 0.1f)
+		{
+			// Enemy is moving
+			enemyInfo.anim.SetBool("isMoving", true);
+		}
+		else
+		{
+			// Enemy is idle
+			enemyInfo.anim.SetBool("isMoving", false);
+			
+		}
+
+		// Apply directoin
+		if (enemyInfo.heading.up.x > 0)
+		{
+			// right side
+			
+
+			if (enemyInfo.heading.up.y > 0.5f)
+			{
+				// up
+				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[0].rotation);
+				if (enemyInfo.spriteDirections[0].flipX) enemyInfo.spriteRenderer.flipX = true;
+				else enemyInfo.spriteRenderer.flipX = false;
+
+			}
+			else if (enemyInfo.heading.up.y < -0.5f)
+			{
+				// down
+				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[2].rotation);
+				if (enemyInfo.spriteDirections[2].flipX) enemyInfo.spriteRenderer.flipX = true;
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
+			else
+			{
+				// middle
+				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[1].rotation);
+				if (enemyInfo.spriteDirections[1].flipX) enemyInfo.spriteRenderer.flipX = true;
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
+		}
+		else
+		{
+			// left side
+			
+
+			if (enemyInfo.heading.up.y > 0.5f)
+			{
+				// up
+				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[5].rotation);
+				if (enemyInfo.spriteDirections[5].flipX) enemyInfo.spriteRenderer.flipX = true;
+				else enemyInfo.spriteRenderer.flipX = false;
+
+			}
+			else if (enemyInfo.heading.up.y < -0.5f)
+			{
+				// down
+				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[3].rotation);
+				if (enemyInfo.spriteDirections[3].flipX) enemyInfo.spriteRenderer.flipX = true;
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
+			else
+			{
+				// middle
+				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[4].rotation);
+				if (enemyInfo.spriteDirections[4].flipX) enemyInfo.spriteRenderer.flipX = true;
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
+		}
+	}
+
 	public bool CanSeePlayer()
 	{
 		

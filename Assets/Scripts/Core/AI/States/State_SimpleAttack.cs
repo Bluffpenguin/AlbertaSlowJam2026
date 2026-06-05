@@ -15,6 +15,7 @@ public class State_SimpleAttack : AIState
         : base(_enemyInfo, _player)
     {
         stateName = STATE.ATTACK;
+		enemyInfo.anim.speed = 2;
     }
 
 	public override void Enter()
@@ -40,7 +41,7 @@ public class State_SimpleAttack : AIState
 
 	public override void Update()
 	{
-		
+		HandleAnimation();
 
 		
 		base.Update();
