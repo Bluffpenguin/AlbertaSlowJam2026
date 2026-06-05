@@ -86,70 +86,66 @@ public class AIState
 		{
 			// Enemy is moving
 			enemyInfo.anim.SetBool("isMoving", true);
+
+			if (enemyInfo.heading.up.x > 0 && enemyInfo.heading.up.x > Mathf.Abs(enemyInfo.heading.up.y))
+			{
+				// Face right
+				enemyInfo.spriteRenderer.flipX = true;
+			}
+			else if (enemyInfo.heading.up.x < 0 && Mathf.Abs(enemyInfo.heading.up.x) > Mathf.Abs(enemyInfo.heading.up.y))
+			{
+				// Face left
+				enemyInfo.spriteRenderer.flipX = false;
+			}
+			else if (enemyInfo.heading.up.y > 0)
+			{
+				// Face up
+
+				//Placeholder
+				if (enemyInfo.heading.up.x > 0) { enemyInfo.spriteRenderer.flipX = true; }
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
+			else
+			{
+				// Face down
+
+				//Placeholder
+				if (enemyInfo.heading.up.x > 0) { enemyInfo.spriteRenderer.flipX = true; }
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
 		}
 		else
 		{
 			// Enemy is idle
 			enemyInfo.anim.SetBool("isMoving", false);
-			
-		}
 
-		// Apply directoin
-		if (enemyInfo.heading.up.x > 0)
-		{
-			// right side
-			
-
-			if (enemyInfo.heading.up.y > 0.5f)
+			if (enemyInfo.heading.up.x > 0 && enemyInfo.heading.up.x > Mathf.Abs(enemyInfo.heading.up.y))
 			{
-				// up
-				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[0].rotation);
-				//if (enemyInfo.spriteDirections[0].flipX) enemyInfo.spriteRenderer.flipX = true;
-				//else enemyInfo.spriteRenderer.flipX = false;
-
+				// Face right
+				enemyInfo.spriteRenderer.flipX = true;
 			}
-			else if (enemyInfo.heading.up.y < -0.5f)
+			else if (enemyInfo.heading.up.x < 0 && Mathf.Abs(enemyInfo.heading.up.x) > Mathf.Abs(enemyInfo.heading.up.y))
 			{
-				// down
-				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[2].rotation);
-				//if (enemyInfo.spriteDirections[2].flipX) enemyInfo.spriteRenderer.flipX = true;
-				//else enemyInfo.spriteRenderer.flipX = false;
+				// Face left
+				enemyInfo.spriteRenderer.flipX = false;
+			}
+			else if (enemyInfo.heading.up.y > 0)
+			{
+				// Face up
+
+				//Placeholder
+				if (enemyInfo.heading.up.x > 0) { enemyInfo.spriteRenderer.flipX = true; }
+				else enemyInfo.spriteRenderer.flipX = false;
 			}
 			else
 			{
-				// middle
-				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[1].rotation);
-				//if (enemyInfo.spriteDirections[1].flipX) enemyInfo.spriteRenderer.flipX = true;
-				//else enemyInfo.spriteRenderer.flipX = false;
-			}
-		}
-		else
-		{
-			// left side
-			
+				// Face down
 
-			if (enemyInfo.heading.up.y > 0.5f)
-			{
-				// up
-				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[5].rotation);
-				//if (enemyInfo.spriteDirections[5].flipX) enemyInfo.spriteRenderer.flipX = true;
-				//else enemyInfo.spriteRenderer.flipX = false;
+				//Placeholder
+				if (enemyInfo.heading.up.x > 0) { enemyInfo.spriteRenderer.flipX = true; }
+				else enemyInfo.spriteRenderer.flipX = false;
+			}
 
-			}
-			else if (enemyInfo.heading.up.y < -0.5f)
-			{
-				// down
-				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[3].rotation);
-				//if (enemyInfo.spriteDirections[3].flipX) enemyInfo.spriteRenderer.flipX = true;
-				//else enemyInfo.spriteRenderer.flipX = false;
-			}
-			else
-			{
-				// middle
-				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[4].rotation);
-				//if (enemyInfo.spriteDirections[4].flipX) enemyInfo.spriteRenderer.flipX = true;
-				//else enemyInfo.spriteRenderer.flipX = false;
-			}
 		}
 	}
 
