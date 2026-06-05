@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4b7863b2-16b6-4c7a-97ad-595ecb125389}">
+		<property name="assetPath">
+			<value>SFX/Interactables/TrapDoorOpen.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5412244897959184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{58fc9157-c198-4102-98e5-47d2aeb17037}</destination>
+		</relationship>
+	</object>
+</objects>

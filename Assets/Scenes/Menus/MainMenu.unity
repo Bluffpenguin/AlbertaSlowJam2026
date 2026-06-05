@@ -722,14 +722,14 @@ MonoBehaviour:
       Data2: 1293316534
       Data3: -1944071773
       Data4: 859925470
-    Path: event:/SFX/Items/PickUpItem
+    Path: event:/SFX/Interactables/PickUpItem
   <MoneyGained>k__BackingField:
     Guid:
       Data1: -406081979
       Data2: 1112047403
       Data3: -1088892795
       Data4: 1201266261
-    Path: event:/SFX/Items/MoneyGain
+    Path: event:/SFX/Interactables/MoneyGain
   <PlayerFootsteps>k__BackingField:
     Guid:
       Data1: 1239748440

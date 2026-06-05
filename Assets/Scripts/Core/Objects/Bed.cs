@@ -27,6 +27,7 @@ public class Bed : MonoBehaviour, IInteractable
 
 	public void OnInteract()
 	{
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.GoToBed, this.transform.position);
 		GameManager.Instance.EndDay();
 	}
 

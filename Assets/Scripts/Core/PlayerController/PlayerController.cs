@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 _moveDir;
 	private Vector2 _dashDirection;
 	private float _dashCooldownTimer;
-	private EventInstance _playerFootsteps;
+	private EventInstance _playerFootsteps, _playerStunned;
 
 	private bool _canMove = true;
 	Coroutine _currentStun = null;
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		_playerFootsteps = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerFootsteps);
+		_playerStunned = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.PlayerStunned);
 	}
 
 	private void OnEnable()
@@ -203,8 +204,7 @@ public class PlayerController : MonoBehaviour
 		if (moveDir != Vector2.zero && _canMove)
 		{
 			// get playback state
-			PLAYBACK_STATE playbackState;
-			_playerFootsteps.getPlaybackState(out playbackState);
+			_playerFootsteps.getPlaybackState(out PLAYBACK_STATE playbackState);
 
 			if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
 			{
@@ -215,6 +215,20 @@ public class PlayerController : MonoBehaviour
 		else
 		{
 			_playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+		}
+
+		if (!_canMove)
+		{
+			_playerStunned.getPlaybackState(out PLAYBACK_STATE playbackState);
+
+			if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+			{
+				_playerStunned.start();
+			}
+			else
+			{
+				_playerStunned.stop(STOP_MODE.ALLOWFADEOUT);
+			}
 		}
 	}
 }
