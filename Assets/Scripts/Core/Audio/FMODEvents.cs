@@ -13,9 +13,10 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference PlayGameButtonWhistle { get; private set; }
 
 	[field: Header("Music")]
-	[field: SerializeField] public EventReference ShopMusic { get; private set; }
-	[field: SerializeField] public EventReference ScavengingMusic { get; private set; }
-	[field: SerializeField] public EventReference MenuMusic { get; private set; }
+	[field: SerializeField] public EventReference GameMusic { get; private set; }
+	//[field: SerializeField] public EventReference ShopMusic { get; private set; }
+	//[field: SerializeField] public EventReference ScavengingMusic { get; private set; }
+	//[field: SerializeField] public EventReference MenuMusic { get; private set; }
 
 	public static FMODEvents Instance { get; private set; }
 

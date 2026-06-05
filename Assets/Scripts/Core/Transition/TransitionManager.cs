@@ -248,7 +248,6 @@ public class TransitionManager : MonoBehaviour
 		gameWinButtons.SetActive(false);
 		runInfo.SetActive(false);
 		gameEndScreen.gameObject.SetActive(false);
-		GameManager.Instance.StopMusic();
 		Destroy(GameManager.Instance.gameObject);
 
 		Player.Controller.PlayerInput.Enable();

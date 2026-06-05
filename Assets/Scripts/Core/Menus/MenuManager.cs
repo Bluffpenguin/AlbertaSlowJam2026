@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private bool _paused;
 	public bool Paused => _paused;
 	public bool inGame;
-	private EventInstance _menuMusic;
+	[SerializeField] private GameMusic gameMusic;
 
 	private void Awake()
 	{
@@ -29,12 +29,7 @@ public class MenuManager : MonoBehaviour
 
 	private void Start()
 	{
-		_menuMusic = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.MenuMusic);
-	}
-
-	private void FixedUpdate()
-	{
-		UpdateMusic();
+		AudioManager.Instance.InitializeMusic(FMODEvents.Instance.GameMusic);
 	}
 
 	public void Pause_and_Unpause()
@@ -53,24 +48,6 @@ public class MenuManager : MonoBehaviour
 			Time.timeScale = 0;
 			SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
 			_paused = true;
-		}
-	}
-
-	private void UpdateMusic()
-	{
-		if (!inGame)
-		{
-			_menuMusic.getPlaybackState(out PLAYBACK_STATE playbackState);
-
-			if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-			{
-				_menuMusic.start();
-			}
-		}
-		else
-		{
-			_menuMusic.stop(STOP_MODE.ALLOWFADEOUT);
-
 		}
 	}
 }
