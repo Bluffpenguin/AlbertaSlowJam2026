@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{318cd2d4-efba-4521-a24c-343e552ccc35}">
+		<property name="assetPath">
+			<value>SFX/Interactables/ItemPickUpSFX.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.52800000000000002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{58fc9157-c198-4102-98e5-47d2aeb17037}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -4,20 +4,29 @@ using FMODUnity;
 public class FMODEvents : MonoBehaviour
 {
 	[field: Header("SFX")]
+	// Interactables
 	[field: SerializeField] public EventReference PickUpItem { get; private set; }
 	[field: SerializeField] public EventReference MoneyGained { get; private set; }
+	[field: SerializeField] public EventReference OpenStorage { get; private set; }
+	[field: SerializeField] public EventReference CloseStorage { get; private set; }
+	[field: SerializeField] public EventReference OpenShipDoor { get; private set; }
+	[field: SerializeField] public EventReference GoToBed { get; private set; }
+
+	// Player
 	[field: SerializeField] public EventReference PlayerFootsteps { get; private set; }
-	[field: SerializeField] public EventReference ButtonHover { get; private set; }
 	[field: SerializeField] public EventReference PlayerDash { get; private set; }
+	[field: SerializeField] public EventReference PlayerStunned { get; private set; }
+
+	// UI
+	[field: SerializeField] public EventReference ButtonHover { get; private set; }
 	[field: SerializeField] public EventReference ButtonHiss { get; private set; }
 	[field: SerializeField] public EventReference PlayGameButtonWhistle { get; private set; }
+
+	// Enemies
 	[field: SerializeField] public EventReference EnemyStep { get; private set; }
 
 	[field: Header("Music")]
 	[field: SerializeField] public EventReference GameMusic { get; private set; }
-	//[field: SerializeField] public EventReference ShopMusic { get; private set; }
-	//[field: SerializeField] public EventReference ScavengingMusic { get; private set; }
-	//[field: SerializeField] public EventReference MenuMusic { get; private set; }
 
 	public static FMODEvents Instance { get; private set; }
 
@@ -30,7 +39,7 @@ public class FMODEvents : MonoBehaviour
 		else
 		{
 			Instance = this;
-			DontDestroyOnLoad(Instance);
+			//DontDestroyOnLoad(Instance);
 		}
 	}
 }

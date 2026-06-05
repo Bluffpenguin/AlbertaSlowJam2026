@@ -722,14 +722,42 @@ MonoBehaviour:
       Data2: 1293316534
       Data3: -1944071773
       Data4: 859925470
-    Path: event:/SFX/Items/PickUpItem
+    Path: event:/SFX/Interactables/PickUpItem
   <MoneyGained>k__BackingField:
     Guid:
       Data1: -406081979
       Data2: 1112047403
       Data3: -1088892795
       Data4: 1201266261
-    Path: event:/SFX/Items/MoneyGain
+    Path: event:/SFX/Interactables/MoneyGain
+  <OpenStorage>k__BackingField:
+    Guid:
+      Data1: 1524769885
+      Data2: 1212360146
+      Data3: -1241548913
+      Data4: 1535449469
+    Path: event:/SFX/Interactables/OpenStorage
+  <CloseStorage>k__BackingField:
+    Guid:
+      Data1: -2027299655
+      Data2: 1290594116
+      Data3: -793810786
+      Data4: -817883807
+    Path: event:/SFX/Interactables/CloseStorage
+  <OpenShipDoor>k__BackingField:
+    Guid:
+      Data1: 1802498086
+      Data2: 1311058821
+      Data3: -1951252845
+      Data4: 123545567
+    Path: event:/SFX/Interactables/OpenShipDoor
+  <GoToBed>k__BackingField:
+    Guid:
+      Data1: -1570919086
+      Data2: 1209975102
+      Data3: 284918201
+      Data4: 28927132
+    Path: event:/SFX/Interactables/GoToBed
   <PlayerFootsteps>k__BackingField:
     Guid:
       Data1: 1239748440
@@ -737,13 +765,6 @@ MonoBehaviour:
       Data3: -1552344176
       Data4: 173410818
     Path: event:/SFX/Player/FootstepsV2
-  <ButtonHover>k__BackingField:
-    Guid:
-      Data1: 650340056
-      Data2: 1286041328
-      Data3: -2115793262
-      Data4: -72296143
-    Path: event:/SFX/UI/Button_Hover
   <PlayerDash>k__BackingField:
     Guid:
       Data1: 1901810097
@@ -751,6 +772,20 @@ MonoBehaviour:
       Data3: 586737560
       Data4: -1824678324
     Path: event:/SFX/Player/Dash
+  <PlayerStunned>k__BackingField:
+    Guid:
+      Data1: 1263283326
+      Data2: 1152193296
+      Data3: 966712493
+      Data4: 1628223634
+    Path: event:/SFX/Player/PlayerStunned
+  <ButtonHover>k__BackingField:
+    Guid:
+      Data1: 650340056
+      Data2: 1286041328
+      Data3: -2115793262
+      Data4: -72296143
+    Path: event:/SFX/UI/Button_Hover
   <ButtonHiss>k__BackingField:
     Guid:
       Data1: 1338868759
