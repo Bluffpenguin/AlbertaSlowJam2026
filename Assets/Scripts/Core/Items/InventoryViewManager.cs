@@ -50,7 +50,13 @@ public class InventoryViewManager : MonoBehaviour
 
 	public void CloseAllOpenViews()
 	{
-		foreach ((var view, _) in _windowsDict.Values) {
+		foreach (var kvp in _windowsDict)
+		{
+			if (kvp.Key == InventoryWindow.Storage)
+			{
+				AudioManager.Instance.PlayOneShot(FMODEvents.Instance.CloseStorage, this.transform.position);
+			}
+			(var view, _) = kvp.Value;
 			view.ClearView();
 			view.gameObject.SetActive(false);
 		}
