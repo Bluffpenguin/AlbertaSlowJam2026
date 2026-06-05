@@ -52,11 +52,11 @@ public class InventoryViewManager : MonoBehaviour
 	{
 		foreach (var kvp in _windowsDict)
 		{
-			if (kvp.Key == InventoryWindow.Storage)
+			(var view, _) = kvp.Value;
+			if (kvp.Key == InventoryWindow.Storage && view.gameObject.activeSelf)
 			{
 				AudioManager.Instance.PlayOneShot(FMODEvents.Instance.CloseStorage, this.transform.position);
 			}
-			(var view, _) = kvp.Value;
 			view.ClearView();
 			view.gameObject.SetActive(false);
 		}
