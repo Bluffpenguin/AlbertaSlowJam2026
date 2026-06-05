@@ -357,6 +357,7 @@ MonoBehaviour:
   _renderer: {fileID: 0}
   _regularMaterial: {fileID: 0}
   _outlineMaterial: {fileID: 0}
+  gameMusic: 0
 --- !u!19719996 &243436887
 TilemapCollider2D:
   m_ObjectHideFlags: 0
