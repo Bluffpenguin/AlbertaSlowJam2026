@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 
 public class LoadScene : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class LoadScene : MonoBehaviour
 		else
 		{
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
+		}
+
+		if (wantedSceneName == "MainMenu" && MenuManager.Instance.inGame)
+		{
+			GameManager.Instance.ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
+			GameManager.Instance.ShopMusic.stop(STOP_MODE.ALLOWFADEOUT);
+			MenuManager.Instance.inGame = false;
 		}
 
 			SceneManager.LoadScene(wantedSceneName);

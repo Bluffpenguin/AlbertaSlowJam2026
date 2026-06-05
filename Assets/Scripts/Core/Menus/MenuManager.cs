@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private bool _paused;
 	public bool Paused => _paused;
 	public bool inGame;
+	private EventInstance _menuMusic;
 
 	private void Awake()
 	{
@@ -25,6 +27,16 @@ public class MenuManager : MonoBehaviour
 		//Debug.Log($"Current scene is: {currentScene}");
 	}
 
+	private void Start()
+	{
+		_menuMusic = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.MenuMusic);
+	}
+
+	private void FixedUpdate()
+	{
+		UpdateMusic();
+	}
+
 	public void Pause_and_Unpause()
 	{
 		if (!inGame)
@@ -39,8 +51,26 @@ public class MenuManager : MonoBehaviour
 		else
 		{
 			Time.timeScale = 0;
-			SceneManager.LoadScene("PauseMenu",LoadSceneMode.Additive);
+			SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
 			_paused = true;
+		}
+	}
+
+	private void UpdateMusic()
+	{
+		if (!inGame)
+		{
+			_menuMusic.getPlaybackState(out PLAYBACK_STATE playbackState);
+
+			if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+			{
+				_menuMusic.start();
+			}
+		}
+		else
+		{
+			_menuMusic.stop(STOP_MODE.ALLOWFADEOUT);
+
 		}
 	}
 }
