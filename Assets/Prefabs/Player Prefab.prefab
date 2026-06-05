@@ -2684,6 +2684,10 @@ PrefabInstance:
       propertyPath: _dashSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4661329644406251954, guid: 1b1ad4dfc231ea5428be15b37439abc9, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7234557660444717745, guid: 1b1ad4dfc231ea5428be15b37439abc9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

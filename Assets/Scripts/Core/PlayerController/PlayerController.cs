@@ -129,66 +129,24 @@ public class PlayerController : MonoBehaviour
 			// Player is moving
 			_animDir = _rb.linearVelocity.normalized;
 			_anim.SetBool("IsWalking", true);
+			_anim.SetFloat("DirX", _animDir.x);
+			_anim.SetFloat("DirY", _animDir.y);
 
-			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
+			if (_animDir.x > 0)
 			{
 				// Face right
 				_spriteRenderer.flipX = false;
 			}
-			else if (_animDir.x < 0 && Mathf.Abs(_animDir.x) > Mathf.Abs(_animDir.y))
+			else if (_animDir.x < 0)
 			{
 				// Face left
 				_spriteRenderer.flipX = true;
 			}
-			else if (_animDir.y > 0)
-			{
-				// Face up
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
-			else
-			{
-				// Face down
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
+			
 		}
 		else
 		{
-			// Player is idle
 			_anim.SetBool("IsWalking", false);
-
-			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
-			{
-				// Face right
-				_spriteRenderer.flipX = false;
-			}
-			else if (_animDir.x < 0 && Mathf.Abs(_animDir.x) > Mathf.Abs(_animDir.y))
-			{
-				// Face left
-				_spriteRenderer.flipX = true;
-			}
-			else if (_animDir.y > 0)
-			{
-				// Face up
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
-			else
-			{
-				// Face down
-
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
 		}
 	}
 
