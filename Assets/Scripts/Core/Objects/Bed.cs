@@ -1,5 +1,4 @@
 using UnityEngine;
-using FMOD.Studio;
 
 public class Bed : MonoBehaviour, IInteractable
 {
@@ -28,7 +27,7 @@ public class Bed : MonoBehaviour, IInteractable
 
 	public void OnInteract()
 	{
-		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnterBed, this.transform.position);
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.GoToBed, this.transform.position);
 		GameManager.Instance.EndDay();
 	}
 

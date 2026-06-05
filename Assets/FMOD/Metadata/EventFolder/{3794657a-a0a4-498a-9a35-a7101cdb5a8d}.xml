@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="EventFolder" id="{d5609583-4ec1-44a4-b981-fbcb88b819e8}">
+	<object class="EventFolder" id="{3794657a-a0a4-498a-9a35-a7101cdb5a8d}">
 		<property name="name">
 			<value>Interactables</value>
 		</property>

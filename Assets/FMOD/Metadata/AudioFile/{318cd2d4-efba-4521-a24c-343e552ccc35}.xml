@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{d5c5553f-a024-4aae-9405-ff9aea67714c}">
+	<object class="AudioFile" id="{318cd2d4-efba-4521-a24c-343e552ccc35}">
 		<property name="assetPath">
 			<value>SFX/Interactables/ItemPickUpSFX.mp3</value>
 		</property>

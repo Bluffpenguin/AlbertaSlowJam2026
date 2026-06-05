@@ -4,14 +4,13 @@ using FMODUnity;
 public class FMODEvents : MonoBehaviour
 {
 	[field: Header("SFX")]
-
 	// Interactables
 	[field: SerializeField] public EventReference PickUpItem { get; private set; }
 	[field: SerializeField] public EventReference MoneyGained { get; private set; }
 	[field: SerializeField] public EventReference OpenStorage { get; private set; }
 	[field: SerializeField] public EventReference CloseStorage { get; private set; }
-	[field: SerializeField] public EventReference EnterBed { get; private set; }
 	[field: SerializeField] public EventReference OpenShipDoor { get; private set; }
+	[field: SerializeField] public EventReference GoToBed { get; private set; }
 
 	// Player
 	[field: SerializeField] public EventReference PlayerFootsteps { get; private set; }
@@ -23,7 +22,7 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference ButtonHiss { get; private set; }
 	[field: SerializeField] public EventReference PlayGameButtonWhistle { get; private set; }
 
-	// Enemy
+	// Enemies
 	[field: SerializeField] public EventReference EnemyStep { get; private set; }
 
 	[field: Header("Music")]
@@ -40,7 +39,7 @@ public class FMODEvents : MonoBehaviour
 		else
 		{
 			Instance = this;
-			DontDestroyOnLoad(Instance);
+			//DontDestroyOnLoad(Instance);
 		}
 	}
 }
