@@ -765,6 +765,13 @@ MonoBehaviour:
       Data3: -1970550117
       Data4: -412231946
     Path: event:/SFX/Interactables/FinishCraft
+  <Scap>k__BackingField:
+    Guid:
+      Data1: 896890278
+      Data2: 1118796714
+      Data3: 984727937
+      Data4: 739219215
+    Path: event:/SFX/Interactables/Scrap
   <PlayerFootsteps>k__BackingField:
     Guid:
       Data1: 1239748440
@@ -1417,7 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
-  gameMusic: 0
+  gameMusic: 1
   wantedSceneName: WorkShop
 --- !u!224 &4116923692204246766
 RectTransform:
