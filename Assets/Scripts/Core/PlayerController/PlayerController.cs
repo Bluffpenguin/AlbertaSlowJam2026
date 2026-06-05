@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		yield return new WaitForSeconds(duration);
+		_playerStunned.stop(STOP_MODE.ALLOWFADEOUT);
 		_canMove = true;
 		_currentStun = null;
 
@@ -185,7 +186,5 @@ public class PlayerController : MonoBehaviour
 		{
 			_playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
 		}
-
-
 	}
 }
