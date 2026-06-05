@@ -415,7 +415,7 @@ MonoBehaviour:
   - You have one week to impress management, so keep up with your quota and you'll
     do just fine!
   - Oh, and dont get spotted by those guard robots, they will try to steal your stuff!
-  - (Use WASD to move)
+  - (Use WASD to move, Shift to Dash)
   _index: 0
   _onEnable:
     m_PersistentCalls:
