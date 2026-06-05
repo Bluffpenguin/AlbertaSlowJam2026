@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private List<InvokeOnDayStart> _listeners = new();
 	[SerializeField] private string _dungeonScene = "Dungeon";
 	[SerializeField] private string _hudScene = "HUD";
-	public EventInstance ShopMusic, ScavengeMusic;
 
 	[Header("Game Settings")]
 	[SerializeField] public bool AdvanceClockInShip = true;
@@ -67,8 +66,6 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		ShopMusic = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ShopMusic);
-		ScavengeMusic = AudioManager.Instance.CreateEventInstance(FMODEvents.Instance.ScavengingMusic);
 		// Testing
 		StartGame();
 	}
@@ -92,11 +89,6 @@ public class GameManager : MonoBehaviour
 			AdvanceClock = false;
 			EndDay();
 		}
-	}
-
-	private void FixedUpdate()
-	{
-		
 	}
 
 	public async void StartGame()
@@ -190,68 +182,4 @@ public class GameManager : MonoBehaviour
 		Debug.Log("Game has ended");
 	}
 
-	public void StopMusic()
-	{
-		ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
-		ShopMusic.stop(STOP_MODE.ALLOWFADEOUT);
-	}
-
-	private void UpdateMusic()
-	{
-		switch (gameState)
-		{
-			case GameState.InShip:
-				{
-					if (gameState == GameState.InShip)
-					{
-						// get playback state
-						ShopMusic.getPlaybackState(out PLAYBACK_STATE playbackState);
-
-						if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-						{
-							ShopMusic.start();
-						}
-						ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
-					}
-					else
-					{
-						ShopMusic.stop(STOP_MODE.ALLOWFADEOUT);
-
-					}
-					break;
-				}
-			case GameState.InDungeon:
-				{
-					if (gameState == GameState.InDungeon)
-					{
-						// get playback state
-						ScavengeMusic.getPlaybackState(out PLAYBACK_STATE playbackState);
-
-						if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-						{
-							ScavengeMusic.start();
-						}
-
-						ShopMusic.stop(STOP_MODE.ALLOWFADEOUT);
-					}
-					else
-					{
-						ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
-					}
-					break;
-				}
-			case GameState.EndScreen:
-				{
-					Debug.Log("Endscreen music / SFX");
-					ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
-					ShopMusic.stop(STOP_MODE.ALLOWFADEOUT);
-					break;
-				}
-			default:
-				{
-					Debug.LogWarning($"No GameState '{gameState}' Found");
-					break;
-				}
-		}
-	}
 }

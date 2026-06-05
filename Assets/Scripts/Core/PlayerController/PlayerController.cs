@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 	private void UpdateSound(Vector2 moveDir)
 	{
 		// start footsteps event if the player is moving
-		if (moveDir != Vector2.zero)
+		if (moveDir != Vector2.zero && _canMove)
 		{
 			// get playback state
 			PLAYBACK_STATE playbackState;

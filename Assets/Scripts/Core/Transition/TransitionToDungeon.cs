@@ -23,10 +23,12 @@ public class TransitionToDungeon : MonoBehaviour, IInteractable
 
 	public Material OutlineMaterial => _outlineMaterial;
 
-	
+	[Header("GameMusic")]
+	[SerializeField] private GameMusic gameMusic;
 
 	public void OnInteract()
 	{
+		AudioManager.Instance.SetGameMusic(gameMusic);
 		TransitionManager.Instance.TransitionToDungeon.Invoke();
 	}
 

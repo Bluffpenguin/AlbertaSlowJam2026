@@ -606,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 0
   wantedSceneName: SettingsMenu
 --- !u!1 &585503770
 GameObject:
@@ -915,6 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 0
   wantedSceneName: 
 --- !u!1001 &1218767207
 PrefabInstance:
@@ -1058,7 +1060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5111697378080301033, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LoadSelectedScene
+      value: ToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5111697378080301033, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1110,6 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 0
   wantedSceneName: MainMenu
 --- !u!1 &1251442751
 GameObject:

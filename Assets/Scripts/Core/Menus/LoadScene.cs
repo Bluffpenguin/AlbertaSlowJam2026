@@ -4,34 +4,37 @@ using FMOD.Studio;
 
 public class LoadScene : MonoBehaviour
 {
+	[SerializeField] private GameMusic gameMusic;
 	// NOTE: This is applied to menu buttons that send you to different scenes.
 	[SerializeField] private string wantedSceneName;
 
+	public void PlayGame()
+	{
+		AudioManager.Instance.SetGameMusic(gameMusic);
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayGameButtonWhistle, this.transform.position);
+		MenuManager.Instance.inGame = true;
+		SceneManager.LoadScene("WorkShop");
+	}
+
+	public void ToMainMenu()
+	{
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
+		MenuManager.Instance.inGame = false;
+		AudioManager.Instance.SetGameMusic(gameMusic);
+		SceneManager.LoadScene("MainMenu");
+	}
+
 	public void LoadSelectedScene()
 	{
-		if (wantedSceneName.Contains("WorkShop"))
-		{
-			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayGameButtonWhistle, this.transform.position);
-		}
-		else
-		{
-			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
-		}
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
 
-		if (wantedSceneName == "MainMenu" && MenuManager.Instance.inGame)
-		{
-			GameManager.Instance.ScavengeMusic.stop(STOP_MODE.ALLOWFADEOUT);
-			GameManager.Instance.ShopMusic.stop(STOP_MODE.ALLOWFADEOUT);
-			MenuManager.Instance.inGame = false;
-		}
-
-			SceneManager.LoadScene(wantedSceneName);
+		SceneManager.LoadScene(wantedSceneName);
 
 		MenuManager.Instance.currentScene = wantedSceneName;
 
 		if (MenuManager.Instance.currentScene.Contains("WorkShop"))
 		{
-			MenuManager.Instance.inGame = true;
+			
 		}
 		//Debug.Log($"Loaded: {MenuManager.Instance.currentScene}");
 	}

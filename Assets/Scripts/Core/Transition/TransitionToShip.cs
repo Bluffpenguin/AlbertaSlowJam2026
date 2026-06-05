@@ -24,11 +24,13 @@ public class TransitionToShip : MonoBehaviour, IInteractable
 
 	public Material OutlineMaterial => _outlineMaterial;
 
-	
+	[Header("GameMusic")]
+	[SerializeField] private GameMusic gameMusic;
 
 	public void OnInteract()
 	{
 		if (TransitionManager.Instance != null) Debug.Log("There is a singleton");
+		AudioManager.Instance.SetGameMusic(gameMusic);
 		TransitionManager.Instance.TransitionToShip.Invoke();
 	}
 

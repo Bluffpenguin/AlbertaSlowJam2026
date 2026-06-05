@@ -166,6 +166,7 @@ MonoBehaviour:
   currentScene: 
   _paused: 0
   inGame: 0
+  gameMusic: 0
 --- !u!1 &477629506
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,27 +879,13 @@ MonoBehaviour:
       Data3: 203520917
       Data4: 601499597
     Path: event:/SFX/UI/PlayGameWhistle
-  <ShopMusic>k__BackingField:
+  <GameMusic>k__BackingField:
     Guid:
-      Data1: -231751510
-      Data2: 1162454270
-      Data3: -1993051756
-      Data4: 767251626
-    Path: event:/Music/ShopMusic
-  <ScavengingMusic>k__BackingField:
-    Guid:
-      Data1: -1081259834
-      Data2: 1341099504
-      Data3: -236997499
-      Data4: 1472627898
-    Path: event:/Music/ScavengingMusic
-  <MenuMusic>k__BackingField:
-    Guid:
-      Data1: -1000687606
-      Data2: 1226561887
-      Data3: -721320045
-      Data4: -430367587
-    Path: event:/Music/MenuMusic
+      Data1: 1642468330
+      Data2: 1316819284
+      Data3: 142558338
+      Data4: 451310628
+    Path: event:/Music/GameMusic
 --- !u!1 &1675468254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5111697378080301033, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadSelectedScene
+      value: PlayGame
       objectReference: {fileID: 0}
     - target: {fileID: 5111697378080301033, guid: d9001e5529a43a14e91849e155f64eb7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1113,6 +1100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 0
   wantedSceneName: 
 --- !u!114 &2851139218846514346
 MonoBehaviour:
@@ -1126,6 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 0
   wantedSceneName: SettingsMenu
 --- !u!114 &3042479007905665718
 MonoBehaviour:
@@ -1139,6 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 0
   wantedSceneName: CreditsMenu
 --- !u!1001 &3231616855530542404
 PrefabInstance:
@@ -1298,6 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2442a1cb9d586849b81b10784c0edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::LoadScene
+  gameMusic: 1
   wantedSceneName: WorkShop
 --- !u!1001 &6855949352313573509
 PrefabInstance:
