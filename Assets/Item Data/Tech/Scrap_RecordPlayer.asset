@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scrap_RecordPlayer
   m_EditorClassIdentifier: Scripts.Core::Scrap
   _displayName: Gramophone
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: aebbe44363b4f4f46994365e1f97fcea, type: 3}
   _description: 
   _baseSellValue: 20
   _itemTile: {fileID: 0}

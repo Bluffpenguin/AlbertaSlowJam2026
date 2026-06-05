@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff7510e56d14c541ad65321eaa2f000, type: 3}
   m_Name: Scrap_SteamEngine
   m_EditorClassIdentifier: Scripts.Core::Scrap
-  _displayName: 
-  _sprite: {fileID: 0}
+  _displayName: Toy Train
+  _sprite: {fileID: 21300000, guid: 6f93af7544cb6bd49a37aff66fe4644d, type: 3}
   _description: 
   _baseSellValue: 15
   _itemTile: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scrap_MechanicalClock
   m_EditorClassIdentifier: Scripts.Core::Scrap
   _displayName: Mechanical Clock
-  _sprite: {fileID: 21300000, guid: 2cdc145ee9369f445a69d37f25294083, type: 3}
+  _sprite: {fileID: 21300000, guid: a702382673d4c4f4db110fda429ad5c0, type: 3}
   _description: 
   _baseSellValue: 10
   _itemTile: {fileID: 0}
