@@ -6,6 +6,7 @@ public class State_SimplePursue : AIState
 {
 	float pathUpdateDelay = 0.2f;
 	float pursueSpeed = 8f;
+	bool stalling = false;
 	public State_SimplePursue(EnemyInfo _enemyInfo, Transform _player)
         : base(_enemyInfo, _player)
     {
@@ -17,18 +18,23 @@ public class State_SimplePursue : AIState
 	{
 		
 		AudioManager.Instance.SetGameMusic(GameMusic.EnemyChasing);
+		stalling = true;
+		enemyInfo.rm.StartCoroutine(WaitBeforeChasing());
 		UpdatePathToPlayer();
 		base.Enter();
 	}
 
 	public override void Update()
 	{
+		if (stalling) return;
 		HandleAnimation();
 		base.Update();
 	}
 
 	public override void FixedUpdate()
 	{
+		if (stalling) return;
+		
 		Vector3Int playerPos = enemyInfo.rm.navTileMap.WorldToCell(player.position);
 		float distance = Vector3Int.Distance(playerPos, enemyInfo.rm.navTileMap.WorldToCell(enemyInfo.npc.transform.position));
 		if (enemyInfo.rm.navTileMap.GetTile(playerPos) == null)
@@ -84,7 +90,6 @@ public class State_SimplePursue : AIState
 		{
 			Node playerNode = enemyInfo.rm.GetNode(PlayerPosition);
 			Node enemyNode = enemyInfo.rm.GetNode(EnemyPosition);
-			currentWP = 1;
 			if (enemyInfo.rm.pf.AStar(enemyNode, playerNode))
 			{
 				path = enemyInfo.rm.pf.ShavePath(enemyInfo.rm.pf.pathList);
@@ -100,6 +105,12 @@ public class State_SimplePursue : AIState
 				stage = EVENT.EXIT;
 				return;
 			}
+
+			if (path.Count > 1)
+			{
+				currentWP = 1;
+			}
+			else currentWP = 0;
 		}
 		
 
@@ -117,5 +128,14 @@ public class State_SimplePursue : AIState
 	{
 		yield return new WaitForSeconds(pathUpdateDelay);
 		UpdatePathToPlayer();
+	}
+
+	IEnumerator WaitBeforeChasing()
+	{
+		enemyInfo.textBox.text = "?";
+		enemyInfo.textBox.enabled = true;
+		yield return new WaitForSeconds(0.5f);
+		stalling = false;
+		enemyInfo.textBox.enabled = false;
 	}
 }
