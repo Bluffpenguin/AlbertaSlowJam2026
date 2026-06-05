@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="EncodableAsset" id="{5134b882-64de-4563-99ab-c7742dccc6ca}">
+	<object class="DataFile" id="{9deca1b6-978e-4c76-b608-31fbade937be}">
 		<property name="assetPath">
-			<value>SFX/Interactables/</value>
+			<value>SFX/Interactables/ItemPickUpSFX.mp3.meta</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{58fc9157-c198-4102-98e5-47d2aeb17037}</destination>

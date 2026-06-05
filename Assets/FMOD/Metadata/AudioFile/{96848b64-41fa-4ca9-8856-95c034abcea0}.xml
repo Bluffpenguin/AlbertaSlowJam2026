@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{96848b64-41fa-4ca9-8856-95c034abcea0}">
 		<property name="assetPath">
-			<value>SFX/Items/MoneyGainSFX.mp3</value>
+			<value>SFX/Interactables/MoneyGainSFX.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
