@@ -765,6 +765,13 @@ MonoBehaviour:
       Data3: -1970550117
       Data4: -412231946
     Path: event:/SFX/Interactables/FinishCraft
+  <Scap>k__BackingField:
+    Guid:
+      Data1: 896890278
+      Data2: 1118796714
+      Data3: 984727937
+      Data4: 739219215
+    Path: event:/SFX/Interactables/Scrap
   <PlayerFootsteps>k__BackingField:
     Guid:
       Data1: 1239748440

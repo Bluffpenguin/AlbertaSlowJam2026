@@ -12,6 +12,7 @@ public class FMODEvents : MonoBehaviour
 	[field: SerializeField] public EventReference OpenShipDoor { get; private set; }
 	[field: SerializeField] public EventReference GoToBed { get; private set; }
 	[field: SerializeField] public EventReference FinishCraft { get; private set; }
+	[field: SerializeField] public EventReference Scap { get; private set; }
 
 	// Player
 	[field: SerializeField] public EventReference PlayerFootsteps { get; private set; }
