@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e276e45603066944b94557b49e093a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InventoryInteractable
-  _tooltip: Open
+  _tooltip: Craft
   _tooltipOffset: {x: 0, y: 0}
   _window1: 1
   _window2: 4

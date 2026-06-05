@@ -753,7 +753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Scrap
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46a5e28174b638347b154f3744ddde46, type: 2}
   m_sharedMaterial: {fileID: -3217494707316313169, guid: 46a5e28174b638347b154f3744ddde46, type: 2}

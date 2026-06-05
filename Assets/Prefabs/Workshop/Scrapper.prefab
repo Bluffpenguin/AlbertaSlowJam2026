@@ -83,9 +83,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e276e45603066944b94557b49e093a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::InventoryInteractable
-  _tooltip: Open
+  _tooltip: Scrap
+  _tooltipOffset: {x: 0, y: 0}
   _window1: 1
   _window2: 3
+  _interactTime: 0.5
+  _renderer: {fileID: 0}
+  _regularMaterial: {fileID: 0}
+  _outlineMaterial: {fileID: 0}
 --- !u!61 &6398251716258780238
 BoxCollider2D:
   m_ObjectHideFlags: 0
