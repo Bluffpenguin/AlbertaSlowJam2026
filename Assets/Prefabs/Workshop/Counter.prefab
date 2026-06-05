@@ -75,11 +75,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 99c08c377963c7f4db84d782a6b1c214, type: 2}
   - {fileID: 11400000, guid: c630a53855bd1414e92e5d5aab2062a7, type: 2}
   - {fileID: 11400000, guid: c6d4f3808de126c4e8beed923f557577, type: 2}
+  - {fileID: 11400000, guid: a082b3f291829cf418606cdc818c0918, type: 2}
+  - {fileID: 11400000, guid: b7e70fadcd31a784db40745eccd063d6, type: 2}
+  - {fileID: 11400000, guid: e3223b43a7d781d4b8778d1deefc0f1d, type: 2}
   - {fileID: 11400000, guid: cd5a9ae4e437da3488f9033855257321, type: 2}
   - {fileID: 11400000, guid: cc8727d80491b29469ae2e4faaeb1c68, type: 2}
   - {fileID: 11400000, guid: f4dda9960677bbe49a0ceb6a90694a75, type: 2}
   - {fileID: 11400000, guid: f636317587566304a851778d929e6893, type: 2}
   - {fileID: 11400000, guid: 5b3733da81b049f4d8446a4a5b99b5a8, type: 2}
+  - {fileID: 11400000, guid: 5a482b7a4b427ca4b8ef3fb9c69ebb37, type: 2}
+  - {fileID: 11400000, guid: 8c09b269589baeb478739a8665e518fe, type: 2}
+  - {fileID: 11400000, guid: b15553a52cc2fdc46b6ad63fc2c74a5b, type: 2}
   _sales: []
   _saleSlots:
   - {fileID: 0}
@@ -108,8 +114,8 @@ MonoBehaviour:
   _window2: 5
   _interactTime: 0.5
   _renderer: {fileID: 0}
-  _regularMaterial: {fileID: 0}
-  _outlineMaterial: {fileID: 0}
+  _regularMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  _outlineMaterial: {fileID: -876546973899608171, guid: 371b3602872fbe944894a82751705886, type: 3}
 --- !u!61 &7998984253243777810
 BoxCollider2D:
   m_ObjectHideFlags: 0
