@@ -888,11 +888,11 @@ MonoBehaviour:
     Path: event:/SFX/Items/MoneyGain
   <PlayerFootsteps>k__BackingField:
     Guid:
-      Data1: -331703091
-      Data2: 1167550090
-      Data3: -1697402234
-      Data4: 904945904
-    Path: event:/SFX/Player/Footsteps
+      Data1: 1239748440
+      Data2: 1088374315
+      Data3: -1552344176
+      Data4: 173410818
+    Path: event:/SFX/Player/FootstepsV2
   <ButtonHover>k__BackingField:
     Guid:
       Data1: 650340056
@@ -921,6 +921,13 @@ MonoBehaviour:
       Data3: 203520917
       Data4: 601499597
     Path: event:/SFX/UI/PlayGameWhistle
+  <EnemyStep>k__BackingField:
+    Guid:
+      Data1: 1617538252
+      Data2: 1220673148
+      Data3: 100791741
+      Data4: -637344892
+    Path: event:/SFX/Enemies/EnemyStep
   <GameMusic>k__BackingField:
     Guid:
       Data1: 1642468330

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 	[Space]
 	[SerializeField] private float _dashSpeed = 200;
 	[SerializeField] private float _dashCooldown = 5f;
+	[SerializeField] private UI_Dash _dashUI;
 
 	private Rigidbody2D _rb;
 	private Animator _anim;
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
 			_dashCooldownTimer = _dashCooldown;
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, this.transform.position);
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
+			_dashUI.OnDash(_dashCooldown);
 		}
 
 		UpdateSound(_moveDir);
