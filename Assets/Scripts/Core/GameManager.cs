@@ -157,13 +157,13 @@ public class GameManager : MonoBehaviour
 	void SwitchToDungeon()
 	{
 		gameState = GameState.InDungeon;
-		UpdateMusic();
+		AudioManager.Instance.SetGameMusic(GameMusic.Scavenge);
 		dayStarted = true;
 	}
 	void SwitchToShip() 
 	{
 		gameState = GameState.InShip;
-		UpdateMusic();
+		AudioManager.Instance.SetGameMusic(GameMusic.Ship);
 	}
 
 	public void EndGame()

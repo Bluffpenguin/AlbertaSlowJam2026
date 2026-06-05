@@ -16,7 +16,7 @@ public class State_SimplePursue : AIState
 	public override void Enter()
 	{
 		
-		AudioManager.Instance.SetSpottedMusic(SpottedMusic.Spotted);
+		AudioManager.Instance.SetGameMusic(GameMusic.EnemyChasing);
 		UpdatePathToPlayer();
 		base.Enter();
 	}
@@ -108,7 +108,7 @@ public class State_SimplePursue : AIState
 
 	public override void Exit()
 	{
-		AudioManager.Instance.SetSpottedMusic(SpottedMusic.NotSpotted);
+		AudioManager.Instance.SetGameMusic(GameMusic.Scavenge);
 		Debug.Log("Switched To Unspotted Music");
 		base.Exit();
 	}

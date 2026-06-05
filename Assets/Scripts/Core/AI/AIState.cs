@@ -103,24 +103,24 @@ public class AIState
 			if (enemyInfo.heading.up.y > 0.5f)
 			{
 				// up
-				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[0].rotation);
-				if (enemyInfo.spriteDirections[0].flipX) enemyInfo.spriteRenderer.flipX = true;
-				else enemyInfo.spriteRenderer.flipX = false;
+				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[0].rotation);
+				//if (enemyInfo.spriteDirections[0].flipX) enemyInfo.spriteRenderer.flipX = true;
+				//else enemyInfo.spriteRenderer.flipX = false;
 
 			}
 			else if (enemyInfo.heading.up.y < -0.5f)
 			{
 				// down
-				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[2].rotation);
-				if (enemyInfo.spriteDirections[2].flipX) enemyInfo.spriteRenderer.flipX = true;
-				else enemyInfo.spriteRenderer.flipX = false;
+				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[2].rotation);
+				//if (enemyInfo.spriteDirections[2].flipX) enemyInfo.spriteRenderer.flipX = true;
+				//else enemyInfo.spriteRenderer.flipX = false;
 			}
 			else
 			{
 				// middle
-				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[1].rotation);
-				if (enemyInfo.spriteDirections[1].flipX) enemyInfo.spriteRenderer.flipX = true;
-				else enemyInfo.spriteRenderer.flipX = false;
+				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[1].rotation);
+				//if (enemyInfo.spriteDirections[1].flipX) enemyInfo.spriteRenderer.flipX = true;
+				//else enemyInfo.spriteRenderer.flipX = false;
 			}
 		}
 		else
@@ -131,24 +131,24 @@ public class AIState
 			if (enemyInfo.heading.up.y > 0.5f)
 			{
 				// up
-				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[5].rotation);
-				if (enemyInfo.spriteDirections[5].flipX) enemyInfo.spriteRenderer.flipX = true;
-				else enemyInfo.spriteRenderer.flipX = false;
+				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[5].rotation);
+				//if (enemyInfo.spriteDirections[5].flipX) enemyInfo.spriteRenderer.flipX = true;
+				//else enemyInfo.spriteRenderer.flipX = false;
 
 			}
 			else if (enemyInfo.heading.up.y < -0.5f)
 			{
 				// down
-				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[3].rotation);
-				if (enemyInfo.spriteDirections[3].flipX) enemyInfo.spriteRenderer.flipX = true;
-				else enemyInfo.spriteRenderer.flipX = false;
+				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[3].rotation);
+				//if (enemyInfo.spriteDirections[3].flipX) enemyInfo.spriteRenderer.flipX = true;
+				//else enemyInfo.spriteRenderer.flipX = false;
 			}
 			else
 			{
 				// middle
-				enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[4].rotation);
-				if (enemyInfo.spriteDirections[4].flipX) enemyInfo.spriteRenderer.flipX = true;
-				else enemyInfo.spriteRenderer.flipX = false;
+				//enemyInfo.spriteRenderer.transform.rotation = Quaternion.Euler(enemyInfo.spriteDirections[4].rotation);
+				//if (enemyInfo.spriteDirections[4].flipX) enemyInfo.spriteRenderer.flipX = true;
+				//else enemyInfo.spriteRenderer.flipX = false;
 			}
 		}
 	}

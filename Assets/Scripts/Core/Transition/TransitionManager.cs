@@ -54,7 +54,8 @@ public class TransitionManager : MonoBehaviour
     {
         gameEndScreen.gameObject.SetActive(false);
         gameOverButtons.SetActive(false);
-        dungeonPlayer = shipPlayer = Player.Instance.transform;
+		Player.PersonalView.gameObject.SetActive(false);
+		dungeonPlayer = shipPlayer = Player.Instance.transform;
 
         sceneCamera = Camera.main;
         sceneCamera.transform.SetParent(shipPlayer);
@@ -90,6 +91,7 @@ public class TransitionManager : MonoBehaviour
     IEnumerator TransportToShip(float time)
     {
 		Player.Controller.PlayerInput.Disable();
+		Player.PersonalView.gameObject.SetActive(false);
 		fadeToBlack.enabled = true;
         BeginTransition.Invoke();
 		while (fadeToBlack.color.a < 1)
@@ -107,7 +109,8 @@ public class TransitionManager : MonoBehaviour
 
         shipPlayer.gameObject.SetActive(true);
         MoveCamera(shipPlayer);
-        yield return new WaitForSeconds(time / 3);
+		
+		yield return new WaitForSeconds(time / 3);
 		Player.Controller.PlayerInput.Enable();
 		while (fadeToBlack.color.a > 0)
 		{
@@ -145,6 +148,7 @@ public class TransitionManager : MonoBehaviour
         }
         dungeonPlayer.gameObject.SetActive(true);
         MoveCamera(dungeonPlayer);
+		Player.PersonalView.gameObject.SetActive(true);
         yield return new WaitForSeconds(time/3);
 		Player.Controller.PlayerInput.Enable();
 		while (fadeToBlack.color.a > 0)
