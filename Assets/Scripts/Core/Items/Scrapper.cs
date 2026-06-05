@@ -44,5 +44,6 @@ public class Scrapper : Inventory
 		for (int i = 0; i < _inputCount; i++) {
 			base[i] = ItemStack.Empty;
 		}
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.Scap, this.transform.position);
 	}
 }
