@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using FMOD.Studio;
+using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
@@ -30,6 +31,17 @@ public class MenuManager : MonoBehaviour
 	private void Start()
 	{
 		AudioManager.Instance.InitializeMusic(FMODEvents.Instance.GameMusic);
+	}
+
+	private void Update()
+	{
+		if (Keyboard.current.eKey.wasPressedThisFrame && InventoryViewManager.Instance != null)
+		{
+			if (inGame == false)
+			{
+				InventoryViewManager.Instance.CloseAllOpenViews();
+			}
+		}
 	}
 
 	public void Pause_and_Unpause()
