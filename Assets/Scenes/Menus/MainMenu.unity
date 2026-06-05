@@ -758,6 +758,13 @@ MonoBehaviour:
       Data3: 284918201
       Data4: 28927132
     Path: event:/SFX/Interactables/GoToBed
+  <FinishCraft>k__BackingField:
+    Guid:
+      Data1: -1960198185
+      Data2: 1295937146
+      Data3: -1970550117
+      Data4: -412231946
+    Path: event:/SFX/Interactables/FinishCraft
   <PlayerFootsteps>k__BackingField:
     Guid:
       Data1: 1239748440
