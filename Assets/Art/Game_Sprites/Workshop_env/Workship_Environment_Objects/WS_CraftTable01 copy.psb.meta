@@ -97,7 +97,7 @@ ScriptedImporter:
   layeredSpriteImportData:
   - name: Layer 36
     originalName: 
-    pivot: {x: 0.28444445, y: 0}
+    pivot: {x: 0.28444445, y: 0.25}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -119,7 +119,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   - name: Group 1
     originalName: 
-    pivot: {x: 0.25, y: 0}
+    pivot: {x: 0.75, y: 0.4}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
