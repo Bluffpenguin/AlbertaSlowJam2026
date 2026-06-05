@@ -37,6 +37,7 @@ public class Crafter : Inventory
 		Debug.Log(Input.Length);
 		var result = Craft(Recipe.GetIngredients(Input));
 		Clear();
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.FinishCraft, this.transform.position);
 		Output = result;
 	}
 
