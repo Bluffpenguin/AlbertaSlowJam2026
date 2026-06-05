@@ -1,4 +1,3 @@
-using UnityEditor.Graphs;
 using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
