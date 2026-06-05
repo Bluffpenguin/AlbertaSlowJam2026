@@ -39,7 +39,7 @@ public class FMODEvents : MonoBehaviour
 		else
 		{
 			Instance = this;
-			DontDestroyOnLoad(Instance);
+			//DontDestroyOnLoad(Instance);
 		}
 	}
 }
