@@ -7,7 +7,7 @@ public class ItemTile : MonoBehaviour, IInteractable
 
 	[SerializeField] private string _tooltip = "Pick Up";
 	[SerializeField] private Vector2 _tooltipOffset;
-	[SerializeField] private InventoryItem _item;
+	[SerializeField] internal InventoryItem _item;
 
 	[SerializeField] private float _interactTime = 2f;
 	public float InteractTime => _interactTime;

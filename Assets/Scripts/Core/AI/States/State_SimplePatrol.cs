@@ -14,6 +14,7 @@ public class State_SimplePatrol : AIState
         : base(_enemyInfo, _player)
     {
         stateName = STATE.PATROL;
+		enemyInfo.anim.speed = 1;
     }
 
 	public override void Enter()
@@ -51,7 +52,7 @@ public class State_SimplePatrol : AIState
 
 
 
-		
+		HandleAnimation();
 		base.Update();
 	}
 

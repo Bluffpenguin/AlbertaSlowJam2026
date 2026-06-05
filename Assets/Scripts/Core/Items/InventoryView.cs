@@ -45,7 +45,7 @@ public class InventoryView : MonoBehaviour
 		model.OnContentsChanged += UpdateSlotValue;
 	}
 
-	private void Slot_OnClicked(int slotIndex)
+	protected virtual void Slot_OnClicked(int slotIndex)
 	{
 		if (_other == null) {
 			return;

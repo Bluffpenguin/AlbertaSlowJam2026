@@ -144,6 +144,8 @@ public class GameManager : MonoBehaviour
 		CurrentHour = WakeUpHour;
 		CurrentMinute = 0;
 
+		Player.Inventory.Clear();
+
 		foreach (var listener in _listeners)
 		{
 			listener.StartDay(DayIndex);
@@ -155,9 +157,14 @@ public class GameManager : MonoBehaviour
 	void SwitchToDungeon()
 	{
 		gameState = GameState.InDungeon;
+		AudioManager.Instance.SetGameMusic(GameMusic.Scavenge);
 		dayStarted = true;
 	}
-	void SwitchToShip() { gameState = GameState.InShip; }
+	void SwitchToShip() 
+	{
+		gameState = GameState.InShip;
+		AudioManager.Instance.SetGameMusic(GameMusic.Ship);
+	}
 
 	public void EndGame()
 	{

@@ -2,7 +2,9 @@ using UnityEngine;
 
 [System.Serializable]
 public struct EnemyInfo { 
-	internal Animator anim;
+	public Animator anim;
+	public SpriteRenderer spriteRenderer;
+	public List<SpriteDirection> spriteDirections;
 	public int enemyId;
 	public Transform heading;
 	public GameObject npc;
@@ -11,6 +13,14 @@ public struct EnemyInfo {
 	public AIState.STATE defaultState;
 	public Rigidbody2D rb;
 	public float attackRange;
+}
+
+[System.Serializable]
+public struct SpriteDirection
+{
+	public string name;
+	public Vector3 rotation;
+	public bool flipX;
 }
 
 public class SimpleEnemy : MonoBehaviour
@@ -23,7 +33,6 @@ public class SimpleEnemy : MonoBehaviour
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
 	{
-		//enemyInfo.anim = this.GetComponent<Animator>();
 		enemyInfo.attackRange = .5f;
 		enemyInfo.npc = this.gameObject;
 		enemyInfo.rb = GetComponent<Rigidbody2D>();

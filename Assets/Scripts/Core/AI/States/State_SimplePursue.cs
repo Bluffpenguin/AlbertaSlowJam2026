@@ -10,17 +10,20 @@ public class State_SimplePursue : AIState
         : base(_enemyInfo, _player)
     {
         stateName = STATE.PURSUE;
+		enemyInfo.anim.speed = 2;
     }
 
 	public override void Enter()
 	{
+		
+		AudioManager.Instance.SetGameMusic(GameMusic.EnemyChasing);
 		UpdatePathToPlayer();
 		base.Enter();
 	}
 
 	public override void Update()
 	{
-		
+		HandleAnimation();
 		base.Update();
 	}
 
@@ -105,6 +108,8 @@ public class State_SimplePursue : AIState
 
 	public override void Exit()
 	{
+		AudioManager.Instance.SetGameMusic(GameMusic.Scavenge);
+		Debug.Log("Switched To Unspotted Music");
 		base.Exit();
 	}
 
