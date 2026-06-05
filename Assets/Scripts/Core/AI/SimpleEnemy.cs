@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
@@ -13,6 +14,7 @@ public struct EnemyInfo {
 	public AIState.STATE defaultState;
 	public Rigidbody2D rb;
 	public float attackRange;
+	public TextMeshProUGUI textBox;
 }
 
 [System.Serializable]
@@ -33,7 +35,6 @@ public class SimpleEnemy : MonoBehaviour
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
 	{
-		enemyInfo.attackRange = .7f;
 		enemyInfo.npc = this.gameObject;
 		enemyInfo.rb = GetComponent<Rigidbody2D>();
 		player = GameObject.FindWithTag("Player").transform;
