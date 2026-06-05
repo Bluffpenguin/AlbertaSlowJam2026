@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float _dashSpeed = 200;
 	[SerializeField] private float _dashCooldown = 5f;
 	[SerializeField] private UI_Dash _dashUI;
+	[SerializeField] private UI_Stun _stunUI;
 
 	private Rigidbody2D _rb;
 	private Animator _anim;
@@ -188,6 +189,8 @@ public class PlayerController : MonoBehaviour
 
 	IEnumerator PlayerStun(float duration)
 	{
+		_stunUI.OnStun(duration, transform.position);
+		_rb.linearVelocity = Vector3.zero;
 		yield return new WaitForSeconds(duration);
 		_canMove = true;
 		_currentStun = null;

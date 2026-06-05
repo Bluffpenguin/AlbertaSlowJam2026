@@ -103,6 +103,8 @@ public class TooltipManager : MonoBehaviour
 		_tooltipTransform.position = pos;
 		_tooltipPromptObj.text = "E";
 		_tooltipTextObj.text = tip;
+		isInteractPressed = false;
+		_fillBar.localScale = new Vector3(0, _fillBar.localScale.y);
 		_tooltipTransform.gameObject.SetActive(true);
 		_timeToCompleteCurrentAction = timeToComplete;
 		_isTooltipOpen = true;
