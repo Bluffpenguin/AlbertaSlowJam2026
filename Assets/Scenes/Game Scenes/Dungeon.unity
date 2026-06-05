@@ -868,9 +868,9 @@ Tilemap:
   m_TileMatrixArray: []
   m_TileColorArray: []
   m_TileObjectToInstantiateArray:
-  - m_RefCount: 1360
+  - m_RefCount: 14703
     m_Data: {fileID: 4164311523602927295, guid: 62561c28c6b851747aae6bf2381e5726, type: 3}
-  - m_RefCount: 9
+  - m_RefCount: 97
     m_Data: {fileID: 5265685831754520929, guid: d9e65c055f4b5da4cb2b1a1f6d045c10, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::MultiObstaclePostProcessor
   _tilemap: {fileID: 1558919288}
-  _tile: {fileID: 0}
+  _tile: {fileID: 11400000, guid: 856a622c1f78de1459205c14bb75a4b6, type: 2}
   _processingOrder: -2
   _maxCount: 10
   _countScalingByDistance:
@@ -1512,7 +1512,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _data: {fileID: 0}
+  _data: {fileID: 11400000, guid: a1440993edc13144cb6eac9cf9a80d61, type: 2}
   _table:
   - {fileID: 11400000, guid: cddd581e928debf46b14509aa31c8956, type: 2}
   - {fileID: 11400000, guid: a1440993edc13144cb6eac9cf9a80d61, type: 2}
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::MultiObstaclePostProcessor
   _tilemap: {fileID: 1558919288}
-  _tile: {fileID: 0}
+  _tile: {fileID: 11400000, guid: cdaf0f1419ec5724399a59283ab1b907, type: 2}
   _processingOrder: -1
   _maxCount: 10
   _countScalingByDistance:
@@ -1556,7 +1556,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _data: {fileID: 0}
+  _data: {fileID: 11400000, guid: f52be8eb4caa9834fb76958cfd9ef53d, type: 2}
   _table:
   - {fileID: 11400000, guid: 7d0841c3fb53cb9418617987ea00fecf, type: 2}
   - {fileID: 11400000, guid: f52be8eb4caa9834fb76958cfd9ef53d, type: 2}
@@ -1573,7 +1573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::MultiObstaclePostProcessor
   _tilemap: {fileID: 1558919288}
-  _tile: {fileID: 0}
+  _tile: {fileID: 11400000, guid: abfbaef945913f8479161723ff4087f2, type: 2}
   _processingOrder: -3
   _maxCount: 3
   _countScalingByDistance:
@@ -1600,7 +1600,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _data: {fileID: 0}
+  _data: {fileID: 11400000, guid: 4c5941adc8131a146b471ad7bda00deb, type: 2}
   _table:
   - {fileID: 11400000, guid: 157789e90abbb7245b5f4bed08f09c01, type: 2}
   - {fileID: 11400000, guid: 4c5941adc8131a146b471ad7bda00deb, type: 2}
@@ -1708,21 +1708,21 @@ Tilemap:
   m_TileMatrixArray: []
   m_TileColorArray: []
   m_TileObjectToInstantiateArray:
-  - m_RefCount: 30
+  - m_RefCount: 115
     m_Data: {fileID: 5363528267526599182, guid: 17b82d2bd0280f14a80d6fb096633eac, type: 3}
-  - m_RefCount: 12
+  - m_RefCount: 91
     m_Data: {fileID: 7081075140317449986, guid: 1d86e1bba264f7c4984626e5e872a741, type: 3}
-  - m_RefCount: 9
+  - m_RefCount: 105
     m_Data: {fileID: 7081075140317449986, guid: 2c8fc1da4476001468b3a7d6f6551a3c, type: 3}
-  - m_RefCount: 6
+  - m_RefCount: 81
     m_Data: {fileID: 7081075140317449986, guid: 44be6fa9b075d1044ac76b8c672c3300, type: 3}
-  - m_RefCount: 4
+  - m_RefCount: 97
     m_Data: {fileID: 5363528267526599182, guid: bf98fdf0bc139a144a2b5e122ec8874b, type: 3}
-  - m_RefCount: 5
+  - m_RefCount: 83
     m_Data: {fileID: 7081075140317449986, guid: 608fb05bac5ab0742b81fa1bc11a97e1, type: 3}
-  - m_RefCount: 1
+  - m_RefCount: 82
     m_Data: {fileID: 7081075140317449986, guid: 0eda93578efa0b04a8c1ecb65b0c334b, type: 3}
-  - m_RefCount: 1
+  - m_RefCount: 100
     m_Data: {fileID: 5363528267526599182, guid: 6c71639d905afbe4caaef54ea677e3b2, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1792,7 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::MultiObstaclePostProcessor
   _tilemap: {fileID: 2073177229}
-  _tile: {fileID: 0}
+  _tile: {fileID: 11400000, guid: 73eae2fc58652b4488abd487d1c7f727, type: 2}
   _processingOrder: 1
   _maxCount: 10
   _countScalingByDistance:
@@ -1828,7 +1828,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _data: {fileID: 0}
+  _data: {fileID: 11400000, guid: 91040f4aa565e294f97cac2c25888af5, type: 2}
   _table:
   - {fileID: 11400000, guid: 31a29057abbece04cb2995c95fe30226, type: 2}
   - {fileID: 11400000, guid: 91040f4aa565e294f97cac2c25888af5, type: 2}
