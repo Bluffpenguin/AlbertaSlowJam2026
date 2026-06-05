@@ -30,6 +30,7 @@ public class TransitionToShip : MonoBehaviour, IInteractable
 	public void OnInteract()
 	{
 		if (TransitionManager.Instance != null) Debug.Log("There is a singleton");
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.OpenShipDoor, this.transform.position);
 		AudioManager.Instance.SetGameMusic(gameMusic);
 		TransitionManager.Instance.TransitionToShip.Invoke();
 	}

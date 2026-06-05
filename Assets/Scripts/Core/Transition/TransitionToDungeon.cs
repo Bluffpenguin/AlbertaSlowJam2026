@@ -28,6 +28,7 @@ public class TransitionToDungeon : MonoBehaviour, IInteractable
 
 	public void OnInteract()
 	{
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.OpenShipDoor, this.transform.position);
 		AudioManager.Instance.SetGameMusic(gameMusic);
 		TransitionManager.Instance.TransitionToDungeon.Invoke();
 	}

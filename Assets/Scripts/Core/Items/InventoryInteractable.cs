@@ -26,6 +26,7 @@ public class InventoryInteractable : MonoBehaviour, IInteractable
 
 	public void OnInteract()
 	{
+		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.OpenStorage, this.transform.position);
 		InventoryViewManager.Instance.OpenView(_window1, _window2);
 	}
 
