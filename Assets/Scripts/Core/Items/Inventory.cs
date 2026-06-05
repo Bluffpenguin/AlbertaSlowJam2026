@@ -1,3 +1,4 @@
+using UnityEditor.Graphs;
 using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
@@ -108,6 +109,21 @@ public class Inventory : MonoBehaviour, IReadOnlyList<ItemStack>
 		removed = this[slot] with { Count = Mathf.Min(count, this[slot].Count) };
 		this[slot] -= removed;
 		return removed.Count == count;
+	}
+
+	public virtual bool RemoveRandom(int count, out ItemStack removed)
+	{
+		for (int i = 0; i < Capacity; i++)
+		{
+			if (this[i].Count > 0)
+			{
+				removed = this[i] with { Count = Mathf.Min(count, this[i].Count) };
+				this[i] -= removed;
+				return removed.Count == count;
+			}
+		}
+		removed = ItemStack.Empty;
+		return false;
 	}
 
 	public bool IsEmpty()
