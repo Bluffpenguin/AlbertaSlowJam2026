@@ -22,7 +22,7 @@ public class AIState
 	protected AIState nextState;
 
 	internal float visDist = 3.0f;
-	internal float visAngle = 30.0f;
+	internal float visAngle = 60.0f;
 
 	protected GameObject startObj;
 	protected GameObject endObj;
@@ -151,14 +151,45 @@ public class AIState
 
 	public bool CanSeePlayer()
 	{
-		
+		bool onlyX = true;
 		if (player == null) 
 		{
 			player = GameObject.FindGameObjectWithTag("Player").transform;
 			return false;
 		}
 		Vector3 direction = player.position - enemyInfo.npc.transform.position;
-		float angle = Vector3.Angle(direction, enemyInfo.heading.up);
+
+		float angle = 0;
+		if (Mathf.Abs(enemyInfo.heading.up.x) > Mathf.Abs(enemyInfo.heading.up.y) || onlyX)
+		{
+			// Facing left or right
+			if (enemyInfo.heading.up.x > 0)
+			{
+				//Facing right
+				angle = Vector3.Angle(direction, enemyInfo.npc.transform.right);
+			}
+			else
+			{
+				// Facing left
+				angle = Vector3.Angle(direction, -enemyInfo.npc.transform.right);
+			}
+		}
+		else
+		{
+			// Facing up or down
+			if (enemyInfo.heading.up.y > 0)
+			{
+				// Facing up
+				angle = Vector3.Angle(direction, enemyInfo.npc.transform.up);
+			}
+			else
+			{
+				// Facing down
+				angle = Vector3.Angle(direction, -enemyInfo.npc.transform.up);
+			}
+		}
+
+		//float angle = Vector3.Angle(direction, enemyInfo.heading.up);
 		float scaledDist = direction.magnitude * enemyInfo.rm.navTileMap.cellSize.magnitude;
 
 		if (scaledDist  < visDist && angle < visAngle)

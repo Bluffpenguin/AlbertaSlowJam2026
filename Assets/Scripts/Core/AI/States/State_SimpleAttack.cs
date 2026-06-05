@@ -26,8 +26,7 @@ public class State_SimpleAttack : AIState
 		Player.Controller.Stun(2f);
 
 		// Steal Item
-		int slot = Random.Range(0, Player.Inventory.Capacity);
-		if (Player.Inventory.RemoveAt(slot, 1, out stolenItem))
+		if (Player.Inventory.RemoveRandom(1, out stolenItem))
 		{
 			stoleItem = true;
 		}

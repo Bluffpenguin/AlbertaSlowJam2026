@@ -102,8 +102,10 @@ public class PlayerController : MonoBehaviour
 		if (_playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0)
 		{
 			_dashCooldownTimer = _dashCooldown;
+			
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, this.transform.position);
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
+			UpdateAnimation();
 			_dashUI.OnDash(_dashCooldown);
 		}
 
@@ -129,66 +131,30 @@ public class PlayerController : MonoBehaviour
 			// Player is moving
 			_animDir = _rb.linearVelocity.normalized;
 			_anim.SetBool("IsWalking", true);
+			if (_dashCooldownTimer > 4.5f)
+			{
+				_anim.SetBool("IsDashing", true);
+			}
+			else _anim.SetBool("IsDashing", false);
+			
+			_anim.SetFloat("DirX", _animDir.x);
+			_anim.SetFloat("DirY", _animDir.y);
 
-			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
+			if (_animDir.x > 0)
 			{
 				// Face right
 				_spriteRenderer.flipX = false;
 			}
-			else if (_animDir.x < 0 && Mathf.Abs(_animDir.x) > Mathf.Abs(_animDir.y))
+			else if (_animDir.x < 0)
 			{
 				// Face left
 				_spriteRenderer.flipX = true;
 			}
-			else if (_animDir.y > 0)
-			{
-				// Face up
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
-			else
-			{
-				// Face down
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
+			
 		}
 		else
 		{
-			// Player is idle
 			_anim.SetBool("IsWalking", false);
-
-			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
-			{
-				// Face right
-				_spriteRenderer.flipX = false;
-			}
-			else if (_animDir.x < 0 && Mathf.Abs(_animDir.x) > Mathf.Abs(_animDir.y))
-			{
-				// Face left
-				_spriteRenderer.flipX = true;
-			}
-			else if (_animDir.y > 0)
-			{
-				// Face up
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
-			else
-			{
-				// Face down
-
-
-				//Placeholder
-				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
-				else _spriteRenderer.flipX = true;
-			}
 		}
 	}
 
