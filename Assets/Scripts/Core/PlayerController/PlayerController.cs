@@ -60,14 +60,16 @@ public class PlayerController : MonoBehaviour
 
 	private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 	{
-		if (_detector != null) {
+		if (_detector != null)
+		{
 			//_detector.tryInteract = true;
 		}
 	}
 
 	private void Interact_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 	{
-		if (_detector != null) {
+		if (_detector != null)
+		{
 			//_detector.tryInteract = false;
 		}
 	}
@@ -91,12 +93,14 @@ public class PlayerController : MonoBehaviour
 
 		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
 		_rb.AddForce(displacement, ForceMode2D.Impulse);
-		if (_rb.linearVelocity != Vector2.zero) {
+		if (_rb.linearVelocity != Vector2.zero)
+		{
 			_dashDirection = _rb.linearVelocity.normalized;
 		}
 
 		_dashCooldownTimer -= Time.fixedDeltaTime;
-		if (_playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0) {
+		if (_playerInput.Player.Dash.IsPressed() && _dashCooldownTimer <= 0)
+		{
 			_dashCooldownTimer = _dashCooldown;
 			AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, this.transform.position);
 			_rb.AddForce(_dashSpeed * _dashDirection, ForceMode2D.Impulse);
@@ -119,13 +123,13 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateAnimation()
 	{
-		
+
 		if (_rb.linearVelocity.magnitude > 0.05f)
 		{
 			// Player is moving
 			_animDir = _rb.linearVelocity.normalized;
 			_anim.SetBool("IsWalking", true);
-			
+
 			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
 			{
 				// Face right
@@ -179,7 +183,7 @@ public class PlayerController : MonoBehaviour
 			else
 			{
 				// Face down
-				
+
 
 				//Placeholder
 				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
@@ -192,6 +196,13 @@ public class PlayerController : MonoBehaviour
 	{
 		_stunUI.OnStun(duration, transform.position);
 		_rb.linearVelocity = Vector3.zero;
+
+		_playerStunned.getPlaybackState(out PLAYBACK_STATE playbackState);
+		if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+		{
+			_playerStunned.start();
+		}
+
 		yield return new WaitForSeconds(duration);
 		_canMove = true;
 		_currentStun = null;
@@ -217,18 +228,6 @@ public class PlayerController : MonoBehaviour
 			_playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
 		}
 
-		if (!_canMove)
-		{
-			_playerStunned.getPlaybackState(out PLAYBACK_STATE playbackState);
 
-			if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-			{
-				_playerStunned.start();
-			}
-			else
-			{
-				_playerStunned.stop(STOP_MODE.ALLOWFADEOUT);
-			}
-		}
 	}
 }
