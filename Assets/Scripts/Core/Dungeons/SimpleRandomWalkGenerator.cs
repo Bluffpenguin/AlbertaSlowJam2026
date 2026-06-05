@@ -42,8 +42,15 @@ public class SimpleRandomWalkGenerator : BaseDungeonGenerator
 		this.GetComponentsInChildren(components);
 		components.Sort();
 		for (int i = 0; i < components.Count; i++) {
-			if (components[i].enabled)
-				components[i].ProcessRoom(room);
+			var processor = components[i];
+			if (processor == null || processor.enabled is false)
+				continue;
+			try {
+				processor.ProcessRoom(room);
+			}
+			catch (Exception ex) {
+				Debug.LogWarning($"An error occurred while applying processor {processor}.\n{ex}", this);
+			}
 		}
 		ListPool<IRoomPostProcessor>.Release(components);
 	}
