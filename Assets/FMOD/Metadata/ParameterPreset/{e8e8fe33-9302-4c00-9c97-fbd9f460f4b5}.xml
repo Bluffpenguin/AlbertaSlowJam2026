@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{e8e8fe33-9302-4c00-9c97-fbd9f460f4b5}">
+		<property name="name">
+			<value>GameMusic</value>
+		</property>
+		<relationship name="folder">
+			<destination>{0151c5de-7fae-4a3b-8b90-e084f5178358}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{6312818e-7e4f-4552-8552-ce1d8d177a0a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{6312818e-7e4f-4552-8552-ce1d8d177a0a}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>MainMenu</value>
+			<value>Ship</value>
+			<value>Scavenging</value>
+			<value>EnemyChasing</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
