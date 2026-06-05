@@ -730,6 +730,34 @@ MonoBehaviour:
       Data3: -1088892795
       Data4: 1201266261
     Path: event:/SFX/Interactables/MoneyGain
+  <OpenStorage>k__BackingField:
+    Guid:
+      Data1: 545664201
+      Data2: 1240406702
+      Data3: -686287695
+      Data4: 1935575699
+    Path: event:/SFX/Interactables/StorageOpen
+  <CloseStorage>k__BackingField:
+    Guid:
+      Data1: -2102851723
+      Data2: 1140491830
+      Data3: -1734632566
+      Data4: 1125084853
+    Path: event:/SFX/Interactables/StorageClose
+  <OpenShipDoor>k__BackingField:
+    Guid:
+      Data1: 801218361
+      Data2: 1111678570
+      Data3: 747396791
+      Data4: -1415427980
+    Path: event:/SFX/Interactables/OpenTrapDoor
+  <GoToBed>k__BackingField:
+    Guid:
+      Data1: -1779292069
+      Data2: 1280578816
+      Data3: -1885851483
+      Data4: -1267420826
+    Path: event:/SFX/Interactables/EnterBed
   <PlayerFootsteps>k__BackingField:
     Guid:
       Data1: 1239748440
@@ -737,13 +765,6 @@ MonoBehaviour:
       Data3: -1552344176
       Data4: 173410818
     Path: event:/SFX/Player/FootstepsV2
-  <ButtonHover>k__BackingField:
-    Guid:
-      Data1: 650340056
-      Data2: 1286041328
-      Data3: -2115793262
-      Data4: -72296143
-    Path: event:/SFX/UI/Button_Hover
   <PlayerDash>k__BackingField:
     Guid:
       Data1: 1901810097
@@ -751,6 +772,20 @@ MonoBehaviour:
       Data3: 586737560
       Data4: -1824678324
     Path: event:/SFX/Player/Dash
+  <PlayerStunned>k__BackingField:
+    Guid:
+      Data1: 755183952
+      Data2: 1213274645
+      Data3: -2126888064
+      Data4: -1105339593
+    Path: event:/SFX/Player/Stunned
+  <ButtonHover>k__BackingField:
+    Guid:
+      Data1: 650340056
+      Data2: 1286041328
+      Data3: -2115793262
+      Data4: -72296143
+    Path: event:/SFX/UI/Button_Hover
   <ButtonHiss>k__BackingField:
     Guid:
       Data1: 1338868759
