@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{75617096-8631-4814-9f24-87b0f06b3f8b}">
+		<property name="assetPath">
+			<value>Music/Menu/Land_of_Scraps_P1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>192.92308390022677</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{58fc9157-c198-4102-98e5-47d2aeb17037}</destination>
+		</relationship>
+	</object>
+</objects>

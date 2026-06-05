@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{9b41baa5-d8c1-4756-99ea-8a1b4cf6c527}">
+		<property name="assetPath">
+			<value>Music/Menu/Land_of_Scraps_Loop.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>177.23077097505669</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{58fc9157-c198-4102-98e5-47d2aeb17037}</destination>
+		</relationship>
+	</object>
+</objects>
