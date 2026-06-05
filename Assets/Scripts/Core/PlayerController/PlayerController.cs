@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float _dashCooldown = 5f;
 
 	private Rigidbody2D _rb;
+	private Animator _anim;
+	private SpriteRenderer _spriteRenderer;
+	private Vector3 _animDir;
 	private Vector2 _moveDir;
 	private Vector2 _dashDirection;
 	private float _dashCooldownTimer;
@@ -25,7 +28,9 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		_playerInput = new();
+		_anim = GetComponent<Animator>();
 		_rb = GetComponent<Rigidbody2D>();
+		_spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	private void Start()
@@ -79,6 +84,8 @@ public class PlayerController : MonoBehaviour
 		_moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
 		_moveDir.y *= 0.5f;
 
+		if (_moveDir.magnitude == 0) _rb.linearVelocity = Vector2.zero;
+
 		Vector2 displacement = _moveSpeed * Time.fixedDeltaTime * _moveDir;
 		_rb.AddForce(displacement, ForceMode2D.Impulse);
 		if (_rb.linearVelocity != Vector2.zero) {
@@ -93,6 +100,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		UpdateSound(_moveDir);
+		UpdateAnimation();
 	}
 
 	public void Stun(float stunDuration)
@@ -103,6 +111,77 @@ public class PlayerController : MonoBehaviour
 
 		_currentStun = StartCoroutine(PlayerStun(stunDuration));
 
+	}
+
+	void UpdateAnimation()
+	{
+		
+		if (_rb.linearVelocity.magnitude > 0.05f)
+		{
+			// Player is moving
+			_animDir = _rb.linearVelocity.normalized;
+			_anim.SetBool("IsWalking", true);
+			
+			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
+			{
+				// Face right
+				_spriteRenderer.flipX = false;
+			}
+			else if (_animDir.x < 0 && Mathf.Abs(_animDir.x) > Mathf.Abs(_animDir.y))
+			{
+				// Face left
+				_spriteRenderer.flipX = true;
+			}
+			else if (_animDir.y > 0)
+			{
+				// Face up
+
+				//Placeholder
+				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
+				else _spriteRenderer.flipX = true;
+			}
+			else
+			{
+				// Face down
+
+				//Placeholder
+				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
+				else _spriteRenderer.flipX = true;
+			}
+		}
+		else
+		{
+			// Player is idle
+			_anim.SetBool("IsWalking", false);
+
+			if (_animDir.x > 0 && _animDir.x > Mathf.Abs(_animDir.y))
+			{
+				// Face right
+				_spriteRenderer.flipX = false;
+			}
+			else if (_animDir.x < 0 && Mathf.Abs(_animDir.x) > Mathf.Abs(_animDir.y))
+			{
+				// Face left
+				_spriteRenderer.flipX = true;
+			}
+			else if (_animDir.y > 0)
+			{
+				// Face up
+
+				//Placeholder
+				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
+				else _spriteRenderer.flipX = true;
+			}
+			else
+			{
+				// Face down
+				
+
+				//Placeholder
+				if (_animDir.x > 0) { _spriteRenderer.flipX = false; }
+				else _spriteRenderer.flipX = true;
+			}
+		}
 	}
 
 	IEnumerator PlayerStun(float duration)
