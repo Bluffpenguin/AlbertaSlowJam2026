@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
 
 	private Bus masterBus;
 	private Bus musicBus;
-	private Bus sfxBus;	
+	private Bus sfxBus;
 
 	private List<EventInstance> eventInstances;
 
@@ -37,10 +37,15 @@ public class AudioManager : MonoBehaviour
 		}
 		eventInstances = new List<EventInstance>();
 
+		
+
+	}
+
+	private void Start()
+	{
 		masterBus = RuntimeManager.GetBus("bus:/");
 		musicBus = RuntimeManager.GetBus("bus:/Music");
 		sfxBus = RuntimeManager.GetBus("bus:/SFX");
-
 	}
 
 	private void Update()
