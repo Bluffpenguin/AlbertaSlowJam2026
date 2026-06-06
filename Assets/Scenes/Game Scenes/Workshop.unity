@@ -36559,23 +36559,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4505565767839450300, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 540
+      value: 254
       objectReference: {fileID: 0}
     - target: {fileID: 4553457296077189720, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4553457296077189720, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4553457296077189720, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4553457296077189720, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 5569252077192845536, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_Pivot.x
@@ -36665,10 +36665,18 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 16777215
       objectReference: {fileID: 0}
+    - target: {fileID: 6163782448847747276, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7070176101629115123, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_Name
       value: Buttons_GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 7070176101629115123, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7409017162292172197, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -36719,19 +36727,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8335757793254926042, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8335757793254926042, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8335757793254926042, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8335757793254926042, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -127
       objectReference: {fileID: 0}
     - target: {fileID: 9153540903359596140, guid: aa0d0a92fc1256b4986c7e47bdc02a53, type: 3}
       propertyPath: m_AnchorMax.y

@@ -53,7 +53,7 @@
 			<destination>{6ef08785-5422-4382-8fb8-c0a49e92aecd}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{1f0f1ba4-3ae1-4327-a0bd-5e2f0adb4a7d}</destination>
+			<destination>{b6bdfad3-686e-42b5-ad00-9f5978b1b1d8}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c47f01aa-fc85-4d58-b97c-b74e19990b84}" />

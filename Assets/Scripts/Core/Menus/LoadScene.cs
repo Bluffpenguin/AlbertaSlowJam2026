@@ -26,8 +26,11 @@ public class LoadScene : MonoBehaviour
 
 	public void LoadSelectedScene()
 	{
+		if (SceneManager.GetSceneByName(wantedSceneName).isLoaded) return;
+
 		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
 
+		
 		SceneManager.LoadScene(wantedSceneName);
 
 		MenuManager.Instance.currentScene = wantedSceneName;
@@ -41,6 +44,8 @@ public class LoadScene : MonoBehaviour
 
 	public void LoadSettings()
 	{
+		if (SceneManager.GetSceneByName("SettingsMenu").isLoaded) return;
+
 		AudioManager.Instance.PlayOneShot(FMODEvents.Instance.ButtonHiss, this.transform.position);
 		SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
 		MenuManager.Instance.currentScene = "SettingsMenu";
