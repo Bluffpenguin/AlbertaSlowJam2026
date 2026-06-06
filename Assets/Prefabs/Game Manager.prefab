@@ -47,14 +47,17 @@ MonoBehaviour:
   _listeners: []
   _dungeonScene: Dungeon
   _hudScene: HUD
+  AdvanceClockInShip: 1
   WakeUpHour: 6
   EndOfDayHour: 18
   SecondsPerMinute: 2
-  _quotas: 2800000050000000
+  _quotas: 280000003c0000005000000064000000780000008c000000a0000000
+  gameState: 1
   DayIndex: -1
   TimeElapsed: 0
   CurrentHour: 0
   CurrentMinute: 0
   AdvanceClock: 0
   PlayerMoney: 0
+  PlayerMoneyOverall: 0
   TodaysQuota: 0
