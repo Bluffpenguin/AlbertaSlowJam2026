@@ -42,6 +42,7 @@ public class State_SimpleIdle : AIState
 		{
 			nextState = new State_SimplePursue(enemyInfo, player);
 			stage = EVENT.EXIT;
+			return;
 		}
 
 		// Look around

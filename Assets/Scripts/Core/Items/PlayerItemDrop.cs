@@ -27,8 +27,13 @@ public class PlayerItemDrop : MonoBehaviour
 		Vector3Int tilePos = _tileMap.WorldToCell(pos);
 		if (item.Count > 0 && _tileMap.GetInstantiatedObject(tilePos) == null)
 		{
-			_tileMap.SetTile(tilePos, item.Data.ItemTile);
-			return true;
+			if (item.Data.ItemTile != null)
+			{
+				_tileMap.SetTile(tilePos, item.Data.ItemTile);
+				return true;
+			}
+			else return false;
+			
 		}
 		return false;
 	}

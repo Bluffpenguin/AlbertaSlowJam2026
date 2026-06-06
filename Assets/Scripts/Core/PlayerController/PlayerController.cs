@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour
 			StopCoroutine(_currentStun);
 
 		_currentStun = StartCoroutine(PlayerStun(stunDuration));
-
 	}
 
 	void UpdateAnimation()
@@ -162,6 +161,9 @@ public class PlayerController : MonoBehaviour
 	{
 		_stunUI.OnStun(duration, transform.position);
 		_rb.linearVelocity = Vector3.zero;
+		_anim.SetBool("IsWalking", false);
+		_anim.SetBool("IsDashing", false);
+		UpdateAnimation();
 
 		_playerStunned.getPlaybackState(out PLAYBACK_STATE playbackState);
 		if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
