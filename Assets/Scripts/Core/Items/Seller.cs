@@ -118,7 +118,9 @@ public class Seller : Inventory
 		_sellTotal = 0;
 		_sellTotalText.text = "$0";
 
-		for (int i = 0; i < _inputCount; i++)
+		int itemsInInput = _inputCount;
+
+		for (int i = 0; i < itemsInInput; i++)
 		{
 			base[i] = ItemStack.Empty;
 		}
