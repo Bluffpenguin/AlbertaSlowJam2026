@@ -22,8 +22,8 @@ public class UI_OnHighlight : MonoBehaviour
     {
         if (isHighlighted)
         {
-			_leftGear.Rotate(new Vector3(0, 0, _leftGearSpeed * Time.deltaTime));
-			_rightGear.Rotate(new Vector3(0, 0, _rightGearSpeed * Time.deltaTime));
+			_leftGear.Rotate(new Vector3(0, 0, _leftGearSpeed * Time.unscaledDeltaTime));
+			_rightGear.Rotate(new Vector3(0, 0, _rightGearSpeed * Time.unscaledDeltaTime));
 		}
 		UpdateSound();
 	}
