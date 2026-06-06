@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts.Core::AudioManager
   masterVolume: 1
-  musicVolume: 1
+  musicVolume: 0.5
   sfxVolume: 1
 --- !u!1001 &1790767219
 PrefabInstance:
